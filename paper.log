@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2017.1.21)  28 MAR 2017 17:02
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2017.1.21)  28 MAR 2017 22:04
 entering extended mode
 **C:/Users/Margo/Documents/毕业论文/latex-本/paper.tex
 (C:/Users/Margo/Documents/毕业论文/latex-本/paper.tex
@@ -1115,96 +1115,116 @@ l.106 	\begin{proposition}
 <to be read again> 
                    \relax 
 l.114 	\begin{proposition}
-                           <img/3.jpg, id=576, 496.10344pt x 437.38406pt>
+                          pdfTeX warning (ext4): destination with the same iden
+tifier (name{definition.8}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.120 	\begin{definition}
+                         [���ھ�����ģ��Ľ���)]
+Overfull \hbox (33.73895pt too wide) in paragraph at lines 121--122
+[]\C19/kai/m/n/12/40 � \C19/kai/m/n/12/62 u \C19/kai/m/n/12/61 � \C19/kai/m/n/1
+2/42 � � \C19/kai/m/n/12/40 �  \C19/kai/m/n/12/61 � \C19/kai/m/n/12/64 � \C19/
+kai/m/n/12/37  \C19/kai/m/n/12/57 N$\OMS/cmsy/m/n/12 O$\C19/kai/m/n/12/26 � \C
+19/kai/m/n/12/61 � \C19/kai/m/n/12/42 � \C19/kai/m/n/12/44 � \C19/kai/m/n/12/62
+ u$\OML/cmm/m/it/12 r[]\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 X; Y\OT1/cmr/m/n/12 )$
+\C19/kai/m/n/12/40 
+ []
+
+[24]pdfTeX warning (ext4): destination with the same identifier (name{definitio
+n.9}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.132 	\begin{proposition}
+                           [25] <img/3.jpg, id=585, 496.10344pt x 437.38406pt>
 File: img/3.jpg Graphic file (type jpg)
 
 <use img/3.jpg>
-Package pdftex.def Info: img/3.jpg used on input line 135.
+Package pdftex.def Info: img/3.jpg used on input line 156.
 (pdftex.def)             Requested size: 405.45047pt x 357.4626pt.
- [24]
+ [26]
 
-Package natbib Warning: Citation `ol8' on page 25 undefined on input line 144.
-
-
-Package natbib Warning: Citation `ol10' on page 25 undefined on input line 144.
+Package natbib Warning: Citation `ol8' on page 27 undefined on input line 165.
 
 
+Package natbib Warning: Citation `ol10' on page 27 undefined on input line 165.
 
-Package natbib Warning: Citation `ol11' on page 25 undefined on input line 146.
 
 
-pdfTeX warning (ext4): destination with the same identifier (name{definition.8}
-) has been already used, duplicate ignored
+Package natbib Warning: Citation `ol11' on page 27 undefined on input line 167.
+
+
+pdfTeX warning (ext4): destination with the same identifier (name{definition.10
+}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.147 \begin{proposition}
-                          [25 <C:/Users/Margo/Documents/毕业论文/latex-本/
+l.168 \begin{proposition}
+                          [27 <C:/Users/Margo/Documents/毕业论文/latex-本/
 img/3.jpg>]
 
-Package natbib Warning: Citation `ol12' on page 26 undefined on input line 154.
+Package natbib Warning: Citation `ol12' on page 28 undefined on input line 175.
 
 
-pdfTeX warning (ext4): destination with the same identifier (name{definition.9}
-) has been already used, duplicate ignored
+pdfTeX warning (ext4): destination with the same identifier (name{definition.11
+}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.155 \begin{definition}
-                         [26]
+l.176 \begin{definition}
+                         [28]
 
-Package natbib Warning: Citation `ol12' on page 27 undefined on input line 160.
-
-
-
-Package natbib Warning: Citation `ol13' on page 27 undefined on input line 171.
+Package natbib Warning: Citation `ol12' on page 29 undefined on input line 181.
 
 
 
-Package natbib Warning: Citation `ol14' on page 27 undefined on input line 171.
+Package natbib Warning: Citation `ol13' on page 29 undefined on input line 192.
 
 
 
-Package natbib Warning: Citation `ol15' on page 27 undefined on input line 177.
+Package natbib Warning: Citation `ol14' on page 29 undefined on input line 192.
 
 
-<img/4.jpg, id=595, 508.14844pt x 201.75375pt>
+
+Package natbib Warning: Citation `ol15' on page 29 undefined on input line 198.
+
+
+<img/4.jpg, id=603, 508.14844pt x 201.75375pt>
 File: img/4.jpg Graphic file (type jpg)
  <use img/4.jpg>
-Package pdftex.def Info: img/4.jpg used on input line 181.
+Package pdftex.def Info: img/4.jpg used on input line 202.
 (pdftex.def)             Requested size: 405.45047pt x 160.98453pt.
- [27] [28 <C:/Users/Margo/Documents/毕业论文/latex-本/img/4.jpg>]
+ [29] [30 <C:/Users/Margo/Documents/毕业论文/latex-本/img/4.jpg>]
 
-Package natbib Warning: Citation `16' on page 29 undefined on input line 225.
+Package natbib Warning: Citation `16' on page 31 undefined on input line 246.
 
 
-Package natbib Warning: Citation `17' on page 29 undefined on input line 225.
+Package natbib Warning: Citation `17' on page 31 undefined on input line 246.
 
-<img/5.jpg, id=605, 390.70969pt x 344.78813pt>
+<img/5.jpg, id=613, 390.70969pt x 344.78813pt>
 File: img/5.jpg Graphic file (type jpg)
  <use img/5.jpg>
-Package pdftex.def Info: img/5.jpg used on input line 228.
+Package pdftex.def Info: img/5.jpg used on input line 249.
 (pdftex.def)             Requested size: 405.45047pt x 357.8136pt.
-) [29] [30 <C:/Users/Margo/Documents/毕业论文/latex-本/img/5.jpg>]
+) [31] [32 <C:/Users/Margo/Documents/毕业论文/latex-本/img/5.jpg>]
 (C:\Users\Margo\Documents\毕业论文\latex-本\chap4.tex
 ������
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `\CJKnumber' on input line 1.
 
-[31
+[33
 
 
 
 ]
 
-Package natbib Warning: Citation `ol19' on page 32 undefined on input line 34.
+Package natbib Warning: Citation `ol19' on page 34 undefined on input line 34.
 
-[32]) [33] (C:\Users\Margo\Documents\毕业论文\latex-本\chap5.tex
+[34]) [35] (C:\Users\Margo\Documents\毕业论文\latex-本\chap5.tex
 ������
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `\CJKnumber' on input line 1.
 
-) [34
+) [36
 
 
 
@@ -1214,7 +1234,7 @@ Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                \hskip 12.0pt
 (hyperref)                replaced by space on input line 26.
 
-) [35
+) [37
 
 
 
@@ -1223,7 +1243,7 @@ Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 
 Package natbib Warning: Empty `thebibliography' environment on input line 3.
 
-) [36
+) [38
 
 
 ] (C:\Users\Margo\Documents\毕业论文\latex-本\fulu.tex
@@ -1232,10 +1252,10 @@ Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                \hskip 12.0pt
 (hyperref)                replaced by space on input line 3.
 
-) [37
+) [39
 
 
-] (C:\Users\Margo\Documents\毕业论文\latex-本\ack.tex) [38
+] (C:\Users\Margo\Documents\毕业论文\latex-本\ack.tex) [40
 
 
 
@@ -1272,13 +1292,13 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 15363 strings out of 495354
- 226233 string characters out of 3182739
- 347871 words of memory out of 3000000
- 17555 multiletter control sequences out of 15000+200000
+ 15367 strings out of 495354
+ 226278 string characters out of 3182739
+ 347873 words of memory out of 3000000
+ 17557 multiletter control sequences out of 15000+200000
  103823 words of font info for 337 fonts, out of 3000000 for 9000
  14 hyphenation exceptions out of 8191
- 43i,18n,58p,1842b,1193s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 43i,18n,58p,2195b,1193s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/s
 imhei.ttf><C:/Program Files (x86)/CTEX/CTeX/fonts/truetype/chinese/simsun.ttf><
 C:/Windows/Fonts/simkai.ttf><C:/Windows/Fonts/simkai.ttf><C:/Program Files (x86
@@ -1377,9 +1397,9 @@ m Files (x86)/CTEX/MiKTeX/fonts/type1/urw/palatino/uplb8a.pfb><C:/Program Files
  (x86)/CTEX/MiKTeX/fonts/type1/urw/palatino/uplr8a.pfb><C:/Program Files (x86)/
 CTEX/MiKTeX/fonts/type1/urw/palatino/uplr8a.pfb><C:/Program Files (x86)/CTEX/Mi
 KTeX/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on paper.pdf (44 pages, 1165646 bytes).
+Output written on paper.pdf (46 pages, 1177574 bytes).
 PDF statistics:
- 1166 PDF objects out of 1200 (max. 8388607)
- 137 named destinations out of 1000 (max. 500000)
+ 1175 PDF objects out of 1200 (max. 8388607)
+ 139 named destinations out of 1000 (max. 500000)
  471 words of extra memory for PDF output out of 10000 (max. 10000000)
 
