@@ -1,0 +1,66 @@
+\IncMargin{1em}
+\begin{algorithm}
+  \SetKwData{Left}{left}\SetKwData{This}{this}\SetKwData{Up}{up}
+  \SetKwFunction{Union}{Union}\SetKwFunction{FindCompress}{FindCompress}
+  \SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+
+  \Input{逻辑程序~$\Pi$~的依赖图~$G_\Pi$~，即二维数组~matrix~\\逻辑程序的所有文字个数~node$\_$num~}
+  \Output{依赖图~$G_\Pi$~所有的环，存储在~map~类型的变量~$\_$circle~中}
+  \BlankLine
+
+
+    v $\leftarrow$ $\emptyset$ \tcp*[h]{定义一个~vector$<$int$>$~类型的变量~v~}\\
+
+    \For{$i = 1$ \KwTo $node\_num$}
+    {
+
+      v $\leftarrow$ v $\cup$ i \\
+      mark node i has been visited \tcp*[h]{记录标号为~i~的文字已经被访问过}     \\
+      
+      \BlankLine
+      deep$\_$search(v) \tcp*[h]{递归求解从标号~i~出发回到自身的所有环}     \\
+
+      \BlankLine
+      \tcc*[h]{深搜回溯，恢复变量的初始值}\\
+
+      remove the mark on node i \\
+      erase the node i from v \\
+    }
+
+    \BlankLine
+    \tcc*[h]{~deep$\_$search(v)~} \\
+    \BlankLine
+    \For{$i = 1$ \KwTo $node\_num$}
+    {
+      \tcc*[h]{获得最后一个进入~v~的文字的标号，记为~$last\_in\_circle$~}\\
+      last$\_$in$\_$circle $\leftarrow$ v[v.size-1]
+
+      \If{matrix[last$\_$in$\_$circle][i]=1}
+      {
+        %\tcc*[h]{存在一条有向边~$<last\_in\_circle,i>$~} \\
+
+         \If{v[0]=i}
+         {
+            %\tcc*[h]{找到一个环}\\
+            $\_$circle $\leftarrow$ $\_$circle $\cup$ v \tcp*[h]{存储找到的一个环}\\
+            continue  \tcp*[h]{这条搜索树分支到此结束}\\
+         }
+
+         \If{v[0]$\neq$i and node i is not visited}
+         {
+           v $\leftarrow$ v $\cup$ i \\
+           mark node i has been visited \\ %\tcp*[h]{记录标号为~i~的文字已经被访问过}  \\
+           \BlankLine
+           deep$\_$search(v) \\ %\tcp*[h]{递归求解从标号~i~出发回到自身的所有环}     \\
+           \BlankLine
+           %\tcc*[h]{深搜回溯，恢复变量的初始值}\\
+           remove the mark on node i \\
+           erase the node i from v \\
+         }
+
+      }
+
+    }
+
+  \caption{找出依赖图~$G_\Pi$~中所有的环}\label{search:circle}
+\end{algorithm}\DecMargin{1em} 

@@ -1,0 +1,213 @@
+\begin{thebibliography}{10}
+
+\bibitem{MaZ2004}
+马小平，朱小燕.
+\newblock 人工智能 [M].
+\newblock 北京:  清华大学出版社, 2004.
+
+\bibitem{McCarthy58}
+McCarthy J.
+\newblock Programs with Common Sense [C].// Mechanisation of Thought Processes,
+  Proceedings of the Symposium of the National Physics Laboratory.
+\newblock London, U.K.: Her Majesty's Stationery Office, 1958:  77--84.
+
+\bibitem{McCarthyHayes69}
+McCarthy J, Hayes P.
+\newblock Some philosophical problems from the standpoint of artificial
+  intelligence [G].// Meltzer B, Michie D. Machine Intelligence 4.
+\newblock Edinburgh:  Edinburgh University Press, 1969:  463--502.
+
+\bibitem{Minsky1975}
+M.Minsky.
+\newblock A Framework for Representing Knowledge [J].
+\newblock P.Winston,editor, The Psych of computer vision, McGraw-Hill,NY, 1975.
+
+\bibitem{WanH2006}
+万海.
+\newblock 基于回答集语义复杂信息系统软件需求模型的研究 [J].
+\newblock 中山大学博士学位论文, 2006.
+
+\bibitem{Lu2002}
+陆钟万.
+\newblock 面向计算机科学的数理逻辑 [M].
+\newblock 北京:  科学出版社, 2002.
+
+\bibitem{reiter1980}
+Reiter R.
+\newblock A logic for default reasoning [J].
+\newblock Artificial intelligence, 1980, 13(1):81--132.
+
+\bibitem{hanks1987}
+Hanks S, McDermott D.
+\newblock Nonmonotonic logic and temporal projection [J].
+\newblock Artificial intelligence, 1987, 33(3):379--412.
+
+\bibitem{moore1985}
+Moore R~C.
+\newblock Semantical considerations on nonmonotonic logic [J].
+\newblock Artificial intelligence, 1985, 25(1):75--94.
+
+\bibitem{mccarthy1980}
+McCarthy J.
+\newblock Circumscription—a form of non-monotonic reasoning [J].
+\newblock Artificial intelligence, 1980, 13(1):27--39.
+
+\bibitem{robinson1965}
+Robinson J~A.
+\newblock A machine-oriented logic based on the resolution principle [J].
+\newblock Journal of the ACM (JACM), 1965, 12(1):23--41.
+
+\bibitem{kowalski1973}
+Kowalski R.
+\newblock Predicate logic as programming language [M].
+\newblock Edinburgh University, 1973.
+
+\bibitem{colmerauer1996}
+Colmerauer A, Roussel P.
+\newblock The birth of Prolog [C].// History of programming languages---II.
+\newblock ACM.
+\newblock 1996:  331--367.
+
+\bibitem{Rei01}
+ 331--367.
+
+\bibitem{LRL97}
+Levesque H~J, Reiter R, Lesp{\'e}rance Y, et~al.
+\newblock GOLOG: A Logic Programming Language for Dynamic Domains [J].
+\newblock Journal of Logic Programming, 1997, 31(1-3):59--83.
+
+\bibitem{GLL00}
+Giacomo G~D, Lesp{\'e}rance Y, Levesque H~J.
+\newblock ConGolog, a concurrent programming language based on the situation
+  calculus [J].
+\newblock Artificial Intelligence, 2000, 121(1-2):109--169.
+
+\bibitem{GLS01}
+Giacomo G~D, Levesque H~J, Sardi{\~n}a S.
+\newblock Incremental execution of guarded theories [J].
+\newblock ACM Transactions on Computational Logic, 2001, 2(4):495--525.
+
+\bibitem{Lak99}
+Lakemeyer G.
+\newblock On sensing and off-line interpreting in {Golog} [G].// Logical
+  Foundations for Cognitive Agents, Contributions in Honor of {Ray Reiter}.
+\newblock 1999.
+
+\bibitem{CL09}
+Cla{\ss}en J, Lakemeyer G.
+\newblock Tractable First-Order Golog with Disjunctive Knowledge Bases [C].//
+  Proceedings of the Ninth International Symposium on Logical Formalizations of
+  Commonsense Reasoning (Commonsense 2009).
+\newblock 2009:  27--33.
+
+\bibitem{Rei01a}
+Reiter R.
+\newblock On knowledge-based programming with sensing in the situation calculus
+  [J].
+\newblock ACM Transactions on Computational Logic, 2001, 2(4):433--457.
+
+\bibitem{L98}
+Levesque H~J.
+\newblock A Completeness Result for Reasoning with Incomplete First-Order
+  Knowledge Bases [C].// Principles of Knowledge Representation and Reasoning:
+  Proceedings of the Fifth International Conference (KR-1998).
+\newblock 1998:  14--23.
+
+\bibitem{LL02}
+Lakemeyer G.
+\newblock Evaluation-Based Reasoning with Disjunctive Information in
+  First-Order Knowledge Bases [C].// Proceedings of the Eights International
+  Conference on Principles and Knowledge Representation and Reasoning
+  (KR-2002).
+\newblock 2002:  73--81.
+
+\bibitem{LLL04}
+Liu Y, Lakemeyer G, Levesque H~J.
+\newblock A Logic of Limited Belief for Reasoning with Disjunctive Information
+  [C].// Principles of Knowledge Representation and Reasoning: Proceedings of
+  the Ninth International Conference (KR-2004).
+\newblock 2004:  587--597.
+
+\bibitem{LR97}
+Lin F, Reiter R.
+\newblock How to Progress a Database [J].
+\newblock Artificial Intelligence, 1997, 92(1-2):131--167.
+
+\bibitem{PB02}
+Petrick R~P~A, Bacchus F.
+\newblock A Knowledge-Based Approach to Planning with Incomplete Information
+  and Sensing [C].// Proceedings of the Sixth International Conference on
+  Artificial Intelligence Planning Systems (AIPS-2002).
+\newblock 2002:  212--222.
+
+\bibitem{VL08}
+Vassos S, Levesque H~J.
+\newblock On the Progression of Situation Calculus Basic Action Theories:
+  Resolving a 10-year-old Conjecture [C].// Proceedings of the Twenty-Third
+  AAAI Conference on Artificial Intelligence (AAAI-2008).
+\newblock 2008:  1004--1009.
+
+\bibitem{VLL08}
+Vassos S, Lakemeyer G, Levesque H~J.
+\newblock First-Order Strong Progression for Local-Effect Basic Action Theories
+  [C].// Principles of Knowledge Representation and Reasoning: Proceedings of
+  the Eleventh International Conference (KR-2008).
+\newblock 2008:  662--672.
+
+\bibitem{LL09}
+Liu Y, Lakemeyer G.
+\newblock On First-Order Definability and Computability of Progression for
+  Local-Effect Actions and Beyond [C].// Proceedings of the 21st International
+  Joint Conference on Artificial Intelligence (IJCAI-2009).
+\newblock 2009:  860--866.
+
+\bibitem{S01}
+Sardi{\~n}a S.
+\newblock Local Conditional High-Level Robot Programs [C].// Logic for
+  Programming, Artificial Intelligence, and Reasoning, 8th International
+  Conference (LPAR-2001).
+\newblock 2001:  110--124.
+
+\bibitem{CELN07}
+Cla{\ss}en J, Eyerich P, Lakemeyer G, et~al.
+\newblock Towards an Integration of Golog and Planning [C].// Proceedings of
+  the 20th International Joint Conference on Artificial Intelligence
+  (IJCAI-2007).
+\newblock 2007:  1846--1851.
+
+\bibitem{LL04}
+Lakemeyer G, Levesque H~J.
+\newblock Situations, Si! Situation Terms, No! [C].// Principles of Knowledge
+  Representation and Reasoning: Proceedings of the Ninth International
+  Conference (KR-2004).
+\newblock 2004:  516--526.
+
+\bibitem{HN01}
+Hoffmann J, Nebel B.
+\newblock The FF Planning System: Fast Plan Generation Through Heuristic Search
+  [J].
+\newblock Journal of Artificial Intelligence Research (JAIR), 2001,
+  14:253--302.
+
+\bibitem{BFM07}
+Baier J~A, Fritz C, McIlraith S~A.
+\newblock Exploiting Procedural Domain Control Knowledge in State-of-the-Art
+  Planners [C].// Proceedings of the Seventeenth International Conference on
+  Automated Planning and Scheduling (ICAPS-2007).
+\newblock 2007:  26--33.
+
+\bibitem{HB04}
+Brafman R~I, Hoffmann J.
+\newblock Conformant Planning via Heuristic Forward Search: A New Approach
+  [C].// Proceedings of the Fourteenth International Conference on Automated
+  Planning and Scheduling (ICAPS-2004).
+\newblock 2004:  355--364.
+
+\bibitem{Hof05}
+Hoffmann J.
+\newblock Contingent planning via heuristic forward search with implicit belief
+  states [C].// Proceedings of the Fifteenth International Conference on
+  Automated Planning and Scheduling (ICAPS-2005).
+\newblock AAAI 2005:  71--80.
+
+\end{thebibliography}

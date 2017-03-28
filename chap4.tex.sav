@@ -1,0 +1,492 @@
+\chapter{消去存在量词的优化}
+
+在上一章中，我们介绍了如何将一阶并行限定理论，若干个一阶并行限定理论以及一阶带优先级的限定理论转换成等价的一阶稳定理论，
+但是，却没有讨论如何计算一阶稳定理论。
+如果我们能够实现一阶稳定理论的计算方法，那么我们也就能够实现一阶限定理论的计算方法。
+而在第二章提到，要将一阶稳定理论转化为逻辑程序来求解稳定模型，必须要消去其中的存在量词。
+本章将关注于消去这些存在量词的方法。
+
+本章首先提出一个翻译，在从一阶并行限定理论转换到一阶稳定理论的过程中，结合稳定模型语义下的量词消去方法，
+在消去存在量词的过程中进行优化，减少引入的辅助谓词和缩小翻译后的理论规模。
+然后将这个优化消去存在量词的翻译推广到一阶带优先级的限定理论。
+最后分析这个优化算法减少的辅助谓词数目和缩小的理论规模。
+
+\section{稳定模型语义下的存在量词消去}
+
+在一阶理论中，存在量词的出现是无法避免的。
+在经典一阶逻辑中，我们往往对公式作Skolem化，即通过引入Skolem函词的方法来模拟存在量词，以达到消去存在量词的目的。
+但在二阶逻辑中，对二阶公式Skolem化必须引入一个三阶Skolem函词，这就使得公式更加复杂。
+由一阶限定理论和一阶稳定模型语义的定义可知，一个一阶限定理论或者一个一阶稳定理论实际上就是一个全称二阶公式，
+因此，Skolem化的思想似乎不能用来消去存在量词。实际上，这一结论在\cite{Heng2011thesis}中被证明。
+
+Heng Zhang等人在\cite{Heng2011}中，提出了一个从一阶稳定理论到一阶稳定理论
+保持在有穷结构上投影等价关系的翻译$Tr_{QE}$(见第二章定义\ref{def_smqe})，
+通过引入辅助谓词在稳定模型语义下消去一个存在量词块，
+随后在其博士论文\cite{Heng2011thesis}中证明了引入辅助谓词是必须的，以及否证了在所有结构上消去量词的可能性。
+
+对于任意一个一阶语句，我们总是可以找到一个与之强等价的具有前缀范式形式的一阶语句。
+因此，给定任意一个一阶稳定理论，我们可以首先将之转化成前缀范式形式，在使用翻译$Tr_{QE}$来消去存在量词。
+若该语句$\varphi$为$\Pi^0_{2}$-语句，则$Tr_{QE}(\varphi)$是一个$\Pi^0_{1}$-语句，不包含存在量词。
+但若$\varphi$为更复杂的语句，则不能直接使用翻译$Tr_{QE}$。
+根据命题\ref{strongequv}中的强等价关系，对于任何一个$\Pi^0_{k+1}$-语句$\varphi$(其中$k$为自然数)，
+我们可以通过合理地选择提取量词的顺序，将$Tr_{QE}(\varphi)$转化为一个与之强等价的$\Pi^0_{k}$-语句。
+根据保持有穷结构上的投影等价关系的可译性的传递性，我们可以递归地调用翻译$Tr_{QE}$和合理转化前缀范式，
+最终得到一个在稳定模型语义下的$\Pi^0_{1}$-语句。
+由定理\ref{theorem_sm2lp}可知，每个在稳定模型语义下的全称一阶公式都可以被翻译为一个与之强等价的扩充的析取逻辑程序。
+通过一个回答集程序求解器，我们可以计算出该逻辑程序的回答集，从而求得原语句的稳定模型。
+
+若设原$\Pi^0_{k}$-语句$\varphi$的规模为$n$，则通过递归调用翻译$Tr_{QE}$，
+得到的$\Pi^0_{1}$-语句的规模为$O(3^_{k-2}\times 4n)$。
+接下来，再使用Pedro Cabalar等人在\cite{cabalar2007propositional}中给出的翻译，将这个全称一阶语句翻译为与之强等价的扩充的析取逻辑程序。
+在这个过程中，需要频繁地使用类似“分配律”的规则，所以最终得到的逻辑程序的规模会是这个$\Pi^0_{1}$-语句的超多项式倍。
+因此，在消去存在量词的过程中，一阶稳定理论规模的$3^k$倍增长，使得最终的逻辑程序规模增长过快，严重影响求解效率。
+因此，对消去存在量词的翻译的优化就很有必要了。
+
+通过对翻译$Tr_{QE}$的分析，实际上翻译$Tr_{QE}$具有以下性质：
+\begin{proposition}\label{pro_sm_qe_split}
+\textbf{(文献\cite{Heng2011thesis} 命题6.1)}
+任意给定两个$L^v$-公式$\varphi$和$\psi$，设$\sigma_i$是$v$中的一集谓词常元，则有$\mathbf{SM}[Tr_{QE}(\varphi)\wedge \psi;\sigma_i,S,T]$
+在有穷结构上投影等价于$\mathbf{SM}[\varphi\wedge \psi;\sigma_i]$。
+\end{proposition}
+
+根据此命题，我们可以将原一阶稳定理论转化为多个公式的合取，即形如$\vartheta_1 \wedge \vartheta_2 \wedge \ldots \wedge \vartheta_n$，
+然后只对那些包含存在量词的子公式$\vartheta_i(1 \leq i\leq n)$递归调用翻译$Tr_{QE}$，
+这样就使得$3^k$倍的理论增长只发生在那些包含存在量词的子公式上，
+有效降低最终生成的不含存在量词的一阶稳定理论的规模。
+
+\section{一阶并行限定理论中的存在量词消去的优化}
+
+根据从一阶并行限定理论到一阶稳定理论的翻译$Tr_v$的定义，
+如果在原一阶语句$\varphi$中包含存在谓词，那么在翻译后的语句中，
+$\varphi^{\neg\neg}$和$\tilde{\varphi}_j$也会包含存在量词，
+而定义\ref{def_circ2sm}中的公式(\ref{pe2})实际上也是包含存在量词的，因为全称量词出现在蕴含式的前件。
+因为一般一阶语句的规模比起极小化谓词的个数要多得多，
+所以我们一般认为由翻译$Tr_v$造成的理论规模的膨胀为原理论的两倍。
+即使命题\ref{pro_sm_qe_split}拆分开包含存在量词的公式和全称一阶公式，
+递归调用翻译$Tr_v$最终得到的全称一阶公式为原理论的$5^{k+1}$倍。
+
+实际上，翻译$Tr_v$和翻译$Tr_{QE}$都涉及到稳定模型语义下的一些性质，
+那么，我们能否总结两个翻译共同应用的性质，结合两个翻译，对整个存在量词消去的过程进行优化呢？
+
+观察翻译$Tr_v$和翻译$Tr_{QE}$中都涉及到类似$\varphi^{\neg\neg}$的公式，都是用于刻画一阶公式的，
+因此，利用这个共同点，我们找到了一个，在从一阶并行限定理论到一阶稳定理论过程中，
+对存在量词消去进行优化的翻译，具体定义如下：
+
+\begin{definition}\label{def_circqe}
+给定任意一个形如$\forall\bar{x} \exists \bar{y}\vartheta(\bar{x},\bar{y})$的具有前缀范式形式的一阶语句$\varphi$，且$\vartheta$是无量词的否定范式，
+$\sigma_m$和$\sigma_{v}$是两个互不相交的谓词常元集，
+我们定义$\Gamma_{\exists}(\varphi;\sigma_m;\sigma_{v})$为以下公式的合取的全称闭包：
+\begin{eqnarray}
+\textstyle
+ \neg \neg S(\bar{x},\overline{\mathrm{m{\i}n}}) \label{qe1}\\
+  (succ(\bar{y},\bar{y}')\wedge S(\bar{x},\bar{y}')) \vee \vartheta^{\neg\neg}(\bar{x},\bar{y})
+  \rightarrow S(\bar{x},\bar{y}) \label{qe2}\\
+  (succ(\bar{y},\bar{y}')\wedge W(\bar{x},\bar{y}')) \vee \vartheta^{\top}(\bar{x},\bar{y})   \rightarrow W(\bar{x},\bar{y}) \label{qe3}\\
+  T(\bar{x},\overline{\mathrm{m{\i}n}}) \vee \tilde{\vartheta}(\bar{x},\overline{\mathrm{m{\i}n}}) \label{qe4}\\
+  succ(\bar{y},\bar{y}') \rightarrow (T(\bar{x},\bar{y}) \leftrightarrow \tilde{\vartheta}(\bar{x},\bar{y}') \vee T(\bar{x},\bar{y}')) \label{qe5}\\
+%  \begin{split}
+%  \!\{[succ(\bar{y},\bar{y}')\!\wedge\!\neg W(\bar{x},\bar{y}')]\vee \!\bar{y}\! = \!\overline{\mathrm{max}})\}\!\wedge\! W(\bar{x},\bar{y})\!   \hspace{1.2cm} \\ \rightarrow\!
+%   (T(\bar{x},\overline{\mathrm{max}})\! \leftrightarrow \tilde{\vartheta}(\bar{x},\bar{y}))\label{qe6}
+%\end{split}\\
+\![(\overline{\mathrm{max}} = \bar{y}) \vee(succ(\bar{y},\bar{y}')\wedge\neg W(\bar{x},\bar{y}'))]\wedge W(\bar{x},\bar{y})\rightarrow
+   (T(\bar{x},\overline{\mathrm{max}})\! \leftrightarrow \tilde{\vartheta}(\bar{x},\bar{y}))\label{qe6}\\
+  \gamma \leftrightarrow \bigwedge\limits_{P \in \sigma_{i}} \forall \bar{x} (P(\bar{x})\vee \neg P(\bar{x})) \label{qe7}\\
+  \bigwedge\limits_{Q' \in \sigma'_{v}} \forall \bar{x}(\gamma \rightarrow Q'(\bar{x})) \label{qe8}
+\end{eqnarray}
+其中，
+\begin{enumerate}
+  \item $\vartheta^{\neg\neg}$是将$\vartheta$中所有形如$P(\bar{x})$的正文字替换为$\neg\neg P(\bar{x})$后所得到的公式；
+  \item $\vartheta^{\top}$是对$\vartheta$按如下方法替换后得到的公式：
+      \begin{itemize}
+        \item 对于$P \in \sigma_m$，将所有形如$P(\bar{x})$的正文字替换为$\neg \neg P(\bar{t})$，将所有形如$\neg P(\bar{t})$的负文字替换为$\top$，
+        \item 对于$Q \in \sigma_v$，将所有形如$Q(\bar{x})$的正文字和形如$\neg Q(\bar{x})$的负文字替换为$\top$；
+      \end{itemize}
+  \item $\tilde{\vartheta}$是对$\vartheta$按如下方法替换后得到的公式：
+      \begin{itemize}
+        \item 对于$P \in \sigma_m$，将所有形如$\neg P(\bar{t})$的负文字替换为$(P(\bar{x})\rightarrow \gamma)$，
+        \item 对于$Q \in \sigma_v$，将所有形如$Q(\bar{x})$的正文字替换为$Q'(\bar{x})$，
+                将所有形如$\neg Q(\bar{x})$的负文字替换为$(Q'(\bar{x})\rightarrow \gamma)$；
+      \end{itemize}
+  \item 谓词$succ$是未在$\varphi$中出现过的谓词常元，它是建立在有穷论域$A$上的$2\times|\bar{y}|$元关系，它刻画了$A^{|\bar{y}|}$中元素的一个线序，
+      其中$\overline{\mathrm{m{\i}n}}$和$\overline{\mathrm{max}}$是未在$\varphi$中出现过的个体常元，
+      分别表示在这个线序下的最小元和最大元；
+  \item 谓词$Q'$是相应于可变谓词$Q(Q \in\sigma_v)$引入的从未出现过的辅助谓词，且每对$Q$和$Q'$都具有相同的元数，谓词集$\sigma'_v$表示由这些辅助谓词$Q'$组成的集合；
+  \item $S,W,T$和$\gamma$都是从未出现过的辅助谓词。
+\end{enumerate}
+\end{definition}
+
+实际上，优化翻译$\Gamma_{\exists}$结合了翻译$Tr_v$和翻译$Tr_{QE}$，在有穷论域上构造一个线序，通过逐个检测论域上的元素，来刻画存在量词。
+根据文献\cite{Heng2011thesis}
+%\vspace*{-2mm}
+\begin{lemma}
+Over a non-empty finite domain, there exists a strict total order which has the unique maximum and minimum individual
+and every individual has an unique successor under the order.
+\end{lemma}
+
+Indeed Lemma 3 provides a basis to use a successor relation over a finite structure in the translation.
+According Lemma 3, we can assume that structures with the same finite domain share the same total order.
+So for every tuple, its successor is unique
+and $\overline{\mathrm{succ}}, \overline{\mathrm{max}}, \overline{\mathrm{m{\i}n}}$ have the same interpretation over structure with the same finite domain.
+
+Intuitively, predicates \textit{S} and \textit{W} describe the maximum tuple in terms of $\bar{y}$ satisfying $\theta$ and $\theta^{\top \neg\neg}$ on the successor relation. Once the minimum tuple is included by S(\textit{resp.}\textit{W}), there must be a tuple $\bar{y}$ letting $\theta$(\textit{resp.}$\theta^{\top \neg\neg}$) be satisfied. As for predicate \textit{T}, its corresponding predicate variable \textit{T}$^*$ is introduced to describe the existence of $\bar{y}$ in $\theta(\sigma^*_i,\sigma^*_v)$ which is an important part in circumscription. In addition, $\theta^{\top \neg\neg}$ is introduced to reflect $\theta(\sigma^*_i,\sigma^*_v)$ because the latter implies the former when $\sigma_i \leq \sigma_i^*$. Similar to translation $Tr_v$ in Definition 1, $\mathrm{St}(\tilde{\theta};\tau_{i})$ is equivalent to $\theta(\sigma^*_i,\sigma^*_v)$ when $\sigma_i < \sigma_i^*$.
+
+This optimization actually is a translation from a first-order theory in parallel circumscription to another one under stable model semantics eliminating a tuple of existential quantifiers. Proposition \ref{prop3} shows it is sound and complete with the proof followed.
+
+\begin{proposition}\label{prop3}
+Let $\varphi$ be any first-order sentence of the form $\forall \bar{x} \exists \bar{y}\vartheta(\bar{x},\bar{y})$,
+and $\sigma_{i}$ be a tuple of predicate constants.
+Then $\exists \sigma_{v}' \exists S \exists T \exists W \exists \gamma \emph{\textrm{SM}}[\Gamma_{\exists}(\varphi; \sigma_{i};\sigma_{v}); \sigma_{i}, \sigma'_{v}, S,$ $T, W, \gamma]$ is equivalent to $\emph{\textrm{CIRC}}[\varphi;\sigma_{i}]$ over finite structures,
+where $S,T,W,\sigma'_v,\gamma$ are auxiliary predicates introduced by $\Gamma_{\exists}$.
+\end{proposition}
+%\vspace*{-1mm}
+%The proof of Proposition 4 follows the main idea of the proof of Proposition 1 in \cite{Heng2011} and is omitted due to the space limitation.
+
+\begin{proof}
+Let $\sigma$ and $\tau$ be the vocabularies of $\varphi$ and $\Gamma_{\exists}(\varphi;\sigma_{i};\sigma_{v})$ (shortly, $\Gamma$) respectively.
+%Suppose that $\sigma_{i}$ is a subset of $\sigma$ because predicates not in $\varphi$ make no sense.
+Next we define $\tau_{i}$ as $\sigma_{i} \cup \sigma_{v}^{*} \cup \{S, T, W, \gamma\}$.
+Given any $\sigma$-structure $\mu$ over a finite domain $A$,
+let $R_{\mu}$(\textit{resp.}$R^{\top}_{\mu}$) be a relation on $A$ such that:
+for all tuples $\bar{a}$ and $\bar{b}$ with of length $|\bar{x}|$ and $|\bar{y}|$ respectively,
+$(\bar{a},\bar{b}) \in R_{\mu}$(\textit{resp.}$(\bar{a},\bar{b}) \in R^{\top}_{\mu}$) iff there is a tuple $\bar{c} \geq \bar{b}$ under the total order
+letting $\theta(\bar{a},\bar{c})$ (\textit{resp.}$\theta^{\top \neg \neg}(\bar{a},\bar{c})$) be satisfied by $\mu$.
+In addition, let $\lambda_{\mu}(\bar{a})$
+be the largest one of tuples in relation $R^{\top}_{\mu}$.
+Let $\theta^{*}$ be a formula obtained by substituting corresponding variables in $\sigma^{*}_{i}$ and $\sigma^{*}_{v}$ for minimized and varied predicate constants.
+
+$\Rightarrow$ First we assume that $\nu$ is a model of $\textrm{SM}[\Gamma;\tau_{i}]$ and $\mu$ is a $\sigma$-restriction of $\mu$.
+Then it is our target to draw a conclusion that $\mu$ satisfies $\textrm{CIRC}[\varphi;\sigma]$.
+Obviously $\gamma$ is interpreted to $\top$ and \textit{T} is filled with the domain in $\nu$.
+By the definition, $\nu$ should satisfies $\nu(S) = R_{\mu}$ and $\nu(W) = R^{\top}_{\mu}$.
+Otherwise $\beta$ would satisfy $\tau_i^{*} < \tau_i$ and $\mathrm{St}(\Gamma;\tau_i)$ and it breaks the beginning assumption.
+%In other words, $S$ and $W$ are interpreted as $R_{\mu}$ and $R^{\top}_{\mu}$ respectively.
+With formula (\ref{qe1}) satisfied, for every tuple of $\bar{a}$
+there exists at least one tuple $\bar{b}$ such that $\theta(\bar{a},\bar{b})$ is true in $\mu$.
+In short, $\mu$ satisfies $\varphi$.
+
+To get a contradiction, we suppose that $\alpha$, as an assignment in $\mu$,
+satisfies both $\sigma^{*}_{i} < \sigma_{i}$ and $\forall \bar{x} \exists \bar{y} \theta^{*}(\bar{x},\bar{y})$ which can not both be true if $\mu$ is a minimal model.
+Under this assumption, let assignment $\beta'$ in $\nu$
+be obtained by assigning $\sigma^{*}_{i}$ and $\sigma^{*}_{v}$ as same as $\alpha$
+such that $\beta'(S^{*}) = R_{\mu}$, $\beta'(W^{*}) = R^{\top}_{\mu}$, $\beta'(\gamma^{*})= \bot$,
+and for arbitrary tuples $\bar{a}$ and $\bar{b}$ of corresponding length,
+$(\bar{a},\bar{b}) \in \beta'(T^{*})$ iff either $\theta^{*}(\bar{a},\lambda_{\mu}(\bar{a}))$ is satisfied
+or there is a tuple $\bar{c} > \bar{b}$ such that $\alpha$ satisfies $\theta^{*}(\bar{a},\bar{c})$. Then $\theta^*$ equals to $\mathrm{St}(\tilde{\theta};\tau_{i})$ and implies $\mathrm{St}(\theta^{\top \neg\neg};\tau_{i})$ letting $\mathrm{St}((\ref{qe4})$$-$$(\ref{qe6});\tau_{i})$ be satisfied.
+A conclusion that $\tau^{*}_{i} < \tau_{i}$ and $\mathrm{St}(\Gamma;\tau_{i})$ are satisfied by $\beta'$
+is drawn and makes a contradiction.
+\hspace*{-0.5mm}So \hspace*{-0.5mm}$\mu$ is a minimal model of \hspace*{-0.4mm}$\varphi$ with minimizing \hspace*{-0.2mm}$\sigma_{i}$.
+
+$\Rightarrow$ On the other hand, with the assumption that $\mu$ is a model of $\textrm{CIRC}[\varphi;\sigma_{i}]$,
+we need to show that $\nu$, as an expansion of $\mu$ on $\tau$, satisfies $\textrm{SM}[\Gamma;\tau_{i}]$.
+Additionally, let $\nu$ interpret $S$ and $W$ as the relations $R_{\mu}$ and $R^{\top}_{\mu}$ respectively
+and fill $T$ over the domain,
+and make $\gamma$ true.
+Surely it can be concluded that $\nu$ satisfies $\Gamma$.
+
+Similarly we assume that assignment $\beta$ in $\nu$ satisfies $\tau^{*}_{i} < \tau_{i}$
+and $\mathrm{St}(\Gamma;\tau_{i})$ using \textit{reductio ad absurdum}.
+By the definition, it is true that $\beta(S^*)=R_{\mu}$ and $\beta(W^*)=R^{\top}_{\mu}$.
+Next, we assert that $\sigma^{*}_{i} < \sigma_{i}$ is satisfied.
+Otherwise it would satisfy $\tau^*_i = \tau_i$ and make a contradiction with the above assumption.
+Therefore, $\gamma^{*}$ is assigned as $\bot$
+and it makes $\mathrm{St}(\tilde{\theta}(\bar{x},\bar{y});\tau_{i})$ equal to $\theta^{*}(\bar{x},\bar{y})$.
+Thanks to the formulas (\ref{qe4})-(\ref{qe6}) with operator $\mathrm{St}$ applied, for each tuple $\bar{a}$ there are two feasible situations  in $\beta$ that
+$\theta^{*}(\bar{a},\lambda_{\mu}(\bar{a}))$ is true and there exists a tuple $\bar{b}$ letting $\theta^{*}(\bar{a},\bar{b})$ be satisfied.
+Whichever one is true, $\beta$ will satisfies $\exists \bar{y} \theta^{*}(\bar{a},\bar{y})$.
+Because of the arbitrariness of $\bar{a}$, we can know that an assignment $\alpha$ in $\mu$ assigned
+as same as $\beta$ on $\sigma_{i}$ will satisfies $\forall \bar{x} \exists \bar{y} \theta^{*}(\bar{x},\bar{y})$.
+But it will imply a contradiction with the assumption that $\mu$ is a model of $\textrm{CIRC}[\varphi;\sigma_{i}]$.
+Here the proof is completed.
+\end{proof}
+
+\begin{definition}\label{def3}
+%Let $\varphi$ be a first-order sentence of the form $\forall\bar{x} \exists \bar{y}\vartheta(\bar{x},\bar{y})$ where $\vartheta$ is quantifier-free and in negation normal form,
+%and we define $\Gamma_{\exists}(\varphi;\sigma_1 > \ldots > \sigma_k;\sigma_{v})$ be the conjunction of below formulas with universal quantifiers omitted:
+%\vspace*{-1.5mm}
+给定任意一个前缀范式形如$\forall\bar{x} \exists \bar{y}\vartheta(\bar{x},\bar{y})$的一阶语句$\varphi$，且$\vartheta$是无量词的否定范式，对于k+1个互不相交的谓词集合$\sigma_1 , \ldots, \sigma_k,\sigma_{v}$，我们用下面的公式的合取来定义$\Gamma_{\exists}(\varphi;\sigma_1 > \ldots > \sigma_k;\sigma_{v})$：
+\begin{eqnarray}
+\textstyle
+ \neg \neg S(\bar{x},\overline{\mathrm{m{\i}n}}) \label{qe1}\\
+  (succ(\bar{y},\bar{y}')\wedge S(\bar{x},\bar{y}')) \vee \vartheta^{\neg\neg}(\bar{x},\bar{y})
+  \rightarrow S(\bar{x},\bar{y}) \label{qe2}\\
+  (succ(\bar{y},\bar{y}')\wedge W(\bar{x},\bar{y}')) \vee \vartheta^{\top}(\bar{x},\bar{y})   \rightarrow W(\bar{x},\bar{y}) \label{qe3}\\
+  \bigwedge\limits_{1 \leq j \leq k} T_j(\bar{x},\overline{\mathrm{m{\i}n}}) \vee \tilde{\vartheta}_j(\bar{x},\overline{\mathrm{m{\i}n}}) \label{qe4}\\
+  \bigwedge\limits_{1 \leq j \leq k} succ(\bar{y},\bar{y}') \rightarrow (T_j(\bar{x},\bar{y}) \leftrightarrow \tilde{\vartheta}_j(\bar{x},\bar{y}') \vee T_j(\bar{x},\bar{y}')) \label{qe5}\\
+%\end{eqnarray}
+%\begin{eqnarray}
+%\textstyle
+  \!\bigwedge\limits_{1 \leq j \leq k} \{[succ(\bar{y},\bar{y}')\!\wedge\!\neg W(\bar{x},\bar{y}')]\vee \!\bar{y}\! = \!\overline{\mathrm{max}})\}\!\wedge\! W(\bar{x},\bar{y})\!  \rightarrow\!
+   (T_j(\bar{x},\overline{\mathrm{max}})\! \leftrightarrow \tilde{\vartheta}_j(\bar{x},\bar{y}))\label{qe6}\\
+%  W(\bar{x},\overline{\mathrm{max}})\rightarrow (T(\bar{x},\overline{\mathrm{max}}) \leftrightarrow \tilde{\vartheta}(\bar{x},\overline{\mathrm{max}}))\\
+  \bigwedge\limits_{1 \leq j \leq k} \gamma_j \leftrightarrow \bigwedge\limits_{P \in \sigma_j} \forall \bar{x} (P(\bar{x})\vee \neg P(\bar{x})) \label{qe7}\\
+  \bigwedge\limits_{1 \leq j \leq k}\forall \bar{x}(\gamma_{j} \rightarrow \bigwedge\limits_{Q^j \in \delta_{j}}Q^j(\bar{x})) \label{qe8}
+\end{eqnarray}
+
+%$succ$ is a successor relation on the domain based on a total order;
+%%with no occurrence in $\varphi$;
+%$\overline{\mathrm{max}}$ and $\overline{\mathrm{m{\i}n}}$ denote the maximum and minimum tuple respectively on the successor relation; and $S$, $T$, $W$, $\gamma$, and $\sigma_v'$ are auxiliary predicates.
+其中，
+\begin{enumerate}
+  \item $\vartheta^{\neg \neg}$是由$\vartheta$通过将每一个满足$P \in \in \bigcup_{1\leq i \leq k}\sigma_i$的正文字$P(\bar{x})$替换为$\neg \neg P(\bar{t})$后得到的公式；
+  \item $\vartheta^{\top}$是由$\vartheta$通过以下操作得到的公式：
+      \begin{enumerate}
+        \item 对于$P \in \sigma_1$，将每一个正文字$P(\bar{t})$替换为$\neg \neg P(\bar{t})$，将每一个负文字$\neg P(\bar{t})$替换为$\top$，
+        \item 对于$Q \in \bigcup_{2\leq i \leq k}\sigma_i \cup \sigma_v$，将每一个正文字$Q(\bar{t})$和每一个负文字$\neg Q(\bar{t})$替换为$\top$；
+      \end{enumerate}
+  \item 对于第j个优先级，$\tilde{\vartheta}_j$是由$\vartheta$通过以下操作得到的公式：
+      \begin{enumerate}
+        \item 对于$P \in \sigma_j$，将每一个负文字$\neg P(\bar{t})$替换为$(P(\bar{t}) \rightarrow \gamma_j)$，
+        \item 对于$P \in \bigcup_{1\leq i<j}\sigma_i$，将每一个正文字$P(\bar{t})$替换为$\neg \neg P(\bar{t})$，
+        \item 对于$Q \in \bigcup_{j < i \leq k}\sigma_i \cup \sigma_v$，将每一个正文字$Q(\bar{t})$替换为$Q^j(\bar{t})$，将每一个负文字$\neg Q(\bar{t})$替换为$(Q^j(\bar{t}) \rightarrow \gamma)$；
+      \end{enumerate}
+  \item $succ$表示基于论域上的全序的一个后继关系，是一个从未在$\vartheta$中出现的$2\times |\bar{y}|$元辅助谓词，而$\overline{\mathrm{max}}$和$\overline{\mathrm{m{\i}n}}$则分别表示在这个全序下的长度为$|\bar{y}|$的最大元组和最小元组
+  \item $S,W,T_j,Q^j$和$\gamma_j$是从未出现过的辅助谓词，而$\delta_{j}$表示由上面引进的辅助谓词$Q^j$组成的集合
+\end{enumerate}
+%(1)$\vartheta^{\neg \neg}$是由$\vartheta$通过将每一个满足$P \in \sigma_m$的正文字$P(\bar{x})$替换为$\neg \neg P(\bar{t})$后得到的公式；
+%(2)$\vartheta^{\top}$是由$\vartheta$通过以下操作得到的公式：
+%(i)对于$P \in \sigma_1$，将每一个正文字$P(\bar{t})$替换为$\neg \neg P(\bar{t})$，将每一个负文字$\neg P(\bar{t})$替换为$\top$，
+%(ii)对于$Q \in \bigcup_{2\leq i \leq k}\sigma_i \cup \sigma_v$，将每一个正文字$Q(\bar{t})$和每一个负文字$\neg Q(\bar{t})$替换为$\top$；
+%(3)$\tilde{\vartheta}_j$是由$\vartheta$通过以下操作得到的公式：
+%(i)对于$P \in \sigma_j$，将每一个负文字$\neg P(\bar{t})$替换为$(P(\bar{t}) \rightarrow \gamma_j)$，
+%(ii)对于$P \in \bigcup_{1\leq i<j}\sigma_i$，将每一个正文字$P(\bar{t})$替换为$\neg \neg P(\bar{t})$，
+%(iii)对于$Q \in \bigcup_{j < i \leq k}\sigma_i \cup \sigma_v$，将每一个正文字$Q(\bar{t})$替换为$Q^j(\bar{t})$，将每一个负文字$\neg Q(\bar{t})$替换为$(Q^j(\bar{t}) \rightarrow \gamma)$；
+\end{definition}
+
+要点：要保证$\vartheta^{\top}=St(\vartheta^{\top})$继而$W=W^*$，
+还要保证$\vartheta(\sigma_m^*,\sigma_v^*)$即$St(\tilde{\vartheta})$能够推出$\vartheta^{\top}$从而通过第3,4,5条公式来限制$T^*$
+
+
+
+
+
+
+
+
+
+%\section{求解器的工作框架}
+%
+%本文基于第~\ref{chap3}~章提出的两个翻译，实现了一个正析取逻辑程序求解器，将其
+%命名为：~pdlp2nlp~。求解器的工作流程如图~\ref{fig:PDLP:Solver}~所示。在图~\ref{fig:PDLP:Solver}~中，
+%正规矩阵表示的模块均为逻辑程序或者逻辑程序的回答集，圆角矩形与菱形表示的模块均为处理逻辑程序或回答集的运算模块。
+%
+%\begin{figure}
+%  \center
+%  \includegraphics[width=400pt]{img/solver.jpg}\\
+%  %\includegraphics[width=10cm]{img/solver.jpg}\\
+%  \caption{正析取逻辑程序求解器工作框架图} \label{fig:PDLP:Solver}
+%\end{figure}
+%
+%求解器的输入是一个正析取逻辑程序(~DLP~)文件，词法语法解析模块完成两个任务：一是检查输入文件是否存在词语
+%与语法的错误，我们要求输入的逻辑程序的每一条规则都必须符合式~\ref{for:chap2:DLP}~给出的形式；二是将逻辑程序
+%存入内存中的数据结构中，为接下来的运算处理做好准备。
+%
+%判断~HDLP~模块用以判断输入的逻辑程序是否是~HDLP~，以便求解器的后续模块使用不同的计算方法。
+%如果输入的逻辑程序是~HDLP~，那么由图~\ref{fig:PDLP:Solver}~所示，我们通过调用求解~HDLP~模块即可直接求得
+%输入的逻辑程序的回答集。求解~HDLP~模块的实现是基于定理~\ref{theorem:HEDLP2nlp}~与其推论~\ref{corollary:of:theorem:HEDLP2nlp}~，
+%~HDLP~到~NLP~的翻译模块实现的工作
+%即是将~HDLP~翻译为~NLP~，然后~ASP~求解器模块通过调用~clasp~求解器的源码接口以求得翻译后的~NLP~的回答集，即是
+%原逻辑程序~(HDLP)~的回答集。
+%如果输入的逻辑程序是~NHDLP~，那么由图~\ref{fig:PDLP:Solver}~所示，我们通过调用~NHDLP~到~HDLP~的翻译模块将输入的逻辑程序
+%翻译为~n~（n的确切个数因输入的逻辑程序的不同而不同）个~HDLP~，然后对这~n~个~HDLP~分别调用求解~HDLP~模块（也即调用~n~次）求解其各自的
+%回答集，将~n~个~HDLP~的回答集汇总后传入模型筛选器模块，经过筛选器处理后得到的结果即为
+%原逻辑程序（~NHDLP~）的回答集。
+%
+%%至此，整个求解器的工作流程介绍完毕。
+%
+%
+%
+%\section{重要数据结构的介绍}
+%
+%%在本文中实现的求解器均是使用~C++~语言进行编写的。
+%本节将介绍求解器的编码实现过程中，所使用到的比较重要的数据结构。
+%我们的数据结构主要为贯穿整个求解器各模块的：在内存中存储逻辑程序的数据结构和存储文字信息的数据结构。
+%
+%
+%在求解器的编码实现中，我们在词法语法解析(~Parsing~)阶段使用一个节点类型为~ParseNode~的链表存储整个逻辑程序。
+%其中，链表的每一个节点存储一个规则，规则则使用数据结构~Rule~进行存储。数据结构~$\_$head~、~$\_$body~与
+%~$\_$literal$\_$vec~则是用于在~Parsing~阶段用于临时存储各个中间值。数据结构~AtomSet~是整个求解器里至关重要
+%的数据结构，在我们的编码设计里，逻辑程序中的每一个文字（也即命题原子）都使用一个唯一的标号~$i$~来表示，
+%~$i \in \mathbb{N}$~，且~$1 \leq i \leq n$~，~$n$~表示当前逻辑程序中最大的文字个数。例如，一个原子命题~$p$~，我们可能
+%使用标号~$3$~来表示。在这种设计里，我们可以在常数时间里得到一个标号所对应的文字符号（函数~get$\_$string~用于实现该功能），
+%同时也能够在常数时间里得到一个文字符号所对应的标号（函数~get$\_$index~用于实现该功能）。在后续的运算模块中，
+%我们便可以直接对文字所对应的标号进行操作，而不是操作文字符号本身，直到最终返回逻辑程序的回答集的时候
+%调用函数~get$\_$string~返回真正的文字符号即可。这种设计对于节省内存空间和程序效率的提高有非常大的帮助。
+%
+%\section{各模块算法实现} \label{chap4:implementation}
+%
+%本节我们将介绍求解器~pdlp2nlp~各个运算模块内部核心算法的实现，同时在最后给出各个运算模块
+%的复杂度分析。由于词法语法解析模块主要的操作是读取文件和将输入数据存入数据结构，并没有关键的
+%运算算法，这些过程都能够很清晰直观地被理解，在这里略去。
+%
+%为了更好的分析每个模块的时间与空间复杂度，我们在这里给出一些
+%约定，本章后续各节如无特别说明，都将以此处的约定为准。我们约定每个所求解的逻辑程序中规则的最大数目为~$r$~，一个规则
+%的头部出现的文字最大数目为~$h$~，体部出现的文字最大数目为~$b$~（因为求解器处理的是~DLP~，因此体部不会出现~$not$~），
+%逻辑程序中出现的全部不同文字的最大数目为~$lit$~，出现的环的最大个数为~$c$~，回答集的最大个数为~$m$~。
+%
+%\subsection{判断~HDLP~模块} \label{check:HEDLP}
+%
+%该模块的实现目标即是判断输入的逻辑程序是否是一个~HDLP~，其具体实现主要分为如下三个部分：
+%\begin{enumerate}
+%  \item %算法~\ref{create:graph}~：
+%        根据输入的逻辑程序，构建该逻辑程序的依赖图；
+%  \item %算法~\ref{search:circle}~：
+%        根据第~1~部分生成的依赖图，我们通过深搜算法找出依赖图中所有的环，并删除其中重复的环；
+%  \item %算法~\ref{is:Hedlp}~：
+%        根据找到的依赖图中存在的所有环，判断输入的逻辑程序是否是~HDLP~。
+%\end{enumerate}
+%
+%首先判断~HDLP~模块的第~1~部分为构建逻辑程序的依赖图。该部分的实现比较简单，我们在编码过程中
+%使用一个二维数组~$matrix$~存储依赖图。如果标号~$a$~所代表的文字在依赖图中存在一条有向边指向标号~$b$~
+%所代表的文字，则我们将~$matrix[a][b]$~的值置为~1~，否则置为~0~。构图的过程只需要遍历
+%逻辑程序的每一条规则，然后根据规则的头部与体部的文字对数组~$matrix$~进行填值即可。由上述分析，
+%我们可以得出第~1~部分的时间复杂度为~$O(r*b*h)$~，空间复杂度为~$O(lit^2)$~。
+%
+%接下来我们介绍第~2~部分的实现。我们知道第~1~部分生成的依赖图是一个有向图，寻找有向图中的环是
+%深度优先搜索算法的一种经典应用。为了找出依赖图中所有的环，我们在编码实现过程中对于依赖图中
+%的每一个顶点~$v$~，我们均搜索从顶点~$v$~出发最终回到其自身的所有环。在找出依赖图所有的环之后，
+%再将重复的环删去以得到最少的无重复环的集合。算法~\ref{search:circle}~给出了该部分实现的伪代码。
+%由上述分析与深搜算法的性质，我们可以得出第~2~部分的时间复杂度为~$O(lit^2)$~，空间复杂度为~$O(lit*c)$~。
+%
+%最后我们介绍第~3~部分的实现。该部分的实现也比较简单。在求出了逻辑程序依赖图的所有环之后，
+%判断逻辑程序是否是~HDLP~，只需要根据定义，对逻辑程序的每一条规则进行判断即可。
+%对于找到的每一个环，我们循环判断逻辑程序中的每一条规则是否造成了~head-cycle~。在实现过程中，
+%我们将那些造成~head-cycle~的规则存储起来，为方便后续的其他模块使用。由上述分析，
+%很明显可以得到第~3~部分的时间复杂度为~$O(r*c*h*log(lit))$~，其中~$log(lit)$~时间部分表示判断规则头部里的
+%一个文字是否在一个环中所需的时间，空间复杂度为~$O(1)$~。
+%
+%综上所述，我们得出判断~HDLP~模块的时间复杂度为~$O(r*b*h + lit^2 + r*c*h*log(lit))$~，
+%空间复杂度为~$O(lit^2 + lit*c)$~。
+%
+%%\RestyleAlgo{ruled}\LinesNumbered\input{algo_CheckHEDLP_1.tex}
+%
+%\RestyleAlgo{ruled}\LinesNumbered\input{algo_CheckHEDLP_2.tex}
+%
+%%\RestyleAlgo{ruled}\LinesNumbered\input{algo_CheckHEDLP_3.tex}
+%
+%\subsection{求解~HDLP~模块}
+%
+%该模块将~HDLP~到~NLP~的翻译模块与~ASP~求解器模块的功能集成到了一起，其具体实现主要分为如下两个部分：
+%\begin{enumerate}
+%  \item %算法~\ref{HEDLP:2:NLP}~：
+%        基于第~\ref{chap3}~章定理~\ref{theorem:HEDLP2nlp}~的推论~\ref{corollary:of:theorem:HEDLP2nlp}~，
+%        实现将一个~HDLP~翻译为一个~NLP~；
+%  \item %算法~\ref{call:nlp:solver}~：
+%        通过调用~clasp~求解器的源码，求得一个~NLP~程序的回答集。
+%\end{enumerate}
+%
+%我们先介绍求解~HDLP~模块第~1~部分的实现。第~1~部分是求解器~pdlp2nlp~处理~HDLP~的核心所在，
+%具体的实现原理即是基于推论~\ref{corollary:of:theorem:HEDLP2nlp}~。
+%在编码实现过程中，我们只需要使用一个循环，将所求解逻辑程序中的每一条规则根据其头部的文字个数，将其映射成
+%最终的~NLP~中的一条或者多条规则。需要注意的一点是，如果所处理的规则头部为空（即该规则为事实），则
+%直接将该规则本身作为最终~NLP~中的一条规则即可。算法~\ref{HEDLP:2:NLP}~给出了该部分实现的伪代码。
+%由上述分析，我们可以得出第~1~部分的时间复杂度为~$O(r*h^2)$~，空间复杂度为~$O(r*h*lit)$~。
+%
+%\RestyleAlgo{ruled}\LinesNumbered\input{algo_Module_1_1.tex}
+%
+%第~2~部分的编码实现比较简单，只要理解求解器~clasp~源码的调用接口即可完成。在实现过程中，
+%我们需要先定义~clasp~源码中的相关类对象（这里涉及的对象比较多，故不再一一列举），
+%然后通过调用这些对象的相关接口将逻辑程序(~NLP~)的所有文字与
+%规则加入到对象中，然后再调用相应的求解函数接口对逻辑程序进行求解，最后从~clasp~相关对象的成员数据
+%中获得求解的回答集。
+%该部分的时间复杂度为~$O(lit+r*h*(h+b))$~，空间复杂度为~$O(m*lit)$~。
+%
+%综上所述，我们得出求解~HDLP~模块的时间复杂度为~$O( r*h^2 + lit+r*h*(h+b) )$~，
+%空间复杂度为~$O(r*h*lit + m*lit)$~。
+%
+%%\RestyleAlgo{ruled}\LinesNumbered\input{algo_Module_1_2.tex}
+%
+%%基于在~\ref{check:HEDLP}~节中给出的约定，我们给出算法~\ref{HEDLP:2:NLP}~与~\ref{call:nlp:solver}~的复杂度
+%%分析如下：算法~\ref{HEDLP:2:NLP}~的时间复杂度为~$O(r*h^2)$~，空间复杂度为~$O(r*h*lit)$~。
+%%算法~\ref{call:nlp:solver}~的时间复杂度为~$O(lit+r*h*(h+b))$~，空间复杂度为~$O(m*lit)$~。
+%
+%\subsection{~NHDLP~到~HDLP~的翻译模块}
+%
+%该模块是整个求解器实现中最核心的模块，我们基于第~\ref{chap3}~章给出的推论~\ref{corollary:of:theorem:notHEDLP2HEDLP}~，编码实现了
+%~NHDLP~到~HDLP~的翻译。其具体实现主要分为如下三个部分：
+%\begin{enumerate}
+%  \item %算法~\ref{find:normal:rule}~：
+%        在判断~HDLP~模块已经求得待求解逻辑程序中造成~head-cycle~的规则集合的基础上，
+%        我们通过计算求得所有在~NHDLP~到~HDLP~的翻译过程中无需改变的规则集合；
+%  \item %算法~\ref{notHEDLP:2:HEDLP}~：
+%        基于第~\ref{chap3}~章定理~\ref{theorem:notHEDLP2HEDLP}~的推
+%        论~\ref{corollary:of:theorem:notHEDLP2HEDLP}~，实现~NHDLP~到~HDLP~的翻译，生成多个~HDLP~；
+%  \item %算法~\ref{nHEDLP:call:nlpsolver}~：
+%        通过多次调用求解~HDLP~模块求解生成的多个~HDLP~的回答集。
+%\end{enumerate}
+%
+%该模块第~1~部分与第~3~部分的实现均比较简单。这两个部分的具体实现均可以通过简单的循环操作完成，
+%因此我们不再详细介绍其具体实现。
+%接下来我们介绍第~2~部分的具体实现。
+%该部分在实现过程中，主要的难点在于将存在~head-cycle~的规则拆解为多条~head-cycle-free~的规则。
+%由于事先我们无法知道输入的逻辑程序中有多少个规则存在~head-cycle~，因此我们无法使用简单的循环
+%语句实现该操作。在编码的时候，我们根据不同的逻辑程序，动态的生成相应大小的数组用于存储存在~head-cycle~
+%的规则信息。实现了存储之后，我们非常巧妙地使用两个~$while$~循环实现了生成多个~HDLP~的功能。
+%算法~\ref{notHEDLP:2:HEDLP}~给出了该部分实现的伪代码。
+%
+%由上面的分析，我们可以看出~NHDLP~到~HDLP~的翻译模块所需的时间主要是由第~2~部分所决定，所需空间则主要是由第~3~
+%部分存储多个~HDLP~的回答集所决定。
+%由于~NHDLP~到~HDLP~的翻译至多能够生成~$h^r$~个~HDLP~，
+%而一个~HDLP~的一个回答集中可能出现的文字数目上限为~$lit$~，
+%因此，我们得出翻译~2~模块的时间复杂度为~$O(r+h^r)$~，空间复杂度为~$O(m*lit*h^r)$~。
+%
+%
+%%\RestyleAlgo{ruled}\LinesNumbered\input{algo_Translator_2_1.tex}
+%
+%\RestyleAlgo{ruled}\LinesNumbered\input{algo_Translator_2_2.tex}
+%
+%%\RestyleAlgo{ruled}\LinesNumbered\input{algo_Translator_2_3.tex}
+%
+%%同样在基于~\ref{check:HEDLP}~节给出的约定，我们给出算法~\ref{find:normal:rule}~、~\ref{notHEDLP:2:HEDLP}~与
+%%~\ref{nHEDLP:call:nlpsolver}~的复杂度分析如下：
+%%算法~\ref{find:normal:rule}~的时间复杂度为~$O(r^2)$~，空间复杂度为~$O(r*(h+b))$~。
+%%算法~\ref{notHEDLP:2:HEDLP}~的时间复杂度为~$O(r+h^r)$~，空间复杂度为~$O((h+b)*h^r)$~。
+%%算法~\ref{nHEDLP:call:nlpsolver}~的时间复杂度为~$O(h^r)$~，空间复杂度为~$O(m*lit*h^r)$~。
+%
+%\subsection{模型筛选器模块}
+%
+%该模块作为一个模型筛选器，在基于第~\ref{chap3}~章给出的推论~\ref{corollary:of:theorem:notHEDLP2HEDLP}~的理论基础上，
+%负责将~NHDLP~到~HDLP~的翻译模块
+%求得的多个~HDLP~的回答集进行筛选，删去那些不符合要求的回答集以得到最终的回答集。
+%算法~\ref{minimal:models}~给出了该模块实现的伪代码。
+%%\begin{itemize}
+%%  \item 算法~\ref{minimal:models}~：筛选算法~\ref{nHEDLP:call:nlpsolver}~中求得的多个~HDLP~的回答集，以得到最终的回答集结果。
+%%\end{itemize}
+%
+%\RestyleAlgo{ruled}\LinesNumbered\input{algo_Model_Sizer_1.tex}
+%
+%由算法~\ref{minimal:models}~的伪代码可以看出，模型筛选器模块的时间复杂度为~$O(m^2*h^{2*r}*lit*log(lit))$~，
+%其中~$lit*log(lit)$~时间部分表示判断一个回答集的文字是否全部出现在另一个回答集里所需要的时间，空间复杂度~$O(m*lit*h^r)$~。
+%
+%\section{求解器算法复杂度分析}
+%
+%至此，求解器~pdlp2nlp~的各模块主要的算法介绍完毕。现在我们对整个求解器翻译部分的复杂度进行总结性分析。
+%
+%由求解器的工作框架图~\ref{fig:PDLP:Solver}~
+%所示，整个求解器各个模块是按串行模式进行工作的，意即一个模块运算完成后，其输出作为下一个模块的输入，才启动下一个模块的运算工作。
+%由该工作模式，很明显最终整个求解器的求解时间即为各个模块的运算时间总和，空间则为各个模块运算所需空间总和（但是若一个数据结构同时分别作为一个模块的
+%输出与另一个模块的输入，则该数据结构所占的内存空间应只被计算一次）。
+%但是由求解器~pdlp2nlp~工作流程的特殊性，实际上其在判断~HDLP~模块执行之后，只会走
+%一条求解路径，要么走~HDLP~到~NLP~的翻译路径求解的是~HDLP~，要么走~NHDLP~到~HDLP~的翻译路径求解的是~NHDLP~。
+%很明显的，由~\ref{chap4:implementation}~节中各个模块的复杂度分析我们可以看出，
+%对求解器~pdlp2nlp~所需的时间与空间起决定性因素的是~NHDLP~到~HDLP~的翻译这条求解路径，
+%因此我们只需要统计~NHDLP~到~HDLP~的翻译这条求解路径的时间与空间
+%复杂度，即为最终求解器的空间与时间复杂度。
+%
+%由上述分析，我们得到求解器翻译部分最终的时间复杂度为：~$O( r*b*h + lit^2 + r*c*h*log(lit) + h^r + m^2*h^{2*r}*lit*log(lit))$~，
+%化简后即为~$O(m^2*h^{2*r}*lit^2)$~；空间复杂度为：~$O( lit^2 + lit*c +  r*(h+b) + (h+b)*h^r + m*lit*h^r  )$~，
+%化简后即为~$O(m*lit*h^r)$~。
+%
+%至此，我们可以发现求解器的翻译部分的求解时间复杂度是超多项式时间的，
+%这也正好印证了为什么在稳定模型语义下求解（扩展的）析取逻辑程序(~DLP~)全部回答集的计算复杂性为~$\Pi_2^P$-$complete$~，
+%而求解正规逻辑程序(~NLP~)全部回答集的计算复杂性为~coNP-$complete$~。
+%
+%
+%\section{本章小结}
+%
+%在基于第~\ref{chap3}~章的理论基础上，我们实现了一个正析取逻辑程序求解器~pdlp2nlp~，本章即详细介绍了该求解器的具体实现。
+%我们首先对求解器的工作流程给出了一个大致的介绍，说明了求解器各个模块设计的目的；接着介绍编码实现过程中
+%使用到的一些重要数据结构；
+%介绍完所使用的数据结构之后，接着介绍了求解器各个模块核心算法的实现，
+%并分析了各个算法的时间与空间复杂度；
+%最后总结分析了整个求解器翻译部分的复杂度。
+

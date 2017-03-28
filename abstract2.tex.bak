@@ -1,0 +1,30 @@
+%\thispagestyle{empty} %取消当前页码
+%\chapter[ABSTRACT（英文摘要）]{Abstract}
+%\centerline{\begin{tabular}{l l}
+%Title：& Research on Solver for General First-order Circumscriptive Theories and \\
+%    & Application  \\
+%Major：& Computer Technology\\
+%Name：& Xiao Zhanhao\\
+%Supervisor：& Wan Hai\\
+%\end{tabular}}
+\vspace{0.5cm}
+%\chapter*{Abstract}
+% \markboth{英~文~摘~要}{英~文~摘~要}
+\phantomsection
+%\addcontentsline{toc}{chapter}{Abstract}
+
+%\centerline{\LARGE \textsf{\textbf{Abstract}}}
+\centerline{\xiaoerhao \textbf{Abstract}}
+\vspace{0.5cm}
+
+Word embedding is a popular research direction in recent years. The purpose of word embedding is to express the semantic information of entities and relationships in the knowledge base through the dense vector of low latitude. Based on the effective storage of information, it can perform entity prediction, link Prediction and other reasoning tasks. At present, most of the work focuses on training a more efficient translation model by optimizing the scoring function, loss function, etc., so that the trained translation model can achieve better results under the score of meanrank and Hit@10. This paper takes into account the relevance of the translation model training data to the ontology semantics, and puts forward a new method to enhance the performance of the translated model by using the existing results of ontology reasoning research. This method uses the ontology to complete the semantic expression of the training set, and uses the set of triples in the test data to construct a set of observations. In this way, this paper transforms the problem of optimizing the translation model into the problem of abductive reasoning in ontology research. The retrospective diagnosis is an important reasoning method for the acquisition of new knowledge of ontology. This method can reveal the root cause that the observed value has not been successfully entailed, and can provide the explanation which is consistent with the original body semantics. The axiom of the explanation has the same grammar as the axiom in the ontology. After using the obtained explanation to perfect the defect ontology, the new ontology can not only contain the observation value, but also because of the completeness of the key axiom, The ability to acquire new knowledge.
+In the ontology diagnosis of the ontology, limiting the size of the explanatory set is a key factor that must be considered. Interpretation of the set of too strong expression will lead to the infinite expansion of the solution space, and excessive compression of the solution space, not only will greatly weaken the interpretation of the set of expression ability, will also affect the interpretation of the lack of coverage of the lack of ability. In order to balance the contradiction between the expression ability of the explanation and the solution space, this paper proposes a new concept based on the characteristics of the decision set. Basically, the decision set template is obtained from the decision, and the acquisition method is to quantify the axioms of the decision set, and the explanation assembly is calculated from the original set and the set of decision sets, and then instantiated. At the same time, in order to limit the space of the interpretation set, this article will introduce a new concept, the smallest template. In the ontology diagnosis of the ontology, the expression of the observation is another factor to consider, but in the data set of the training set of the word vector model, the triplet is its only expression, so this article will use the simplified expression The language completes the expression of the set of observations, which allows the solution space of the interpretation set to be reduced without affecting the expression of the interpretation set.
+The goal of this paper is to express the training data of the word by using the expression ability of the ontology, so as to transform the problem of the optimization word vector model into the dying diagnosis problem in the ontology research. By using the semantic capabilities of the decision set template, we can extract the target set from the template and the set of examples. Then, using the results of the diagnosis, we can modify the training data of the word vector so as to achieve the purpose of optimizing the vector model of the training. Finally, we also set up a set of related experiments to verify the corrective ability of the explanatory set to be derived from the training data, and to compare the expression ability and reasoning ability of the word vector model obtained under different methods.
+%\vspace*{-1cm}
+
+
+
+
+
+{\bf Keywords:  Ontology; SVO; RDFS; Natural Language}
+%\clearpage

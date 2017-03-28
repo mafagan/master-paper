@@ -1,0 +1,55 @@
+\IncMargin{1em}
+\begin{algorithm}
+  \SetKwData{Left}{left}\SetKwData{This}{this}\SetKwData{Up}{up}
+  \SetKwFunction{Union}{Union}\SetKwFunction{FindCompress}{FindCompress}
+  \SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+
+  \Input{存储逻辑程序~$\Pi$~的依赖图~$G_\Pi$~的矩阵~$matrix$~\\存储依赖图~$G_\Pi$~的转置~$G_{\Pi}^T$~的矩阵~$T$\_$matrix$~}
+  \Output{依赖图~$G_\Pi$~的全部强连通分支，存储在~vector$<$vector$<$int$>>$~类型的变量~scc$\_$vec~中}
+  \BlankLine
+
+    time $\leftarrow$ 0 \tcp*[h]{定义整型变量~time~}\\
+    
+    \For{each vertex u in $G_\Pi$}
+    {
+        d[u] $\leftarrow$ 0\\
+        f[u] $\leftarrow$ 0\\
+        color[u] $\leftarrow$ 0 \tcp*[h]{将数组~d~、~f~、~color~的初值全置为~0~}\\
+    }
+
+    \For{each vertex u in $G_\Pi$}
+    {
+      \If{u is white}
+      {     
+        DFS$\_$VISIT(u)\\
+      }
+    }
+    
+    \BlankLine
+    \tcc*[h]{至此，完成对依赖图~$G_\Pi$~的深搜，接下来对其转置进行深索} \\
+    \tcc*[h]{根据第一次深搜的f值，将依赖图的节点排序，f值大的在前} \\
+    \BlankLine
+     
+    sort the vertices in $G_\Pi$ in order of decreasing f\\
+    \For{each vertex u in $G_\Pi$}
+    {
+       color[u] $\leftarrow$ 0 \tcp*[h]{将数组~color~的初值全置为~0~}\\
+    }
+    v $\leftarrow \emptyset$   \tcp*[h]{定义~vector$<$int$>$~类型的变量~v~，用于存储~SCC~}\\
+    
+    \For{each vertex u in $G_\Pi$ after sorted by f[u]}
+    {
+      \If{u is white}
+      {
+         v $\leftarrow$ v $\cup$ u  \tcp*[h]{将顶点~u~存入~v~中}\\
+         DFS$\_$VISIT2(u,v) \\
+         
+        
+         \tcc*[h]{递归回溯，找到一棵深度搜索树，即为一个~SCC~} \\
+         scc$\_$vec $\leftarrow$ scc$\_$vec $\cup$ v \tcp*[h]{将~v~存入~scc$\_$vec~中}\\
+         v $\leftarrow$ $\emptyset$ \tcp*[h]{清空~v~，为求解下一个~SCC~做准备}\\
+      }
+    }
+    
+  \caption{求依赖图~$G_\Pi$~的全部强连通分支}\label{find AllSCC}
+\end{algorithm}\DecMargin{1em} 

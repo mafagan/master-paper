@@ -1,0 +1,113 @@
+\IncMargin{1em}
+\begin{algorithm}
+  \SetKwData{Left}{left}\SetKwData{This}{this}\SetKwData{Up}{up}
+  \SetKwFunction{Union}{Union}\SetKwFunction{FindCompress}{FindCompress}
+  \SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+
+  \Input{未造成~head-cycle~的规则集合，存储在~vector$<$Rule $*>$~类型的变量~vecNor~中\\造成~head-cycle~的规则集合，存储在~vector$<$Rule $*>$~类型的变量~vecAbnor~中}
+  \Output{生成的多个~HDLP~，存储在~vector$< $vector$<$Rule$*> >$~类型的变量~vec$\_$nHDLP~中}
+  \BlankLine
+
+     num $\leftarrow$ the number of rules in vecAbnor\tcp*[h]{定义整型变量~num~}\\
+
+     generate two arrays total[num] and answer[num] \\%\tcp*[h]{动态开辟两个大小为~num~的整型数组}\\
+
+
+    \For{$i = 0$ \KwTo $num-1$}
+    {
+      %\tcc*[h]{置~total[i]~的值为~vecAbnor~中第~i+1~个规则头部的文字个数} \\
+      %total[i] $\leftarrow$ the number of literals in head of (i+1)-th rule in vecAbnor   \\
+      total[i] $\leftarrow$ the number of literals which cause head-cycle in head of vecAbnor[i]  \\
+      answer[i] $\leftarrow$ 0；\\
+    }
+
+    \While{true}
+    {
+       tmp $\leftarrow$ vecNor \tcp*[h]{定义~vector$<$Rule $*>$~类型的临时变量~tmp~}
+
+       \For{$i = 0$ \KwTo $num-1$}
+       {
+          r $\leftarrow \emptyset$ \tcp*[h]{定义规则~r~} \\
+
+         % \tcc*[h]{~r~的头部~$\leftarrow$~~vecAbnor~中第~i+1~个规则头部的第~answer[i]+1~个文字}\\
+       %   set the head of r by the literal of (answer[i]+1)-th literal which cause head-cycle in head of (i+1)-th rule in vecAbnor \\
+
+          head of r $\leftarrow$ the (answer[i]+1)-th literal which causes head-cycle in head of vecAbnor[i] \\
+
+    %按照展豪的想法应该加这一句
+    %add the literals which do not make head-cycle in head of (i+1)-th rule in vecAbnor to the head of r \\
+
+         head of r  $\leftarrow$ head of r $\cup$ literals which do not cause head-cycle in head of vecAbnor[i] \\
+
+         % \tcc*[h]{~r~的体部~$\leftarrow$~~vecAbnor~中第~i+1~个规则的体部}
+          %set the body of r by the literals in the body of (i+1)-th rule in vecAbnor
+
+          body of r $\leftarrow$ body of vecAbnor[i]
+
+          tmp $\leftarrow$ tmp $\cup$ r \\
+       }
+
+
+       vec$\_$nHDLP $\leftarrow$ vec$\_$nHDLP $\cup$ tmp  \tcp*[h]{成功生成一个~HDLP~} \\
+
+
+      %\BlankLine
+
+       k $\leftarrow$ num-1 \tcp*[h]{定义整型变量~k~，置初值为~num-1~}\\
+       \While{k $\geq$ 0}
+       {
+          \If{answer[k] $<$ total[k]-1}
+          {
+             answer[k]++；\\
+             break \\ %\tcp*[h]{跳出最里层的~while~循环}\\
+          }
+
+          answer[k] $\leftarrow$ 0；\\
+          k $\leftarrow$ k-1；\\
+       }
+
+       \If(\tcp*[h]{说明已经生成全部的~HDLP~，算法运行可结束} ){k $<$ 0}
+       {
+         break \\ %\tcp*[h]{跳出最外层~while~循环} \\
+       }
+    }
+
+%num $\leftarrow$ the number of rules in HEDLP \tcp*[h]{定义整型变量~num~，置初值为~HEDLP~中规则的数量}\\
+%    \For{$i = 1$ \KwTo $num$}
+%    {
+%        \tcc*[h]{定义整型变量~lit$\_$in$\_$head~，置初值为~HEDLP~第~i~个规则头部文字的个数}\\
+%        lit$\_$in$\_$head $\leftarrow$ the number of literals in the head of i-th rule \\
+%
+%
+%        \For{$j = 1$ \KwTo $lit\_in\_head$}
+%        {
+%            r $\leftarrow \emptyset$ \tcp*[h]{定义规则~r~，~r~即最终生成的~NLP~里面的一条规则} \\
+%
+%            \tcc*[h]{~r~头部的文字被置为当前第~i~个规则头部里的第~j~个文字}\\
+%            set the head of r by the literal of the j-th literal in head of i-th rule \\
+%
+%            %\tcc*[h]{~r~体部的正文字被置为当前第~i~个规则体部里的全部正文字}\\
+%            set the positive body of r by the positive body of i-th rule \\
+%
+%            %\tcc*[h]{~r~体部的负文字被置为当前第~i~个规则体部里的全部负文字}\\
+%            set the negative body of r by the negative body of i-th rule \\
+%
+%            \BlankLine
+%            \tcc*[h]{每一个新产生的规则，其体部的负文字部分都不相同} \\
+%            \For{$k = 1$ \KwTo $lit\_in\_head$}
+%            {
+%              \If{j$\neq$k}
+%              {
+%                \tcc*[h]{将当前第~i~个规则头部里的第~k~个文字加入~r~体部的负文字部分}\\
+%                add the k-th literal in head of i-th rule to the negative body of r \\
+%              }
+%            }
+%            \BlankLine
+%            \tcc*[h]{至此，已经正确生成一条~NLP~的规则} \\
+%            asp$\_$rule $\leftarrow$ asp$\_$rule $\cup$ r \tcp*[h]{将规则~r~存入数据结构~asp$\_$rule~中}\\
+%        }
+%    }
+
+
+  \caption{实现~NHDLP~到~HDLP~的翻译}\label{notHEDLP:2:HEDLP}
+\end{algorithm}\DecMargin{1em} 

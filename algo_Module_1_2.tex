@@ -1,0 +1,84 @@
+\IncMargin{1em}
+\begin{algorithm}
+  \SetKwData{Left}{left}\SetKwData{This}{this}\SetKwData{Up}{up}
+  \SetKwFunction{Union}{Union}\SetKwFunction{FindCompress}{FindCompress}
+  \SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+
+  \Input{逻辑程序~NLP~的规则集合，存储在~vector$<$Rule$>$~类型的变量~asp$\_$rule~中\\一个~AtomSet~类型的对象~as~}
+  \Output{~NLP~的回答集，存储在~vector$<$set$<$int$>>$~类型的变量~vec$\_$model~中}
+  \BlankLine
+
+    define the clasp objects \tcp*[h]{定义~clasp~源码的相关对象}\\
+    num $\leftarrow$ as.num  \tcp*[h]{定义整型变量~num~，置初值为对象~as~的成员数据~num~}\\
+
+    \tcc*[h]{开始~clasp~源码相关对象添加一个逻辑程序所有文字与规则的操作}\\
+
+    \For{$i = 1$ \KwTo $num$}
+    {
+      add literal i to the clasp objects \tcp*[h]{通过~clasp~源码的相关对象逐个加入文字}\\
+    }
+
+    \For{each rule r in asp$\_$rule}
+    {
+      begin to add a rule \tcp*[h]{开始~clasp~源码相关对象添加一个规则的操作}\\
+
+      add the literal in head of r to the clasp objects \tcp*[h]{通过~clasp~源码的相关对象将规则~r~头部的文字存入}\\
+
+      \For{each literal l appear positive in the body of r}
+      {
+        add l to the clasp objects \\
+      }
+
+      \For{each literal l appear negative in the body of r}
+      {
+        add l to the clasp objects \\
+      }
+
+      finish adding a rule \tcp*[h]{结束~clasp~源码相关对象添加一个规则的操作}\\
+    }
+    \tcc*[h]{结束~clasp~源码相关对象添加一个逻辑程序所有文字与规则的操作}\\
+
+    invoke the clasp solve interface \tcp*[h]{调用~clasp~源码接口对所加入的逻辑程序进行求解}\\
+
+    vec$\_$model $\leftarrow$ vec$\_$model $\cup$ all answer sets of current NLP \tcp*[h]{将求解的全部回答集存入数据结构~vec$\_$model~中} \\
+
+
+ %num $\leftarrow$ the number of rules in HEDLP \tcp*[h]{定义整型变量~num~，置初值为~HEDLP~中规则的数量}\\
+%    \For{$i = 1$ \KwTo $num$}
+%    {
+%        \tcc*[h]{定义整型变量~lit$\_$in$\_$head~，置初值为~HEDLP~第~i~个规则头部文字的个数}\\
+%        lit$\_$in$\_$head $\leftarrow$ the number of literals in the head of i-th rule \\
+%
+%
+%        \For{$j = 1$ \KwTo $lit\_in\_head$}
+%        {
+%            r $\leftarrow \emptyset$ \tcp*[h]{定义规则~r~，~r~即最终生成的~NLP~里面的一条规则} \\
+%
+%            \tcc*[h]{~r~头部的文字被置为当前第~i~个规则头部里的第~j~个文字}\\
+%            set the head of r by the literal of the j-th literal in head of i-th rule \\
+%
+%            %\tcc*[h]{~r~体部的正文字被置为当前第~i~个规则体部里的全部正文字}\\
+%            set the positive body of r by the positive body of i-th rule \\
+%
+%            %\tcc*[h]{~r~体部的负文字被置为当前第~i~个规则体部里的全部负文字}\\
+%            set the negative body of r by the negative body of i-th rule \\
+%
+%            \BlankLine
+%            \tcc*[h]{每一个新产生的规则，其体部的负文字部分都不相同} \\
+%            \For{$k = 1$ \KwTo $lit\_in\_head$}
+%            {
+%              \If{j$\neq$k}
+%              {
+%                \tcc*[h]{将当前第~i~个规则头部里的第~k~个文字加入~r~体部的负文字部分}\\
+%                add the k-th literal in head of i-th rule to the negative body of r \\
+%              }
+%            }
+%            \BlankLine
+%            \tcc*[h]{至此，已经正确生成一条~NLP~的规则} \\
+%            asp$\_$rule $\leftarrow$ asp$\_$rule $\cup$ r \tcp*[h]{将规则~r~存入数据结构~asp$\_$rule~中}\\
+%        }
+%    }
+
+
+  \caption{求得一个~NLP~的回答集}\label{call:nlp:solver}
+\end{algorithm}\DecMargin{1em} 

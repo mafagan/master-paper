@@ -1,0 +1,154 @@
+%@InProceedings{PB02,
+%  author =    "R. P. A. Petrick and F. Bacchus",
+%  title =     "A Knowledge-Based Approach to Planning with Incomplete Information and Sensing",
+%  pages =     "212--221",
+%  booktitle = "Proc. AIPS-02",
+%  year =      2002
+%}
+%
+%@Article{LR97,
+%  author =       "F. Lin and R. Reiter",
+%  title =        "How to Progress a Database",
+%  journal =      "Artificial Intelligence",
+%  year =         "1997",
+%  volume =       "92",
+%  number =       "1--2",
+%  pages =        "131--167"
+%}
+%
+%
+%@InProceedings{LLL04,
+%  title =        "A Logic of Limited Belief for Reasoning
+%                  with Disjunctive Information",
+%  author =       "Y. Liu and G. Lakemeyer and H. J. Levesque",
+%  booktitle =    "Proc. KR-04",
+%  pages =        "587--597",
+%  year =         "2004"
+%}
+%
+%@inproceedings{Lev96,
+%  author    = {H. J. Levesque},
+%  title     = {What Is Planning in the Presence of Sensing?},
+%  booktitle = {AAAI},
+%  year      = {1996},
+%  pages     = {1139-1146}
+%}
+%
+%
+%
+%@InProceedings{LL09,
+%  title =        "On First-Order Definability and Computability of Progression for
+%Local-Effect Actions and Beyond",
+%  author =       "Y. Liu and G. Lakemeyer",
+%  booktitle =    "Proc. IJCAI-09",
+%  year =         "2009"
+%}
+%
+%@InCollection{MH69,
+%  author =       "J. McCarthy and P. J. Hayes",
+%  booktitle =    "Machine Intelligence 4",
+%  title =        "Some philosophical problems from the standpoint of
+%                  artificial intelligence",
+%  publisher =    "Edinburgh University Press",
+%  year =         "1969",
+%  editor =       "B. Meltzer and D. Michie",
+%  pages =        "463--502"
+%}
+%
+%@InCollection{Lak99,
+%  author =       "G. Lakemeyer",
+%  title =    "On sensing and off-line interpreting in {Golog}",
+%  booktitle =        "Logical Foundations for Cognitive Agents, Contributions in Honor of {Ray Reiter}",
+%  year =         "1999"
+%}
+%
+%@article{GLL00,
+%  author    = {G. {De Giacomo} and
+%               Y. Lesp{\'e}rance and
+%               H. J. Levesque},
+%  title     = {ConGolog, a concurrent programming language based on the
+%               situation calculus},
+%  journal   = {Artif. Intell.},
+%  volume    = {121},
+%  number    = {1-2},
+%  year      = {2000},
+%  pages     = {109-169}
+%}
+%
+%@article{FF,
+%  author    = {J. Hoffmann and B. Nebel},
+%  title     = {The FF planning system: Fast plan generation through heuristic search},
+%  journal   = {J. Artif. Intell. Res.},
+%  volume    = {14},
+%  year      = {2001},
+%  pages     = {253-302}
+%}
+%
+%@Book{Rei01,
+%  author =       "R. Reiter",
+%  title =        "Knowledge in Action: Logical Foundations for
+%                  Specifying and Implementing Dynamical Systems",
+%  year =         "2001"
+%}
+%
+%@article{Rei01a,
+%  author    = {R. Reiter},
+%  title     = {On knowledge-based programming with sensing in the situation
+%               calculus},
+%  journal   = {ACM Trans. Comput. Log.},
+%  volume    = {2},
+%  number    = {4},
+%  year      = {2001},
+%  pages     = {433-457}
+%}
+%
+%@Article{LRL97,
+%  author =       "H.J. Levesque and R. Reiter and Y. Lesp\'{e}rance
+%                  and F. Lin and R. Scherl",
+%  title =        "Golog: A Logic Programming Language for Dynamic Domains",
+%  journal =      "J. of Logic Programming",
+%  volume =       "31",
+%  pages =        {59--84},
+%  year =         "1997"
+%}
+%
+%@inproceedings{BFM07,
+%  author    = {J. A. Baier and
+%               C. Fritz and
+%               S. A. McIlraith},
+%  title     = {Exploiting Procedural Domain Control Knowledge in State-of-the-Art
+%               Planners},
+%  booktitle = {ICAPS-07},
+%  year      = {2007},
+%  pages     = {26-33}
+%}
+%
+%@inproceedings{Cla07,
+%  author    = {J. Cla{\ss}en and
+%               P. Eyerich and
+%               G. Lakemeyer and
+%               B. Nebel},
+%  title     = {Towards an Integration of Golog and Planning},
+%  booktitle = {Proc. IJCAI-07},
+%  year      = {2007}
+%}
+%
+%
+%@article{GLS01,
+%  author    = {G. {De Giacomo} and
+%               H. J. Levesque and
+%               S. Sardi{\~n}a},
+%  title     = {Incremental execution of guarded theories},
+%  journal   = {ACM Trans. Comput. Log.},
+%  volume    = {2},
+%  number    = {4},
+%  year      = {2001},
+%  pages     = {495-525}
+%}
+%
+%@conference {CL09,
+%	author = {J. Cla{\ss}en and G. Lakemeyer},
+%	title = {Tractable First-Order Golog with Disjunctive Knowledge Bases},
+%	booktitle = {Proc. Commonsense 2009},
+%	year = {2009}
+%}

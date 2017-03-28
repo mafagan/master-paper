@@ -1,0 +1,44 @@
+\IncMargin{1em}
+\begin{algorithm}
+  \SetKwData{Left}{left}\SetKwData{This}{this}\SetKwData{Up}{up}
+  \SetKwFunction{Union}{Union}\SetKwFunction{FindCompress}{FindCompress}
+  \SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+
+  \Input{待求解的命题理论~$T_\Pi$~的命题公式集合，存储在~cnf$\_$formula~类型的变量~final$\_$cnf~中\\
+         用于存储逻辑程序~$\Pi$~的全部回答集的容器~vec$\_$models~}
+  \Output{如果所求的命题理论~$T_\Pi$~有模型，则返回~true~，否则返回~false~}
+  \BlankLine
+
+   res $\leftarrow$ true \tcp*[h]{定义布尔类型的变量~res~}\\
+   sat $\leftarrow \emptyset$ \tcp*[h]{定义~SAT~求解器的类对象~sat~}\\
+   \For{each literal l in $T_\Pi$}
+   {
+     add a new variable into object sat \tcp*[h]{对于命题理论~$T_\Pi$~中的每一个文字，均加入一个新变元到~sat~对象中}\\
+   }
+
+   \tcc*[h]{接下来添加命题理论~$T_\Pi$~的每一个析取子句}\\
+   \For{each clause c in final$\_$cnf}
+   {
+     add clause c into object sat \tcp*[h]{将每一个析取子句加入~sat~对象中}\\
+   }
+
+   res $\leftarrow$ sat.solve()  \tcp*[h]{调~SAT~求解器的求解接口，有解则返回~true~，否则返回~false~}\\
+   \If{res=false}
+   {
+     return res \tcp*[h]{命题理论~$T_\Pi$~没有模型，直接返回~false~}\\
+   }
+   store the model into s1 \tcp*[h]{将求得的命题理论的模型存入~set$<$int$>$~类型的变量~s1~中}\\
+   store the opposite model into s2 \tcp*[h]{将模型的反存入~set$<$int$>$~类型的变量~s2~中}\\
+
+   vec$\_$models $\leftarrow$ vec$\_$models $\cup$ s1 \tcp*[h]{将求得的命题理论模型根据式~\ref{for:chap5:literal}~变换成逻辑程序的回答集，然后存入~vec$\_$models~中}\\
+
+   \If{s.size=0}
+   {
+     return false \tcp*[h]{如果该次求得的模型为空（即每个文字都为负），则无需再继续求解模型}\\
+   }
+
+   final$\_$cnf $\leftarrow$ final$\_$cnf $\cup$ s2 \tcp*[h]{将该模型的反加入~final$\_$cnf~中，继续求解剩余的模型}\\
+   return true\\
+
+  \caption{一次调用~minisat~求解器源码接口求解命题理论模型的过程}\label{call:minisat:solver:2}
+\end{algorithm}\DecMargin{1em} 

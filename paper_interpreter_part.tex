@@ -1,0 +1,665 @@
+%File: formatting-instruction.tex
+\documentclass[letterpaper]{article}
+\usepackage{aaai}
+\usepackage{times}
+\usepackage{helvet}
+\usepackage{courier}
+\usepackage{amssymb}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{others}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\newtheorem{DEFINITION}[theorem]{Definition}
+\newenvironment{definition}{\begin{DEFINITION} \rm }
+                            {\end{DEFINITION}}
+\newtheorem{NOTATION}[theorem]{Notation}
+\newenvironment{notation}{\begin{NOTATION} \rm}
+                            {\end{NOTATION}}
+\newtheorem{EXAMPLE}{Example}[section]
+\newenvironment{example}{\begin{EXAMPLE} \rm}
+                            {\end{EXAMPLE}}
+
+\frenchspacing
+\pdfinfo{
+/Title (Formatting Instructions for Authors Using LaTeX)
+/Subject (AAAI Publications)
+/Author (AAAI Press)}
+\setcounter{secnumdepth}{0}
+\begin{document}
+% The file aaai.sty is the style file for AAAI Press
+% proceedings, working notes, and technical reports.
+%
+\title{First Order Golog based on Exact Progression and Limit Reasoning}
+\author{AAAI Press\\
+Association for the Advancement of Artificial Intelligence\\
+445 Burgess Drive\\
+Menlo Park, California 94025\\
+}
+\maketitle
+\begin{abstract}
+\begin{quote}
+
+\end{quote}
+\end{abstract}
+
+\setcounter{secnumdepth}{1}
+\section{An interpreter of \emph{$\mathcal{LB}$Golog}}
+
+The interpreter of \emph{$\mathcal{LB}$Golog} is implemented in \emph{PROLOG} language, based on \emph{GOLOG}, with progression of KB and evaluation of formula under $B_0$ in open world.
+
+Firstly we need the specification of BAT provided by users, as follows:
+
+$\bullet$\texttt{fluent\_list($l$)}: $l$ is the list of fluent declarations;
+
+$\bullet$\texttt{predicate\_list($l$)}: $l$ is the list of predicate declarations;
+
+$\bullet$\texttt{individual\_list($l$)}: $l$ is the list of the known individuals;
+
+$\bullet$\texttt{init\_kb($l$)}: $l$ is the list of initial KB;
+
+$\bullet$\texttt{prim\_action($\alpha$)}: $\alpha$ is a primitive action;
+
+$\bullet$\texttt{sens\_action($\beta$)}: $\beta$ is a sensing action;
+
+$\bullet$\texttt{poss($\alpha$,$\phi$)}: formula $\phi$ is the precondition of action $\alpha$;
+
+$\bullet$\texttt{ssa($f$,$\gamma^+$,$\gamma^-$)}: the successor state axiom of fluent $f$ consists of formulas $\gamma^+$ and $\gamma^-$;
+
+$\bullet$\texttt{sf($\beta$,$\phi$)}: objective formula $\phi$ is hold as the result of sensing action $\beta$ is $1$.
+
+As that evaluation and progression are the mostly frequent operations in the interpreter, to increase the efficiency of calculating, we implement the cores of the two operations in \emph{C} language, and then encapsulate them as the primitive operations in \emph{PROLOG}, showed as follows:
+
+$\bullet$\texttt{query($\phi$,$s$)}: evaluate subjective formula $\phi$ in situation $s$;
+
+$\bullet$\texttt{query(what($\vec{c}$, $\vec{x}$, $\phi$), $s$)}: return $\vec{c}$ such that subjective formula $\phi_{\vec{c}}^{\vec{x}}$ is evaluated true in situation $s$;
+
+$\bullet$\texttt{prim\_prog($\alpha$,$s$,$s'$)}: progress situation $s$ to situation $s'$ wrt. primitive action $\alpha$;
+
+$\bullet$\texttt{sens\_prog($\beta$,$r$,$s$,$s'$)}: progress situation $s$ to situation $s'$ wrt. sensing action $\beta$ with sensing result $r$;
+
+$\bullet$\texttt{del\_sit($s$)}: delete the KB about situation $s$.
+
+All the operations above are relevant with the KB about situation, which is also stored with the data structures defined in \emph{C}. To noted, the two progression operators yield both the KBs about the new situation and the old one. In this case, we support the deletion of KB to remove the trashy KB from memory.
+
+\subsection{Basic structures}
+
+We define predicates \texttt{btrans/3} and \texttt{bfinal/1} as the implementation of \emph{BTrans/BFinal} semantics. Predicate \texttt{btrans($\delta$, $\delta'$, $\alpha$)} implements that program $\delta$ executes action $\alpha$ in current situation, and then with program $\delta'$ remaining. And predicate \texttt{bfinal($\delta$)} checks that program $\delta$ terminates in current situation.
+
+We post the the implementations of basic structures, the structures except search operator and planning operator, as follows:
+\begin{verbatim}
+bfinal(nil).
+bfinal(?(P)):-query(P).
+bfinal(E1:E2):-bfinal(E1),bfinal(E2).
+bfinal(E1#E2):-bfinal(E1);bfinal(E2).
+bfinal(pi(L,G,E)):-query(what(L1,L,G)),
+    subl(L,L1,E,E1),bfinal(E1).
+bfinal(star(_)).
+bfinal(if(P,E1,E2)):-query(P)->
+    bfinal(E1);bfinal(E2).
+bfinal(while(P,E)):-query(P)->bfinal(E);
+    true.
+bfinal(E):-proc(E,E1),bfinal(E1).
+
+btrans(A,nil,A):-prim_action(A),
+    poss(A,P),query(knows(P)).
+btrans(B,nil,B):-sens_action(B),
+    poss(B,P),query(knows(P)).
+btrans(E1:E2,E,A):-btrans(E1,E3,A),
+    E=(E3:E2);bfinal(E1),btrans(E2,E,A).
+btrans(E1#E2,E,A):-btrans(E1,E,A);
+    btrans(E2,E,A).
+btrans(pi(L,G,E),E1,A):-
+    query(what(L1,L,G)),subl(L,L1,E,E2),
+    btrans(E2,E1,A).
+btrans(star(E),E1:star(E),A):-
+    btrans(E,E1,A).
+btrans(if(P,E1,E2),E,A):-query(P)->
+    btrans(E1,E,A);btrans(E2,E,A).
+btrans(while(P,E),E1,A):-query(P),
+    btrans(E:while(P,E),E1,A).
+btrans(E,E1,A):-proc(E,E2),
+    btrans(E2,E1,A).
+
+lbGolog(E):-bfinal(E),!.
+lbGolog(E):-btrans(E,E1,A),
+    (A=nil->true;do(A)),!,lbGolog(E1).
+
+do(A):-execute(A),prim_prog(A).
+do(B):-execute(B,R),sens_prog(B,R).
+
+execute(A):-prim_action(A),writeln(A).
+execute(B,R):-sens_action(B),write(B),
+    write(':(y/n)'),read(R).
+
+query(P):-curr_sit(S),query(P,S).
+prim_prog(A):-curr_sit(S),
+    prim_prog(A,S,S1),update_sit(S1).
+sens_prog(B,R):-curr_sit(S),
+    sens_prog(B,R,S,S1),update_sit(S1).
+update_sit(S):-retract(curr_sit(S0)),
+    del_sit(S0),assert(curr_sit(S)).
+\end{verbatim}
+
+As above, predicate \texttt{subl($l_x$, $l_c$, $p_x$, $p_c$)} is to substitute all variables of $l_x$ occurring in program $p_x$ with corresponding constants of $l_c$, to a new program $p_c$. And predicate \texttt{curr\_sit($s$)} records the current situation $s$.
+
+Predicate \texttt{lbGolog($\delta$)} is the main loop with program $\delta$ as input. Predicate \texttt{do($\alpha$)} calls for the progression of action $\alpha$ after execute it. Predicates \texttt{query($\phi$)}, \texttt{prim\_prog($\alpha$)} and \texttt{sens\_prog($\beta$, $r$)} are executed evaluation and progression respectively in current situation. Moreover, predicate \texttt{update\_sit($s$)} is provided to update the current situation and delete the KB of old situation after progression.
+
+From the definitions above, the input program, with  takes \texttt{lbGolog/1} as the entrance of interpreter; then performs \texttt{btrans/3} for actions recursively, executing every action by \texttt{do/1}; and lastly terminates with the success of \texttt{bfinal/1}. In such a case, we can conclude that the program runs online.
+
+And we mark the program only with basic structures as a \emph{basic program}.
+
+\subsection{Search operator $\Sigma$}
+
+As the implementation of search operator $\Sigma$, we define predicates $bdo/3$ and $ext/4$ as follows:
+\begin{verbatim}
+bdo(nil,_,nil).
+bdo(A,S,A):-prim_action(A),poss(A,P),
+    query(knows(P),S).
+bdo(B,S,B):-sens_action(B),poss(B,P),
+    query(knows(P),S).
+bdo(?(P),S,nil):-query(P,S).
+bdo(E1:E2,S,C):-bdo(E1,S,C1),
+    ext(C1,E2,S,C).
+bdo(E1#E2,S,C):-bdo(E1,S,C);bdo(E2,S,C).
+bdo(pi(L,G,E),S,C):-
+    query(what(L1,L,G),S),
+    subl(L,L1,E,E1),bdo(E1,S,C).
+bdo(star(E),S,C):-C=nil;bdo(E,S,C1),
+    ext(C1,star(E),S,C).
+bdo(if(P,E1,E2),S,C):-query(P,S)->
+    bdo(E1,S,C);bdo(E2,S,C).
+bdo(while(P,E),S,C):-query(P,S)->
+    bdo(E,S,C1),ext(C1,while(P,E),S,C);
+    C=nil.
+bdo(E,S,C):-proc(E,E1),bdo(E1,S,C).
+
+ext(nil,E,S,C):-bdo(E,S,C).
+ext(A,E,S,A:C):-prim_action(A),
+    prim_prog(A,S,S1),(bdo(E,S1,C),
+    del_sit(S1);del_sit(S1),fail).
+ext(B,E,S,C):-sens_action(B),
+    sens_prog(B,1,S,ST),(bdo(E,ST,CT),
+    del_sit(ST);del_sit(ST),fail),
+    sens_prog(B,0,S,SF),(bdo(E,SF,CF),
+    del_sit(SF);del_sit(SF),fail),
+    sf(B,F),C=(B:if(knows(F),CT,CF)).
+ext(A:C,E,S,A:C1):-prim_action(A),
+    prim_prog(A,S,S1),(ext(C,E,S1,C1),
+    del_sit(S1);del_sit(S1),fail).
+ext(B:C,E,S,C1):-sens_action(B),
+    sens_prog(B,1,S,ST),(ext(C,E,ST,CT),
+    del_sit(ST);del_sit(ST),fail),
+    sens_prog(B,0,S,SF),(ext(C,E,SF,CF),
+    del_sit(SF);del_sit(SF),fail),
+    sf(B,F),C1=(B:if(knows(F),CT,CF)).
+ext(if(P,C1,C2),E,S,C):-query(P,S)->
+    ext(C1,E,S,C);ext(C2,E,S,C).
+
+btrans(search(E),E1,nil):-curr_sit(S),
+    bdo(E,S,E1).
+\end{verbatim}
+
+As definitions above, predicates \texttt{bdo/3} and \texttt{ext/4} implement the $\mathcal{C_D}$ relation and $\mathcal{E_D}$ relation respectively.
+Noted that, the situation in searching procedure is changed by the progression of action in "mind". That means the KBs of different situations are concurrently exist in memory. Therefore once search succeeds or backtracks, we should delete the KB of the situation used in the search, except the one of real current situation.
+
+Search implementation guarantees a program with sensing action to work fine, even thought the program is not well formed.
+For example of catch plane domain, a program $\delta$ is formed as:
+\\
+$sense\_gate\_A;buy\_paper;\\
+(goto(gate\_A);buy\_coffee|buy\_coffee;goto(gate\_B));\\
+board(plane)$,\\
+where actions mentioned are defined literally. To be noted that, $sense\_gate\_A$ is a sensing action to sense whether gate A or gate B to board plane, and $board(plane)$ is successful only if the agent get to the right gate to board plane. $\delta$ is not well formed, i.e. it might not work successfully online, because of no control to force the agent to get to the right gate.
+
+This problem can be solved by search operator. The interpretation of $\Sigma\delta$ results in the program $\delta'$ as:
+\\
+$sense\_gate\_A;\\
+\textbf{if}\; Knows(\psi)\\
+\textbf{then}\; buy\_paper;(goto(gate\_A);buy\_coffee;board(plane)\\
+\textbf{else}\; buy\_paper;buy\_coffee;goto(gate\_B));board(plane)$,\\
+where $SF(sense\_gate\_A,\sigma)\equiv\psi[\sigma]$ is hold for an arbitrary situation $\sigma$. And the search implementation of $\Sigma$ operator can guarantee the program $\delta'$ always execute online successfully, of which the executions are accepted by $\delta$.
+
+\subsection{Planning operator $\Upsilon$}
+
+This part is contributed to implement the planning operator $\Upsilon$, to plan a sequence of actions for a program. The main idea is to construct a planning instance from the BAT and program, and leave the plan task to an existing planner.
+
+A planning instance is a pair, marked as $I=(D,P)$, where $D$ is a domain definition and $P$ is a problem definition. To simplify, we discuss the $D$ and $P$ described in \emph{ADL}. A domain definition contains mainly domain predicates and operators, while a problem definition consists of objects present in $I$, initial state description and goal.
+
+\subsubsection{DCK planning}
+Here we cite the work of Sheila et al. in \cite{BFM07}, of which the main contribution is providing an algorithm to merge a planning instance and a program into an equivalent planning instance, whose plans adhere to the program.
+
+They define a compiling function $C(\delta, n , E) = (L, L', n')$, as to translate program $\delta$ with variables list $E$ into an $\varepsilon$-NFA, and then to feature the auxiliary operators, like $test$, $noop$ and $free$, in list $L$, and the additional restrictions of domain operators in list $L'$, where integers $n$ and $n'$ represent that $\delta$ in state $S_n$ results in state $S_{n'}$. In this way they can get the control information of program.
+
+Given a planning instance $I=(D,P)$ and a program $\delta$, let $(L, L', n_f)$ be the value of $C(\delta, 0 , [])$, their algorithm, which we called \emph{compiling algorithm}, is to restrict every operator in $D$ with the operator of the same name in $L'$; append the auxiliary operators to $D$; extend domain predicates in $D$ with $bound/1$, $map/2$ and $state/1$, which are the auxiliary ones in compiling; extend objects in $P$ with the ones represent the program variables and automaton's states; add $state(s_0)$ to initial state; and add $state(s_{n_f})$ to goal in $P$. And the correctness of the compiling algorithm is illustrated in their paper.
+
+\subsubsection{Implementation}
+Here the implementation of planning operator $\Upsilon$ is to translate the BAT to a planning instance $I$ wrt. $\delta$, and utilize the compiling algorithm to construct a new planning instance $I'$ with $I$ and program $\delta$. And we mainly introduce the procedure of translating a BAT wrt. a program to a planning instance.
+
+\begin{definition}\label{ssa2eff}
+Given an action $\alpha(\vec{c})$ and an SSA(Successor State Axiom) formula $\psi$ of the form $F(\vec{x}, do(a, s)) \Leftrightarrow \gamma^+(\vec{x}, a, s) \vee F(\vec{x}, s) \wedge \neg\gamma^-(\vec{x}, a, s)$, define $Eff(\alpha(\vec{c}), \psi)$ as the \emph{eff-formula} for $\alpha(\vec{c})$ with $\psi$, if
+$Eff(\alpha(\vec{c}), \psi) \equiv (\gamma^+(\vec{e}, s) \supset F(\vec{e}, do(\alpha(\vec{c}), s))) \wedge (\gamma^-(\vec{e}, s) \supset \neg F(\vec{e}, do(\alpha(\vec{c}), s)))$,
+where $\gamma^+(\vec{e}, s)$ and $\gamma^-(\vec{e}, s)$ are exactly the $\gamma^+|_{\alpha(\vec{c})}^a$ and $\gamma^-|_{\alpha(\vec{c})}^a$ eliminated all action functions with UNA(Unique Name Axiom),
+and $\vec{e}$ is the binding of $\vec{x}$ with equality axiom.
+\end{definition}
+
+Definition~\ref{ssa2eff} provides the method of transferring an SSA to an effect formula wrt. a given action, which refers to \cite{Rei01}.
+
+\begin{definition}\label{action description}
+Given a BAT $\mathcal{D}$ and an action $\alpha(\vec{c})$, define $OP_{\mathcal{D}} (\alpha(\vec{c})) = <a, \vec{x}, Pre(\vec{x}), Eff(\vec{x})>$ as the \emph{action description of $\alpha(\vec{c})$ wrt. $\mathcal{D}$}, if:
+\begin{enumerate}
+  \item $a = \alpha$;
+  \item $\vec{x} = \vec{c}$;
+  \item $Pre(\vec{c}) \equiv Poss(\alpha(\vec{c}))$, where $Poss(\alpha(\vec{c}))$ is exactly the $Poss(\alpha(\vec{c}), s)$ removed the situation argument $s$;
+  \item $Eff(\vec{c}) \equiv \bigwedge_{\psi \in \mathcal{D} \wedge SSA(\psi)} Eff'(\alpha(\vec{c}), \psi)$, where $Eff'(\alpha(\vec{c}), \psi)$ is exactly the $Eff(\alpha(\vec{c}), \psi)$ removed the situation functions.
+\end{enumerate}
+\end{definition}
+
+And now by definition~\ref{action description}, we translate the specification of action to an operator description.
+
+\begin{definition}
+Given a BAT $\mathcal{D}$ and a program $\delta$, define $P_{\mathcal{D}}(\delta) = S_p \cup S_f$ as the \emph{set of predicates relevant to $\delta$ wrt. $\mathcal{D}$}, where:
+\begin{enumerate}
+  \item $S_p$ is the subset of predicates in $\mathcal{D}$, of which the predicates occur in the formula tests of $\delta$ or the action description of actions of $\mathcal{D}$ mentioned in $\delta$;
+  \item $S_f$ of fluent respectively.
+\end{enumerate}
+\end{definition}
+
+\begin{definition}
+Given a BAT $\mathcal{D}$, we mark $OBJ_{\mathcal{D}}$ as the set consisting of the individuals known in $\mathcal{D}$, which means the individuals are either in the individual list defined by users, or mentioned in $\mathcal{D}_{S_0}$.
+\end{definition}
+
+We restrict that the individuals mentioned in control programs should occur in the individual list.
+
+\begin{definition}
+Given a subjective formula $\phi$, define an objective formula $\phi'$ as the \emph{objective form of $\phi$}, if $\phi'$ is exactly the $\phi$ changing all $Knows(\psi)$ to $\psi$, where $\psi$ is an objective formula.
+
+Given a program $\delta$, define a program $\delta'$ as the \emph{objective form of $\delta$}, if $\delta'$ is exactly the $\delta$ changing all the mentioned subjective formulas to their objective forms.
+\end{definition}
+
+\begin{definition}
+Given a BAT $\mathcal{D}$, a ground situation $\sigma$ and a basic program $\delta$ with no sensing actions or procedure calls, define $I_{\mathcal{D}}(\delta, \sigma)$ as the planning instance wrt. $\mathcal{D}$ and $\delta$ in $\sigma$, if:
+\begin{enumerate}
+  \item operations: $\{OP_{\mathcal{D}} (\alpha(\vec{t})) | \alpha(\vec{t})\; is\; mentioned\; in\; \delta\}$;
+  \item domain predicates: $P_{\mathcal{D}}(\delta)$;
+  \item objects: $OBJ_{\mathcal{D}}$;
+  \item initial state: $D_{init}$, which is the subset of $D_{\sigma}$, containing the literals about predicates and fluent of $P_{\mathcal{D}}(\delta)$ with individuals of $OBJ_{\mathcal{D}}$;
+  \item goal: $True$.
+\end{enumerate}
+\end{definition}
+
+So we can translate a BAT wrt. a program to a planning instance with above definitions.
+And plan implementation of planning operator $\Sigma$ is:
+
+\begin{verbatim}
+btrans(planning(E),E1,nil):-situation(S),
+    proc(E,E2)->planning(E2,S,E1);
+    planning(E,S,E1).
+\end{verbatim}
+
+As showed above, the predicate \texttt{planning($\delta$, $\sigma$, $\delta'$)} implements that, given a BAT $\mathcal{D}$, a basic program $\delta$ with no sensing actions or procedure calls, and current situation $\sigma$:
+\begin{enumerate}
+  \item Firstly calculate planning instance $I_{\mathcal{D}}(\delta, \sigma)=(D,P)$; and use the compiling algorithm in ~\cite{BFM07}, to construct a new planning instance $I_{\mathcal{D},\delta_o}(\delta, \sigma)$ from $I_{\mathcal{D}}(\delta, \sigma)$ with $\delta_o$, where $\delta_o$ is the objective form of $\delta$. Noted that, we compile $\delta_o$ with parameters $x_i(1\leq i\leq k)$, and so we call $C(\delta_o,0,[x_i]_{i=1}^k)$ instead of $C(\delta_o,0,[])$. What's more, the initial state is appended to $\{bound(x_i),map(x_i,r_i)\}_{i=1}^k$ correspondingly, given the value $r_i$ of parameters $x_i$ for every $i$.
+  \item And then call \emph{FF} planner with $I_{\mathcal{D},\delta_o}(\delta, \sigma)$ for a plan $\vec{\alpha}$.
+  \item Finally let $\delta'$ be the sequence of $Filter(\vec{\alpha}, D)$, which is the function defined in \cite{BFM07} to filter the actions not in domain $D$.
+\end{enumerate}
+
+To accelerate the generation of planning instance $I_{\mathcal{D},\delta_o}(\delta, \sigma) = (D_{\delta_o},P_{\delta_o})$ at the runtime, before running the program, the interpreter will pretreat to generate the planning domain $D_{\delta_o}$ corresponding to the program dominated by $\Upsilon$, i.e. only planning problem $P_{\delta_o}$ would be dynamically generated.
+
+\subsection{Correctness of the interpreter}
+
+\begin{theorem}[Correctness of basic constructs]\label{basic constructs theorem}
+Let $\mathcal{D}$ be a BAT, $\sigma$ a ground situation, and $\delta$ a basic program. Then we have
+\begin{enumerate}
+  \item \texttt{bfinal($\delta$)} wrt. $\sigma$ succeeds, iff
+$(\delta,\sigma)\in \mathcal{F_D}$.
+  \item \texttt{btrans($\delta$, $P$, $A$)} wrt. $\sigma$ succeeds with $P = \delta'$ and $A = \alpha$, iff
+$(\delta,\sigma)\rightarrow_\mathcal{D}(\delta',do(\alpha,\sigma))$, where $do(nil,\sigma)=\sigma$.
+\end{enumerate}
+\end{theorem}
+
+The theorem~\ref{basic constructs theorem} shows that the implementation of basic constructs is correct. Since the implementation and semantics are in direct correspondence, the proof of this theorem is trivial by structure induction.
+
+\begin{theorem}[Soundness and weak completeness of search]\label{search theorem}
+Let $\mathcal{D}$ be a BAT, $\sigma$ a ground situation, and $\delta$ a basic program. Then we have
+\begin{enumerate}
+  \item \texttt{btrans(search($\delta$), $P$, $A$)} wrt. $\sigma$ succeeds with $P = \delta'$, then $(\delta, \sigma, \delta') \in \mathcal{C_D}$;
+  \item if $(\delta, \sigma, \delta') \in \mathcal{C_D}$ for some $\delta'$, then \texttt{btrans(search($\delta$), $P$, $A$)} wrt. $\sigma$ succeeds or does not terminate.
+\end{enumerate}
+\end{theorem}
+
+The weak completeness of search comes from the running orders of nondeterministic choice. Consider the program $\delta=(\delta_1|\delta_2)$ in situation $\sigma$, in the case that $\delta_2$ in search finitely succeeds, so $(\delta,\sigma,\delta')\in\mathcal{C_D}$ is hold for some $\delta'$. As $\delta_1$ would be searched first, however, once $\delta_1$ loops forever, e.g. $\delta_1 =(\alpha^*;false?)$, $\delta$ would not terminate. And the theorem of search is also proved by structure induction.
+
+\begin{definition}[Just-in-time]\label{just in time}
+Given a BAT $\mathcal{D}$, a ground situation $\sigma$, and a basic program $\delta$, we say that $\sigma$ is \emph{just-in-time} for $\delta$ wrt. $\mathcal{D}$, if $p(\vec{c})\in UP(prog(\Sigma[s_0],\sigma))$ iff $\neg p(\vec{c})\not\in UP(prog(\Sigma[s_0],\sigma))$, where $p\in P_\mathcal{D}(\delta)$, and $c_i\in OBJ_\mathcal{D}$ for $1\leq i\leq n$ such that $\vec{c}=c_1,\ldots,c_n$.
+\end{definition}
+
+In order to evaluate quantified formulas with finite objects, we construct predicate $known(O)$, with the meaning that object $O$ is already known. Given a BAT $\mathcal{D}$ and a main program, we so append $\bigwedge_{O\in OBJ_\mathcal{D}} known(O)$ to KB.
+
+\begin{definition}[Objects-all-known program]\label{objects all known program}
+Given a program $\delta$, we say that $\delta$ is an \emph{objects-all-known program}, if mentioned in $\delta$:
+\begin{enumerate}
+  \item every quantified formula is of either the form $\forall\vec{x}\bigwedge_{i=1}^n knows(known(x_i))\supset \phi$ or $\exists\vec{x}\bigwedge_{i=1}^n knows(known(x_i))\wedge \phi$, marked as \emph{objects-all-known formula},
+  \item and every $\phi$ in $\pi\vec{x}.\phi\wedge\delta$ constructs, is of the form $\bigwedge_{i=1}^n knows(known(x_i))\wedge \phi'$,
+\end{enumerate}
+where $\vec{x}=x_1,\ldots,x_n$.
+\end{definition}
+
+\begin{theorem}[Correctness of planning]\label{planning theorem}
+Let $\mathcal{D}$ be a BAT, $\sigma$ a ground situation, and $\delta$ a basic program with no sensing actions or procedure calls. Suppose that $\delta$ is also an objects-all-known program, and $\sigma$ is just-in-time for $\delta$. Then we have
+\begin{enumerate}
+  \item if \texttt{btrans(planning($\delta$), $P$, $A$)} wrt. $\sigma$ succeeds with $P=\delta'$, then $(\delta, \sigma, \delta') \in \mathcal{C_D}$;
+  \item if $(\delta, \sigma, \delta') \in \mathcal{C_D}$ for some $\delta'$, then \texttt{btrans(planning($\delta$), $P$, $A$)} wrt. $\sigma$ succeeds.
+\end{enumerate}
+\end{theorem}
+
+The theorem~\ref{planning theorem} shows the correctness of searching an action sequence by calling planner, under dynamic complete knowledge case. And the proof of this theorem is to firstly prove the equivalence of interpreting programs between the transition function $\Delta$ defined in \cite{BFM07} and the online semantics $\rightarrow_\mathcal{D}$ and $\mathcal{F_D}$; and then construct the corresponding relation between online semantics and offline semantics $\mathcal{C_D}$. And the theorem is proved with the two relations mentioned above.
+
+\section{Experiments}
+
+\subsection{Wumpus world}
+
+We use our interpreter to construct the control programs for the famous domain Wumpus world. We take the safety as the first place to construct the controller, that's to say, the agent would not die under the controller. On such base, the program would control the agent to get as more golds as she can. And the experiment results are showed as Table 1, with map size 8$\times$8 and 3000 random maps.
+
+\small\noindent
+\begin{center}
+Table 1. Wumpus world in our interpreter(8$\times$8, 3000)
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+Prob & Gold & IMP & Reward & Moves & Time & Calls \\
+\hline
+10\% & 1412 & 695 & 437 & 34 & 0.398 & 16 \\
+\hline
+15\% & 890 & 917 & 275 & 22 & 0.246 & 11 \\
+\hline
+20\% & 567 & 1171 & 175 & 14 & 0.147 & 7 \\
+\hline
+30\% & 263 & 1581 & 82 & 6 & 0.070 & 3 \\
+\hline
+40\% & 182 & 1924 & 58 & 3 & 0.040 & 2 \\
+\hline
+\end{tabular}
+\end{center}
+\normalsize
+
+In Table 1, \emph{Prob} is the probability of pit for every grid; \emph{Gold} is the number of the got golds; \emph{IMP} is the number of maps that is impossible, i.e. the first grid is felt smell or stench so the agent has to climb out the dungeon; \emph{Reward} and \emph{Moves} are separately the averages of the reward and move times for every map; \emph{Time} is the average cost time in the experiment with 3000 maps; and \emph{Calls} is the average times of calling the plan implementation of planning operator, in other words, calling a planer (\emph{FF}).
+
+As showed above, with the higher \emph{Prob}, all the indexes go lower, except the \emph{IMP} climbs up. In other words, the lower \emph{Prob} is, the more possibilities the agent explores the dungeon. Noted that, even in the lowest \emph{Prob}, the agent cost only averagely less than 0.4 seconds for a map, which shows the good efficiency of our interpreter.
+
+\subsection{Open service robot}
+
+This domain is the extension of service robot, which is hold for a competition by USTC in China every year, with incomplete knowledge case. The service robot domain describes several small objects, like cup and bottle, at the locations of big objects, like desk and teapot. And the tasks for agent are, to take some small objects for human or on appointed big objects, to putdown or catch some small objects, and to goto some location.
+
+In service robot, the knowledge about locations of small objects is complete, i.e. any small objects' locations can be inferred from KB, while in open service robot, the knowledge is incomplete, with the sense that some small objects' locations cannot be inferred from KB. The knowledge about locations of small objects is of the clause form, instead of literal form, e.g. $location(N_{10}, L_{5}) \vee location(N_{10}, L_{7})$, $location(N_{10}, L_{8}) \vee location(N_{11}, L_{4})$ and $location(N_{12}, L_{5})$.
+
+And now we can use our interpreter to construct control programs for the agent to complete the tasks given. And the main control is to use sensing actions to find out the specific locations of target objects, then execute the tasks online. Noted that, we implement an operator that calculates a set of assignments, such that at least one of them satisfies the given unbound literal, in which way we get the possible locations of the small objects. However, this operator is not so important in the interpreter, and we omit the details here.
+
+Now we post an example with the tasks [give(human, book), puton(red, can, desk)], given that the book is marked $N_{10}$ and the red can is marked $N_{11}$, and the knowledge about locations of them is the conjunction of three clauses $location(N_{10}, L_{5}) \vee location(N_{10}, L_{7})$, $location(N_{10}, L_{8}) \vee \neg location(N_{11}, L_{5})$ and $location(N_{11}, L_{4}) \vee location(N_{11}, L_{5})$. Actually, the real locations of them are $location(N_{10}, L_{7})$ and $location(N_{11}, L_{4})$. And the executions of the control program are as follows:
+\begin{verbatim}
+move(l0,l8)
+sense_loc(n10,l8)
+<sense_loc(n10,l8)(yes/no)>:no.
+move(l8,l7)
+sense_loc(n10,l7)
+<sense_loc(n10,l7)(yes/no)>:yes.
+catch(n10,l7)
+move(l7,l1)
+putdown(n10,l1)
+move(l1,l4)
+catch(n11,l4)
+move(l4,l9)
+putdown(n11,l9)
+true.
+\end{verbatim}
+
+As above, the agent completes the tasks without any sensing actions about the location of the red can $N_{11}$. That's because by unit propagation, $location(N_{11}, L_{5})$ is inferred false according to the second clause with the negative sensing result of $sense_loc(N_{10}, L_{8})$, and then $location(N_{11}, L_{4})$ is inferred true according to the third clause. From this case, we can test the intelligence of our interpreter.
+
+\section{Related work}
+
+Based on situation calculus, there has been several high-level programming languages, like \emph{GOLOG} \cite{LRL97}, \emph{sGOLOG} \cite{Lak99} and \emph{IndiGolog} \cite{GLS01}. They offer a useful way to put some simple control information into low-level programming.
+
+\emph{GOLOG}, as the basic programming language, requires \emph{CWA} (Closed World Assumption) for formula evaluations, with \emph{regression} mechanism. And to make a successful nondeterministic choice, it calculates the complete execution steps of the entire program \emph{offline}.
+
+In \emph{incomplete knowledge case}, \emph{sGOLOG} extends \emph{GOLOG} by incorporating sensing actions, supporting complete inference based on \emph{possible-world} semantics and \emph{domain closure}. And it yields a tree of actions branching with the results of sensing actions, instead of a linear sequence of actions.
+
+To adapt \emph{open world} case, \emph{IndiGolog} extends \emph{GOLOG} by serving \emph{online} execution of program with $Trans/Final$ semantics. As the ground literal form of KB, JIT (Just-In-Time) is asked for preserving the complete inference. Moreover, it proposes \emph{search operator} to guarantee the successful executions of sub-program as offline planning.
+
+Considering incomplete knowledge case, Jens and Gerhard \cite{CL09} extend the expression and reasoning of knowledge in \emph{GOLOG} with disjunctive, by the logic of limited belief $\mathcal{SL}$ \cite{LLL04}. Within a fixed \emph{belief level},
+they support a program semantics following online semantics, and a search operator as offline planning. Further, they propose another search operator considering all belief levels iteratively.
+\section{Programs in Wumpus world}
+
+The primitive actions:
+\\
+$\indent move/4\\
+\indent shoot\_up/0\\
+\indent shoot\_down/0\\
+\indent shoot\_left/0\\
+\indent shoot\_right/0\\
+\indent grab/0\\
+\indent climb/0$
+\\
+
+The sensing actions:
+\\
+$\indent sense\_stench/0\\
+\indent sense\_breeze/0\\
+\indent sense\_gold/0\\
+\indent sense\_scream/0
+$
+\\
+
+The control programs:
+\\
+$\textbf{proc}\; main\\
+\indent senseAll;\\
+\indent\textbf{if}\; K(gold(n_1,n_1))\\
+\indent\textbf{then}\; grab;climb\\
+\indent\textbf{else}\; explore;\Upsilon(moveLoc(n_1,n_1));climb\\
+\indent\textbf{endIf};\\
+\textbf{endProc}$
+\\
+
+\noindent $\textbf{proc}\; senseAll\\
+\indent sense\_stench;\\
+\indent sense\_breeze;\\
+\indent sense\_gold\\
+\textbf{endProc}$
+\\
+
+\noindent$\textbf{proc}\; explore\\
+\indent\textbf{while}\; K(\neg getsGold) \wedge\\
+\indent\indent\exists[x,y].(K((\neg wumpus(x,y) \vee \neg wumpusAlive) \wedge\\
+\indent\indent\indent\neg pit(x,y)) \wedge \neg K(explored(x,y)))\\
+\indent\textbf{do}\;(\pi[x,y].(K((\neg wumpus(x,y) \vee \neg wumpusAlive) \wedge\\
+\indent\indent\indent\indent\neg pit(x,y)) \wedge \neg K(explored(x,y))) \wedge\\
+\indent\indent\indent(\Upsilon moveLoc(x,y));\\
+\indent\indent\indent senseAll;\\
+\indent\indent\indent\textbf{if}\; K(\exists[x_0,y_0]. agent(x_0,y_0) \wedge gold(x_0,y_0))\\
+\indent\indent\indent\textbf{then}\; grab\\
+\indent\indent\indent\textbf{else}\\
+\indent\indent\indent\indent\textbf{if}\; \exists[x_1,y_1].K(wumpusAlive \wedge\\ \indent\indent\indent\indent\indent\indent wumpus(x_1,y_1))\\
+\indent\indent\indent\indent\textbf{then}\; shootWumpus\\
+\indent\indent\indent\indent\textbf{else}\; nil\\
+\indent\indent\indent\indent\textbf{endIf}\\
+\indent\indent\indent\textbf{endIf}\\
+\indent\textbf{endWhile}\\
+\textbf{endProc}$
+\\
+
+\noindent $\textbf{proc}\; moveLoc(X,Y)\\
+\indent(\pi[x_0,y_0,x_1,y_1].K(agent(x_0,y_0) \wedge explored(x_1,y_1)) \wedge\\
+\indent\indent move(x_0,y_0,x_1,y_1))^*;\\
+\indent(\pi[x_2,y_2]. K(agent(x_2,y_2)) \wedge\\
+\indent\indent move(x_2,y_2,X,Y))\\
+\textbf{endProc}$
+\\
+
+\noindent $\textbf{proc}\; shootWumpus\\
+\indent(\pi[x_1,y_1,x_2,y_2].K(wumpus(x_1,y_1) \wedge\\
+\indent\indent\indent explored(x_2,y_2) \wedge\\
+\indent\indent\indent(x_1=x_2 \wedge succ(y_1,y_2)) \vee\\
+\indent\indent\indent(x_1=x_2 \wedge succ(y_2,y_1)) \vee\\
+\indent\indent\indent(y_1=y_2 \wedge succ(x_1,x_2)) \vee\\
+\indent\indent\indent(y_1=y_2 \wedge succ(x_2,x_1))) \wedge\\
+\indent\indent (\Upsilon moveLoc(x_2,y_2));\\
+\indent\indent(succ(y_2,y_1)?;shoot\_up|succ(y_1,y_2)?;shoot\_dowm|\\
+\indent\indent succ(x_1,x_2)?;shoot\_left|succ(x_2,x_1)?;shoot\_right));\\
+\indent sense\_scream\\
+\textbf{endProc}$
+
+\small
+\bibliography{int}
+\bibliographystyle{aaai}
+
+\section{Proof}
+In the following proofs, we do not discuss the conditionals, while-loops and procedure cases that are not necessary. And the programs in proof are ignored the difference in syntax from implementation.
+
+1. Theorem~\ref{basic constructs theorem}
+
+Proof: Use structure induction to prove the correctness.
+
+(1) Base case: For $\mathcal{F_D}$, consider empty program $nil$, test $\phi?$ and iteration $\delta^*$. They are trivial according to the definitions except $\phi?$.
+
+For the case $\phi?$, by the [query theorem], \texttt{query($\phi$, $\sigma$)} succeeds iff $wclosure(B_0 prog(\Sigma[S_0], \sigma))\models B_0 \phi[\sigma]$. And the proof is finished by definitions.
+
+For $\rightarrow_\mathcal{D}$, consider primitive action $\alpha$ and sensing action $\beta$. The proofs of them are similar, so take $\alpha$ case to prove.
+
+\texttt{query(knows($\Pi_\alpha$), $\sigma$)} succeeds, iff, by the [query theorem], $wclosure(B_0 prog(\Sigma[S_0], \sigma))\models B_0 \Pi_\alpha[\sigma]$, where $\Pi_\alpha$ is the precondition of $\alpha$. And then the proof is over by definitions.
+
+(2) Induction step: Assume that the two parts of the theorem are hold.
+
+For $\mathcal{F_D}$, consider $\delta_1;\delta_2$, $\delta_1|\delta_2$ and $\pi\vec{x}.\phi\wedge\delta$; and for $\rightarrow_\mathcal{D}$, consider $\delta_1;\delta_2$, $\delta_1|\delta_2$, $\pi\vec{x}.\phi\wedge\delta$ and $\delta^*$. The proof for $\mathcal{F_D}$ is simple by definition and [query theorem]. And for $\rightarrow_\mathcal{D}$, prove the $\delta_1;\delta_2$ case.
+
+The one to prove is that: Given a ground situation $\sigma$,
+\texttt{btrans($\delta_1;\delta_2$, $P$, $A$)} wrt. $\sigma$ succeeds with $P=\delta'$ and $A=\alpha$, iff
+$(\delta_1;\delta_2,\sigma)\rightarrow_\mathcal{D}(\delta',do(\alpha,\sigma))$.
+
+By definitions, inductively prove that:
+
+(A) $T_{A1}$: [\texttt{btrans($\delta_1;\delta_2$, $P_1$, $A_1$)} wrt. $\sigma$] succeeds with $P_1=\gamma;\delta_2$ and $A_1=\alpha$
+s.t. \texttt{btrans($\delta_1$, $\gamma$, $\alpha$)} wrt. $\sigma$ succeeds, iff
+$T_{A2}$: [$(\delta_1;\delta_2,\sigma)\rightarrow_\mathcal{D}(\gamma;\delta_2,do(\alpha,\sigma))$],
+s.t. $(\delta_1,\sigma)\rightarrow_\mathcal{D}(\gamma,do(\alpha,\sigma))$.
+
+(B) $T_{B1}$: [\texttt{btrans($\delta_1;\delta_2$, $P_1$, $A_1$)} wrt. $\sigma$] succeeds with $P_1=\gamma$ and $A_1=\alpha$
+s.t. \texttt{btrans($\delta_2$, $\gamma$, $\alpha$)} wrt. $\sigma$ succeeds, iff
+$T_{B2}$: [$(\delta_1;\delta_2,\sigma)\rightarrow_\mathcal{D}(\gamma,do(\alpha,\sigma))$]
+s.t. $(\delta_2,\sigma)\rightarrow_\mathcal{D}(\gamma,do(\alpha,\sigma))$.
+
+For case (A), $T_{A1}$ succeeds iff $T_{A3}$: [\texttt{btrans($\delta_1$, $\gamma$, $\alpha$)} wrt. $\sigma$] succeeds;
+and $T_{A2}$ is hold iff $T_{A4}$: [$(\delta_1,\sigma)\rightarrow_\mathcal{D}(\gamma,do(\alpha,\sigma))$] is hold.
+By the induction hypothesis, $T_{A3}$ succeeds iff $T_{A4}$ is hold.
+
+For case (B), $T_{B1}$ succeeds iff both $T_{B3}$: [\texttt{bfinal($\delta_1$)} wrt. $\sigma$] and $T_{B4}$: [\texttt{btrans($\delta_2$, $\gamma$, $\alpha$)} wrt. $\sigma$] succeed;
+and $T_{B2}$ is hold iff both $T_{B5}$: [$(\delta_1,\sigma)\in \mathcal{F_D}$] and $T_{B6}$:
+[$(\delta_2,\sigma)\rightarrow_\mathcal{D}(\gamma,do(\alpha,\sigma))$] are hold.
+It's easy to get that, $T_{B3}$ succeeds iff $T_{B5}$ is hold, and $T_{B4}$ succeeds iff $T_{B6}$ is hold, by the induction hypothesis.
+
+Hence, the proof of $\delta_1;\delta_2$ case for $\rightarrow_\mathcal{D}$ is finished. It's by the similar way to prove other cases.
+
+Therefore, the implementation of basic constructs is correct.
+$\blacksquare$
+\\
+
+2. Theorem~\ref{search theorem}
+
+Proof: Use structure induction to prove the soundness and weak completeness.
+\\
+
+(Soundness)
+
+(1) Base case: Consider the cases of empty program $nil$, primitive action $\alpha$, sensing action $\beta$, test $\phi?$ and iteration $\delta^*$. The $nil$ and $\delta^*$ cases are trivial, and the proofs of the other cases are similar each other. So take the $\phi?$ case to prove.
+
+That's to prove that:
+\texttt{btrans(search($\phi?$), $P$, $A$)} wrt. $\sigma$ succeeds with $P = \delta'$, then $(\phi?, \sigma, \delta') \in \mathcal{C_D}$
+
+The success of \texttt{btrans(search($\phi?$), P, A)} wrt. $\sigma$ implies that \texttt{bdo($\phi?$, $\sigma$, P)} with $P=nil$, i.e. \texttt{query($\phi$, $\sigma$)} succeeds. By [query theorem], $wclosure(B_0 prog(\Sigma[S_0], \sigma))\models B_0 \phi[\sigma]$ is hold, hence $(\phi?,\sigma,nil)\in\mathcal{C_D}$.
+
+(2) Induction step:
+Consider $\delta_1;\delta_2$, $\delta_1|\delta_2$, $\pi\vec{x}.\phi\wedge\delta$ and $\delta^*$. Since the proofs of $\delta_1|\delta_2$ and $\pi\vec{x}.\phi\wedge\delta$ are trivial by the assumption $A_\mathcal{C_D}$, prove $\delta_1;\delta_2$ case as $\delta^*$ case is proved similarly.
+
+Assume that: $A_\mathcal{C_D}$: [Given a situation $s$, if \texttt{bdo($\delta_1$, $s$, $P_1$)} succeeds with $P_1=\rho^*$, then $(\delta_1, s, \rho_1)\in \mathcal{C_D}$; if \texttt{bdo($\delta_2$, $s$, $P_2$)} succeeds with $P_2=\rho_2$, then $(\delta_2, s, \rho_2)\in \mathcal{C_D}$.]
+
+By assumption $A_\mathcal{C_D}$, the success of first sub-goal \texttt{bdo($\delta_1$, $s$, $\rho_1$)} implies $(\delta_1, s, \rho_1)\in \mathcal{C_D}$. And we now prove that: if \texttt{ext($\rho$, $\delta_2$, $\sigma$, $P$)} succeeds with $P=\rho'$, then $(\rho, \delta_2, \sigma, \rho')\in \mathcal{E_D}$.
+
+We use structure induction here.
+
+(2-1) Base case: Consider the empty program $nil$. From definitions this case is hold simply, by the assumption $A_\mathcal{C_D}$, as that the success of \texttt{bdo($\delta_2$, $\sigma$, $\rho'$)} implies $(\delta_2, \sigma, \rho')\in \mathcal{C_D}$.
+
+(2-2) Induction step:
+
+Consider the cases of $\alpha;\rho$, $\beta;\rho$ and $\textbf{if} \phi \textbf{then} \rho_1 \textbf{else} \rho_2 \textbf{endIf}$. Here take the $\beta;\rho$ case to prove.
+
+Assume that: $A_\mathcal{E_D}$: [if \texttt{ext($\rho$, $\delta_2$, $\sigma$, $P$)} succeeds with $P=\rho'$, then $(\rho, \delta_2, \sigma, \rho')\in \mathcal{E_D}$.]
+
+(pause here)
+
+It'a going to prove that: if \texttt{ext($\beta;\rho$, $\delta_2$, $\sigma$, $P$)} succeeds with $P=\rho'$, then $(\beta;\rho, \delta_2, \sigma, \rho')\in \mathcal{E_D}$.
+
+Since \texttt{sens\_prog($\beta$, $1$, $\sigma$, $\sigma_T$)} succeeds by definition of \texttt{ext/4}, it means that $\sigma_T=do(\beta_T,\sigma)$, i.e. \texttt{ext($\rho$, $\delta_2$, $do(\beta_T,\sigma)$, $\rho_T$)} succeeds. For the record, \texttt{del\_sit($\sigma_T$)} is to delete the KB of $\sigma_T$, whenever the search in $\sigma_T$ succeeds or backtracks. Hence by the assumption $A_\mathcal{E_D}$, $(\rho, \delta_2, do(\beta_T,\sigma), \rho_T)\in \mathcal{E_D}$ is hold, and $(\rho, \delta_2, do(\beta_F,\sigma), \rho_F)\in \mathcal{E_D}$ is hold respectively. As \texttt{sf($\beta$, $\psi$)} succeeds such that $SF(\beta, \sigma)\equiv\psi[\sigma]$, get that $\rho'=\beta;\textbf{if} \phi \textbf{then} \rho_T \textbf{else} \rho_F \textbf{endIf}$. Therefore $(\rho, \delta_2, \sigma, \rho')\in \mathcal{E_D}$ is hold.
+
+The other cases are proved similarly.
+$\bigtriangleup$
+\\
+
+Return to proof of the $\delta_1;\delta_2$ case, $(\rho_1, \delta_2, \sigma, \rho)\in \mathcal{E_D}$ is hold with the success of \texttt{ext($\rho_1$, $\delta_2$, $\sigma$, $\rho$)} by the conclusion above. Therefore, $(\delta_1;\delta_2, \sigma, \rho)\in \mathcal{C_D}$ is hold.
+$\square$
+\\
+
+(Weak completeness)
+
+The proof is almost the anti-direction of the one for soundness. However, notice that the cases of loop forever leads that the search does not terminate.
+
+Consider the program $(\alpha_1^*;false?|\alpha_2)$ in search, where both $\alpha_1$ and $\alpha_2$ are possible in any situation, and then easily know that $(\alpha_1^*;false?|\alpha_2, \sigma, \alpha_2)\in \mathcal{C_D}$ given a ground situation $\sigma$. With the codes of \texttt{bdo/3}in \emph{PROLOG}, \texttt{bdo($\alpha_1^*;false?$, $\sigma$, $\rho$)} is to test first. And this task loops forever, since the the test of iteration $\alpha_1^*$ lasts forever until $false?$ turns true or $\alpha$ is not possible in some situation, impossibly. Hence the search would neither finitely succeed nor fail, i.e. not terminate.
+
+Therefore, get the weak completeness.
+$\blacksquare$
+\\
+
+3. Theorem~\ref{planning theorem}
+
+Proof: Using the correctness theorem in \cite{BFM07}, it's to prove that: $\vec{\alpha}$ is accepted by $\varepsilon$-NFA $A_{\delta_o,I_\mathcal{D}}$, iff $(\delta,\sigma,\vec{\alpha})\in\mathcal{C_D}$, considered $\vec{\alpha}$ as the sequence constructs for simplicity. Here point out that $\vec{\alpha}$ is also the plan in $I_\mathcal{D}(\delta,\sigma)$, as of which the goal is always true.
+
+To prove the transformation above, firstly need several lemmas, with the same premise as theorem~\ref{planning theorem}, and let $Init$ the initial state of $I_{\mathcal{D},\delta_o}(\delta,\sigma)$, $s$ a state, $\phi$ a ground or objects-all-known subjective formula, and $\phi_o$ is the objective form of $\phi$. Then:
+
+\begin{lemma}\label{init evaluation}
+$Init\models\phi_o$, iff $wclosure(B_0 prog(\Sigma[S_0],\sigma))\models\phi$.
+\end{lemma}
+
+\begin{lemma}\label{prog evaluation}
+$Succ(Init,\vec{\alpha},s)$ and $s\models\phi_o$, iff $\vec{\alpha}$ is legal in $\sigma$ and $wclosure(B_0 prog(\Sigma[S_0],do(\vec{\alpha},\sigma)))\models\phi$.
+\end{lemma}
+
+This two lemmas above guarantee the equivalent abilities of evaluation between planning instance $I_{\mathcal{D},\delta_o}(\delta,\sigma)$ and BAT $\mathcal{D}$.
+
+Let $\gamma$ be a basic and objects-all-known program with no sensing actions and procedure calls, in which the predicates mentioned are in $P_\mathcal{D} (\delta)$, and the objects mentioned are in $OBJ_\mathcal{D}$, and $\gamma_o$ the objective form of $\gamma$. Then:
+
+\begin{lemma}\label{nfa final}
+$[nil,s]\in\Delta([\gamma_o,s],\varepsilon^*)$ with $Succ(Init,\vec{\alpha},s)$, iff $(\gamma,\sigma')\in\mathcal{F_D}$ with $\sigma'=do(\vec{\alpha},\sigma)$ and $\vec{\alpha}$ is legal in $\sigma$.
+\end{lemma}
+
+\begin{lemma}\label{nfa trans}
+Let $\beta$ be an action s.t. $\beta\neq\varepsilon$. Then
+\begin{enumerate}
+  \item for every program $\gamma_o'$ s.t. $[\gamma_o',s']\in\Delta([\gamma_o,s],\beta)$, with $Succ(Init,\vec{\alpha},s)$ and $Succ(s,\beta,s')$, there exists a program $\gamma'$ s.t. $(\gamma,\sigma')\rightarrow_\mathcal{D}(\gamma',do(\beta,\sigma'))$, with $\sigma'=do(\vec{\alpha},\sigma)$ and $\vec{\alpha}$ is legal in $\sigma$, and the objective form of $\gamma'$ is $\gamma_o'$;
+  \item for every program $\gamma'$ s.t. $(\gamma,\sigma')\rightarrow_\mathcal{D}(\gamma',do(\beta,\sigma'))$, with $\sigma'=do(\vec{\alpha},\sigma)$ and $\vec{\alpha}$ is legal in $\sigma$, we have that $[\gamma_o',s']\in\Delta([\gamma_o,s],\beta)$, with $Succ(Init,\vec{\alpha},s)$ and $Succ(s,\beta,s')$, where $\gamma_o'$ is the objective form of $\gamma'$.
+\end{enumerate}
+\end{lemma}
+
+This two lemmas above shows the equivalence of interpreting programs between the transition function $\Delta$ and the semantics $\rightarrow_\mathcal{D}$ and $\mathcal{F_D}$.
+
+\begin{lemma}\label{trans final bdo}
+Let $\vec{\alpha}$ be an action sequence. Then
+there exists a program $\delta'$, s.t. $(\delta,\sigma)\rightarrow_\mathcal{D}^*(\delta',do(\vec{\alpha},\sigma))$ and $(\delta',do(\vec{\alpha},\sigma))\in\mathcal{F_D}$, iff
+$(\delta,\sigma,\vec{\alpha})\in\mathcal{C_D}$.
+\end{lemma}
+
+The lemma above shows the correctness of offline semantics $\mathcal{C_D}$ for an action sequence.
+
+Lemma~\ref{init evaluation} and lemma~\ref{prog evaluation} are proved by utilizing the procedure of constructing $I_\mathcal{D}(\delta,\sigma)$. And as the first two lemmas are hold, lemma~\ref{nfa final} and lemma~\ref{nfa trans} are proved by structure induction. Lastly, lemma~\ref{trans final bdo} is also proved by structure induction.
+\\
+
+For soundness, by lemma~\ref{nfa final} and lemma~\ref{nfa trans}, we firstly get that the action sequence $\vec{\alpha}$, accepted by $A_{\delta_o,I_\mathcal{D}}$, can be transited iteratively by $\rightarrow_\mathcal{D}$ from configuration $(\delta,\sigma)$ to a configuration $(\delta',do(\vec{\alpha},\sigma))\in \mathcal{F_D}$, for some $\delta'$. Then by lemma~\ref{trans final bdo} the soundness is proved. And the completeness is proved similarly on anti-direction.
+\end{document} 

@@ -1,0 +1,84 @@
+\IncMargin{1em}
+\begin{algorithm}
+  \SetKwData{Left}{left}\SetKwData{This}{this}\SetKwData{Up}{up}
+  \SetKwFunction{Union}{Union}\SetKwFunction{FindCompress}{FindCompress}
+  \SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+
+  \Input{ 存储~HDLP~规则的~vector$<$Rule $*>$~类型的变量~vec~}
+  \Output{存储~NLP~的规则的~vector$<$Rule$>$~类型的变量~asp$\_$rule~}
+  \BlankLine
+
+    num $\leftarrow$ the number of rules in HDLP \tcp*[h]{定义整型变量~num~}\\
+    \For{$i = 1$ \KwTo $num$}
+    {
+        \tcc*[h]{定义整型变量~lit$\_$in$\_$head~，置初值为~HDLP~第~i~个规则头部文字的个数}\\
+        lit$\_$in$\_$head $\leftarrow$ the number of literals in the head of i-th rule \\
+
+        \If(\tcp*[h]{当前规则是一条约束}){lit$\_$in$\_$head=0}
+        {
+            r $\leftarrow \emptyset$  \tcp*[h]{定义规则~r~} \\
+            r $\leftarrow$ the i-th rule \\
+            asp$\_$rule $\leftarrow$ asp$\_$rule $\cup$ r \tcp*[h]{将规则~r~存入数据结构~asp$\_$rule~中}\\
+            continue \\
+        }
+
+        \For{$j = 1$ \KwTo $lit\_in\_head$}
+        {
+            r $\leftarrow \emptyset$  \\
+
+            \tcc*[h]{~r~头部的文字被置为当前第~i~个规则头部里的第~j~个文字}\\
+            %set the head of r by the literal of the j-th literal in head of i-th rule \\
+            
+            the head of r $\leftarrow$ the j-th literal in head of i-th rule \\
+
+            %\tcc*[h]{~r~体部的正文字被置为当前第~i~个规则体部里的全部正文字}\\
+            %set the positive body of r by the positive body of i-th rule \\
+
+            the body of r $\leftarrow$ the body of i-th rule \\
+
+            %\tcc*[h]{~r~体部的负文字被置为当前第~i~个规则体部里的全部负文字}\\
+            %set the negative body of r by the negative body of i-th rule \\
+
+            \BlankLine
+            \tcc*[h]{每一个新产生的规则，其体部的负文字部分都不相同} \\
+            \For{$k = 1$ \KwTo $lit\_in\_head$}
+            {
+              \If{j$\neq$k}
+              {
+                \tcc*[h]{将当前第~i~个规则头部里的第~k~个文字加入~r~体部的负文字部分}\\
+                add the k-th literal in head of i-th rule to the negative body of r \\
+              }
+            }
+            \BlankLine
+            \tcc*[h]{至此，已经正确生成一条~NLP~的规则} \\
+            asp$\_$rule $\leftarrow$ asp$\_$rule $\cup$ r \\ %\tcp*[h]{将规则~r~存入数据结构~asp$\_$rule~中}\\
+        }
+    }
+
+ %judge $\leftarrow$ true \tcp*[h]{定义~bool~类型的变量~judge~}     \\
+%    cursor $\leftarrow$ p \tcp*[h]{定义一个~ParseNode~类型的指针~cursor~}\\
+%
+%
+%    \While{cursor $\neq$ NIL}
+%    {
+%       %\For{对于变量~circle~里的每一个环~c~}
+%       \For{each circle c in $\_$circle}
+%       {
+%          %\If(\tcp*[h]{aaaaa}){~cursor~所指节点中的规则头部出现两个文字在环~c~中}
+%          \If(\tcp*h{~cursor~所指节点中的规则头部出现两个文字在环~c~中}){two literals appear in the head of rule in cursor are in c}
+%          {
+%            judge $\leftarrow$ false \\
+%            store the rule in cursor \tcp*[h]{将当前造成~head-cycle~的规则存起来，为后续的其他模块使用}\\
+%            break \tcp*[h]{跳出最内层~for~循环} \\
+%          }
+%       }
+%       \BlankLine
+%        \tcc*[h]{处理完该条规则，准备处理下一条规则；} \\
+%        set the cursor point to next rule \\
+%    }
+%
+%    return the value of judge \\
+
+
+  \caption{实现~HDLP~到~NLP~的翻译}\label{HEDLP:2:NLP}
+\end{algorithm}\DecMargin{1em} 

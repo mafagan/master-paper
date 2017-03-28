@@ -1,0 +1,21 @@
+\IncMargin{1em}
+\begin{algorithm}
+  \SetKwData{Left}{left}\SetKwData{This}{this}\SetKwData{Up}{up}
+  \SetKwFunction{Union}{Union}\SetKwFunction{FindCompress}{FindCompress}
+  \SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+
+  \Input{待求解的命题理论~$T_\Pi$~的命题公式集合，存储在~cnf$\_$formula~类型的变量~final$\_$cnf~中}
+  \Output{逻辑程序~$\Pi$~的全部回答集，存储在类型为~vector$<$set$<$int$>>$~的变量~vec$\_$models~}
+  \BlankLine
+
+    judge $\leftarrow$ true \tcp*[h]{定义布尔类型的变量~judge~}\\
+    \While{judge=true}
+    {
+      \tcc*[h]{调用函数~IsExist$\_$model~判断当前的命题理论是否有解，有则存储，然后重复调用}\\
+      judge $\leftarrow$ IsExist$\_$model(final$\_$cnf,vec$\_$models)  \\
+    }
+
+
+
+  \caption{重复调用~minisat~求解器的源码接口求解命题理论~$T_\Pi$~的模型}\label{call:minisat:solver:1}
+\end{algorithm}\DecMargin{1em} 

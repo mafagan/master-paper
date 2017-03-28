@@ -1,0 +1,230 @@
+\def\qed{\hfill \vrule height6pt width 6pt depth 0pt}
+\chapter{基于决断集模板进行溯因诊断}
+    本体中的知识库以及规则是本体可以进行推理的前提。目前的本体构造主要由手工或者是半手工构建。由于本体的结构复杂，信息量大，因此本体的构建是一个长期的过程。在本体的构建过程中，构建的本体与观察值的不一致是一个常会发生的问题。因此，找到问题的原因，对观察值提出合理解释成为本体推理中的一个重要任务，这类任务也被称作是溯因推理问题。
+\section{解释与决定集}
+    溯因推理的一个重要目的就是需要找出合理的解释对观察值的进行解释。一般的，这个解释不应该导致诊断本体的不一致，同时，结合本体中的背景知识，新构建出的本体能够蕴含观察值，且新构建的本体能够保持一致的特性。因此，我们对解释有以下定义：
+\begin{definition}[解释)]
+    给定一个一致的本体$\mathcal{O}$以及观察值$\alpha$，$\mathcal{O} \nvDash \alpha$, 并且$\mathcal{O} \cup \{\alpha \} $ 是一致的，那么假如存在一个公理的集合$\mathcal{E}$使得$\mathcal{O} \cup \mathcal{E} \models \alpha$，$\mathcal{E} \nvDash \alpha$并且$\mathcal{O} \cup \mathcal{E}$ 是一致的，我们称这个集合$\mathcal{E}$为在本体$\mathcal{O}$中对$\alpha$的解释。
+\end{definition}
+
+    为了能够满足本体对蕴涵值的推理需求，解释在本体的溯因诊断中通常会以一种表达能力较高的DL语言比如$\mathcal{SROIQ}$。表达能力高的语言虽然可以满足本体对观察值的推理需求，但是较高的表达能力会带来另外一个问题，解释的空间会无限增大。为了能够尽可能提高解释的表达能力的同时能够限制解释的空间大小，本文利用模板来实现对解释的空间进行限制。在本体的推理中，决断集是一个重要的概念，对于一个一致的本体$O$以及观察值$\alpha$，我们定义$Jst(\alpha, \mathcal{O})$为本体$\mathcal{O}$对观察值$\alpha$的决断集的集合。因为决断集对蕴含值具有推理的合理性，同时决断集满足本体对观察值的解释需要是最小集合的约束，因此直观地本体对观察值的解释也会遵循相应的模板。
+
+    在定义决断集模板之前，我们首先需要可扩展公理， 对于本体的一条公理，如果公理中的一个或多个的二元关系或者个体被二元关系变量或者个体变量替换，则这条公理会被称作可扩展公理。更多地，一条可扩展公理会被称为可全扩展公理如果这条公理的所有二元关系的个体都被二元关系中的个体变量替换。同时，可全扩展公理会保留本体中的$\top$，$\bot$以及个体的不变。
+    在本体中，公理的类型种类多，由多条公理组成的决断集会产生数量难以接受的模板，因此我们需要限制模板的数量，也就意味着我们需要使用尽可能少的模板来表达尽可能多的决断集，同时，对于每个生成的模板，应该要有一种映射的方式使得决断集与之相对应。这种映射的方式我们称之为可扩展公理的替换，可扩展公理的替换能够把扩展公理的变量个体映射到个体名或者是个体变量。一个替换会被称作实例化替换如果这个替换能够把所有的个体变脸映射到个体名。
+
+    一般地，我们都需要这样的限制，对于每个由决断集产生的模板，都存在一个实例化的替换，使得这个由决断集产生的模板被映射到一个决断集中。但是这样的限制依旧会产生公理数不受限制的模板，考虑以下例子：
+    \begin{example}[解释)]
+            令决断集$\mathcal{J}$是一直本体$\mathcal{O}$中对于二元关系断言$r_y(e_1, e_2)$的决断集，$J_p$是一个由决断集生成的决断集模板：
+            \begin{center}
+                \item $\mathcal{J} = \{r_M \circ r_N \sqsubseteq r_K, r_M(e_1, e_\mu), r_N(e_\mu, e_2)\}$
+                \item $\mathcal{J}_p = \{r_M \circ r_N \sqsubseteq r_K, r_M(e_{x_1}, e_{y_1}),\cdots,r_M(e_{x_n}, e_{y_n}),  r_N(e_m, e_n) \}$
+            \end{center}
+            从$\mathcal{J}$和$\mathcal{J}_p$可以看出，$\mathcal{J}_p$是一个公理基数没有上限的决断集模板，因为存在这样一个映射$\theta$：
+            \begin{center}
+                \item $\theta = \{e_{x_i} \mapsto e_1, e_{y_i} \mapsto e_\mu, e_m \mapsto e_\mu,e_n \mapsto e_2 \mid 1\leq i\leq n\}$
+            \end{center}
+
+            由于这个$\theta$满足条件所有的个体变量被映射到个体实例，因此这个映射$\theta$是一个实例化替换使得$\mathcal{J}_p\theta = \mathcal{J}$。
+    \end{example}
+    为了避免出现决断集模板基数无限增大的情况，我们需要的决断集模板的替换做出进一步限制。在实例化替换的基础上，我们提出差异化实例替换。差异化实例替换不仅需要满足条件所有的个体变量都被映射到个体实例，还需要满足条件对于所有的不相同变量，被映射后的个体也不相同。直观地，一个差异化实例替换会是变量到个体间的一一映射。同时，一般地一个决断集模板需要能够生成至少一个决断集，然而为了保证最后生成的解释的合理性，我们需要决断集模板的所有差异化实例替换都只生成决断集，因此我们需要限制所有的对于$r(e_x, e_y)$决断集模板，在差异化实例替换的映射下能够维持蕴含$r(e_x\theta, e_y\theta)$这一特性。因此我们对决断集模板做出如下定义：
+	\begin{definition}[决定集模版)]
+    一个由扩展公理组成的集合$\mathcal{J}_p$会被称为在本体$\mathcal{O}$中对于$r(e_x\, e_y)$的决定集模版如果$\mathcal{J}_p$满足以下两个条件:(1) 存在一个替换$\theta$使得$\mathcal{J}_p\theta\in \emph{Jst}\left(r\left(e_x\theta, e_y\theta\right), \mathcal{O}\right)$\ \ (2)对于所有的差异化实例替换$\sigma$存在$\mathcal{J}_p\sigma\models r\left(e_x\sigma, e_y\sigma\right)$。
+	
+	\end{definition}
+	继续考虑例3.1中的决定集模板:
+	\begin{center}
+		$\mathcal{J}_p = \{r_M \circ r_N \sqsubseteq r_K, r_M(e_{x_1}, e_{y_1}),\cdots,r_M(e_{x_n}, e_{y_n}),  r_N(e_m, e_n) \}$
+	\end{center}
+	根据以上定义，在任一个一致的本体$\mathcal{O}$中，$\mathcal{J}_p$不是一个符合定义的对于二元关系断言实例$r_K(e_1, e_2)$的决断集模板。因为对于决定集模板$\mathcal{J}_p$的差异化实例替换$\theta$,存在:
+	\begin{center}
+	$\{r_M \circ r_N \sqsubseteq r_K, r_M(e_{x_1}\theta, e_{y_1}\theta),  r_N(e_m\theta, e_n\theta)\} \in Jst(r_M(e_{x_1}, e_{y_1}),\mathcal{O})$
+	\end{center}
+	同时:
+	\begin{center}
+		$\{r_M \circ r_N \sqsubseteq r_K, r_M(e_{x_1}\theta, e_{y_1}\theta),  r_N(e_m\theta, e_n\theta)\} \subset \mathcal{J}_p\theta$
+	\end{center}
+	
+	因此可以得出：
+	\begin{center}
+		$\mathcal{J}_p \theta \not \in Jst(r_M(e_{x_1}\theta, e_{y_1}\theta),O)$
+	\end{center}
+	同时，$\mathcal{J}_p$也不是$r_M(e_{x_1}, e_{y_k})$的决断集模板当$k > 1$。这是因为$\mathcal{J}_p\sigma \nvDash r_M(e_{x_1}\sigma, e_{y_k}\sigma)$，其中：
+		\begin{center}
+			$\sigma = \{e_{x_i} \mapsto e_1, e_{y_i}\mapsto e_2\mid 1\leq i \leq n, i\neq k\} \cup \{e_{x_k}\mapsto e_2, e_{y_k}\mapsto e_1\}$
+		\end{center}
+		
+	为了保证决断集能够被映射到决断集空间上，我们使用从决断集上生成决断集模板的方法来获取决断集模板。我们在生成的决断集的基础上，对二元关系中的个体进行变量替换，且对于不相同的个体名，我们使用不同的个体变量替换。我们对用不相同变量替换不相同个体的过程记作$lift(S,A,B)$。$lift(S,A,B)$表示对公理集合中的所有个体名，我们把$A$映射为变量$X$, $B$映射为变量$Y$, 其它不相同的个体分别映射到不同的个体变量。
+	\begin{proposition}
+		令$\mathcal{O}$为一致本体，$r_M(e_1, e_2)$是$\mathcal{O}$的一个蕴涵值，且$\mathcal{J}$是在$\mathcal{O}$中对于蕴含值$r_M(e_1, e_2)$的一个决断集。那么$lift(\mathcal{J}, e_1, e_2)$就是一个在$\mathcal{O}$中对于$r_M(e_1, e_2)$的一个决断集模板。
+	\end{proposition}
+	证明：(1)因为在决断集$\mathcal{J}$与$lift(\mathcal{J}, e_1, e_2)$之间具个体变量到个体实体的一对一映射，因此这里存在一个$lift(\mathcal{J}, e_1, e_2)$的差异化实例替换$\theta$使得$X\theta=e_1$，$Y\theta=e_2$，且$lift(\mathcal{J}, e_1, e_2)\cdot\theta=\mathcal{J}$。(2)令$\sigma$为$lift(\mathcal{J}, e_1, e_2)$的一个差异化实例替换，因此对于$lift(\mathcal{J}, e_1, e_2) \cdot \sigma$必然存在一个到$lift(\mathcal{J}, e_1, e_2) \cdot \theta$个体变量之间的映射$\rho$从而使得$X\theta = X\sigma$，$Y\theta = Y\sigma$且$lift(\mathcal{J}, e_1, e_2)\cdot\theta\cdot\rho = lift(\mathcal{J}, e_1, e_2)\cdot\sigma$。又因为$lift(\mathcal{J}, e_1, e_2)\cdot\theta \models r_M(X\theta, Y\theta)$，因此必然有$lift(\mathcal{J}, e_1, e_2)\cdot\theta\cdot\rho \models r_M(X\sigma, Y\sigma)$，考虑到$lift(\mathcal{J}, e_1, e_2)\cdot\theta\cdot\rho = lift(\mathcal{J}, e_1, e_2)\cdot\sigma$，因此可知对于所有的差异化实例替换$\sigma$都有$lift(\mathcal{J}, e_1, e_2)\cdot\sigma \models r_M(X\sigma, Y\sigma)$，命题成立。
+	
+	
+	要使得对于观察值$\alpha$以及一致本体$\mathcal{O}$中的溯因解释$\mathcal{E}$遵循决断集模板，我们做出如下限制：$\mathcal{E}$是观察值$\alpha$在$\mathcal{O} \cup \mathcal{E}$中的决断集的子集，其中这个决断集是由决断集模板通过差异化实例替换计算得来。我们把这个解释$\mathcal{E}$称作可接受解释：
+	\begin{definition}
+		给定一个一致本体$\mathcal{O}$，一个可蕴含$r_M(X,Y)$决断集模板的集合$\mathcal{P}$以及观察值$\alpha$，其中$\mathcal{O} \not \models \alpha$，解释$\mathcal{E}$如果满足存在一个决断集模板$\mathcal{J}_p \in \mathcal{P}$以及一个在决断集模板$\mathcal{J}_p$上的差异化实例替换$\theta$使得$\alpha = r_M(X\theta, Y\theta), \mathcal{E} \subseteq \mathcal{J}_p\theta$以及$\mathcal{J}_p\theta \in Jst(\alpha, \mathcal{O} \cup \mathcal{E})$，我们就把这样的解释称作可接受解释。
+	\end{definition}
+	
+	下面给出一个可接受解释例子：
+	\begin{example}
+		考虑以下本体$\mathcal{O}$：
+		\begin{center}
+			$\{ r_M \circ r_N \sqsubseteq r_K, r_M(e_1, e_3)\}$
+		\end{center}
+		
+		决断集模板$\mathcal{J}_p$为：
+		\begin{center}
+			$\{ r_M \circ r_N \sqsubseteq r_K, r_M(A, e_w), r_N(e_{w}, B)\}$
+		\end{center}
+		
+		观察值$\alpha$为：
+		\begin{center}
+			$r_K(e_1, e_2)$
+		\end{center}
+		
+		根绝决断集模板$\mathcal{J}_p$，我们可以得到$\mathcal{E} = {r_M(e_1, e_3), r_N(e_3, e_2)}$是一个对于观察值$r_K(e_1, e_2)$在$\mathcal{O}$中的可接受解释，因为存在一个差异化实例替换：
+		\begin{center}
+			$\theta = \{A \mapsto e_1, e_w \mapsto e_3, B \mapsto e_2\}$
+		\end{center}
+		满足$r_o(e_1,e_2) = r_o(X\theta,Y\theta)$，$\mathcal{E} \subseteq \mathcal{J}_p\theta$且$J_p\theta \in Jst(r_o(e_1,e_2), \mathcal{O} \cup \mathcal{E})$。
+		
+	\end{example}
+	
+	给定一个一致本体$\mathcal{O}$以及一个观察$\alpha$，其中$\mathcal{O} \not \models \alpha$，且$\mathcal{O} \cup \{\alpha\}$是一致的，那么本体的使用者更通常地会考虑以下三个特性：非平凡(i.e., $\mathcal{E} \not \models \alpha$)，一致(i.e. $\mathcal{O} \cup \mathcal{E}$是一致的)以及子集最小的(i.e., $\mathcal{O} \cup \not \models \alpha$ 对于所有的$\mathcal{E}' \subset \mathcal{E}$)。我们称满足以上三个条件的解释为合理解释。可以看出，在例子3.2中得到的解释$\mathcal{E} = \{r_M(e_1, e_3), r_N(e_3, e_2)\}$不是一个合理的解释。因为存在一个$\mathcal{E}$的子集$\mathcal{E}' = \{r_N(e_3, e_2\})$满足$r_o(e_1,e_2) = r_o(X\theta,Y\theta)$，$\mathcal{E}' \subseteq \mathcal{J}_p\theta$且$J_p\theta \in Jst(r_o(e_1,e_2), \mathcal{O} \cup \mathcal{E}')$。所以，我们结合以上条件定义如果一个可接受的解释满足非平凡，一致以及子集最小这三个条件，那么我们就称它为合理解释。
+	
+	\begin{example}
+		继续考虑例3.2，本体$\mathcal{O}$以及$\mathcal{O} \cup r_K(e_1, e_2)$也是一致的。正如前文提到的，$\mathcal{E}$并不是一个合理的解释，因为对于本体$\mathcal{O}$以及观察值$r_K(e_1, e_2)$，$\mathcal{E}$并不是一个最小集使得$r_o(e_1,e_2) = r_o(X\theta,Y\theta)$，$\mathcal{E} \subseteq \mathcal{J}_p\theta$且$J_p\theta \in Jst(r_o(e_1,e_2), \mathcal{O} \cup \mathcal{E})$。相对的，$\mathcal{E}' = \{r_N(e_3, e_2\})$是根据模板集合$\mathcal{P}$在本体$\mathcal{O}$中对观察值$\alpha$的一个合理解释，使得$\mathcal{E}' \not \models r_K(e_1, e_2)$，$\mathcal{O} \cup \mathcal{E}'$是一致的且对于所有的$\mathcal{E}''\subset \mathcal{E}'$不存在$\mathcal{O} \cup \mathcal{E}'' \models r_K(e_1, e_2)$。
+	\end{example}
+	
+	在本体的诊断中，由于解释需要遵循决断集模板，而且不存在$\mathcal{J}_p\theta \subset \mathcal{O}$的情况，因此并非所有的变量个体都会被映射到本体$\{\mathcal{O} \cup \alpha\}$的个体集合中。在本文中，我们称这些变量为解释变量。
+	由于解释变量的存在，如果想保证诊断的方法能够更加高效，一种考虑是只计算无法被其它解释通过实例化替换后得到的解释。然而解释变量的允许却会导致解释公理集合基数的变大甚至无法限制，考虑以下解释$r_o(A, A)$，这个解释可以由解释$\mathcal{E} = \{r_o(A, e_{x_1}), r_o(e_{x_2}, e_{x_3}), \cdots, r_o(e_{x_{n-1}}, e_n)\}$通过映射$\theta = \{e_{x_i} \mapsto A \mid 1 \leq i \leq n\}$获得。因此对于解释的替换，我们提出一个新的概念，叫做解释差异化替换。解释$\mathcal{E}$的差异化替换会可以把$\mathcal{E}$的解释变量映射到不同的解释变量或者是一个没有在$\mathcal{E}$中已经出现的变量。在前文提到的例子中，$\theta$并不是一个解释的差异化替换，因为$e_{x_i}$被映射到的变量$A$是解释$\mathcal{E}$中已经存在的个体实例，所以$\theta$不是解释的差异化替换。因此我们提出一个新的子集概念：
+	\begin{definition}[$\subseteq_\mathsf{ds}$-\emph{minimal} 解释)]
+    一个解释$\mathcal{E}$会被称为$\subseteq_\mathsf{ds}$-\emph{minimal} 如果这个$\mathcal{E}$满足以下条件：不存在这样一个解释$\mathcal{E}'$使得$\mathcal{E}'\subseteq_\mathsf{ds}\mathcal{E}$ 且$\mathcal{E}\not\subseteq_\mathsf{ds}\mathcal{E}'$，其中$\mathcal{E}'\subseteq_\mathsf{ds}\mathcal{E}$ 表示存在一个$\mathcal{E}'$的差异化替换$\theta$，使得$\mathcal{E}'\theta\subseteq\mathcal{E}$。
+	\end{definition}
+	
+	$\subseteq_\mathsf{ds}$-$\emph{minimal}$解释是一个比子集最小更强的概念，以下定理说明$\subseteq_\mathsf{ds}$-$\emph{minimal}$是子集最小的充分条件：
+	\begin{proposition}
+    一个对于观察值$\alpha$在本体$\mathcal{O}$中的$\subseteq_\mathsf{ds}$-$\emph{minimal}$ 解释$\mathcal{E}$同时也是一个$\emph{subset-minimal}$的解释。
+	\end{proposition}
+	
+	证明：对于所有的$\mathcal{E}' \subset \mathcal{E}$，我们有$\mathcal{E}'\subseteq_\mathsf{ds} \mathcal{E}$且$\mathcal{E}'\not\subseteq_\mathsf{ds} \mathcal{E}$。所以，如果不存在对于观察值$\alpha$在本体$\mathcal{O}$中的解释$\mathcal{E}'$使得$\mathcal{E}'\subseteq_\mathsf{ds} \mathcal{E}$且$\mathcal{E}'\not\subseteq_\mathsf{ds} \mathcal{E}$，那么也不会存在$\mathcal{E}' \subset \mathcal{E}$使得$\mathcal{O}\cup \mathcal{E}' \models \alpha$，所以命题成立。
+	
+	验证解释$\mathcal{E}$是否是$\subseteq_\mathsf{ds}$-$\emph{minimal}$不需要考虑解释$\mathcal{E}$的所有子集组合排列的情况。实际上我们只需要考虑$n$个更小的解释即可。这里的$n$等于$\mathcal{E}$中公理数的基数以及个体实例的总和。在介绍这两种方法之前，我们需要先介绍两种集合概念。一种是公理集$S$的最近变量集$lifts_1(S)$，最近变量集$lifts_1(S)$使用变量替换一个在$S$中已经存在的个体实例。例如：对于$S=\{r_o(A,B)\}$存在两个最近变量集分别是$\{r_o(e_{x},B)\}$和$\{A, r_o(e_{x})\}$。然后，我们定义一个最大真子集，最大真子集有且仅有$S$中的某一公理外的所有公理。我们把最大真子集记作$subs_1(S)$。以下命题展示了验证解释$\mathcal{E}$是否是一个$\subseteq_\mathsf{ds}$-$\emph{minimal}$解释的方法。
+	
+	\begin{proposition}
+		对于观察值$\alpha$在本体$\mathcal{O}$中的解释$\mathcal{E}$是一个$\subseteq_\mathsf{ds}$-$\emph{minimal}$解释当且仅当$\mathcal{E}$满足以下条件：$\mathcal{O} \cup \mathcal{E}' \not \models \alpha$对于所有的$\mathcal{E}' \in subs_1(\mathcal{E}) \cup lifts_1(\mathcal{E})$。
+	\end{proposition}
+\section{RDFS构建框架}
+
+通过对本体学习以及RDFS相关的知识的研究，综合考虑到中文自然语言的特点、RDFS的表达方式以及本体的基本元素需要，设计出了一个基本的从中文自然语言文本构建基于RDFS本体模型的系统框架。
+
+\subsection{目标本体特性}
+要从中文自然语言文本中构建出准确的RDFS本体模型，该系统框架应该具有且不限于以下几点特征:
+
+(1)	能够以较高的精度完成中文的自然语言处理
+
+(2)	能从信息源中识别出领域概念
+
+(3)	能自动抽取出分类层次关系
+
+(4)	能抽取出概念之间的非分类关系
+
+基于以上几点，可以设计出系统主要流程为：读取输入信息源——自然语言处理——本体概念识别——概念以及关系抽取——元素转换——构建RDFS模型。
+\begin{figure}[htb]
+  \center
+  \includegraphics[width=0.95\textwidth]{img/3.jpg}\\
+  \caption{基于RDFS的本体学习框架}\label{fig:fulladder}
+\end{figure}
+
+\subsection{中文文本预处理}
+本文设计的系统框架的输入信息源为中文自然语言文本，为了进行术语识别以及该概念关系抽取的相关操作，需要对输入信息进行预处理，包括分词、语义角色标注、依存句法树生成等工作。	
+	目前国外的自然语言处理框架在完成自然语言处理的基本任务时能有较高的准确率，但是这些框架要么不支持中文，要么在中文环境中处理的准确率较低，影响系统的准确性。在国内目前也已经研发出面向中文的自然语言处理框架，其中已经发展得比较成熟的有哈尔滨工业大学的nlp 和复旦大学的nlp，这两者对中文自然语言的处理都有较高的准确率，鉴于哈尔滨工业大学nlp需要通过WebAPI的方式进行调用，而复旦大学的fnlp可以在本地以第三库的形式进行调用，在使用大规模文本作为信息输入源进行测试的时候会有相对较好的速度性能表现。所以本文选择使用由国内复旦大学研发的中文自然语言框架fnlp来进行中文文本的预处理工作。
+
+\subsection{本体概念的识别}
+术语是一种结合紧密的固定或半固定的词或短语，具有结合紧密型和语言完备性特点，进而，它还是一种具有很强的领域特征的词语，具有领域性\upcite{ol8}。在本体中，术语与概念在概念上是一致的，概念的自动提取是构建本体的重要工作之一\upcite{ol10}。
+	在目前的本体构建中，领域概念的抽取主要有两类方法，分别是基于统计的方法和基于语义处理的方法。语义处理通过对文档进行预处理，如分词、语义标注、语法树分析、依存结构生成、实体识别等，对信息源进行结构与模式分析，提取出术语。	通过语义分析抽取术语不需要大量的信息源，相对较少的计算量，但是语义分析的方法依赖于严格的语法结构，对于口语化的表达难以达到理想的效果，对输入信息源的质量有着较高的要求。而基于统计学的方法并没有这些限制，基于统计学的方法不需要输入的信息源严格遵循语法结构，能够比较容易地提取出未登录词。与之相对的，统计学的方法也有缺点。统计学的方法在抽取低频术语的时候容易遗漏，且统计学需要大量的输入信息源。
+    推荐度的计算主要基于统计学方法中的词频逆文档频率(term frequency–inverse document frequency)。TF.IDF用于对词语的区分能力进行计算，分数越高，意味着词语的区分能力越强，表达范围归入该领域的可能性就越大\upcite{ol11}。
+\begin{proposition}
+    词频逆文件频率的计算:
+\begin{eqnarray}
+    tf_{i,j}idf_{i} = \frac{n_{i,j}}{\sum_k n_{k,j}}\frac{|D|}{|{j:t_i \in d_j|}}
+\end{eqnarray}。
+\end{proposition}
+    词频逆文件频率对单位字词有较好的计算能力，但是在计算时难以对复合型短语进行计算。以“书画艺术”为例，经过自然语言处理之后，会被分词模块识别成“书画”和“艺术”两个词语，而“书画艺术”是在艺术领域里一个重要的术语。
+    在Dennis, B等人对术语的研究中，他们证明了术语在主要由名词和名词短语表达，在名词短语中，又以双词组合占多数\upcite{ol12}。
+\begin{definition}
+    以一个或者两个字词组成的有完整意义的短语，我们称为base-item。
+
+\end{definition}
+
+在中文中，通过对语料的文档人工处理，我们提取出三组典型的base-item的语义形式，[名词]，[形容词，名词]，[名词，名词]\upcite{ol12}。根据这三组语义形式，我们可以过滤出候选的术语集，包括字词和短语，然后再使用统计学方法进行筛选，具体步骤如下：
+
+\begin{itemize}
+ \item 对文档按照标点符号进行分句操作，对于非规则或者无符号文本部分，利用空格与换行等符号进行断句。
+ \item 利用fnlp对句子进行分词操作，并为每个字词标注词性。
+ \item 通过应用语义表达规则从字词集中提取出候选的术语。
+ \item 计算出候选术语的推荐度，制定阀值，筛选出最终的术语集。
+\end{itemize}
+
+\subsection{分类关系的抽取}
+概念之间的关系是本体构建中的重点。本体通过关系把各种概念连成一体，以此表达领域之中概念之间的联系。在本体中的关系主要有两类，分别是分类关系和非分类关系。这两类关系在文本中不管是体现的方法还是形式都不一样，因此对于这两种关系的提取需要使用不同的方法分别进行操作。
+系的方法主要是基于Hearst模式的抽取方法。Hearst模式是一种基于模式的信息抽取方法\upcite{ol13}\upcite{ol14}，它通过识别句子中的特定模式来抽取概念之间的关系。由于自然语言句式较多，表达方式多样，因此准确率较低。而且Hearst 模式是基于西文的，在中文上并不适用。中文的语法相较英文要复杂不少，从模式上进行信息抽取的难度较大，因此本文通过结合Wordnet的方法进行信息抽取。Wordnet中保存了与词原有上下位关系的词，通过查询中文Wordnet可以对领域概念之间的上下位关系进行验证。
+
+\subsection{非分类关系的抽取}
+非分类关系与分类关系不同，非分类关系可以相对容易的根据文本中进行提取。GOLF系统中对非分类关系的抽取采用的是关联规则的VCC(n)事务方法，VCC(n)事务方法假定：如果概念c1和c2间具有非分类关系v，当且仅当c1和c2 都出现在带有动词v的n个词内(即c1和c2都出现在动词v的周围)，可以用一个条件概率来表示动词和概念对之间的关联度。这种方法虽然可以从文本中提取出大部分的关系，但是缺点是会抽取出太多无意义的和错误的关系，这种情况在长难句中更加明显。考虑以下例子：
+		戴着帽子的老师在看书。			(1)
+	这是一个比较常见的句式，在VCC(n) 的提取方法中由于“帽子”与“书”都在动词“看”的附近，因此“帽子”与“书”的关系得分会比较高，而这种关系并不是我们需要的。
+    针对以上情况，本文选择利用语义分析的方法来提高关系抽取的准确度。在汉语中，谓语是表达两个概念之间关系的最直接和最主要的方式，而“主谓宾”则是汉语中最基本的句式，其中“主宾”相当于一个关系实例中的两个概念，主、谓、宾模式构成的三元组可以为领域关系的抽取提供强有力的参考\upcite{ol15}。 主谓宾的模式(subject, Verb, Object)类似于RDF 模型中的(Subject, Predicate, Object) 三元组，本文会使用RDF三元组的形式进行表达。
+	主谓宾的提取首先需要借助fnlp对句子进行自然语言预处理，生成依存句法树，依旧以句子(1)为例，生成该句子的语法生成树：
+\begin{figure}[htb]
+  \center
+  \includegraphics[width=0.95\textwidth]{img/4.jpg}\\
+  \caption{基于RDFS的本体学习框架}\label{fig:fulladder}
+\end{figure}
+从依存句法中提取主谓宾的算法如下：
+	输入：中文句子s。
+	输出：句子主谓宾结构
+	1.  遍历句子中的元素，找到HED词。
+	2. 提取出依存HED词的词集D。
+	3. 遍历D，找到与HED有SBV关系的词S，若无，返回空。
+	4. 继续遍历，找到与HED有VOB关系的词O，若无，返回空。
+	5. 返回(S, HED, O)组成的主谓宾三元组。
+
+\begin{algorithm}
+  \caption{SVO Extraction}
+  \KwIn{Dependency Tree $t$}
+  \KwOut{$svotriplet(r)$}
+
+  \For{each $word$ in tree $t$}
+  {
+    $res$ instance of svotriplet\;
+    \If{$word$ is HED}
+    {
+        $wordset$ = words depend on $word$\;
+        $res.HED$ = $word$\;
+        \For{each $w$ in $wordset$}
+        {
+            \If{relation between $w$ and $word$ is $SBV$}
+            {
+                $res.subject$ = $w$\;
+            }
+
+            \If{relation between $w$ and $word$ is $VOB$}
+            {
+                $res.object$ = $w$\;
+            }
+        }
+    }
+  }
+  return $res$\;
+\end{algorithm}
+
+对Fig 3.2中的句法树进行操作，分别找到与HED词“看”有SBV依存关系的“老师”与有VOB关系的“书”，可以提取出句子(1)的主谓宾结构三元组(老师, 看， 书)，而这就是我们需要的一条RDF关系实例。
+
+\subsection{基于RDFS的本体模型的构建}
+本体中的关系主要有是part-of，kind-of，instance-of和attribute-of\upcite{16}\upcite{17}。 这四个关系在RDFS中并没有具体指明两者之间的关系，但是我们可以在RDFS中找到表达方式与之相近的关系。在RDFS中，rdfs:type表示的是类与实例之间的关系，我们用来表示本体中instance-of的关系，同理，被用来表示概念之间的继承关系会映射到被用于表达父类与子类关系的rdfs:subClassos，而attribute-of则会使用RDF三元组中的property代替。至于part-of，由于RDFS中并无与之相近的表达，且part-of关系可以看做是attribute-of关系的细化，所以我们把part-of关系也映射到RDF三元组中的property来对其进行表达。最后的关系映射关系如图Fig 3.3：
+\begin{figure}[htb]
+  \center
+  \includegraphics[width=0.95\textwidth]{img/5.jpg}\\
+  \caption{基于RDFS的本体学习框架}\label{fig:fulladder}
+\end{figure}

@@ -1,0 +1,76 @@
+\IncMargin{1em}
+\begin{algorithm}
+  \SetKwData{Left}{left}\SetKwData{This}{this}\SetKwData{Up}{up}
+  \SetKwFunction{Union}{Union}\SetKwFunction{FindCompress}{FindCompress}
+  \SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+
+  \Input{多个~HDLP~的回答集集合，存储在~set$<$set$<$int$>>$~类型的变量~all$\_$models~中}
+  \Output{直接输出原输入逻辑程序最终的回答集}
+  \BlankLine
+
+    redundant$\_$models $\leftarrow \emptyset$ \tcp*[h]{定义~set$<$set$<$int$>>$~类型的变量，用于存储将要被抛弃的回答集}\\
+
+
+    \For{each answer set m$\_$1 in all$\_$models}
+    {
+      \For{each answer set m$\_$2 in all$\_$models}
+      {
+        \If%(\tcp*[h]{回答集~m$\_$2~里的文字全部出现在回答集~m$\_$1~里})
+        {m$\_$1$\neq$m$\_$2 and m$\_$2$~\subseteq$~m$\_$1}
+        {
+          redundant$\_$models $\leftarrow$ redundant$\_$models $\cup$ m$\_$1 \\
+          break \\ %\tcp*[h]{跳出最内层~for~循环} \\
+        }
+      }
+    }
+
+    \BlankLine
+    \tcc*[h]{输出原输入逻辑程序最终的回答集到屏幕}\\
+
+    \For{each answer set m in all$\_$models}
+    {
+      \If{m is not appear in redundant$\_$models}
+      {
+        print the answer set m onto screen \\
+      }
+    }
+
+%num $\leftarrow$ the number of rules in HEDLP \tcp*[h]{定义整型变量~num~，置初值为~HEDLP~中规则的数量}\\
+%    \For{$i = 1$ \KwTo $num$}
+%    {
+%        \tcc*[h]{定义整型变量~lit$\_$in$\_$head~，置初值为~HEDLP~第~i~个规则头部文字的个数}\\
+%        lit$\_$in$\_$head $\leftarrow$ the number of literals in the head of i-th rule \\
+%
+%
+%        \For{$j = 1$ \KwTo $lit\_in\_head$}
+%        {
+%            r $\leftarrow \emptyset$ \tcp*[h]{定义规则~r~，~r~即最终生成的~NLP~里面的一条规则} \\
+%
+%            \tcc*[h]{~r~头部的文字被置为当前第~i~个规则头部里的第~j~个文字}\\
+%            set the head of r by the literal of the j-th literal in head of i-th rule \\
+%
+%            %\tcc*[h]{~r~体部的正文字被置为当前第~i~个规则体部里的全部正文字}\\
+%            set the positive body of r by the positive body of i-th rule \\
+%
+%            %\tcc*[h]{~r~体部的负文字被置为当前第~i~个规则体部里的全部负文字}\\
+%            set the negative body of r by the negative body of i-th rule \\
+%
+%            \BlankLine
+%            \tcc*[h]{每一个新产生的规则，其体部的负文字部分都不相同} \\
+%            \For{$k = 1$ \KwTo $lit\_in\_head$}
+%            {
+%              \If{j$\neq$k}
+%              {
+%                \tcc*[h]{将当前第~i~个规则头部里的第~k~个文字加入~r~体部的负文字部分}\\
+%                add the k-th literal in head of i-th rule to the negative body of r \\
+%              }
+%            }
+%            \BlankLine
+%            \tcc*[h]{至此，已经正确生成一条~NLP~的规则} \\
+%            asp$\_$rule $\leftarrow$ asp$\_$rule $\cup$ r \tcp*[h]{将规则~r~存入数据结构~asp$\_$rule~中}\\
+%        }
+%    }
+
+
+  \caption{筛选求得的多个~HDLP~的回答集}\label{minimal:models}
+\end{algorithm}\DecMargin{1em} 

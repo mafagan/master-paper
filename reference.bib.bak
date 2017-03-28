@@ -1,0 +1,1166 @@
+%begin:   added by dannylin
+@Book{MaZ2004,
+        author= {马小平 and 朱小燕},
+        title=  {人工智能},
+        year=   {2004},
+        publisher = {清华大学出版社},
+        address=    {北京},
+        pages = {}
+    }
+
+@InProceedings{McCarthy58,
+        author = "John McCarthy",
+        title = "Programs with Common Sense",
+        booktitle = "Mechanisation of Thought Processes, Proceedings of the
+        Symposium of the National Physics Laboratory",
+        year = "1958",
+        pages = "77--84",
+        publisher = "Her Majesty's Stationery Office",
+        address = "London, U.K.",
+}
+
+@book{McCarthyHayes69,
+  title={Some philosophical problems from the standpoint of artificial intelligence},
+  author={McCarthy, John and Hayes, Patrick},
+  year={1968},
+  publisher={Stanford University}
+}
+
+@ARTICLE{Minsky1975,
+        author      = {M.Minsky},
+        title       = {A Framework for Representing Knowledge},
+        journal     = {P.Winston,editor, The Psych of computer vision, McGraw-Hill,NY},
+        year        = {1975},
+        address     = {},
+        month       = {Aug.},
+        volume      = {},
+        pages       = {},
+}
+
+
+@PHDTHESIS{WanH2006,
+  AUTHOR =       {万海},
+  TITLE =        {基于回答集语义复杂信息系统软件需求模型的研究},
+  SCHOOL =       {中山大学},
+  YEAR =         {2006},
+  month =        {Jun.},
+}
+
+@Book{Lu2002,
+        author= {陆钟万},
+        title=  {面向计算机科学的数理逻辑},
+        year=   {2002},
+        publisher = {科学出版社},
+        address=    {北京},
+        pages = {}
+    }
+
+@article{reiter1980,
+        title={A logic for default reasoning},
+        author={Reiter, Raymond},
+        journal={Artificial intelligence},
+        volume={13},
+        number={1},
+        pages={81--132},
+        year={1980},
+        publisher={Elsevier}
+}
+
+@article{hanks1987,
+  title={Nonmonotonic logic and temporal projection},
+  author={Hanks, Steve and McDermott, Drew},
+  journal={Artificial intelligence},
+  volume={33},
+  number={3},
+  pages={379--412},
+  year={1987},
+  publisher={Elsevier}
+}
+
+@article{moore1985,
+  title={Semantical considerations on nonmonotonic logic},
+  author={Moore, Robert C},
+  journal={Artificial intelligence},
+  volume={25},
+  number={1},
+  pages={75--94},
+  year={1985},
+  publisher={Elsevier}
+}
+
+@article{mccarthy1980,
+  title={Circumscription—a form of non-monotonic reasoning},
+  author={McCarthy, John},
+  journal={Artificial intelligence},
+  volume={13},
+  number={1},
+  pages={27--39},
+  year={1980},
+  publisher={Elsevier}
+}
+
+@article{mccarthy1986,
+  title={Applications of circumscription to formalizing common-sense knowledge},
+  author={McCarthy, John},
+  journal={Artificial Intelligence},
+  volume={28},
+  number={1},
+  pages={89--116},
+  year={1986},
+  publisher={Elsevier}
+}
+
+@article{robinson1965,
+  title={A machine-oriented logic based on the resolution principle},
+  author={Robinson, John Alan},
+  journal={Journal of the ACM (JACM)},
+  volume={12},
+  number={1},
+  pages={23--41},
+  year={1965},
+  publisher={ACM}
+}
+
+@book{kowalski1973,
+  title={Predicate logic as programming language},
+  author={Kowalski, Robert},
+  year={1973},
+  publisher={Edinburgh University}
+}
+
+@article{colmerauer1973,
+  title={Un systeme de communication homme-machine en francais},
+  author={Colmerauer, Alain and Kanoui, Henri and Pasero, Robert and Roussel, Philippe},
+  journal={Rapport preliminaire, Groupe de Res. en Intell. Artif},
+  year={1973}
+}
+
+@article{kowalski1979,
+  title={Algorithm = logic + control},
+  author={Kowalski, Robert},
+  journal={Communications of the ACM},
+  volume={22},
+  number={7},
+  pages={424--436},
+  year={1979},
+  publisher={ACM}
+}
+
+@book{lloyd1984,
+  title={Foundations of logic programming},
+  author={Lloyd, John Wylie},
+  volume={2},
+  year={1984},
+  publisher={Springer-verlag Berlin}
+}
+
+%@article{lloyd1987,
+%  title={Foundations of logic programming},
+%  author={Lloyd, John Wylie},
+%  year={1987},
+%  publisher={Springer-Verlag New York Inc., New York, NY}
+%}
+
+@inproceedings{minker1982,
+  title={On indefinite databases and the closed world assumption},
+  author={Minker, Jack},
+  booktitle={6th Conference on Automated Deduction},
+  pages={292--308},
+  year={1982},
+  organization={Springer}
+}
+
+@article{clark1978,
+  title={Negation as failure},
+  author={Clark, Keith L},
+  journal={Logic and data bases},
+  volume={1},
+  pages={293--322},
+  year={1978}
+}
+
+@book{reiter1977,
+  title={On closed world data bases},
+  author={Reiter, Raymond},
+  year={1978},
+  publisher={Springer}
+}
+
+@inproceedings{gelfond1988,
+  title={The stable model semantics for logic programming},
+  author={Gelfond, Michael and Lifschitz, Vladimir},
+  booktitle={Proceedings of the 5th International Conference on Logic programming},
+  volume={161},
+  year={1988}
+}
+
+@article{van1991,
+  title={The well-founded semantics for general logic programs},
+  author={Van Gelder, Allen and Ross, Kenneth A and Schlipf, John S},
+  journal={Journal of the ACM (JACM)},
+  volume={38},
+  number={3},
+  pages={619--649},
+  year={1991},
+  publisher={ACM}
+}
+
+@article{gelfond1991,
+  title={Classical negation in logic programs and disjunctive databases},
+  author={Gelfond, Michael and Lifschitz, Vladimir},
+  journal={New generation computing},
+  volume={9},
+  number={3},
+  pages={365--385},
+  year={1991},
+  publisher={Springer}
+}
+
+@PHDTHESIS{Zhang2011,
+  AUTHOR =       {章衡},
+  TITLE =        {非单调逻辑的可判定性与可译性},
+  SCHOOL =       {清华大学},
+  YEAR =         {2011},
+  month =        {Jun.},
+}
+
+@article{lin2004,
+  title={ASSAT: Computing answer sets of a logic program by SAT solvers},
+  author={Lin, Fangzhen and Zhao, Yuting},
+  journal={Artificial Intelligence},
+  volume={157},
+  number={1},
+  pages={115--137},
+  year={2004},
+  publisher={Elsevier}
+}
+
+
+@PHDTHESIS{Ji2011,
+  AUTHOR =       {吉建民},
+  TITLE =        {提高~ASP~效率的若干途径及服务机器人上应用},
+  SCHOOL =       {中国科学技术大学},
+  YEAR =         {2010},
+  month =        {March.},
+}
+
+@inproceedings{drescher2008,
+  title={Conflict-driven disjunctive answer set solving},
+  author={Drescher, Christian and Gebser, Martin and Grote, Torsten and Kaufmann, Benjamin and K{\"o}nig, Arne and Ostrowski, Max and Schaub, Torsten},
+  booktitle={Proceedings of the Eleventh International Conference on Principles of Knowledge Representation and Reasoning (KR’08)},
+  pages={422--432},
+  year={2008},
+  organization={AAAI Press}
+}
+
+@article{leone2006,
+  title={The DLV system for knowledge representation and reasoning},
+  author={Leone, Nicola and Pfeifer, Gerald and Faber, Wolfgang and Eiter, Thomas and Gottlob, Georg and Perri, Simona and Scarcello, Francesco},
+  journal={ACM Transactions on Computational Logic (TOCL)},
+  volume={7},
+  number={3},
+  pages={499--562},
+  year={2006},
+  publisher={ACM}
+}
+
+@article{janhunen2006,
+  title={Unfolding partiality and disjunctions in stable model semantics},
+  author={Janhunen, Tomi and Niemel{\"a}, Ilkka and Seipel, Dietmar and Simons, Patrik and You, Jia-Huai},
+  journal={ACM Transactions on Computational Logic (TOCL)},
+  volume={7},
+  number={1},
+  pages={1--37},
+  year={2006},
+  publisher={ACM}
+}
+
+@article{lifschitz2002,
+  title={Answer set programming and plan generation},
+  author={Lifschitz, Vladimir},
+  journal={Artificial Intelligence},
+  volume={138},
+  number={1},
+  pages={39--54},
+  year={2002},
+  publisher={Elsevier}
+}
+
+@article{nogueira2001,
+  title={An A-Prolog decision support system for the Space Shuttle},
+  author={Nogueira, Monica and Balduccini, Marcello and Gelfond, Michael and Watson, Richard and Barry, Matthew},
+  journal={Practical Aspects of Declarative Languages},
+  pages={169--183},
+  year={2001},
+  publisher={Springer}
+}
+
+
+@article{balduccini2001,
+  title={The USA-Advisor: A case study in answer set planning},
+  author={Balduccini, Marcello and Gelfond, Micchael and Watson, Richard and Nogueira, Monica},
+  journal={Logic Programming and Nonmotonic Reasoning},
+  pages={439--442},
+  year={2001},
+  publisher={Springer}
+}
+
+@article{soininen1998,
+  title={Developing a declarative rule language for applications in product configuration},
+  author={Soininen, Timo and Niemel{\"a}, Ilkka},
+  journal={Practical Aspects of Declarative Languages},
+  pages={305--319},
+  year={1998},
+  publisher={Springer}
+}
+
+@article{baral2004,
+  title={A knowledge based approach for representing and reasoning about signaling networks},
+  author={Baral, Chitta and Chancellor, Karen and Tran, Nam and Tran, NL and Joy, Anna and Berens, Michael},
+  journal={Bioinformatics},
+  volume={20},
+  number={suppl 1},
+  pages={i15--i22},
+  year={2004},
+  publisher={Oxford Univ Press}
+}
+
+@article{brooks2005,
+  title={Character-based cladistics and answer set programming},
+  author={Brooks, Daniel and Erdem, Esra and Minett, James and Ringe, Donald},
+  journal={Practical Aspects of Declarative Languages},
+  pages={37--51},
+  year={2005},
+  publisher={Springer}
+}
+
+@article{ben1994,
+  title={Propositional semantics for disjunctive logic programs},
+  author={Ben-Eliyahu, Rachel and Dechter, Rina},
+  journal={Annals of Mathematics and Artificial intelligence},
+  volume={12},
+  number={1},
+  pages={53--87},
+  year={1994},
+  publisher={Springer}
+}
+
+@book{ebbinghaus1994,
+  title={Mathematical logic},
+  author={Ebbinghaus, H-D and Flum, J{\"o}rg and Thomas, Wolfgang},
+  year={1994},
+  publisher={Springer}
+}
+
+@book{enderton2001,
+  title={A mathematical introduction to logic},
+  author={Enderton, Herbert and Enderton, Herbert B},
+  year={2001},
+  publisher={Academic press}
+}
+
+@article{eiter2009,
+  title={Answer set programming: A primer},
+  author={Eiter, Thomas and Ianni, Giovambattista and Krennwallner, Thomas},
+  journal={Reasoning Web. Semantic Technologies for Information Systems},
+  pages={40--110},
+  year={2009},
+  publisher={Springer}
+}
+
+@article{lifschitz1996,
+  title={Foundations of logic programming},
+  author={Lifschitz, Vladimir},
+  journal={Principles of knowledge representation},
+  volume={3},
+  pages={69--127},
+  year={1996}
+}
+
+@book{cutland1980,
+  title={Computability: An introduction to recursive function theory},
+  author={Cutland, Nigel},
+  year={1980},
+  publisher={Cambridge University Press}
+}
+
+@article{dix1996,
+  title={Reducing disjunctive to non-disjunctive semantics by shift-operations},
+  author={Dix, J{\"u}rgen and Gottlob, Georg and Marek, Wiktor},
+  journal={Fundamenta Informaticae},
+  volume={28},
+  number={1},
+  pages={87--100},
+  year={1996},
+  publisher={IOS Press}
+}
+
+@book{cormen2001,
+  title={Introduction to algorithms},
+  author={Cormen, Thomas H and Leiserson, Charles E and Rivest, Ronald L and Stein, Clifford},
+  year={2001},
+  publisher={MIT press}
+}
+
+@book{papadimitriou2003,
+  title={Computational complexity},
+  author={Papadimitriou, Christos H},
+  year={2003},
+  publisher={John Wiley and Sons Ltd.}
+}
+
+@article{marek1989,
+  title={Stable theories in autoepistemic logic},
+  author={Marek, W},
+  journal={Fundamenta Informaticae},
+  volume={12},
+  number={2},
+  pages={243--254},
+  year={1989}
+}
+
+@techreport{moore1984,
+  title={Possible-world semantics for autoepistemic logic},
+  author={Moore, Robert C},
+  year={1984},
+  institution={DTIC Document}
+}
+
+@article{eiter1995,
+  title={On the computational cost of disjunctive logic programming: Propositional case},
+  author={Eiter, Thomas and Gottlob, Georg},
+  journal={Annals of Mathematics and Artificial Intelligence},
+  volume={15},
+  number={3-4},
+  pages={289--323},
+  year={1995},
+  publisher={Springer}
+}
+
+@article{przymusinski1991,
+  title={Stable semantics for disjunctive programs},
+  author={Przymusinski, Teodor C},
+  journal={New generation computing},
+  volume={9},
+  number={3-4},
+  pages={401--424},
+  year={1991},
+  publisher={Springer}
+}
+
+@article{marek1991,
+  title={Autoepistemic logic},
+  author={Marek, Wiktor and Truszczy{\'n}ski, Miros{\l}aw},
+  journal={Journal of the ACM (JACM)},
+  volume={38},
+  number={3},
+  pages={587--618},
+  year={1991},
+  publisher={ACM}
+}
+
+@article{bidoit1991,
+  title={Negation by default and unstratifiable logic programs},
+  author={Bidoit, Nicole and Froidevaux, Christine},
+  journal={Theoretical Computer Science},
+  volume={78},
+  number={1},
+  pages={85--112},
+  year={1991},
+  publisher={Elsevier}
+}
+
+@inproceedings{marek1991computing,
+  title={Computing intersection of autoepistemic expansions},
+  author={Marek, Wiktor and Truszczynski, Miroslaw},
+  booktitle={Proceedings of the 1st International Workshop on Logic Programming and Non-monotonic Reasoning},
+  pages={37--50},
+  year={1991},
+  organization={TheMIT Press}
+}
+
+@book{van2008,
+  title={Handbook of knowledge representation},
+  author={Van Harmelen, Frank and Lifschitz, Vladimir and Porter, Bruce},
+  volume={1},
+  year={2008},
+  publisher={Elsevier Science}
+}
+
+@article{wangyisong2009,
+  title={带函数的正规逻辑程序设计系统},
+  author={王以松 and 魏昆鹏},
+  journal={贵州大学学报},
+  volume={2},
+  pages={019},
+  year={2009}
+}
+
+@article{chenwu2008,
+  title={一种基于逻辑程序的重复协商框架},
+  author={陈武 and 张明义},
+  journal={计算机科学},
+  volume={35},
+  pages={5},
+  year={2008}
+}
+
+@article{zhangmingsheng2009,
+  title={基于逻辑程序的柔性授权框架},
+  author={张明生 and 陈武},
+  journal={通信学报},
+  volume={1},
+  year={2009}
+}
+
+@article{shenyidong1997,
+  title={析取逻辑及析取逻辑程序的语义研究},
+  author={沈一栋},
+  journal={中国科学: E 辑},
+  volume={27},
+  number={2},
+  pages={187--192},
+  year={1997}
+}
+
+@article{gelfond1991disjunctive,
+  title={Disjunctive defaults},
+  author={Gelfond, Michael and Lifschitz, Vladimir and Przymusinska, Halina and Truszczynski, Miroslaw},
+  journal={Proc. KR},
+  volume={91},
+  pages={230--237},
+  year={1991},
+  publisher={Citeseer}
+}
+
+@inproceedings{schaerf1993,
+  title={Negation and minimality in non-Horn databases},
+  author={Schaerf, Marco},
+  booktitle={Proceedings of the twelfth ACM SIGACT-SIGMOD-SIGART symposium on Principles of database systems},
+  pages={147--157},
+  year={1993},
+  organization={ACM}
+}
+
+@article{schaerf1995,
+  title={Negation and minimality in disjunctive databases},
+  author={Schaerf, Marco},
+  journal={The Journal of logic programming},
+  volume={23},
+  number={1},
+  pages={63--86},
+  year={1995},
+  publisher={Elsevier}
+}
+
+@incollection{lee2003loop,
+  title={Loop formulas for disjunctive logic programs},
+  author={Lee, Joohyung and Lifschitz, Vladimir},
+  booktitle={Logic Programming},
+  pages={451--465},
+  year={2003},
+  publisher={Springer}
+}
+
+%****************************************
+%end:   added by dannylin
+%****************************************
+
+%%pks with sensing
+%@InProceedings{PB02bk,
+%  author =    "R. P. A. Petrick and F. Bacchus",
+%  title =     "A Knowledge-Based Approach to Planning with
+%               Incomplete Information and Sensing",
+%  pages =     "212--221",
+%  booktitle = "Proc. of the Sixth International Conference on
+%               Artificial Intelligence Planning and Scheduling ({AIPS}-2002)",
+%  year =      "2002"
+%}
+%@inproceedings{PB02,
+%  author    = {Ronald P. A. Petrick and
+%               Fahiem Bacchus},
+%  title     = {A Knowledge-Based Approach to Planning with Incomplete Information
+%               and Sensing},
+%  booktitle = {Proceedings of the Sixth International Conference on Artificial
+%               Intelligence Planning Systems (AIPS-2002)},
+%  year      = {2002},
+%  pages     = {212-222},
+%  crossref  = {DBLP:conf/aips/2002},
+%  bibsource = {DBLP, http://dblp.uni-trier.de}
+%}
+%
+%
+%%SL
+%@InProceedings{LLL04bk,
+%  title =        "A Logic of Limited Belief for Reasoning
+%                  with Disjunctive Information",
+%  author =       "Y. Liu and G. Lakemeyer and H. J. Levesque",
+%  booktitle =    "Proc. KR-04",
+%  pages =        "587--597",
+%  year =         "2004"
+%}
+%@inproceedings{LLL04,
+%  author    = {Yongmei Liu and
+%               Gerhard Lakemeyer and
+%               Hector J. Levesque},
+%  title     = {A Logic of Limited Belief for Reasoning with Disjunctive
+%               Information},
+%  booktitle = {Principles of Knowledge Representation and Reasoning: Proceedings
+%               of the Ninth International Conference (KR-2004)},
+%  year      = {2004},
+%  pages     = {587-597},
+%  crossref  = {DBLP:conf/kr/2004},
+%  bibsource = {DBLP, http://dblp.uni-trier.de}
+%}
+%
+%
+%@inproceedings{Lev96,
+%  author    = {H. J. Levesque},
+%  title     = {What Is Planning in the Presence of Sensing?},
+%  booktitle = {AAAI},
+%  year      = {1996},
+%  pages     = {1139-1146}
+%}
+%
+%
+%%progression for local-effect in proper+ kb
+%@InProceedings{LL09bk,
+%  title =        "On First-Order Definability and Computability of Progression for
+%Local-Effect Actions and Beyond",
+%  author =       "Y. Liu and G. Lakemeyer",
+%  booktitle =    "Proc. IJCAI-09",
+%  year =         "2009"
+%}
+%@inproceedings{LL09,
+%  author    = {Yongmei Liu and
+%               Gerhard Lakemeyer},
+%  title     = {On First-Order Definability and Computability of Progression
+%               for Local-Effect Actions and Beyond},
+%  booktitle = {Proceedings of the 21st International Joint
+%               Conference on Artificial Intelligence (IJCAI-2009)},
+%  year      = {2009},
+%  pages     = {860-866},
+%  ee        = {http://ijcai.org/papers09/Papers/IJCAI09-147.pdf},
+%  crossref  = {DBLP:conf/ijcai/2009},
+%  bibsource = {DBLP, http://dblp.uni-trier.de}
+%}
+%
+%
+%
+%@InCollection{MH69,
+%  author =       "J. McCarthy and P. J. Hayes",
+%  booktitle =    "Machine Intelligence 4",
+%  title =        "Some philosophical problems from the standpoint of
+%                  artificial intelligence",
+%  publisher =    "Edinburgh University Press",
+%  year =         "1969",
+%  editor =       "B. Meltzer and D. Michie",
+%  pages =        "463--502"
+%}
+%
+%
+%%sGolog
+%@InCollection{Lak99,
+%  author =       "G. Lakemeyer",
+%  title =        "On sensing and off-line interpreting in {Golog}",
+%  booktitle =    "Logical Foundations for Cognitive Agents, Contributions in Honor of {Ray Reiter}",
+%  year =         "1999"
+%}
+%
+%%ConGolog
+%@article{GLL00bk,
+%  author    = {G. {De Giacomo} and
+%               Y. Lesp{\'e}rance and
+%               H. J. Levesque},
+%  title     = {ConGolog, a concurrent programming language based on the
+%               situation calculus},
+%  journal   = {Artif. Intell.},
+%  volume    = {121},
+%  number    = {1-2},
+%  year      = {2000},
+%  pages     = {109-169}
+%}
+%@article{GLL00,
+%  author    = {Giuseppe De Giacomo and
+%               Yves Lesp{\'e}rance and
+%               Hector J. Levesque},
+%  title     = {ConGolog, a concurrent programming language based on the
+%               situation calculus},
+%  journal   = {Artificial Intelligence},
+%  volume    = {121},
+%  number    = {1-2},
+%  year      = {2000},
+%  pages     = {109-169},
+%  ee        = {http://dx.doi.org/10.1016/S0004-3702(00)00031-X},
+%  bibsource = {DBLP, http://dblp.uni-trier.de}
+%}
+%
+%
+%%knowledge in action
+%@Book{Rei01,
+%  author =       "R. Reiter",
+%  title =        "Knowledge in Action: Logical Foundations for
+%                  Specifying and Implementing Dynamical Systems",
+%  year =         "2001",
+%  publisher =    "MIT Press",
+%  address =      "London",
+%  pages =        "19-145"
+%}
+%
+%@article{Rei01bk,
+%  author    = {Simon Parsons},
+%  title     = {Knowledge in action: Logical foundations for specifying
+%               and implementing dynamical systems by Raymond Reiter, MIT
+%               Press, 0-262-18218-1, 448 pp},
+%  journal   = {Knowledge Eng. Review},
+%  volume    = {20},
+%  number    = {4},
+%  year      = {2005},
+%  pages     = {431-432},
+%  ee        = {http://dx.doi.org/10.1017/S0269888906210749},
+%  bibsource = {DBLP, http://dblp.uni-trier.de}
+%}
+%
+%
+%
+%%knowledge-based Golog
+%@article{Rei01abk,
+%  author    = {R. Reiter},
+%  title     = {On knowledge-based programming with sensing in the situation
+%               calculus},
+%  journal   = {ACM Trans. Comput. Log.},
+%  volume    = {2},
+%  number    = {4},
+%  year      = {2001},
+%  pages     = {433-457}
+%}
+%@article{Rei01a,
+%  author    = {Raymond Reiter},
+%  title     = {On knowledge-based programming with sensing in the situation
+%               calculus},
+%  journal   = {ACM Transactions on Computational Logic},
+%  volume    = {2},
+%  number    = {4},
+%  year      = {2001},
+%  pages     = {433-457},
+%  ee        = {http://doi.acm.org/10.1145/502166.502167},
+%  bibsource = {DBLP, http://dblp.uni-trier.de}
+%}
+%
+%
+%
+%%Golog
+%@Article{LRL97bk,
+%  author =       "H.J. Levesque and R. Reiter and Y. Lesp\'{e}rance
+%                  and F. Lin and R. Scherl",
+%  title =        "Golog: A Logic Programming Language for Dynamic Domains",
+%  journal =      "J. of Logic Programming",
+%  volume =       "31",
+%  pages =        {59--84},
+%  year =         "1997"
+%}
+%@article{LRL97,
+%  author    = {Hector J. Levesque and
+%               Raymond Reiter and
+%               Yves Lesp{\'e}rance and
+%               Fangzhen Lin and
+%               Richard B. Scherl},
+%  title     = {GOLOG: A Logic Programming Language for Dynamic Domains},
+%  journal   = {Journal of Logic Programming},
+%  volume    = {31},
+%  number    = {1-3},
+%  year      = {1997},
+%  pages     = {59-83},
+%  ee        = {http://dx.doi.org/10.1016/S0743-1066(96)00121-5},
+%  bibsource = {DBLP, http://dblp.uni-trier.de}
+%}
+%
+%
+%
+%
+%%DCK planning
+%@inproceedings{BFM07bk,
+%  author    = {J. A. Baier and
+%               C. Fritz and
+%               S. A. McIlraith},
+%  title     = {Exploiting Procedural Domain Control Knowledge in State-of-the-Art
+%               Planners},
+%  booktitle = {ICAPS},
+%  year      = {2007},
+%  pages     = {26-33}
+%}
+%@inproceedings{BFM07,
+%  author    = {Jorge A. Baier and
+%               Christian Fritz and
+%               Sheila A. McIlraith},
+%  title     = {Exploiting Procedural Domain Control Knowledge in State-of-the-Art
+%               Planners},
+%  booktitle = {Proceedings of the Seventeenth International Conference
+%               on Automated Planning and Scheduling (ICAPS-2007)},
+%  year      = {2007},
+%  pages     = {26-33},
+%  crossref  = {DBLP:conf/aips/2007},
+%  bibsource = {DBLP, http://dblp.uni-trier.de}
+%}
+%
+%
+%
+%%IndiGolog
+%@article{GLS01bk,
+%  author    = {G. {De Giacomo} and
+%               H. J. Levesque and
+%               S. Sardi{\~n}a},
+%  title     = {Incremental execution of guarded theories},
+%  journal   = {ACM Trans. Comput. Log.},
+%  volume    = {2},
+%  number    = {4},
+%  year      = {2001},
+%  pages     = {495-525}
+%}
+%@article{GLS01,
+%  author    = {Giuseppe De Giacomo and
+%               Hector J. Levesque and
+%               Sebastian Sardi{\~n}a},
+%  title     = {Incremental execution of guarded theories},
+%  journal   = {ACM Transactions on Computational Logic},
+%  volume    = {2},
+%  number    = {4},
+%  year      = {2001},
+%  pages     = {495-525},
+%  ee        = {http://doi.acm.org/10.1145/502166.502169},
+%  bibsource = {DBLP, http://dblp.uni-trier.de}
+%}
+%
+%
+%
+%
+%%SL-based Golog
+%@conference {CL09bk,
+%	author = {J. Cla{\ss}en and G. Lakemeyer},
+%	title = {Tractable First-Order Golog with Disjunctive Knowledge Bases},
+%	booktitle = {Proceedings of the Ninth International Symposium on Logical Formalizations of Commonsense Reasoning (Commonsense 2009)},
+%	year = {2009}
+%}
+%@inproceedings{CL09,
+%  title = {Tractable First-Order Golog with Disjunctive Knowledge Bases},
+%  author = {Jens Cla{\ss}en and Gerhard Lakemeyer},
+%  booktitle = {Proceedings of the Ninth International Symposium on
+%                  Logical Formalizations of Commonsense Reasoning
+%                  (Commonsense 2009)},
+%  year = {2009},
+%  pages = {27--33}
+%}
+%
+%
+%
+%%progression for local-effect
+%@InProceedings{VLL08bk,
+%  title =        "First-order strong progression for local-effect basic action theories",
+%  author =       "S. Vassos and
+%                  G. Lakemeyer and
+%                  H. J. Levesque",
+%  booktitle =    "Proc. KR-08",
+%  year =         "2008"
+%}
+%@inproceedings{VLL08,
+%  author    = {Stavros Vassos and
+%               Gerhard Lakemeyer and
+%               Hector J. Levesque},
+%  title     = {First-Order Strong Progression for Local-Effect Basic Action
+%               Theories},
+%  booktitle = {Principles of Knowledge Representation and Reasoning: Proceedings
+%               of the Eleventh International Conference (KR-2008)},
+%  year      = {2008},
+%  pages     = {662-672},
+%  crossref  = {DBLP:conf/kr/2008},
+%  bibsource = {DBLP, http://dblp.uni-trier.de}
+%}
+%
+%
+%
+%%not first-order definable
+%@INPROCEEDINGS{VL08bk,
+%    author = {S. Vassos and H. J. Levesque},
+%    title = {On the progression of situation calculus basic action theories: Resolving a 10-year-old conjecture},
+%    booktitle = {Proc. AAAI08},
+%    year = {2008}
+%}
+%@inproceedings{VL08,
+%  author    = {Stavros Vassos and
+%               Hector J. Levesque},
+%  title     = {On the Progression of Situation Calculus Basic Action Theories:
+%               Resolving a 10-year-old Conjecture},
+%  booktitle = {Proceedings of the Twenty-Third AAAI Conference on Artificial
+%               Intelligence (AAAI-2008)},
+%  year      = {2008},
+%  pages     = {1004-1009},
+%  crossref  = {DBLP:conf/aaai/2008},
+%  bibsource = {DBLP, http://dblp.uni-trier.de}
+%}
+%
+%
+%
+%%proper kb
+%@INPROCEEDINGS{L98bk,
+%    author = {H. J. Levesque},
+%    title = {A completeness result for reasoning with incomplete first-order knowledge bases},
+%    booktitle = {Proc. of KR-98},
+%    year = {1998},
+%    pages = {14--23}
+%}
+%@inproceedings{L98,
+%  author    = {Hector J. Levesque},
+%  title     = {A Completeness Result for Reasoning with Incomplete First-Order
+%               Knowledge Bases},
+%  booktitle = {Principles of Knowledge Representation and Reasoning: Proceedings
+%               of the Fifth International Conference (KR-1998)},
+%  year      = {1998},
+%  pages     = {14-23},
+%  bibsource = {DBLP, http://dblp.uni-trier.de}
+%}
+%
+%
+%
+%%proper+ kb
+%@INPROCEEDINGS{LL02bk,
+%    author = {G. Lakemeyer and H. J. Levesque},
+%    title = {Evaluation-Based Reasoning with Disjunctive Information in First-Order Knowledge Bases},
+%    booktitle = {Proc. of KR-02},
+%    year = {2002},
+%    pages = {73--81}
+%}
+%@inproceedings{LL02,
+%  author    = {Gerhard Lakemeyer},
+%  title     = {Evaluation-Based Reasoning with Disjunctive Information
+%               in First-Order Knowledge Bases},
+%  booktitle = {Proceedings of the Eights International Conference on Principles
+%               and Knowledge Representation and Reasoning (KR-2002)},
+%  year      = {2002},
+%  pages     = {73-81},
+%  crossref  = {DBLP:conf/kr/2002},
+%  bibsource = {DBLP, http://dblp.uni-trier.de}
+%}
+%
+%
+%
+%%ff
+%@ARTICLE{HN01bk,
+%    author = {J. Hoffmann and B. Nebel},
+%    title = {The {FF} planning system: Fast plan generation through heuristic search},
+%    journal = {Journal of Artificial Intelligence Research},
+%    year = {2001},
+%    volume = {14},
+%    pages = {2001}
+%}
+%@article{HN01,
+%  author    = {J{\"o}rg Hoffmann and
+%               Bernhard Nebel},
+%  title     = {The FF Planning System: Fast Plan Generation Through Heuristic
+%               Search},
+%  journal   = {Journal of Artificial Intelligence Research (JAIR)},
+%  volume    = {14},
+%  year      = {2001},
+%  pages     = {253-302},
+%  ee        = {http://dx.doi.org/10.1613/jair.855},
+%  bibsource = {DBLP, http://dblp.uni-trier.de}
+%}
+%
+%
+%
+%
+%
+%%conformant ff
+%@MISC{HB06bk,
+%    author = {J. Hoffmann and R. I. Brafman},
+%    title = {Conformant planning via heuristic forward search: A new approach },
+%    year = {2006}
+%}
+%@inproceedings{HB04,
+%  author    = {Ronen I. Brafman and
+%               J{\"o}rg Hoffmann},
+%  title     = {Conformant Planning via Heuristic Forward Search: A New
+%               Approach},
+%  booktitle = {Proceedings of the Fourteenth International Conference on
+%               Automated Planning and Scheduling (ICAPS-2004)},
+%  year      = {2004},
+%  pages     = {355-364},
+%  crossref  = {DBLP:conf/aips/2004},
+%  bibsource = {DBLP, http://dblp.uni-trier.de}
+%}
+%
+%
+%
+%%contingent ff
+%@INPROCEEDINGS{Hof05bk,
+%    author = {J. Hoffmann},
+%    title = {Contingent planning via heuristic forward search with implicit belief states},
+%    booktitle = {Proceedings of ICAPS’05},
+%    year = {2005},
+%    pages = {71-80},
+%    publisher = {AAAI}
+%}
+%@INPROCEEDINGS{Hof05,
+%    author = {J. Hoffmann},
+%    title = {Contingent planning via heuristic forward search with implicit belief states},
+%    booktitle = {Proceedings of the Fifteenth International Conference on
+%               Automated Planning and Scheduling (ICAPS-2005)},
+%    year = {2005},
+%    pages = {71-80},
+%    publisher = {AAAI}
+%}
+%
+%
+%%planning and golog
+%@INPROCEEDINGS{CELN07bk,
+%    author = {J. Cla{\ss}en and P. Eyerich and G. Lakemeyer and B. Nebel},
+%    title = {Towards an integration of Golog and planning},
+%    booktitle = {IJCAI-07},
+%    year = {2007}
+%}
+%@inproceedings{CELN07,
+%  author    = {Jens Cla{\ss}en and
+%               Patrick Eyerich and
+%               Gerhard Lakemeyer and
+%               Bernhard Nebel},
+%  title     = {Towards an Integration of Golog and Planning},
+%  booktitle = {Proceedings of the 20th International Joint
+%               Conference on Artificial Intelligence (IJCAI-2007)},
+%  year      = {2007},
+%  pages     = {1846-1851},
+%  ee        = {http://dli.iiit.ac.in/ijcai/IJCAI-2007/PDF/IJCAI07-298.pdf},
+%  crossref  = {DBLP:conf/ijcai/2007},
+%  bibsource = {DBLP, http://dblp.uni-trier.de}
+%}
+%
+%
+%
+%%es
+%@MISC{LL04bk,
+%    author = {G. Lakemeyer and H. J. Levesque},
+%    title = {Situations, si! Situation terms, no!},
+%    year = {2004}
+%}
+%@inproceedings{LL04,
+%  author    = {Gerhard Lakemeyer and
+%               Hector J. Levesque},
+%  title     = {Situations, Si! Situation Terms, No!},
+%  booktitle = {Principles of Knowledge Representation and Reasoning: Proceedings
+%               of the Ninth International Conference (KR-2004)},
+%  year      = {2004},
+%  pages     = {516-526},
+%  crossref  = {DBLP:conf/kr/2004},
+%  bibsource = {DBLP, http://dblp.uni-trier.de}
+%}
+%
+%
+%
+%%progression definition
+%@ARTICLE{LR97bk,
+%    author = {F. Lin and R. Reiter},
+%    title = {How to Progress a Database},
+%    journal = {Artificial Intelligence},
+%    year = {1997},
+%    volume = {92},
+%    pages = {131-167}
+%}
+%@article{LR97,
+%  author    = {Fangzhen Lin and
+%               Raymond Reiter},
+%  title     = {How to Progress a Database},
+%  journal   = {Artificial Intelligence},
+%  volume    = {92},
+%  number    = {1-2},
+%  year      = {1997},
+%  pages     = {131-167},
+%  ee        = {http://dx.doi.org/10.1016/S0004-3702(96)00044-6},
+%  bibsource = {DBLP, http://dblp.uni-trier.de}
+%}
+%
+%
+%
+%@ARTICLE{Fan12,
+%    author = {范懿},
+%    title = {基于知识的~\golog~的一阶解释器的查询和演进：理论与实现},
+%    journal = {中山大学硕士学位论文},
+%    year = {2012}
+%}
+%
+%%sensing action
+%@inproceedings{L96bk,
+%  author    = {H. J. Levesque},
+%  title     = {What Is Planning in the Presence of Sensing?},
+%  booktitle = {AAAI/IAAI, Vol. 2},
+%  year      = {1996},
+%  pages     = {1139-1146},
+%}
+%@inproceedings{L96,
+%  author    = {Hector J. Levesque},
+%  title     = {What Is Planning in the Presence of Sensing?},
+%  booktitle = {Proceedings of the Thirteenth National Conference on Artificial
+%               Intelligence and Eighth Innovative Applications of Artificial
+%               Intelligence Conference (AAAI/IAAI-1996), Vol. 2},
+%  year      = {1996},
+%  pages     = {1139-1146},
+%  crossref  = {DBLP:conf/aaai/1996-2},
+%  bibsource = {DBLP, http://dblp.uni-trier.de}
+%}
+%
+%
+%
+%
+%%forgetting
+%@INPROCEEDINGS{LR94,
+%    author = {F. Lin and R. Reiter},
+%    title = {Forget It!},
+%    booktitle = {In Proceedings of the AAAI Fall Symposium on Relevance},
+%    year = {1994},
+%    pages = {154-159}
+%}
+%
+%%IndiGolog with conditional plan
+%@inproceedings{S01bk,
+%  author    = {S. Sardi{\~n}a},
+%  title     = {Local Conditional High-Level Robot Programs},
+%  booktitle = {LPAR},
+%  year      = {2001},
+%  pages     = {110-124}
+%}
+%@inproceedings{S01,
+%  author    = {Sebastian Sardi{\~n}a},
+%  title     = {Local Conditional High-Level Robot Programs},
+%  booktitle = {Logic for Programming, Artificial Intelligence, and Reasoning,
+%               8th International Conference (LPAR-2001)},
+%  year      = {2001},
+%  pages     = {110-124},
+%  ee        = {http://dx.doi.org/10.1007/3-540-45653-8_8},
+%  crossref  = {DBLP:conf/lpar/2001},
+%  bibsource = {DBLP, http://dblp.uni-trier.de}
+%}
+%
+%
+%
+%%automata theory
+%@book{HU79,
+%  author    = {John E. Hopcroft and
+%               Jeffrey D. Ullman},
+%  title     = {Introduction to Automata Theory, Languages and Computation},
+%  address   = {New York},
+%  publisher = {Addison-Wesley},
+%  year      = {1979},
+%  pages     = {22-33},
+%  isbn      = {0-201-02988-X},
+%  bibsource = {DBLP, http://dblp.uni-trier.de}
+%}
+%
+%
+%
+%%lbgolog
+%@inproceedings{FCLL12,
+%  author    = {Yi Fan and Minghui Cai and Naiqi Li and Yongmei Liu},
+%  title     = {A First-Order Interpreter for Knowledge-based {Golog} with Sensing
+%               based on Exact Progression and Limited Reasoning},
+%  booktitle = {Proceedings of the Twenty-Sixth AAAI Conference on Artificial
+%               Intelligence (AAAI-2012)},
+%  year      = {2012},
+%  pages     = {Accepted}
+%}

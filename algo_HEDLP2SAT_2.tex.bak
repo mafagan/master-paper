@@ -1,0 +1,87 @@
+\IncMargin{1em}
+\begin{algorithm}
+  \SetKwData{Left}{left}\SetKwData{This}{this}\SetKwData{Up}{up}
+  \SetKwFunction{Union}{Union}\SetKwFunction{FindCompress}{FindCompress}
+  \SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+
+  \Input{存储命题公式~$\Phi$~的字符串类型变量~s~，~$\Phi$~具有形式~$(P1_1\wedge \ldots \wedge P1_m) \vee (P2_1\wedge \ldots \wedge P2_n) \vee \ldots \vee (Pi_1\wedge \ldots \wedge Pi_k)$~，其中~$Pa_b$~均为命题原子，~$1\leq a \leq i,1 \leq b \leq max\{m,n,\ldots,k\}$~}
+  \Output{与~$\Phi$~等值的~CNF~~$\Phi^{cnf}$~，存储在~cnf$\_$formula~类型的变量~rescnf~中}
+  \BlankLine
+
+    v$\_$str $\leftarrow \emptyset$    \tcp*[h]{定义~vector$<$string$>$~类型的变量~v$\_$str~}\\
+    \tcc*[h]{以~$\vee$~为分隔符将~s~分成~i~段字符串存进~v$\_$str~}\\
+    divide s by the connection $\vee$ into i strings,stored them into v$\_$str \\
+
+    vec $\leftarrow \emptyset$  \tcp*[h]{定义~vector$<$cnf$\_$formula$>$~类型的变量vec}\\
+    \For{each formula str in v$\_$str}
+    {
+      cf $\leftarrow \emptyset$  \tcp*[h]{定义~cnf$\_$formula~类型的变量cf}\\
+      switch the formula str from string to cnf$\_$formula cf \\
+
+      vec $\leftarrow$ vec $\cup$ cf \\
+    }
+
+    rescnf $\leftarrow$ vec[0] \\
+    num $\leftarrow$ vec.size  \tcp*[h]{获得~vec~中待合并的~CNF~公式的个数}\\
+
+    \For{$i = 1$ \KwTo $num$}
+    {
+      \tcc*[h]{~rescnf~只有一个析取子句，且该析取子句只有一个文字} \\
+      \If{rescnf.size=1 and rescnf[0].size=1}
+      {
+        \For{each clause c in vec[i]}
+        {
+          add res[0][0] to c \\
+        }
+        rescnf $\leftarrow$ vec[i] \\
+        continue \\
+      }
+
+      generate a new variable Z$\_$i \tcp*[h]{引入一个新的辅助命题原子}\\
+      \For{each clause c in rescnf}
+      {
+        add $\neg$Z$\_$i to c  \\
+      }
+      \For{each clause c in vec[i]}
+      {
+        add Z$\_$i to c \\
+        rescnf $\leftarrow$ rescnf $\cup$ c \tcp*[h]{将公式 vec[i] 中的每一个析取子句~c~都合并到~res~中}\\
+      }
+    }
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+   % v$\_$str $\leftarrow \emptyset$    \tcp*[h]{定义~vector$<$string$>$~类型的变量~v$\_$str~}\\
+%    \tcc*[h]{以~$\vee$~为分隔符将~s~分成~i~段字符串存进~v$\_$str~}\\
+%    divide s by the connection $\vee$ into i strings,stored them into v$\_$str \\
+%
+%    vec $\leftarrow \emptyset$  \tcp*[h]{定义~vector$<$cnf$\_$formula$>$~类型的变量vec}\\
+%    \For{each formula str in v$\_$str}
+%    {
+%      cf $\leftarrow \emptyset$  \tcp*[h]{定义~cnf$\_$formula~类型的变量cf}\\
+%      switch the formula str from string to cnf$\_$formula cf \\
+%
+%      vec $\leftarrow$ vec $\cup$ cf \\
+%    }
+%
+%    rescnf $\leftarrow$ vec[0] \\
+%    num $\leftarrow$ vec.size  \tcp*[h]{获得~vec~中待合并的~CNF~公式的个数}\\
+%
+%    \For{$i = 1$ \KwTo $num$}
+%    {
+%      generate a new variable Z$\_$i \tcp*[h]{引入一个新的辅助命题原子}\\
+%      \For{each clause c in rescnf}
+%      {
+%        add $\neg$Z$\_$i to c  \\
+%      }
+%      \For{each clause c in vec[i]}
+%      {
+%        add Z$\_$i to c \\
+%        rescnf $\leftarrow$ rescnf $\cup$ c \tcp*[h]{将公式 vec[i] 中的每一个析取子句~c~都合并到~res~中}\\
+%      }
+%    }
+
+
+
+
+  \caption{将命题公式~$\Phi$~转成等值~CNF~~$\Phi^{cnf}$~的核心算法部分}\label{toCNF}
+\end{algorithm}\DecMargin{1em} 

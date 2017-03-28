@@ -1,0 +1,72 @@
+\documentclass{article}
+\usepackage {amssymb}
+\begin{document}
+
+Given a planning instance $I_\delta$ from Sheila's algorithm, we construct an NFA $M = (Q,A,\Delta,q_0,F)$ as follows:
+\begin{enumerate}
+  \item $Q$ is the set of state objects $S_0,\ldots,S_n$ mentioned in $I_\delta$, plus $S_f$;
+  \item $A$ is the set of operator names in $I_\delta$, plus $end$;
+  \item $\Delta$ is the transition between state objects defined by operator description, plus $\Delta(S_n,end)=\{S_f\}$;
+  \item $q_0$ is $S_0$;
+  \item $F$ is $\{S_f\}$.
+\end{enumerate}
+
+As above, we know that $A$ contains primitive actions and some auxiliary actions like
+$noop$, $test$, $free$ and $end$. Here we mark $NT$ the subset of $A$, as it contains
+all the $noop$ and $test$ actions.
+
+From the given transition $\Delta(s,a)={s'}$ for states $s$ and $s'$ and action $a$,
+we can define the transition for states set $R$ and action sequence $\vec{c}$ as classical automaton as follows:
+\begin{enumerate}
+  \item $\Delta(R,a)=\bigcup_{s\in R}\Delta(s,a)$;
+  \item $\Delta(R,\vec{c}\cdot a)=\Delta(\Delta(R,\vec{c}),a)$.
+\end{enumerate}
+
+So we say an action sequence $\vec{c}$ is accepted by $M$, if $S_f\in\Delta(S_0,\vec{c})$.
+\\
+
+Now we construct an NFA $M'=(Q',A,\Delta',q_0,F)$ from $M=(Q,A,\Delta,q_0,F)$ constructed form $I_\delta$, as follows:
+\begin{itemize}
+  \item $Q'=\{S_0\}\cup\bigcup_{s\in Q, a\in A-NT}\Delta(s,a)$;
+  \item
+  \begin{displaymath}
+    \Delta'(s,\vec{c}) = \left\{ \begin{array}{ll}
+        \Delta(s,\vec{c}) & \textrm{if $s\in Q'$ and $\vec{c}=\vec{nt}\cdot a$, where $\vec{nt}\in NT^*$ and $a\in A-NT$}\\
+        \emptyset & \textrm{else}
+    \end{array} \right.
+\end{displaymath}
+\end{itemize}
+
+We want to demonstrate the equivalence of the two NFA $M$ and $M'$:
+an action sequence $\vec{c}$ is accepted by $M'$, iff $\vec{c}$ is accepted by $M$.
+
+To prove the equivalence, we firstly prove that:
+for arbitrary $s\in Q'$ and $\vec{c}=\vec{nt}_1\cdot a_1\cdots \vec{nt}_m\cdot a_m$,
+where $\vec{nt}_i\in NT^*$ and $a_i\in A-NT$ for $1\leq i\leq m$, $\Delta'(s,\vec{c})=\Delta(s,\vec{c})$.
+
+Proof: we use structure induction to prove.
+
+(1) Base: consider $\vec{c}=\vec{nt}\cdot a$, then $\Delta'(s,\vec{c})=\Delta(s,\vec{c})$ from the definition.
+
+(2) Induction step: consider $\vec{c}=\vec{nt}_1\cdot a_1\cdots \vec{nt}_m\cdot a_m$, where $m>1$:
+
+$\Delta'(s,\vec{nt}_1\cdot a_1\cdots \vec{nt}_m\cdot a_m)$\\
+$=\Delta'(s,(\vec{nt}_1\cdot a_1\cdots \vec{nt}_{m-1}\cdot a_{m-1})\cdot\vec{nt}_m\cdot a_m)$\\
+$=\Delta'(\Delta'(s,\vec{nt}_1\cdot a_1\cdots \vec{nt}_{m-1}\cdot a_{m-1}),\vec{nt}_m\cdot a_m)$
+
+We mark $\Delta(s,\vec{nt}_1\cdot a_1\cdots \vec{nt}_{m-1}\cdot a_{m-1})$ as $P$ for short, and from inductive assumption, we have $\Delta'(s,\vec{nt}_1\cdot a_1\cdots \vec{nt}_{m-1}\cdot a_{m-1})=P$. Then we get:
+
+$\Delta'(s,\vec{nt}_1\cdot a_1\cdots \vec{nt}_m\cdot a_m)$\\
+$=\bigcup_{s'\in P}\Delta'(s',\vec{nt}_m\cdot a_m)$\\
+$=\bigcup_{s'\in P}\Delta(s',\vec{nt}_m\cdot a_m)$[from definition]\\
+$=\Delta(s,\vec{nt}_1\cdot a_1\cdots \vec{nt}_m\cdot a_m)$
+
+Therefore, the proof is done.$\blacksquare$
+
+And now the equivalence of $M$ and $M'$ is easy to demonstrate. As $end$ is always the final and only action to transit to $S_f$, every action sequence $\vec{c}$ accepted by $M$, i.e. $S_f\in\Delta(S_0,\vec{c})$, should
+be the form $\vec{nt}_1\cdot a_1\cdots \vec{nt}_m\cdot end$. Hence we know $\vec{c}$ is accepted by $M'$, as $\Delta'(S_0,\vec{c})=\Delta(S_0,\vec{c})$ contains $S_f$ too. Vice verse.
+
+Our improvement is to combine the action sequence $\vec{nt}\cdot a$ into an action $a'$, of which the name is as the same as $a$'s; and precondition is the conjunctions of the preconditions of $nt_i(1\leq i\leq k)$ and $a$, with state function restrict updated from $M'$; and effects are the union of the effects of $nt_i$ and $a$, also with state function updated from $M'$; and lastly the parameters should be the union of the ones of $nt_i$ and $a$. And we mark the new planning instance transformed from $I_\delta$ as $I_\delta'$.
+
+As we know that NFAs $M$ and $M'$ are equivalence, we conclude that the plans for $I_\delta$ and $I_\delta'$, filtering the actions in $NT$, would be exact the same.
+\end{document}

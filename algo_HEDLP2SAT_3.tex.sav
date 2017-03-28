@@ -1,0 +1,23 @@
+\IncMargin{1em}
+\begin{algorithm}
+  \SetKwData{Left}{left}\SetKwData{This}{this}\SetKwData{Up}{up}
+  \SetKwFunction{Union}{Union}\SetKwFunction{FindCompress}{FindCompress}
+  \SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+
+  \Input{     多个~HEDLP~，存储在~vector$< $vector$<$Rule$*>>$~类型的变量~vec$\_$nHEDLP~中}
+  \Output{     多个~HEDLP~的回答集集合，存储在~set$<$set$<$int$>>$~类型的变量~all$\_$models~中}
+  \BlankLine
+
+
+    定义整型变量~num~，置初值为~vec$\_$nHEDLP~的元素个数； \\
+    \For{$i = 1$ \KwTo $num$}
+    {
+      定义~vector$<$set$<$int$>>$~类型的临时变量~tmp~；\\
+      调用~Module 1~模块求解~vec$\_$nHEDLP~中第~i~个~HEDLP~的回答集；\\
+
+      获取第~i~个~HEDLP~求解后的一个或者多个回答集，存入~tmp~中；\\
+      将~tmp~里的每一个回答集存入数据结构~all$\_$models~中；\\
+    }
+
+  \caption{求解多个~HEDLP~的回答集}\label{call minisat solver 1}
+\end{algorithm}\DecMargin{1em} 

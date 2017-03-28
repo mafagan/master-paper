@@ -1,0 +1,1385 @@
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2017.1.21)  28 MAR 2017 17:02
+entering extended mode
+**C:/Users/Margo/Documents/毕业论文/latex-本/paper.tex
+(C:/Users/Margo/Documents/毕业论文/latex-本/paper.tex
+LaTeX2e <2011/06/27>
+Babel <v3.8m> and hyphenation patterns for loaded.
+("C:\Program Files (x86)\CTEX\MiKTeX\tex\latex\base\book.cls"
+Document Class: book 2007/10/19 v1.4h Standard LaTeX document class
+("C:\Program Files (x86)\CTEX\MiKTeX\tex\latex\base\bk12.clo"
+File: bk12.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@chapter=\count80
+\c@section=\count81
+\c@subsection=\count82
+\c@subsubsection=\count83
+\c@paragraph=\count84
+\c@subparagraph=\count85
+\c@figure=\count86
+\c@table=\count87
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+("C:\Program Files (x86)\CTEX\MiKTeX\tex\latex\tools\indentfirst.sty"
+Package: indentfirst 1995/11/23 v1.03 Indent first paragraph (DPC)
+)
+("C:\Program Files (x86)\CTEX\MiKTeX\tex\latex\geometry\geometry.sty"
+Package: geometry 2010/09/12 v5.6 Page Geometry
+
+("C:\Program Files (x86)\CTEX\MiKTeX\tex\latex\graphics\keyval.sty"
+Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
+\KV@toks@=\toks14
+)
+("C:\Program Files (x86)\CTEX\MiKTeX\tex\generic\oberdiek\ifpdf.sty"
+Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
+Package ifpdf Info: pdfTeX in PDF mode is detected.
+)
+("C:\Program Files (x86)\CTEX\MiKTeX\tex\generic\oberdiek\ifvtex.sty"
+Package: ifvtex 2010/03/01 v1.5 Switches for detecting VTeX and its modes (HO)
+Package ifvtex Info: VTeX not detected.
+)
+("C:\Program Files (x86)\CTEX\MiKTeX\tex\generic\ifxetex\ifxetex.sty"
+Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
+)
+\Gm@cnth=\count88
+\Gm@cntv=\count89
+\c@Gm@tempcnt=\count90
+\Gm@bindingoffset=\dimen103
+\Gm@wd@mp=\dimen104
+\Gm@odd@mp=\dimen105
+\Gm@even@mp=\dimen106
+\Gm@layoutwidth=\dimen107
+\Gm@layoutheight=\dimen108
+\Gm@layouthoffset=\dimen109
+\Gm@layoutvoffset=\dimen110
+\Gm@dimlist=\toks15
+
+("C:\Program Files (x86)\CTEX\MiKTeX\tex\latex\geometry\geometry.cfg"))
+("C:\Program Files (x86)\CTEX\MiKTeX\tex\latex\titlesec\titletoc.sty"
+Package: titletoc 2011/12/15 v1.6 TOC entries
+\ttl@leftsep=\dimen111
+)
+("C:\Program Files (x86)\CTEX\MiKTeX\tex\latex\cjk\CJK.sty"
+Package: CJK 2008/12/29 4.8.2
+
+("C:\Program Files (x86)\CTEX\MiKTeX\tex\latex\cjk\mule\MULEenc.sty"
+Package: MULEenc 2008/12/29 4.8.2
+)
+("C:\Program Files (x86)\CTEX\MiKTeX\tex\latex\cjk\CJK.enc"
+File: CJK.enc 2008/12/29 4.8.2
+)
+LaTeX Info: Redefining \selectfont on input line 756.
+\CJK@indent=\box26
+)
+("C:\Program Files (x86)\CTEX\MiKTeX\tex\latex\footmisc\footmisc.sty"
+Package: footmisc 2011/06/06 v5.5b a miscellany of footnote facilities
+\FN@temptoken=\toks16
+\footnotemargin=\dimen112
+\c@pp@next@reset=\count91
+\c@@fnserial=\count92
+Package footmisc Info: Declaring symbol style bringhurst on input line 855.
+Package footmisc Info: Declaring symbol style chicago on input line 863.
+Package footmisc Info: Declaring symbol style wiley on input line 872.
+Package footmisc Info: Declaring symbol style lamport-robust on input line 883.
+
+Package footmisc Info: Declaring symbol style lamport* on input line 903.
+Package footmisc Info: Declaring symbol style lamport*-robust on input line 924
+.
+)
+("C:\Program Files (x86)\CTEX\MiKTeX\tex\latex\type1cm\type1cm.sty"
+Package: type1cm 2002/09/05 v0.04 BlueSky/Y&Y Type1 CM font definitions (DPC, p
+atched RF)
+)
+("C:\Program Files (x86)\CTEX\MiKTeX\tex\latex\psnfss\palatino.sty"
+Package: palatino 2005/04/12 PSNFSS-v9.2a (SPQR) 
+)
+("C:\Program Files (x86)\CTEX\MiKTeX\tex\latex\listings\listings.sty"
+\lst@mode=\count93
+\lst@gtempboxa=\box27
+\lst@token=\toks17
+\lst@length=\count94
+\lst@currlwidth=\dimen113
+\lst@column=\count95
+\lst@pos=\count96
+\lst@lostspace=\dimen114
+\lst@width=\dimen115
+\lst@newlines=\count97
+\lst@lineno=\count98
+\lst@maxwidth=\dimen116
+
+("C:\Program Files (x86)\CTEX\MiKTeX\tex\latex\listings\lstmisc.sty"
+File: lstmisc.sty 2007/02/22 1.4 (Carsten Heinz)
+\c@lstnumber=\count99
+\lst@skipnumbers=\count100
+\lst@framebox=\box28
+)
+("C:\Program Files (x86)\CTEX\MiKTeX\tex\latex\listings\listings.cfg"
+File: listings.cfg 2007/02/22 1.4 listings configuration
+))
+Package: listings 2007/02/22 1.4 (Carsten Heinz)
+
+("C:\Program Files (x86)\CTEX\MiKTeX\tex\latex\ams\math\amsmath.sty"
+Package: amsmath 2000/07/18 v2.13 AMS math features
+\@mathmargin=\skip43
+
+For additional information on amsmath, use the `?' option.
+("C:\Program Files (x86)\CTEX\MiKTeX\tex\latex\ams\math\amstext.sty"
+Package: amstext 2000/06/29 v2.01
+
+("C:\Program Files (x86)\CTEX\MiKTeX\tex\latex\ams\math\amsgen.sty"
+File: amsgen.sty 1999/11/30 v2.0
+\@emptytoks=\toks18
+\ex@=\dimen117
+))
+("C:\Program Files (x86)\CTEX\MiKTeX\tex\latex\ams\math\amsbsy.sty"
+Package: amsbsy 1999/11/29 v1.2d
+\pmbraise@=\dimen118
+)
+("C:\Program Files (x86)\CTEX\MiKTeX\tex\latex\ams\math\amsopn.sty"
+Package: amsopn 1999/12/14 v2.01 operator names
+)
+\inf@bad=\count101
+LaTeX Info: Redefining \frac on input line 211.
+\uproot@=\count102
+\leftroot@=\count103
+LaTeX Info: Redefining \overline on input line 307.
+\classnum@=\count104
+\DOTSCASE@=\count105
+LaTeX Info: Redefining \ldots on input line 379.
+LaTeX Info: Redefining \dots on input line 382.
+LaTeX Info: Redefining \cdots on input line 467.
+\Mathstrutbox@=\box29
+\strutbox@=\box30
+\big@size=\dimen119
+LaTeX Font Info:    Redeclaring font encoding OML on input line 567.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 568.
+\macc@depth=\count106
+\c@MaxMatrixCols=\count107
+\dotsspace@=\muskip10
+\c@parentequation=\count108
+\dspbrk@lvl=\count109
+\tag@help=\toks19
+\row@=\count110
+\column@=\count111
+\maxfields@=\count112
+\andhelp@=\toks20
+\eqnshift@=\dimen120
+\alignsep@=\dimen121
+\tagshift@=\dimen122
+\tagwidth@=\dimen123
+\totwidth@=\dimen124
+\lineht@=\dimen125
+\@envbody=\toks21
+\multlinegap=\skip44
+\multlinetaggap=\skip45
+\mathdisplay@stack=\toks22
+LaTeX Info: Redefining \[ on input line 2666.
+LaTeX Info: Redefining \] on input line 2667.
+)
+("C:\Program Files (x86)\CTEX\MiKTeX\tex\latex\amsfonts\amssymb.sty"
+Package: amssymb 2009/06/22 v3.00
+
+("C:\Program Files (x86)\CTEX\MiKTeX\tex\latex\amsfonts\amsfonts.sty"
+Package: amsfonts 2009/06/22 v3.00 Basic AMSFonts support
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 96.
+))
+("C:\Program Files (x86)\CTEX\MiKTeX\tex\latex\wasysym\wasysym.sty"
+Package: wasysym 2003/10/30 v2.0 Wasy-2 symbol support package
+\symwasy=\mathgroup6
+LaTeX Font Info:    Overwriting symbol font `wasy' in version `bold'
+(Font)                  U/wasy/m/n --> U/wasy/b/n on input line 90.
+)
+("C:\Program Files (x86)\CTEX\MiKTeX\tex\latex\jknappen\mathrsfs.sty"
+Package: mathrsfs 1996/01/01 Math RSFS package v1.0 (jk)
+\symrsfs=\mathgroup7
+)
+("C:\Program Files (x86)\CTEX\MiKTeX\tex\latex\ntheorem\ntheorem.sty"
+Style `ntheorem', Version 1.31 <2011/02/16>
+Package: ntheorem 2011/02/16 1.31
+("C:\Program Files (x86)\CTEX\MiKTeX\tex\latex\base\ifthen.sty"
+Package: ifthen 2001/05/26 v1.1c Standard LaTeX ifthen package (DPC)
+)
+\theorem@style=\toks23
+\theorem@@style=\toks24
+\theorembodyfont=\toks25
+\theoremnumbering=\toks26
+\theorempreskipamount=\skip46
+\theorempostskipamount=\skip47
+\theoremframepreskipamount=\skip48
+\theoremframepostskipamount=\skip49
+\theoremindent=\dimen126
+\theorem@indent=\dimen127
+\theoremheaderfont=\toks27
+\theoremseparator=\toks28
+\theoremprework=\toks29
+\theorempostwork=\toks30
+\theoremsymbol=\toks31
+\qedsymbol=\toks32
+\theoremkeyword=\toks33
+\qedsymbol=\toks34
+\thm@topsepadd=\skip50
+Package ntheorem Info: Option `thmmarks' loaded on input line 1066.
+\c@endNonectr=\count113
+\c@currNonectr=\count114
+\mysavskip=\skip51
+Package ntheorem Info: option `amsmath' handling for `thmmarks' loaded on input
+ line 1066.
+\thm@amstmpdepth=\dimen128
+\tagwidth=\dimen129
+)
+("C:\Program Files (x86)\CTEX\MiKTeX\tex\latex\natbib\natbib.sty"
+Package: natbib 2010/09/13 8.31b (PWD, AO)
+\bibhang=\skip52
+\bibsep=\skip53
+LaTeX Info: Redefining \cite on input line 694.
+\c@NAT@ctr=\count115
+)
+("C:\Program Files (x86)\CTEX\MiKTeX\tex\latex\subfigure\subfigure.sty"
+Package: subfigure 2002/07/30 v2.1.4 subfigure package
+\subfigtopskip=\skip54
+\subfigcapskip=\skip55
+\subfigcaptopadj=\dimen130
+\subfigbottomskip=\skip56
+\subfigcapmargin=\dimen131
+\subfiglabelskip=\skip57
+\c@subfigure=\count116
+\c@lofdepth=\count117
+\c@subtable=\count118
+\c@lotdepth=\count119
+
+****************************************
+* Local config file subfigure.cfg used *
+****************************************
+("C:\Program Files (x86)\CTEX\MiKTeX\tex\latex\subfigure\subfigure.cfg")
+\subfig@top=\skip58
+\subfig@bottom=\skip59
+)
+("C:\Program Files (x86)\CTEX\MiKTeX\tex\latex\placeins\placeins.sty"
+Package: placeins 2005/04/18  v 2.2
+)
+("C:\Program Files (x86)\CTEX\MiKTeX\tex\latex\floatflt\floatflt.sty"
+Package: floatflt 1997/07/16 v. 1.31
+\c@OptionTest=\count120
+\figbox=\box31
+\tabbox=\box32
+\pagebox=\box33
+\ffigcount=\count121
+\ftabcount=\count122
+\fftest=\count123
+\hangcount=\count124
+\nosuccesstryfig=\count125
+\nosuccesstrytab=\count126
+\figgutter=\dimen132
+\tabgutter=\dimen133
+\htdone=\dimen134
+\pageht=\dimen135
+\startpageht=\dimen136
+\tabbredd=\dimen137
+\floatfltwidth=\dimen138
+\fltitemwidth=\dimen139
+\outputpretest=\toks35
+)
+("C:\Program Files (x86)\CTEX\MiKTeX\tex\latex\listings\lstlang1.sty"
+File: lstlang1.sty 2004/09/05 1.3 listings language file
+)
+("C:\Program Files (x86)\CTEX\MiKTeX\tex\latex\listings\lstlang1.sty"
+File: lstlang1.sty 2004/09/05 1.3 listings language file
+)
+("C:\Program Files (x86)\CTEX\MiKTeX\tex\latex\listings\lstmisc.sty"
+File: lstmisc.sty 2007/02/22 1.4 (Carsten Heinz)
+)
+("C:\Program Files (x86)\CTEX\MiKTeX\tex\latex\titlesec\titlesec.sty"
+Package: titlesec 2011/12/15 v2.10.0 Sectioning titles
+\ttl@box=\box34
+\beforetitleunit=\skip60
+\aftertitleunit=\skip61
+\ttl@plus=\dimen140
+\ttl@minus=\dimen141
+\ttl@toksa=\toks36
+\titlewidth=\dimen142
+\titlewidthlast=\dimen143
+\titlewidthfirst=\dimen144
+)
+("C:\Program Files (x86)\CTEX\MiKTeX\tex\latex\caption\caption2.sty"
+Package: caption2 2011/08/12 v2.2d Customising captions (AR)
+
+
+Package caption2 Warning: ****************************************************
+(caption2)                THIS PACKAGE IS OBSOLETE:
+(caption2)                This package attempts to provide an `caption2'
+(caption2)                package v2.0/2.1 author environment so that OLD
+(caption2)                documents can be successfully processed. It should
+(caption2)                NOT be used for NEW documents! New documents should
+(caption2)                use the regular `caption' package v3.x instead.
+(caption2)                ****************************************************
+
+("C:\Program Files (x86)\CTEX\MiKTeX\tex\latex\caption\caption3.sty"
+Package: caption3 2011/11/01 v1.4a caption3 kernel (AR)
+\captionmargin=\dimen145
+\captionmargin@=\dimen146
+\captionwidth=\dimen147
+\caption@indent=\dimen148
+\caption@parindent=\dimen149
+\caption@hangindent=\dimen150
+)
+Package caption2 Info: Running in caption2 v2.0 compatibility mode on input lin
+e 210.
+\captionlinewidth=\dimen151
+\realcaptionwidth=\dimen152
+Package caption2 Info: subfigure package v2.1 (or newer) detected on input line
+ 438.
+\subfigcapwidth=\dimen153
+\subcapindent=\dimen154
+)
+("C:\Program Files (x86)\CTEX\MiKTeX\tex\latex\tools\bm.sty"
+Package: bm 2004/02/26 v1.1c Bold Symbol Support (DPC/FMi)
+\symboldoperators=\mathgroup8
+\symboldletters=\mathgroup9
+\symboldsymbols=\mathgroup10
+\symboldwasy=\mathgroup11
+LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 138.
+LaTeX Info: Redefining \bm on input line 204.
+)
+("C:\Program Files (x86)\CTEX\MiKTeX\tex\latex\fancyhdr\fancyhdr.sty"
+\fancy@headwidth=\skip62
+\f@ncyO@elh=\skip63
+\f@ncyO@erh=\skip64
+\f@ncyO@olh=\skip65
+\f@ncyO@orh=\skip66
+\f@ncyO@elf=\skip67
+\f@ncyO@erf=\skip68
+\f@ncyO@olf=\skip69
+\f@ncyO@orf=\skip70
+)
+("C:\Program Files (x86)\CTEX\MiKTeX\tex\latex\cjk\standard.bdg"
+File: standard.bdg 2008/12/29 4.8.2
+)
+("C:\Program Files (x86)\CTEX\MiKTeX\tex\latex\cjk\extended.enc"
+File: extended.enc 2008/12/29 4.8.2
+)
+("C:\Program Files (x86)\CTEX\MiKTeX\tex\latex\cjk\extended.chr"
+File: extended.chr 2008/12/29 4.8.2
+)
+\c@currdefinitionctr=\count127
+\c@enddefinitionctr=\count128
+\c@definition=\count129
+\c@currpropositionctr=\count130
+\c@endpropositionctr=\count131
+\c@currlemmactr=\count132
+\c@endlemmactr=\count133
+\c@lemma=\count134
+\c@currtheoremctr=\count135
+\c@endtheoremctr=\count136
+\c@theorem=\count137
+\c@curraxiomctr=\count138
+\c@endaxiomctr=\count139
+\c@axiom=\count140
+\c@currcorollaryctr=\count141
+\c@endcorollaryctr=\count142
+\c@currexercisectr=\count143
+\c@endexercisectr=\count144
+\c@currexamplectr=\count145
+\c@endexamplectr=\count146
+\c@example=\count147
+\c@currproofctr=\count148
+\c@endproofctr=\count149
+\c@proof=\count150
+\CJKtwospaces=\skip71
+
+("C:\Program Files (x86)\CTEX\MiKTeX\tex\latex\graphics\graphicx.sty"
+Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
+
+("C:\Program Files (x86)\CTEX\MiKTeX\tex\latex\graphics\graphics.sty"
+Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
+
+("C:\Program Files (x86)\CTEX\MiKTeX\tex\latex\graphics\trig.sty"
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+)
+("C:\Program Files (x86)\CTEX\MiKTeX\tex\latex\00miktex\graphics.cfg"
+File: graphics.cfg 2007/01/18 v1.5 graphics configuration of teTeX/TeXLive
+)
+Package graphics Info: Driver file: pdftex.def on input line 91.
+
+("C:\Program Files (x86)\CTEX\MiKTeX\tex\latex\pdftex-def\pdftex.def"
+File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
+
+("C:\Program Files (x86)\CTEX\MiKTeX\tex\generic\oberdiek\infwarerr.sty"
+Package: infwarerr 2010/04/08 v1.3 Providing info/warning/message (HO)
+)
+("C:\Program Files (x86)\CTEX\MiKTeX\tex\generic\oberdiek\ltxcmds.sty"
+Package: ltxcmds 2011/04/18 v1.20 LaTeX kernel commands for general use (HO)
+)
+\Gread@gobject=\count151
+))
+\Gin@req@height=\dimen155
+\Gin@req@width=\dimen156
+)
+("C:\Program Files (x86)\CTEX\MiKTeX\tex\generic\thumbpdf\thumbpdf.sty"
+Package: thumbpdf 2011/08/10 v3.13 Inclusion of thumbnails (HO)
+
+
+Package thumbpdf Warning: Thumbnail data file `paper.tpt' not found.
+
+) ("C:\Program Files (x86)\CTEX\MiKTeX\tex\latex\hyperref\hyperref.sty"
+Package: hyperref 2012/02/06 v6.82o Hypertext links for LaTeX
+
+("C:\Program Files (x86)\CTEX\MiKTeX\tex\generic\oberdiek\hobsub-hyperref.sty"
+Package: hobsub-hyperref 2011/04/23 v1.4 Bundle oberdiek, subset hyperref (HO)
+
+("C:\Program Files (x86)\CTEX\MiKTeX\tex\generic\oberdiek\hobsub-generic.sty"
+Package: hobsub-generic 2011/04/23 v1.4 Bundle oberdiek, subset generic (HO)
+Package: hobsub 2011/04/23 v1.4 Subsetting bundle oberdiek (HO)
+Package hobsub Info: Skipping package `infwarerr' (already loaded).
+Package hobsub Info: Skipping package `ltxcmds' (already loaded).
+Package: ifluatex 2010/03/01 v1.3 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+Package hobsub Info: Skipping package `ifvtex' (already loaded).
+Package: intcalc 2007/09/27 v1.1 Expandable integer calculations (HO)
+Package hobsub Info: Skipping package `ifpdf' (already loaded).
+Package: etexcmds 2011/02/16 v1.5 Prefix for e-TeX command names (HO)
+Package etexcmds Info: Could not find \expanded.
+(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
+(etexcmds)             that some package has redefined \expanded.
+(etexcmds)             In the latter case, load this package earlier.
+Package: kvsetkeys 2011/04/07 v1.13 Key value parser (HO)
+Package: kvdefinekeys 2011/04/07 v1.3 Defining keys (HO)
+Package: pdftexcmds 2011/04/22 v0.16 Utilities of pdfTeX for LuaTeX (HO)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+Package: pdfescape 2011/04/04 v1.12 Provides string conversions (HO)
+Package: bigintcalc 2011/01/30 v1.2 Expandable big integer calculations (HO)
+Package: bitset 2011/01/30 v1.1 Data type bit set (HO)
+Package: uniquecounter 2011/01/30 v1.2 Provides unlimited unique counter (HO)
+)
+Package hobsub Info: Skipping package `hobsub' (already loaded).
+Package: letltxmacro 2010/09/02 v1.4 Let assignment for LaTeX macros (HO)
+Package: hopatch 2011/01/30 v1.0 Wrapper for package hooks (HO)
+Package: xcolor-patch 2011/01/30 xcolor patch
+Package: atveryend 2011/04/23 v1.7 Hooks at very end of document (HO)
+Package: atbegshi 2011/01/30 v1.15 At begin shipout hook (HO)
+Package: refcount 2010/12/01 v3.2 Data extraction from references (HO)
+Package: hycolor 2011/01/30 v1.7 Color options of hyperref/bookmark (HO)
+) ("C:\Program Files (x86)\CTEX\MiKTeX\tex\latex\oberdiek\kvoptions.sty"
+Package: kvoptions 2010/12/23 v3.10 Keyval support for LaTeX options (HO)
+)
+\@linkdim=\dimen157
+\Hy@linkcounter=\count152
+\Hy@pagecounter=\count153
+
+("C:\Program Files (x86)\CTEX\MiKTeX\tex\latex\hyperref\pd1enc.def"
+File: pd1enc.def 2012/02/06 v6.82o Hyperref: PDFDocEncoding definition (HO)
+)
+\Hy@SavedSpaceFactor=\count154
+
+("C:\Program Files (x86)\CTEX\MiKTeX\tex\latex\00miktex\hyperref.cfg"
+File: hyperref.cfg 2002/06/06 v1.2 hyperref configuration of TeXLive
+)
+Package hyperref Info: Option `colorlinks' set `false' on input line 3925.
+Package hyperref Info: Option `CJKbookmarks' set `true' on input line 3925.
+Package hyperref Info: Hyper figures OFF on input line 4046.
+Package hyperref Info: Link nesting OFF on input line 4051.
+Package hyperref Info: Hyper index ON on input line 4054.
+Package hyperref Info: Plain pages OFF on input line 4061.
+Package hyperref Info: Backreferencing OFF on input line 4066.
+Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
+Package hyperref Info: Bookmarks ON on input line 4284.
+\c@Hy@tempcnt=\count155
+
+("C:\Program Files (x86)\CTEX\MiKTeX\tex\latex\ltxmisc\url.sty"
+\Urlmuskip=\muskip11
+Package: url 2006/04/12  ver 3.3  Verb mode for urls, etc.
+)
+LaTeX Info: Redefining \url on input line 4637.
+\Fld@menulength=\count156
+\Field@Width=\dimen158
+\Fld@charsize=\dimen159
+Package hyperref Info: Hyper figures OFF on input line 5757.
+Package hyperref Info: Link nesting OFF on input line 5762.
+Package hyperref Info: Hyper index ON on input line 5765.
+Package hyperref Info: backreferencing OFF on input line 5772.
+Package hyperref Info: Link coloring OFF on input line 5777.
+Package hyperref Info: Link coloring with OCG OFF on input line 5782.
+Package hyperref Info: PDF/A mode OFF on input line 5787.
+LaTeX Info: Redefining \ref on input line 5827.
+LaTeX Info: Redefining \pageref on input line 5831.
+\Hy@abspage=\count157
+\c@Item=\count158
+\c@Hfootnote=\count159
+)
+
+Package hyperref Message: Driver: hpdftex.
+
+("C:\Program Files (x86)\CTEX\MiKTeX\tex\latex\hyperref\hpdftex.def"
+File: hpdftex.def 2012/02/06 v6.82o Hyperref driver for pdfTeX
+\Fld@listcount=\count160
+\c@bookmark@seq@number=\count161
+
+("C:\Program Files (x86)\CTEX\MiKTeX\tex\latex\oberdiek\rerunfilecheck.sty"
+Package: rerunfilecheck 2011/04/15 v1.7 Rerun checks for auxiliary files (HO)
+Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
+82.
+)
+\Hy@SectionHShift=\skip72
+)
+(C:\Users\Margo\Documents\毕业论文\latex-本\tweaklist.sty)
+("C:\Program Files (x86)\CTEX\CTeX\tex\latex\ccmap\ccmap.sty"
+Package: ccmap 2006/11/18
+\CCT@hooka@@=\toks37
+)
+("C:\Program Files (x86)\CTEX\MiKTeX\tex\latex\mdwtools\mdwtab.sty"
+Package: mdwtab 1998/04/28 1.9 Table typesetting with style
+\tab@state=\count162
+\tab@columns=\count163
+\tab@preamble=\toks38
+\tab@shortline=\toks39
+\extrarowheight=\dimen160
+\tabextrasep=\dimen161
+\arrayextrasep=\dimen162
+\smarraycolsep=\dimen163
+\smarrayextrasep=\dimen164
+\tab@width=\dimen165
+\col@sep=\dimen166
+\tab@endheight=\dimen167
+\tab@leftskip=\skip73
+\tab@rightskip=\skip74
+\fn@notes=\box35
+\fn@width=\dimen168
+)
+("C:\Program Files (x86)\CTEX\MiKTeX\tex\latex\base\makeidx.sty"
+Package: makeidx 2000/03/29 v1.0m Standard LaTeX package
+)
+("C:\Program Files (x86)\CTEX\MiKTeX\tex\latex\moreverb\moreverb.sty"
+Package: moreverb 2008/06/03 v2.3a `more' verbatim facilities
+
+("C:\Program Files (x86)\CTEX\MiKTeX\tex\latex\tools\verbatim.sty"
+Package: verbatim 2003/08/22 v1.5q LaTeX2e package for verbatim enhancements
+\every@verbatim=\toks40
+\verbatim@line=\toks41
+\verbatim@in@stream=\read1
+)
+\tab@position=\count164
+\tab@size=\count165
+\listing@line=\count166
+)
+("C:\Program Files (x86)\CTEX\MiKTeX\tex\latex\algorithm2e\algorithm2e.sty"
+Package: algorithm2e 2008/00/00 v3.10 algorithms environments
+\c@AlgoLine=\count167
+
+("C:\Program Files (x86)\CTEX\MiKTeX\tex\latex\tools\xspace.sty"
+Package: xspace 2009/10/20 v1.13 Space after command names (DPC,MH)
+)
+("C:\Program Files (x86)\CTEX\MiKTeX\tex\latex\ltxmisc\relsize.sty"
+Package: relsize 2003/07/04 ver 3.1
+)
+********************************************************
+Package `algorithm2e' Release 4.01 -- december 14 2009 --
+- algorithm2e-announce@lirmm.fr mailing list for announcement about releases
+- algorithm2e-discussion@lirmm.fr mailing list for discussion about package
+subscribe by emailing sympa@lirmm.fr with 'subscribe <list> <firstname name>'
+- Author: Christophe Fiorio (fiorio@lirmm.fr)
+********************************************************
+\skiptotal=\skip75
+\skiplinenumber=\skip76
+\skiprule=\skip77
+\skiphlne=\skip78
+\skiptext=\skip79
+\skiplength=\skip80
+\algomargin=\skip81
+\skipalgocfslide=\skip82
+\algowidth=\dimen169
+\inoutsize=\dimen170
+\inoutline=\dimen171
+\interspacetitleruled=\dimen172
+\interspacealgoruled=\dimen173
+\interspacetitleboxruled=\dimen174
+\algocf@inoutbox=\box36
+\algocf@inputbox=\box37
+\AlCapSkip=\skip83
+\AlCapHSkip=\skip84
+\algocf@nlbox=\box38
+\algocf@hangingbox=\box39
+\algocf@capbox=\box40
+\algoheightruledefault=\skip85
+\algoheightrule=\skip86
+\algotitleheightruledefault=\skip87
+\algotitleheightrule=\skip88
+\c@algocfline=\count168
+\c@algocfproc=\count169
+\c@algocf=\count170
+\algocf@algoframe=\box41
+\algocf@algobox=\box42
+) (C:\Users\Margo\Documents\毕业论文\latex-本\paper.aux
+(C:\Users\Margo\Documents\毕业论文\latex-本\abstract1.aux)
+(C:\Users\Margo\Documents\毕业论文\latex-本\abstract2.aux)
+(C:\Users\Margo\Documents\毕业论文\latex-本\chap1.aux)
+(C:\Users\Margo\Documents\毕业论文\latex-本\chap2.aux
+
+LaTeX Warning: Label `fig:fulladder' multiply defined.
+
+
+LaTeX Warning: Label `fig:fulladder' multiply defined.
+
+) (C:\Users\Margo\Documents\毕业论文\latex-本\chap3.aux
+
+LaTeX Warning: Label `fig:fulladder' multiply defined.
+
+
+LaTeX Warning: Label `fig:fulladder' multiply defined.
+
+
+LaTeX Warning: Label `fig:fulladder' multiply defined.
+
+) (C:\Users\Margo\Documents\毕业论文\latex-本\chap4.aux
+
+LaTeX Warning: Label `tab_environment' multiply defined.
+
+
+LaTeX Warning: Label `tab_environment' multiply defined.
+
+
+LaTeX Warning: Label `tab_environment' multiply defined.
+
+
+LaTeX Warning: Label `tab_environment' multiply defined.
+
+) (C:\Users\Margo\Documents\毕业论文\latex-本\chap5.aux)
+(C:\Users\Margo\Documents\毕业论文\latex-本\xiexie.aux)
+(C:\Users\Margo\Documents\毕业论文\latex-本\fulu.aux)
+(C:\Users\Margo\Documents\毕业论文\latex-本\ack.aux))
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 534.
+LaTeX Font Info:    ... okay on input line 534.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 534.
+LaTeX Font Info:    ... okay on input line 534.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 534.
+LaTeX Font Info:    ... okay on input line 534.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 534.
+LaTeX Font Info:    ... okay on input line 534.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 534.
+LaTeX Font Info:    ... okay on input line 534.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 534.
+LaTeX Font Info:    ... okay on input line 534.
+LaTeX Font Info:    Checking defaults for C00/song/m/n on input line 534.
+LaTeX Font Info:    ... okay on input line 534.
+LaTeX Font Info:    Checking defaults for C05/song/m/n on input line 534.
+LaTeX Font Info:    ... okay on input line 534.
+LaTeX Font Info:    Checking defaults for C09/song/m/n on input line 534.
+LaTeX Font Info:    ... okay on input line 534.
+LaTeX Font Info:    Checking defaults for C10/song/m/n on input line 534.
+LaTeX Font Info:    ... okay on input line 534.
+LaTeX Font Info:    Checking defaults for C20/song/m/n on input line 534.
+LaTeX Font Info:    ... okay on input line 534.
+LaTeX Font Info:    Checking defaults for C19/song/m/n on input line 534.
+LaTeX Font Info:    ... okay on input line 534.
+LaTeX Font Info:    Checking defaults for C40/song/m/n on input line 534.
+LaTeX Font Info:    ... okay on input line 534.
+LaTeX Font Info:    Checking defaults for C42/song/m/n on input line 534.
+LaTeX Font Info:    ... okay on input line 534.
+LaTeX Font Info:    Checking defaults for C43/song/m/n on input line 534.
+LaTeX Font Info:    ... okay on input line 534.
+LaTeX Font Info:    Checking defaults for C50/song/m/n on input line 534.
+LaTeX Font Info:    ... okay on input line 534.
+LaTeX Font Info:    Checking defaults for C52/song/m/n on input line 534.
+LaTeX Font Info:    ... okay on input line 534.
+LaTeX Font Info:    Checking defaults for C49/song/m/n on input line 534.
+LaTeX Font Info:    ... okay on input line 534.
+LaTeX Font Info:    Checking defaults for C60/mj/m/n on input line 534.
+LaTeX Font Info:    ... okay on input line 534.
+LaTeX Font Info:    Checking defaults for C61/mj/m/n on input line 534.
+LaTeX Font Info:    ... okay on input line 534.
+LaTeX Font Info:    Checking defaults for C63/mj/m/n on input line 534.
+LaTeX Font Info:    ... okay on input line 534.
+LaTeX Font Info:    Checking defaults for C64/mj/m/n on input line 534.
+LaTeX Font Info:    ... okay on input line 534.
+LaTeX Font Info:    Checking defaults for C65/mj/m/n on input line 534.
+LaTeX Font Info:    ... okay on input line 534.
+LaTeX Font Info:    Checking defaults for C70/song/m/n on input line 534.
+LaTeX Font Info:    ... okay on input line 534.
+LaTeX Font Info:    Checking defaults for C31/song/m/n on input line 534.
+LaTeX Font Info:    ... okay on input line 534.
+LaTeX Font Info:    Checking defaults for C32/song/m/n on input line 534.
+LaTeX Font Info:    ... okay on input line 534.
+LaTeX Font Info:    Checking defaults for C33/song/m/n on input line 534.
+LaTeX Font Info:    ... okay on input line 534.
+LaTeX Font Info:    Checking defaults for C34/song/m/n on input line 534.
+LaTeX Font Info:    ... okay on input line 534.
+LaTeX Font Info:    Checking defaults for C35/song/m/n on input line 534.
+LaTeX Font Info:    ... okay on input line 534.
+LaTeX Font Info:    Checking defaults for C36/song/m/n on input line 534.
+LaTeX Font Info:    ... okay on input line 534.
+LaTeX Font Info:    Checking defaults for C37/song/m/n on input line 534.
+LaTeX Font Info:    ... okay on input line 534.
+LaTeX Font Info:    Checking defaults for C80/song/m/n on input line 534.
+LaTeX Font Info:    ... okay on input line 534.
+LaTeX Font Info:    Checking defaults for C81/song/m/n on input line 534.
+LaTeX Font Info:    ... okay on input line 534.
+LaTeX Font Info:    Checking defaults for C01/song/m/n on input line 534.
+LaTeX Font Info:    ... okay on input line 534.
+LaTeX Font Info:    Checking defaults for C11/song/m/n on input line 534.
+LaTeX Font Info:    ... okay on input line 534.
+LaTeX Font Info:    Checking defaults for C21/song/m/n on input line 534.
+LaTeX Font Info:    ... okay on input line 534.
+LaTeX Font Info:    Checking defaults for C41/song/m/n on input line 534.
+LaTeX Font Info:    ... okay on input line 534.
+LaTeX Font Info:    Checking defaults for C62/song/m/n on input line 534.
+LaTeX Font Info:    ... okay on input line 534.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 534.
+LaTeX Font Info:    ... okay on input line 534.
+LaTeX Font Info:    Try loading font information for OT1+ppl on input line 534.
+
+
+("C:\Program Files (x86)\CTEX\MiKTeX\tex\latex\psnfss\ot1ppl.fd"
+File: ot1ppl.fd 2001/06/04 font definitions for OT1/ppl.
+)<<ot1.cmap>>
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+*geometry* verbose mode - [ preamble ] result:
+* driver: pdftex
+* paper: a4paper
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: includehead includefoot 
+* h-part:(L,W,R)=(85.35826pt, 426.79135pt, 85.35826pt)
+* v-part:(T,H,B)=(56.9055pt, 734.08128pt, 54.06006pt)
+* \paperwidth=597.50787pt
+* \paperheight=845.04684pt
+* \textwidth=426.79135pt
+* \textheight=672.20749pt
+* \oddsidemargin=13.08827pt
+* \evensidemargin=13.08827pt
+* \topmargin=-15.36449pt
+* \headheight=12.0pt
+* \headsep=19.8738pt
+* \topskip=12.0pt
+* \footskip=30.0pt
+* \marginparwidth=38.0pt
+* \marginparsep=7.0pt
+* \columnsep=10.0pt
+* \skip\footins=10.8pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+\c@lstlisting=\count171
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: End \AtBeginDocument code.
+("C:\Program Files (x86)\CTEX\MiKTeX\tex\context\base\supp-pdf.mkii"
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count172
+\scratchdimen=\dimen175
+\scratchbox=\box43
+\nofMPsegments=\count173
+\nofMParguments=\count174
+\everyMPshowfont=\toks42
+\MPscratchCnt=\count175
+\MPscratchDim=\dimen176
+\MPnumerator=\count176
+\makeMPintoPDFobject=\count177
+\everyMPtoPDFconversion=\toks43
+)
+\AtBeginShipoutBox=\box44
+Package hyperref Info: Link coloring OFF on input line 534.
+ ("C:\Program Files (x86)\CTEX\MiKTeX\tex\latex\hyperref\nameref.sty"
+Package: nameref 2010/04/30 v2.40 Cross-referencing by name of section
+
+("C:\Program Files (x86)\CTEX\MiKTeX\tex\generic\oberdiek\gettitlestring.sty"
+Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
+)
+\c@section@level=\count178
+)
+LaTeX Info: Redefining \ref on input line 534.
+LaTeX Info: Redefining \pageref on input line 534.
+LaTeX Info: Redefining \nameref on input line 534.
+(C:\Users\Margo\Documents\毕业论文\latex-本\paper.out)
+(C:\Users\Margo\Documents\毕业论文\latex-本\paper.out)
+\@outlinefile=\write3
+
+(C:\Users\Margo\Documents\毕业论文\latex-本\GB_452.cpx
+File: GB.cap 2003/05/18 4.5.2for Standard LaTeX document class
+)
+LaTeX Font Info:    Try loading font information for C19+song on input line 538
+.
+
+("C:\Program Files (x86)\CTEX\CTeX\tex\latex\CJK\GB\c19song.fd"
+File: c19song.fd 2009/09/23 4.8.2
+)<<c1925.cmap>>
+(C:\Users\Margo\Documents\毕业论文\latex-本\abstract1.tex
+LaTeX Font Info:    Try loading font information for C19+hei on input line 19.
+
+("C:\Program Files (x86)\CTEX\CTeX\tex\latex\CJK\GB\c19hei.fd"
+File: c19hei.fd 2009/09/23 4.8.2
+)<<c1963.cmap>><<c1961.cmap>><<c1939.cmap>><<c1953.cmap>><<c1954.cmap>><<c1955.
+cmap>><<c1946.cmap>><<c1951.cmap>><<c1948.cmap>><<c1937.cmap>><<c1950.cmap>><<c
+1940.cmap>><<c1942.cmap>><<c1960.cmap>><<c1941.cmap>><<c1959.cmap>><<c1926.cmap
+>><<c1957.cmap>><<c1943.cmap>><<c1958.cmap>><<c1938.cmap>><<c1964.cmap>><<c1947
+.cmap>><<c1962.cmap>><<c1944.cmap>><<c1965.cmap>><<c1945.cmap>><<c1952.cmap>><<
+c1956.cmap>><<c1949.cmap>><<c1936.cmap>>
+LaTeX Font Info:    Font shape `OT1/ppl/bx/n' in size <12> not available
+(Font)              Font shape `OT1/ppl/b/n' tried instead on input line 26.
+
+
+LaTeX Warning: File ot143.cmap not found on input line 26.
+
+[1
+
+
+
+{C:/Program Files (x86)/CTEX/UserData/pdftex/config/pdftex.map{Unicode.sfd}{UGB
+K.sfd}}]) [2] (C:\Users\Margo\Documents\毕业论文\latex-本\abstract2.tex
+LaTeX Font Info:    Font shape `OT1/ppl/bx/n' in size <18> not available
+(Font)              Font shape `OT1/ppl/b/n' tried instead on input line 17.
+
+[3
+
+
+]) [4] (C:\Users\Margo\Documents\毕业论文\latex-本\paper.toc [5
+
+
+])
+\tf@toc=\write4
+
+[6] (C:\Users\Margo\Documents\毕业论文\latex-本\chap1.tex
+��һ��
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\CJKnumber' on input line 1.
+
+<<oml.cmap>><<oms.cmap>><<omx.cmap>>
+
+LaTeX Warning: File u.cmap not found on input line 4.
+
+LaTeX Font Info:    Try loading font information for U+wasy on input line 4.
+("C:\Program Files (x86)\CTEX\MiKTeX\tex\latex\wasysym\uwasy.fd"
+File: uwasy.fd 2003/10/30 v2.0 Wasy-2 symbol font definitions
+)
+LaTeX Font Info:    Try loading font information for U+rsfs on input line 4.
+
+("C:\Program Files (x86)\CTEX\MiKTeX\tex\latex\jknappen\ursfs.fd"
+File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
+)
+
+LaTeX Font Warning: Font shape `U/wasy/b/n' in size <8> not available
+(Font)              Font shape `U/wasy/m/n' tried instead on input line 4.
+
+
+LaTeX Font Warning: Font shape `U/wasy/b/n' in size <6> not available
+(Font)              Font shape `U/wasy/m/n' tried instead on input line 4.
+
+LaTeX Font Info:    Font shape `OT1/ppl/bx/n' in size <8> not available
+(Font)              Font shape `OT1/ppl/b/n' tried instead on input line 4.
+
+Package natbib Warning: Citation `ol1' on page 1 undefined on input line 4.
+
+
+Package natbib Warning: Citation `ol2' on page 1 undefined on input line 4.
+
+LaTeX Font Info:    Font shape `OT1/ppl/bx/n' in size <14> not available
+(Font)              Font shape `OT1/ppl/b/n' tried instead on input line 7.
+LaTeX Font Info:    Font shape `OT1/ppl/bx/n' in size <17.28> not available
+(Font)              Font shape `OT1/ppl/b/n' tried instead on input line 7.
+[1
+
+
+
+]
+
+Package natbib Warning: Citation `ol3' on page 2 undefined on input line 14.
+
+
+Package natbib Warning: Citation `ol4' on page 2 undefined on input line 18.
+
+
+Package natbib Warning: Citation `ol4' on page 2 undefined on input line 18.
+
+
+Package natbib Warning: Citation `ol5' on page 2 undefined on input line 22.
+
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.2499pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[2]<<c1930.cmap>>
+
+Package natbib Warning: Citation `ol4' on page 3 undefined on input line 25.
+
+
+Package natbib Warning: Citation `ol6' on page 3 undefined on input line 42.
+
+[3]) [4] [5] (C:\Users\Margo\Documents\毕业论文\latex-本\chap2.tex
+�ڶ���
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\CJKnumber' on input line 1.
+
+LaTeX Font Info:    Font shape `OT1/ppl/bx/n' in size <14.4> not available
+(Font)              Font shape `OT1/ppl/b/n' tried instead on input line 6.
+LaTeX Font Info:    Try loading font information for C19+kai on input line 10.
+("C:\Program Files (x86)\CTEX\CTeX\tex\latex\CJK\GB\c19kai.fd"
+File: c19kai.fd 2009/09/23 4.8.2
+)
+Overfull \hbox (26.7855pt too wide) in paragraph at lines 11--28
+ [][] 
+ []
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[6
+
+
+
+]
+Package hyperref Info: bookmark level for unknown definition defaults to 0 on i
+nput line 53.
+Package hyperref Info: bookmark level for unknown example defaults to 0 on inpu
+t line 62.
+ [7] [8]
+Overfull \hbox (10.29053pt too wide) in paragraph at lines 96--97
+[]\C19/kai/m/n/12/49 -$\OMS/cmsy/m/n/12 L[]$\C19/kai/m/n/12/58 � \C19/kai/m/n/1
+2/61 � \C19/kai/m/n/12/42 �\OT1/ppl/m/n/12 DL\C19/kai/m/n/12/37  \C19/kai/m/n/
+12/57 N \C19/kai/m/n/12/26 � \C19/kai/m/n/12/53 �$\OML/cmm/m/it/12 A$\C19/kai/m
+/n/12/58 � \C19/kai/m/n/12/61 � \C19/kai/m/n/12/42 � \C19/kai/m/n/12/40 � \C19/
+kai/m/n/12/42 � \C19/kai/m/n/12/63 3$\OMS/cmsy/m/n/12 L[]$\C19/kai/m/n/12/64 �
+ []
+
+[9]
+Overfull \hbox (44.31512pt too wide) in paragraph at lines 124--125
+[]\C19/kai/m/n/12/40 � \C19/kai/m/n/12/62 u \C19/kai/m/n/12/61 � \C19/kai/m/n/1
+2/42 � � \C19/kai/m/n/12/40 �  \C19/kai/m/n/12/61 � \C19/kai/m/n/12/64 � \C19/
+kai/m/n/12/37  \C19/kai/m/n/12/57 N$\OMS/cmsy/m/n/12 O$\C19/kai/m/n/12/26 � \C
+19/kai/m/n/12/61 � \C19/kai/m/n/12/42 � \C19/kai/m/n/12/44 � \C19/kai/m/n/12/62
+ u$\OML/cmm/m/it/12 role\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 X; Y\OT1/cmr/m/n/12 )
+$\C19/kai/m/n/12/40 
+ []
+
+LaTeX Font Info:    Try loading font information for OMS+ppl on input line 126.
+
+("C:\Program Files (x86)\CTEX\MiKTeX\tex\latex\psnfss\omsppl.fd"
+File: omsppl.fd 
+)
+LaTeX Font Info:    Font shape `OMS/ppl/m/n' in size <12> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 126.
+ [10]
+Package hyperref Info: bookmark level for unknown proposition defaults to 0 on 
+input line 146.
+ [11]
+<img/6.jpg, id=485, 324.61275pt x 109.00725pt>
+File: img/6.jpg Graphic file (type jpg)
+ <use img/6.jpg>
+Package pdftex.def Info: img/6.jpg used on input line 166.
+(pdftex.def)             Requested size: 405.45047pt x 136.16057pt.
+ [12 <C:/Users/Margo/Documents/毕业论文/latex-本/img/6.jpg>]
+
+Package natbib Warning: Citation `ol7' on page 13 undefined on input line 214.
+
+[13] <img/1.jpg, id=498, 432.86719pt x 135.50626pt>
+File: img/1.jpg Graphic file (type jpg)
+ <use img/1.jpg>
+Package pdftex.def Info: img/1.jpg used on input line 219.
+(pdftex.def)             Requested size: 405.45047pt x 126.92926pt.
+
+
+Package natbib Warning: Citation `ol7' on page 14 undefined on input line 223.
+
+[14 <C:/Users/Margo/Documents/毕业论文/latex-本/img/1.jpg>]
+Overfull \hbox (2.50475pt too wide) in paragraph at lines 250--252
+[]\C19/song/bx/n/12/58 � \C19/song/bx/n/12/50 � \C19/song/bx/n/12/57 � \C19/son
+g/bx/n/12/43 L \C19/song/bx/n/12/40 � \C19/song/bx/n/12/56 � \C19/song/bx/n/12/
+50 � \C19/song/bx/n/12/40  \C19/song/bx/n/12/50 � \C19/song/bx/n/12/65 i \C19/
+song/bx/n/12/46 ? \C19/song/bx/n/12/60 1 \C19/song/bx/n/12/39 G \C19/song/bx/n/
+12/48 � \C19/song/bx/n/12/37 L \C19/song/bx/n/12/55 � \C19/song/bx/n/12/56 � \C
+19/song/bx/n/12/50 � \C19/song/bx/n/12/40  \C19/song/bx/n/12/37 � \C19/song/bx
+/n/12/45 8 \C19/song/bx/n/12/26 � \C19/song/bx/n/12/48 ~ \C19/song/bx/n/12/54 X
+ \C19/song/bx/n/12/26 �\OT1/ppl/m/n/12 UBL\C19/song/bx/n/12/65 � \C19/song/bx/n
+/12/58 �$\OML/cmm/m/it/12 U[]B[]L$\C19/song/bx/n/12/40 
+ []
+
+<img/2.jpg, id=508, 464.4853pt x 155.83218pt>
+File: img/2.jpg Graphic file (type jpg)
+ <use img/2.jpg>
+Package pdftex.def Info: img/2.jpg used on input line 264.
+(pdftex.def)             Requested size: 405.45047pt x 136.02943pt.
+<<c1929.cmap>>
+
+Package natbib Warning: Citation `ol8' on page 15 undefined on input line 271.
+
+
+Package natbib Warning: Citation `ol8' on page 15 undefined on input line 272.
+
+
+Package natbib Warning: Citation `ol9' on page 15 undefined on input line 272.
+
+[15 <C:/Users/Margo/Documents/毕业论文/latex-本/img/2.jpg>] [16]
+LaTeX Font Info:    Calculating math sizes for size <10.5> on input line 306.
+
+
+LaTeX Font Warning: Font shape `U/wasy/m/n' in size <10.5> not available
+(Font)              size <10.95> substituted on input line 306.
+
+
+LaTeX Font Warning: Font shape `U/rsfs/m/n' in size <10.5> not available
+(Font)              size <10.95> substituted on input line 306.
+
+
+LaTeX Font Warning: Font shape `U/wasy/b/n' in size <10.5> not available
+(Font)              size <10.95> substituted on input line 306.
+
+
+LaTeX Font Warning: Font shape `U/wasy/b/n' in size <7.34996> not available
+(Font)              Font shape `U/wasy/m/n' tried instead on input line 306.
+
+
+LaTeX Font Warning: Font shape `U/wasy/b/n' in size <5.25> not available
+(Font)              Font shape `U/wasy/m/n' tried instead on input line 306.
+
+) [17] (C:\Users\Margo\Documents\毕业论文\latex-本\chap3.tex
+������
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\CJKnumber' on input line 2.
+
+pdfTeX warning (ext4): destination with the same identifier (name{definition.1}
+) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.6 \begin{definition}
+                      [����)] [18
+
+
+
+]pdfTeX warning (ext4): destination with the same identifier (name{example.1}) 
+has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.16     \begin{example}
+                        [����)]pdfTeX warning (ext4): destination with the same
+ identifier (name{definition.2}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.30 	\begin{definition}
+                        [������ģ��)] [19]
+Overfull \hbox (7.59651pt too wide) in paragraph at lines 51--52
+\C19/song/bx/n/12/57 � \C19/song/bx/n/12/55 � \C19/song/bx/n/12/26 �$\OMS/cmsy/
+m/n/12 J[]$\C19/song/bx/n/12/61 � \C19/song/bx/n/12/37 � \C19/song/bx/n/12/55 �
+$\OML/cmm/m/it/12 r[]\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 e[]; e[]\OT1/cmr/m/n/12 
+)$\C19/song/bx/n/12/40  \C19/song/bx/n/12/46 � \C19/song/bx/n/12/40 � \C19/son
+g/bx/n/12/45 8 \C19/song/bx/n/12/51  \C19/song/bx/n/12/36 � \C19/song/bx/n/12/
+40 $\OML/cmm/m/it/12 k > \OT1/cmr/m/n/12 1$\C19/song/m/n/12/25 " \C19/song/bx/
+n/12/63 � \C19/song/bx/n/12/55 � \C19/song/bx/n/12/61 � \C19/song/bx/n/12/58 �$
+\OMS/cmsy/m/n/12 J[]\OML/cmm/m/it/12  \U/msb/m/n/12 2 \OML/cmm/m/it/12 r[]\OT1
+/cmr/m/n/12 (\OML/cmm/m/it/12 e[]; e[]\OT1/cmr/m/n/12 )$\C19/song/bx/n/12/26 
+�
+ []
+
+pdfTeX warning (ext4): destination with the same identifier (name{definition.3}
+) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.57 	\begin{proposition}
+                          [20]pdfTeX warning (ext4): destination with the same 
+identifier (name{definition.4}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.64 	\begin{definition}
+                        pdfTeX warning (ext4): destination with the same identi
+fier (name{example.2}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.69 	\begin{example}
+                      [21]pdfTeX warning (ext4): destination with the same iden
+tifier (name{definition.5}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.101 	\begin{definition}
+                         [$\subseteq_\mathsf{ds}$-\emph{minimal} ����)]
+[22]pdfTeX warning (ext4): destination with the same identifier (name{definitio
+n.6}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.106 	\begin{proposition}
+                           [23]pdfTeX warning (ext4): destination with the same
+ identifier (name{definition.7}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.114 	\begin{proposition}
+                           <img/3.jpg, id=576, 496.10344pt x 437.38406pt>
+File: img/3.jpg Graphic file (type jpg)
+
+<use img/3.jpg>
+Package pdftex.def Info: img/3.jpg used on input line 135.
+(pdftex.def)             Requested size: 405.45047pt x 357.4626pt.
+ [24]
+
+Package natbib Warning: Citation `ol8' on page 25 undefined on input line 144.
+
+
+Package natbib Warning: Citation `ol10' on page 25 undefined on input line 144.
+
+
+
+Package natbib Warning: Citation `ol11' on page 25 undefined on input line 146.
+
+
+pdfTeX warning (ext4): destination with the same identifier (name{definition.8}
+) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.147 \begin{proposition}
+                          [25 <C:/Users/Margo/Documents/毕业论文/latex-本/
+img/3.jpg>]
+
+Package natbib Warning: Citation `ol12' on page 26 undefined on input line 154.
+
+
+pdfTeX warning (ext4): destination with the same identifier (name{definition.9}
+) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.155 \begin{definition}
+                         [26]
+
+Package natbib Warning: Citation `ol12' on page 27 undefined on input line 160.
+
+
+
+Package natbib Warning: Citation `ol13' on page 27 undefined on input line 171.
+
+
+
+Package natbib Warning: Citation `ol14' on page 27 undefined on input line 171.
+
+
+
+Package natbib Warning: Citation `ol15' on page 27 undefined on input line 177.
+
+
+<img/4.jpg, id=595, 508.14844pt x 201.75375pt>
+File: img/4.jpg Graphic file (type jpg)
+ <use img/4.jpg>
+Package pdftex.def Info: img/4.jpg used on input line 181.
+(pdftex.def)             Requested size: 405.45047pt x 160.98453pt.
+ [27] [28 <C:/Users/Margo/Documents/毕业论文/latex-本/img/4.jpg>]
+
+Package natbib Warning: Citation `16' on page 29 undefined on input line 225.
+
+
+Package natbib Warning: Citation `17' on page 29 undefined on input line 225.
+
+<img/5.jpg, id=605, 390.70969pt x 344.78813pt>
+File: img/5.jpg Graphic file (type jpg)
+ <use img/5.jpg>
+Package pdftex.def Info: img/5.jpg used on input line 228.
+(pdftex.def)             Requested size: 405.45047pt x 357.8136pt.
+) [29] [30 <C:/Users/Margo/Documents/毕业论文/latex-本/img/5.jpg>]
+(C:\Users\Margo\Documents\毕业论文\latex-本\chap4.tex
+������
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\CJKnumber' on input line 1.
+
+[31
+
+
+
+]
+
+Package natbib Warning: Citation `ol19' on page 32 undefined on input line 34.
+
+[32]) [33] (C:\Users\Margo\Documents\毕业论文\latex-本\chap5.tex
+������
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\CJKnumber' on input line 1.
+
+) [34
+
+
+
+] (C:\Users\Margo\Documents\毕业论文\latex-本\xiexie.tex
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                \hskip 12.0pt
+(hyperref)                replaced by space on input line 26.
+
+) [35
+
+
+
+
+] (C:\Users\Margo\Documents\毕业论文\latex-本\paper.bbl
+
+Package natbib Warning: Empty `thebibliography' environment on input line 3.
+
+) [36
+
+
+] (C:\Users\Margo\Documents\毕业论文\latex-本\fulu.tex
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                \hskip 12.0pt
+(hyperref)                replaced by space on input line 3.
+
+) [37
+
+
+] (C:\Users\Margo\Documents\毕业论文\latex-本\ack.tex) [38
+
+
+
+]
+\tf@thm=\write5
+
+
+Package natbib Warning: There were undefined citations.
+
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 679.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 679.
+(C:\Users\Margo\Documents\毕业论文\latex-本\paper.aux
+(C:\Users\Margo\Documents\毕业论文\latex-本\abstract1.aux)
+(C:\Users\Margo\Documents\毕业论文\latex-本\abstract2.aux)
+(C:\Users\Margo\Documents\毕业论文\latex-本\chap1.aux)
+(C:\Users\Margo\Documents\毕业论文\latex-本\chap2.aux)
+(C:\Users\Margo\Documents\毕业论文\latex-本\chap3.aux)
+(C:\Users\Margo\Documents\毕业论文\latex-本\chap4.aux)
+(C:\Users\Margo\Documents\毕业论文\latex-本\chap5.aux)
+(C:\Users\Margo\Documents\毕业论文\latex-本\xiexie.aux)
+(C:\Users\Margo\Documents\毕业论文\latex-本\fulu.aux)
+(C:\Users\Margo\Documents\毕业论文\latex-本\ack.aux))
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 679.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 679.
+Package rerunfilecheck Info: File `paper.out' has not changed.
+(rerunfilecheck)             Checksum: EB37D160BFAD3F2217A76B7C722F2B12;2138.
+
+
+LaTeX Font Warning: Size substitutions with differences
+(Font)              up to 0.45pt have occurred.
+
+
+LaTeX Warning: There were multiply-defined labels.
+
+ ) 
+Here is how much of TeX's memory you used:
+ 15363 strings out of 495354
+ 226233 string characters out of 3182739
+ 347871 words of memory out of 3000000
+ 17555 multiletter control sequences out of 15000+200000
+ 103823 words of font info for 337 fonts, out of 3000000 for 9000
+ 14 hyphenation exceptions out of 8191
+ 43i,18n,58p,1842b,1193s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/s
+imhei.ttf><C:/Program Files (x86)/CTEX/CTeX/fonts/truetype/chinese/simsun.ttf><
+C:/Windows/Fonts/simkai.ttf><C:/Windows/Fonts/simkai.ttf><C:/Program Files (x86
+)/CTEX/CTeX/fonts/truetype/chinese/simsun.ttf><C:/Program Files (x86)/CTEX/CTeX
+/fonts/truetype/chinese/simsun.ttf><C:/Program Files (x86)/CTEX/CTeX/fonts/true
+type/chinese/simsun.ttf><C:/Program Files (x86)/CTEX/CTeX/fonts/truetype/chines
+e/simsun.ttf><C:/Program Files (x86)/CTEX/CTeX/fonts/truetype/chinese/simsun.tt
+f><C:/Windows/Fonts/simkai.ttf><C:/Windows/Fonts/simkai.ttf><C:/Windows/Fonts/s
+imkai.ttf><C:/Windows/Fonts/simkai.ttf><C:/Windows/Fonts/simhei.ttf><C:/Program
+ Files (x86)/CTEX/CTeX/fonts/truetype/chinese/simsun.ttf><C:/Program Files (x86
+)/CTEX/CTeX/fonts/truetype/chinese/simsun.ttf><C:/Windows/Fonts/simkai.ttf><C:/
+Program Files (x86)/CTEX/CTeX/fonts/truetype/chinese/simsun.ttf><C:/Program Fil
+es (x86)/CTEX/CTeX/fonts/truetype/chinese/simsun.ttf><C:/Windows/Fonts/simhei.t
+tf><C:/Windows/Fonts/simhei.ttf>{C:/Program Files (x86)/CTEX/MiKTeX/fonts/enc/d
+vips/fontname/8r.enc}<C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/simhei.ttf>
+<C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/simkai.ttf><C:/Windows/Fonts/sim
+kai.ttf><C:/Windows/Fonts/simkai.ttf><C:/Windows/Fonts/simkai.ttf><C:/Windows/F
+onts/simkai.ttf><C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/simhei.ttf><C:/W
+indows/Fonts/simhei.ttf><C:/Windows/Fonts/simkai.ttf><C:/Windows/Fonts/simkai.t
+tf><C:/Windows/Fonts/simkai.ttf><C:/Windows/Fonts/simkai.ttf><C:/Windows/Fonts/
+simkai.ttf><C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/simkai.ttf><C:/Window
+s/Fonts/simkai.ttf><C:/Windows/Fonts/simkai.ttf><C:/Windows/Fonts/simhei.ttf><C
+:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/simkai.ttf><C:/Windows/Fonts/simka
+i.ttf><C:/Windows/Fonts/simkai.ttf><C:/Windows/Fonts/simkai.ttf><C:/Windows/Fon
+ts/simkai.ttf><C:/Windows/Fonts/simkai.ttf><C:/Windows/Fonts/simkai.ttf><C:/Win
+dows/Fonts/simkai.ttf><C:/Windows/Fonts/simkai.ttf><C:/Windows/Fonts/simkai.ttf
+><C:/Windows/Fonts/simkai.ttf><C:/Windows/Fonts/simkai.ttf><C:/Windows/Fonts/si
+mkai.ttf><C:/Windows/Fonts/simkai.ttf><C:/Windows/Fonts/simkai.ttf><C:/Windows/
+Fonts/simkai.ttf><C:/Windows/Fonts/simkai.ttf><C:/Windows/Fonts/simkai.ttf><C:/
+Windows/Fonts/simkai.ttf><C:/Windows/Fonts/simkai.ttf><C:/Windows/Fonts/simkai.
+ttf><C:/Windows/Fonts/simkai.ttf><C:/Windows/Fonts/simkai.ttf><C:/Windows/Fonts
+/simkai.ttf><C:/Windows/Fonts/simkai.ttf><C:/Windows/Fonts/simkai.ttf><C:/Windo
+ws/Fonts/simkai.ttf><C:/Windows/Fonts/simkai.ttf><C:/Windows/Fonts/simkai.ttf><
+C:/Windows/Fonts/simkai.ttf><C:/Windows/Fonts/simkai.ttf><C:/Windows/Fonts/simk
+ai.ttf><C:/Windows/Fonts/simkai.ttf><C:/Windows/Fonts/simkai.ttf><C:/Windows/Fo
+nts/simkai.ttf><C:/Windows/Fonts/simkai.ttf><C:/Program Files (x86)/CTEX/CTeX/f
+onts/truetype/chinese/simsun.ttf><C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts
+/simhei.ttf><C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/simhei.ttf><C:/Windo
+ws/Fonts/simhei.ttf><C:/Program Files (x86)/CTEX/CTeX/fonts/truetype/chinese/si
+msun.ttf><C:/Program Files (x86)/CTEX/CTeX/fonts/truetype/chinese/simsun.ttf><C
+:/Program Files (x86)/CTEX/CTeX/fonts/truetype/chinese/simsun.ttf><C:/Program F
+iles (x86)/CTEX/CTeX/fonts/truetype/chinese/simsun.ttf><C:/Program Files (x86)/
+CTEX/CTeX/fonts/truetype/chinese/simsun.ttf><C:/Program Files (x86)/CTEX/CTeX/f
+onts/truetype/chinese/simsun.ttf><C:/Program Files (x86)/CTEX/CTeX/fonts/truety
+pe/chinese/simsun.ttf><C:/Program Files (x86)/CTEX/CTeX/fonts/truetype/chinese/
+simsun.ttf><C:/Program Files (x86)/CTEX/CTeX/fonts/truetype/chinese/simsun.ttf>
+<C:/Program Files (x86)/CTEX/CTeX/fonts/truetype/chinese/simsun.ttf><C:/Program
+ Files (x86)/CTEX/CTeX/fonts/truetype/chinese/simsun.ttf><C:/Program Files (x86
+)/CTEX/CTeX/fonts/truetype/chinese/simsun.ttf><C:/Program Files (x86)/CTEX/CTeX
+/fonts/truetype/chinese/simsun.ttf><C:/Program Files (x86)/CTEX/CTeX/fonts/true
+type/chinese/simsun.ttf><C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/simhei.t
+tf><C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/simhei.ttf><C:/Program Files 
+(x86)/CTEX/CTeX/fonts/truetype/chinese/simsun.ttf><C:/Program Files (x86)/CTEX/
+CTeX/fonts/truetype/chinese/simsun.ttf><C:/Program Files (x86)/CTEX/CTeX/fonts/
+truetype/chinese/simsun.ttf><C:/Program Files (x86)/CTEX/CTeX/fonts/truetype/ch
+inese/simsun.ttf><C:/Program Files (x86)/CTEX/CTeX/fonts/truetype/chinese/simsu
+n.ttf><C:/Program Files (x86)/CTEX/CTeX/fonts/truetype/chinese/simsun.ttf><C:/P
+rogram Files (x86)/CTEX/CTeX/fonts/truetype/chinese/simsun.ttf><C:/Program File
+s (x86)/CTEX/CTeX/fonts/truetype/chinese/simsun.ttf><C:/Program Files (x86)/CTE
+X/CTeX/fonts/truetype/chinese/simsun.ttf><C:/Program Files (x86)/CTEX/CTeX/font
+s/truetype/chinese/simsun.ttf><C:/Program Files (x86)/CTEX/CTeX/fonts/truetype/
+chinese/simsun.ttf><C:/Program Files (x86)/CTEX/CTeX/fonts/truetype/chinese/sim
+sun.ttf><C:/Program Files (x86)/CTEX/CTeX/fonts/truetype/chinese/simsun.ttf><C:
+/Program Files (x86)/CTEX/CTeX/fonts/truetype/chinese/simsun.ttf><C:/Program Fi
+les (x86)/CTEX/CTeX/fonts/truetype/chinese/simsun.ttf><C:/Program Files (x86)/C
+TEX/CTeX/fonts/truetype/chinese/simsun.ttf><C:/Program Files (x86)/CTEX/CTeX/fo
+nts/truetype/chinese/simsun.ttf><C:/Program Files (x86)/CTEX/CTeX/fonts/truetyp
+e/chinese/simsun.ttf><C:/Program Files (x86)/CTEX/CTeX/fonts/truetype/chinese/s
+imsun.ttf><C:/Program Files (x86)/CTEX/CTeX/fonts/truetype/chinese/simsun.ttf><
+C:/Program Files (x86)/CTEX/CTeX/fonts/truetype/chinese/simsun.ttf><C:/Program 
+Files (x86)/CTEX/CTeX/fonts/truetype/chinese/simsun.ttf><C:/Program Files (x86)
+/CTEX/CTeX/fonts/truetype/chinese/simsun.ttf><C:/Program Files (x86)/CTEX/CTeX/
+fonts/truetype/chinese/simsun.ttf><C:/Program Files (x86)/CTEX/CTeX/fonts/truet
+ype/chinese/simsun.ttf><C:/Program Files (x86)/CTEX/CTeX/fonts/truetype/chinese
+/simsun.ttf><C:/Program Files (x86)/CTEX/CTeX/fonts/truetype/chinese/simsun.ttf
+><C:/Program Files (x86)/CTEX/CTeX/fonts/truetype/chinese/simsun.ttf><C:/Progra
+m Files (x86)/CTEX/CTeX/fonts/truetype/chinese/simsun.ttf><C:/Program Files (x8
+6)/CTEX/CTeX/fonts/truetype/chinese/simsun.ttf><C:/Program Files (x86)/CTEX/CTe
+X/fonts/truetype/chinese/simsun.ttf><C:/Program Files (x86)/CTEX/CTeX/fonts/tru
+etype/chinese/simsun.ttf><C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/simhei.
+ttf><C:/Program Files (x86)/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.p
+fb><C:/Program Files (x86)/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pf
+b><C:/Program Files (x86)/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb>
+<C:/Program Files (x86)/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C
+:/Program Files (x86)/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/
+Program Files (x86)/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Pro
+gram Files (x86)/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Progra
+m Files (x86)/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmss12.pfb><C:/Program
+ Files (x86)/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmss8.pfb><C:/Program F
+iles (x86)/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Fi
+les (x86)/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Program File
+s (x86)/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files 
+(x86)/CTEX/MiKTeX/fonts/type1/public/amsfonts/symbols/msam10.pfb><C:/Program Fi
+les (x86)/CTEX/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb><C:/Progra
+m Files (x86)/CTEX/MiKTeX/fonts/type1/urw/palatino/uplb8a.pfb><C:/Program Files
+ (x86)/CTEX/MiKTeX/fonts/type1/urw/palatino/uplr8a.pfb><C:/Program Files (x86)/
+CTEX/MiKTeX/fonts/type1/urw/palatino/uplr8a.pfb><C:/Program Files (x86)/CTEX/Mi
+KTeX/fonts/type1/urw/palatino/uplri8a.pfb>
+Output written on paper.pdf (44 pages, 1165646 bytes).
+PDF statistics:
+ 1166 PDF objects out of 1200 (max. 8388607)
+ 137 named destinations out of 1000 (max. 500000)
+ 471 words of extra memory for PDF output out of 10000 (max. 10000000)
+

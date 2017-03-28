@@ -1,0 +1,319 @@
+\chapter{预备知识}
+\section{知识表示学习}
+
+\section{本体语言以及推理}
+
+\subsection{本体与一致性}
+    对于描述逻辑语言$\mathcal{L}$包含以下三个集合，分别是一个由个体名组成的集合$N_I$，一个由概念名组成集合$N_C$以及一个由二元关系名组成的集合$N_R$。 我们把$\mathcal{L}$ 的\emph{语义演绎}表示为$\mathcal{I}=(\Delta^\mathcal{I},\cdot^\mathcal{I})$，其中$\Delta^\mathcal{I}$表示$\mathcal{I}$的定义域，是一个非空的个体集合，$\cdot^\mathcal{I}$是一个映射函数，这个映射函数可以完成概念名到$\Delta^\mathcal{I}$子集的映射，二元关系到$\Delta^\mathcal{I}\times\Delta^\mathcal{I}$ 子集的映射以及个体到$\Delta^\mathcal{I}$元素的映射。在本文中，我们考虑表2.1中的语言片段。
+    \begin{table}[!h]
+	\centering
+	\caption{语法以及语义表}
+	\begin{tabular}{|c|c|c|}
+		\hline
+		Constructor & Syntax & Semantics \\
+		\hline
+		top concept & $\top$ & $\vartriangle ^\mathcal{I}$ \\
+		\hline
+		bottom concept  & $\bot$ & $\emptyset$ \\
+		\hline
+		conjunction & C $\sqcap$ D & $C ^\mathcal{I} \cap D^\mathcal{I}$\\
+		\hline
+		existential restriction & $\exists r.C$ &  $\{X \in \vartriangle ^\mathcal{I} | \exists y \in \vartriangle ^\mathcal{I} : \left(x, y \right) \in r ^\mathcal{I}  \wedge r \in C^\mathcal{I}\}$ \\
+		\hline
+		general concept inclusion & $C \sqsubseteq D$ & $C ^\mathcal{I} \subseteq D^\mathcal{I}$ \\
+		\hline
+		role inclusion & $r_1 \circ \cdots \circ r_k \subseteq r$ & $r^\mathcal{I}_1 \circ \cdots \circ r^\mathcal{I}_k \subseteq r^\mathcal{I}$ \\
+		\hline
+	\end{tabular}
+
+\end{table}
+
+
+
+    一个DL本体$\mathcal{O}=(\mathcal{T}, \mathcal{A})$包括两个部分，一个是TBox $\mathcal{T}$，它描述术语知识与应用领域相关的背景知识，处理概念的定义，由有限个公理构成，其中有引入新概念名和角色名称的公理，有断言包含关系的公理以及断言觉得可传递角色或功能性角色公理[面向Web 的个性化语义信息检索技术]。另一个是断言知识的集合ABox $\mathcal{A}$，它描述的是TBox词汇表中的个体断言,包括概念类的成员元素，二元关系的成员元素二元组以及二元关系的等价关系。在本文中，断言知识部分我们仅考虑二元关系的断言，形如$r(a,b)$，其中$r$是$\Delta^\mathcal{I}\times\Delta^\mathcal{I}$ 中的一个二元关系实例，$a$和$b$是$\Delta^\mathcal{I}$中的一个个体。表2.2展示了TBox与ABox的语法以及语义。
+        \begin{table}[!h]
+	\centering
+	\caption{DL示例公理的语义}
+	\begin{tabular}{|c|c|}
+		\hline
+		Syntax & Semantics \\
+		\hline
+		$C \sqsubseteq D$ & $C ^\mathcal{I} \subseteq D^\mathcal{I}$ \\
+		\hline
+		$C \equiv D$ & $C ^\mathcal{I} = D^\mathcal{I}$ \\
+		\hline
+		$C(a)$ & $a ^\mathcal{I} \in C^\mathcal{I}$\\
+		\hline
+        $r(a,b)$ & $\langle a^\mathcal{I}, b^\mathcal{I}\rangle \in r^\mathcal{I}$\\
+		\hline
+	\end{tabular}
+\end{table}
+
+    一个$\cdot^\mathcal{I}$如果能够满足本体$\mathcal{O}$中的所有公理，那么这个$\cdot^\mathcal{I}$就被称为本体的一个模。因此我们有以下定义：
+    \begin{definition}[一致)]
+    对于一个DL本体$O$，如果它有至少一个模，那么这个本体就会被称为是一致的，记作$\mathcal{O} \nvDash \bot$。相反地，如果一个DL本体$\mathcal{O}$没有至少一个模，那么这个本体就会被称为不一致的，记作$\mathcal{O} \vDash \bot$。
+\end{definition}
+\subsection{本体决断集}
+    本体包含TBox与ABox，因此本体具有从已有的知识库中获取新知识的能力，这种本体中没有，但是可以通过推理出来得到的公理就叫做蕴含。一个本体可能会有一个或多个蕴含，在本体的开发中，能够从蕴含逆推出在推理过程相关的公理具有重大的现实意义，这些公理的集合我们称之为决断集。
+    \begin{definition}[决断集)]
+    令$\mathcal{O}$为一个一致的DL本体，且$\mathcal{O} \vDash \alpha$，其中$\alpha$是蕴含。对于$\mathcal{O}$的一个子集$\mathcal{O}'$，如果对于$\mathcal{O}'$的所有子集$\mathcal{O}''$满足$\mathcal{O}'' \nvDash \alpha$且$\mathcal{O}' \vDash \alpha$，那么$\mathcal{O}'$就是本体$\mathcal{O}$ 中对于$\alpha$的一个决断集。
+    \end{definition}
+     \begin{example}
+        考虑一个一致的DL本体$\mathcal{O}$，其中TBox包含以下三条公理:
+             \begin{center}
+               \item [(1)]$\mathsf{Girl} \sqsubseteq \mathsf{Female}$
+               \item [(2)]$\mathsf{Female} \sqsubseteq \mathsf{Person}$
+               \item [(3)]$\exists \mathsf{giveBirth}.\mathsf{Person} \sqsubseteq \mathsf{Female}$
+             \end{center}
+        ABox包含以下两条公理:
+            \begin{center}
+               \item [(1)]$\mathsf{Female}(Mary)$
+               \item [(2)]$\mathsf{giveBirth}(Lily, Mary)$
+             \end{center}
+        蕴含为：
+             \begin{center}
+               \item $\mathsf{Female}(Lily)$
+             \end{center}
+    \end{example}
+
+\section{描述逻辑溯因诊断}
+
+\subsection{论域词汇表与术语断言}
+
+\subsection{溯因诊断}
+    逻辑研究的是基于规则的推理方式，目前的研究中把推理的方式分为三类，分别是演绎、归纳和溯因推理。演绎推理是最常用的推理方式，演绎推理根据已有的前提事实以及规则，得出结论。对于相同的输入，如果严格按照规则进行运算，演绎推理具有相同的输出，具有恒真性(truth-preserving)。归纳推理则是在已知事实的集合中寻找共同特性，推导出更多事实或同类事实的性质[论语用推理的逻辑属性]。它的推理格式形如以下形式：
+        \begin{enumerate}
+               \item [a.]所有已知的A为B。
+               \item [b.]因此，A为B。
+        \end{enumerate}
+    
+    溯因推理是推理方式中的第三种方式，溯因推理的方式与前两种推理方式有着本质的区别，溯因推理又称作反绎推理，是推理到最佳解释的过程。一般的，它是开始于事实的集合并推导出它们的最合适的解释的推理过程。术语溯因（abduction）意味生成假设来解释观察或结论。因为需要生成假设来解释观察或结论，因此溯因推理会在进行解释的过程中为前提事实增加新的知识使得前提事实与解释的并集可以通过演绎推理的方式演绎出观察值或结论。在描述逻辑本体中，溯因推理是一种重要的推理方式。在描述逻辑本体的构建过程中，本体由于构建不够完善，会经常性出现本体无法蕴含观察值的现象。因此，这个时候就需要进行利用溯因推理的方法，已构建的本体进行诊断，找出本体不完善的原因，并在找到的原因的基础上，提出解释对本体进行修复。这种找出原因并提出解释的推理方法就叫做溯因诊断。溯因诊断对修复本体有着重要的意义。我们对术语断言的溯因诊断问题进行了如下定义：
+    \begin{definition}[术语断言溯因诊断问题)]
+        令$\mathcal{L}_K$和$\mathcal{L}_Q$为两个DL本体，$\mathcal{K}=(\mathcal{T}, \mathcal{A})$是一个$\mathcal{L}_K$中的一个知识库，$\Phi$是一个在$\mathcal{L}_Q$中的术语断言集合。当且仅当 $\mathcal{K} \nvDash \Phi$ 且$\mathcal{K} \cup \Phi \nvDash \bot$的时候，二元组$\langle \mathcal{K}, \Phi \rangle$被称作术语断言的溯因诊断问题。
+    \end{definition}
+    
+    \begin{definition}[术语断言溯因诊断解释)]
+        令$\mathcal{L}_S$为一个DL本体，且$A$为一个多个在$\mathcal{L}_S$中的术语断言集合。对于一个溯因诊断问题$\langle \mathcal{K}, \Phi \rangle$，当且仅当$\mathcal{K} \cup A \vDash \Phi$我们把$A$称为可接受解释。更多的，我们把$A$称为：
+        \begin{enumerate}
+               \item $(\emph{一致})$ 当且仅当$\mathcal{K} \cup A \nvDash \bot$
+               \item $(\emph{非平凡})$ 当且仅当 $\mathcal{K} \nvDash \Phi$
+               \item $(\emph{最小})$ 
+        \end{enumerate}
+    \end{definition}
+\section{定义}
+
+\begin{definition}[可扩展公理)]
+    对于本体的一条公理，如果公理中的一个或多个的二元关系或者个体被二元关系变量或者个体变量替换，则这条公理会被称作可扩展公理。一条可扩展公理会被称为可全扩展公理如果这条公理的所有二元关系和个体都被二元关系和个体变量替换。
+\end{definition}
+
+\begin{definition}[替换)]
+    对于一条可扩展公理或者一个由可扩展公理构成的集合$E$，替换是一个从$E$中的二元关系变量或个体变量到其它二元关系变量或者二元关系以及个体变量或个体的映射。其中，如果该替换把所有二元关系变量映射到二元关系以及所有个体变量映射到个体，我们就把这个替换称作实例化替换。
+\end{definition}
+
+\begin{definition}[解释)]
+    给定一个一致的本体$\mathcal{O}$以及一个二元关系实例$\alpha$，$\mathcal{O} \nvDash \alpha$, 并且$\mathcal{O} \cup \{\alpha \} $ 是一致的，那么假如存在一个公理的集合$\mathcal{E}$使得$\mathcal{O} \cup \mathcal{E} \models \alpha$，$\mathcal{E} \nvDash \alpha$并且$\mathcal{O} \cup \mathcal{E}$ 是一致的，那么我们称这个集合$\mathcal{E}$为在本体$\mathcal{O}$中对$\alpha$的解释。
+\end{definition}
+
+\begin{definition}[$\subseteq_\mathsf{ds}$-\emph{minimal} 解释)]
+    一个解释$\mathcal{E}$会被称为$\subseteq_\mathsf{ds}$-\emph{minimal} 如果这个$\mathcal{E}$满足以下条件：不存在这样一个解释$\mathcal{E}'$使得$\mathcal{E}'\subseteq_\mathsf{ds}\mathcal{E}$ 且$\mathcal{E}\not\subseteq_\mathsf{ds}\mathcal{E}'$，其中$\mathcal{E}'\subseteq_\mathsf{ds}\mathcal{E}$ 表示存在一个$\mathcal{E}'$的差异化替换$\theta$，使得$\mathcal{E}'\theta\subseteq\mathcal{E}$。
+\end{definition}
+
+\begin{definition}[基于决定集模版的解释)]
+    对于一个给定的一致本体$\mathcal{O}$，一个基于$role(X,Y)$的模版$\mathcal{P}$以及一个观察值$\alpha$其中$\mathcal{T} \nvDash \alpha$且$\mathcal{O}\cup \{\alpha\}$是一致的，对于$\alpha$在$\mathcal{O}$ 的解释$\mathcal{E}$会被称为基于决定集模版的解释，如果这个解释满足以下四个条件：
+    \begin{itemize}
+        \item (非平凡) $\mathcal{E} \nvDash \alpha$
+        \item (一致) $\mathcal{O}\cup\mathcal{E}$ 是一致的
+        \item ($\subseteq_\mathsf{ds}-\emph{minimal}$) 不存在一个对于$alpha$在$\mathcal{O}$中的解释$\mathcal{E}'$使得$\mathcal{E}'\subseteq_\mathsf{ds}\mathcal{E}$ 且$\mathcal{E}\not\subseteq_\mathsf{ds}\mathcal{E}'$。
+        \item (可容许) 存在一个决定集模版$\mathcal{J}_p \in \mathcal{P}$以及$\mathcal{J}_p$的一个差异化替换$\theta$使得$\alpha = role(X\theta, Y\theta)$，$\mathcal{E} \subseteq \mathcal{J}_p\theta$且$\mathcal{J}_p\theta \in Jst(\alpha, \mathcal{O}\cup\mathcal{E})$
+    \end{itemize}
+\end{definition}
+
+\begin{definition}[诊断问题)]
+    我们把$\mathcal{P}=(\mathcal{T},\mathcal{A}, \alpha)$称作一个诊断的问题实例，其中本体$\mathcal{O}=\mathcal{T} \cup \mathcal{A}$是一个一致的描述逻辑本体。对于问题$\mathcal{P}$的一个解释$\mathcal{E}$满足：$\mathcal{T}\cup\mathcal{A} \cup \mathcal{E} \models \alpha$ 且 $\mathcal{T}\cup\mathcal{A} \cup \mathcal{E} \nvDash \bot$。
+\end{definition}
+
+\begin{definition}[决定集)]
+    对于一个一致的描述逻辑本体$\mathcal{O}$，且$\mathcal{O} \models \alpha$($\alpha$是一个推论)，$\mathcal{O}$的子集$\mathcal{O}'$会被称作在本体$\mathcal{O}$中对于$\alpha$的决定集如果$\mathcal{O}'\models\alpha$，且对于所有的$\mathcal{O}''\subset\mathcal{O}'$ 都有$\mathcal{O}''\nvDash \alpha$。
+\end{definition}
+
+\begin{definition}[决定集模版)]
+    一个由扩展公理组成的集合$\mathcal{J}_p$会被称为在本体$\mathcal{O}$中对于$role\left(x,y\right)$的决定集模版如果$\mathcal{J}_p$满足以下两个条件:(1) 存在一个替换$\theta$使得$\mathcal{J}_p\theta\in \emph{Jst}\left(role\left(X\theta, Y\theta\right), \mathcal{O}\right)$\ \ (2)对于所有的实例化替换$\sigma$存在$\mathcal{J}_p\sigma\models role\left(X\sigma, Y\sigma\right)$
+\end{definition}
+
+\begin{proposition}
+    给定一个一致的本体$\mathcal{O}$, 一个在$\mathcal{O}$中对于$role(X,Y)$的决定集模版$\mathcal{P}$，以及一个观察值$role(A,B)$，其中$\mathcal{O} \nvDash role(A,B)$ 且$\mathcal{O} \cup \{role(A,B)\}$是一致的，那么对于观察值$role(A,B)$在本体$\mathcal{O}$中由$\mathcal{P}$映射得到的解释集合$\mathcal{S}=\{\mathcal{J}_2\theta\mid \mathcal{J}_p\in\mathcal{P}$, $(\mathcal{J}_1,\mathcal{J}_2)\in \emph{bipart}(\mathcal{J}_p),$且$\theta$是一个在$\mathcal{J}_1 \cup \{role(X,Y)\}$上的替换使得$X\theta=A,Y\theta=B, \mathcal{J}_1 \theta \subseteq \mathcal{O}, \mathcal{J}_2\theta \nvDash role(A,B)\}$。
+\end{proposition}
+
+\begin{proposition}
+    一个对于观察值$\alpha$在本体$\mathcal{O}$中的$\subseteq_\mathsf{ds}$-\emph{minimal} 解释$\mathcal{E}$同时也是一个$\emph{subset-minimal}$的解释。
+\end{proposition}
+
+\begin{proposition}
+    给定一个一致的本体$\mathcal{O}$, 一个在$\mathcal{O}$中对于$role(X,Y)$的决定集模版$\mathcal{P}$，以及一个观察值$role(A,B)$，其中$\mathcal{O} \nvDash role(A,B)$ 且$\mathcal{O} \cup \{role(A,B)\}$是一致的，那么对于观察值$role(A,B)$在本体$\mathcal{O}$中由$\mathcal{P}$映射得到的解释集合$\mathcal{S}=\{\mathcal{J}_2\theta\mid \mathcal{J}_p\in\mathcal{P}$, $(\mathcal{J}_1,\mathcal{J}_2)\in \emph{bipart}(\mathcal{J}_p),$且$\theta$是一个在$\mathcal{J}_1 \cup \{role(X,Y)\}$上的替换使得$X\theta=A,Y\theta=B, \mathcal{J}_1 \theta \subseteq \mathcal{O}, \mathcal{J}_2\theta \nvDash role(A,B)\}$。
+\end{proposition}
+\begin{example}[诊断)]
+    考虑以下训练集：
+    \begin{center}
+        \item 1) $(Mike, /isFatherOf, Josan)$
+        \item 2) $(Mike, /isParentOf, Lily)$
+        \item 3) $(Hill, /isFriendOf, Peter)$
+    \end{center}
+    关系路径:
+    \begin{figure}[htb]
+    \center
+        \includegraphics[width=0.95\textwidth]{img/6.jpg}\\
+    \caption{关系路径}\label{fig:fulladder}
+    \end{figure}
+    观察值:
+    \begin{center}
+        \item $(Mike, /isGrandpaOf, Peter)$
+    \end{center}
+\end{example}
+    \ \ \ \ \ \ \ \ 对于例中的训练集，关系路径以及观察值，我们使用本体语言对其进行表达，分别得到TBox $\mathcal{T}$,ABox $\mathcal{A}$以及观察值$\alpha$。\\
+    其中$\mathcal{T}$为：
+        \begin{center}
+	       \item $isFatherOf\left(a, b\right) \wedge isParentOf\left(a, c\right) \wedge isMotherOf\left(c, d\right) \to isGrandpaOf\left(a, d\right)$
+\end{center}
+    $\mathcal{A}$为:
+        \begin{center}
+        \item 1) $\emph{isFatherOf}(Mike, Josan)$
+        \item 2) $\emph{isParentOf}(Mike, Lily)$
+        \item 3) $\emph{isFriendOf}(Hill, Peter)$
+    \end{center}
+    观察值$\alpha$为:
+    \begin{center}
+        \item $\emph{isGrandpaOf}(Mike, Peter)$
+    \end{center}
+
+    使用二分法对$\mathcal{T}$中的公理进行划分，分别得到以下公理集：
+        \begin{center}
+	    \item 1)\ $J_1$: $isFatherOf\left(a, b\right) \wedge isParentOf\left(a, c\right)$$J_2$: $isMotherOf\left(c, d\right)$
+        \item 2)\ $J_1$: $isParentOf\left(a, c\right) \wedge isMotherOf\left(c, d\right)$$J_2$: $isFatherOf\left(a, b\right)$
+        \item 3)\ $J_1$: $isFatherOf\left(a, b\right) \wedge isMotherOf\left(c, d\right)$$J_2$: $isParentOf\left(a, c\right)$
+        \item 4)\ $J_1$: $isMotherOf\left(c, d\right)$$J_2$: $isFatherOf\left(a, b\right) \wedge isParentOf\left(a, c\right)$
+        \item 5)\ $J_1$: $isFatherOf\left(a, b\right)$$J_2$: $isParentOf\left(a, c\right) \wedge isMotherOf\left(c, d\right)$
+        \item 6)\ $J_1$: $isParentOf\left(a, c\right)$$J_2$: $isFatherOf\left(a, b\right) \wedge isMotherOf\left(c, d\right)$
+        \end{center}
+   首先，我们使用第1个公理集中的$J_1$ 在$\mathcal{A}$中进行实例化，得出以下替换$\mathcal{M}$:
+   \begin{center}
+    \item $\{a \to Mike, b \to Josan, c \to Lily, d \to Peter\}$
+   \end{center}
+   根据得出的替换$\mathcal{M}$,对公理集中的$J_2$执行实例化，因此得到的第一个解释$\mathcal{E}_1$为：
+   \begin{center}
+    \item $\{\emph{isMotherOf}(Lily, Peter)\}$
+   \end{center}
+
+
+
+句法分析是自然语言处理领域的一个关键问题，正确地解析出句法的结构对于自然语言处理的相关任务意义重大。目前已经有多种文法体系存在，其中影响最广泛、研究成果较为成熟的是最早由法国语言学家L.Tesniere在其著作《结构句法基础》(1959)提出的依存句法。他主张主要动词作为一个句子的中心支配其它成分，而它本身不受任何其它成分支配。他主张主要动词作为一个句子依存句法的提出对语言学的发展产生了深远的影响，尤其是在计算机语言学界。Robinson J.J提出了依存关系的四大公理，奠定了依存句法的基础，这四条公理是：
+(1)	一个句子只有一个成分是独立的；
+(2)	其它成分直接依存于某一个成分；
+(3)	任何一个成分都不能依存于两个或两个以上的成分；
+(4)	如果A成分直接依存于B成分，而C成分在句子中位于A和B之间的话，那么，C或直接依存于A，或者直接依存于B，或者直接依存于A和B之间的某一成分\upcite{ol7}。
+以句子“聪明的小华想出了一种解法。”为例，进行依存句法分析，
+
+\begin{figure}[htb]
+  \center
+  \includegraphics[width=0.95\textwidth]{img/1.jpg}\\
+  \caption{依存句法树}\label{fig:fulladder}
+\end{figure}
+
+整棵语法依存关系树以动词“想“为核心，按照依存关系逐步往下构建。目前汉语中的依存关系分类一般以清华大学计算机科学系的周明教授的分类方法为主，共有44 种依存关系\upcite{ol7}。包括SBV-主谓关系、VOB-动宾关系等。
+
+
+\section{RDF三元组}
+
+RDF全称Resource Description Framework，中文名资源描述框架，是一门基于XML的向万维网表达信息的语言，主要用于描述Web资源，使用RDF，人们可以使用自己的词汇表描述任何资源。
+
+\begin{definition}
+RDF三个基本元素：
+\begin{enumerate}
+\item $URIs$: 用于指代资源
+\item $Literals$: 数据值
+\item $Blank nodes$: 空变量
+\end{enumerate}
+\end{definition}
+
+\begin{definition}
+
+我们定义三个集合:
+\begin{enumerate}
+  \item $U$：资源的集合
+  \item $B$：空变量的集合
+  \item $L$：数据值的集合	
+\end{enumerate}
+\end{definition}
+
+
+我们通过对它们的名字进行串联表示它们的并集，例如：UBL作为$U∪B∪L$的简写。
+RDF文件是一条条陈述的集合，每条陈述又叫做三元组，
+
+\begin{definition}
+三元组的定义如下：
+\begin{eqnarray}
+    \left(s,p,o\right) \in UB \times U \times UBL
+\end{eqnarray}
+在这条triplet中，$s$是$subject$，$p$是$predicate$，$o$是$object$。
+\end{definition}
+图Fig 3-2为其中一组RDF Triplet：
+
+\begin{figure}[htb]
+  \center
+  \includegraphics[width=0.95\textwidth]{img/2.jpg}\\
+  \caption{RDF triplet}\label{fig:fulladder}
+\end{figure}
+
+
+\section{TFIDF}
+
+TFIDF（term frequency–inverse document frequency）是一种用于资讯检索与文本挖掘的词频加权技术，属于统计学的一种方法，用以评估一个单词或字词短语对于一个文集或一个语料库中的其中一份文件的重要程度。字词的重要性随着它在文件中出现的次数成正比增加，但同时会随着它在语料库中出现的频率成反比下降\upcite{ol8}。
+TFIDF的主要思想是：如果某个词或短语在一片文章中出现的频率TF高，并在其他文章中很少出现，则认为此词或者短语具有很好的类别区分能力，适合用来分类。\upcite{ol8}\upcite{ol9}TF(Term Frequence) 意为词频，表达的是一个一个词在一个文档中出现的频率，IDF(Inverse Document Frequency) 意为逆向文件频率，TFIDF 认为如果一个词在一个文件中频繁出现，也就是说这个词的TF比较高，意味着这个词具有很好的代表性。同时这个词在整个文档集中出现的频率比较低，则表示这个词具有较好的类别区分能力。之所以使用词频而不是词数，是因为在较长的文件中，同一个词数出现的次数一般会更多。
+\begin{proposition}
+\begin{eqnarray}
+    tf_{i,j} = \frac{n_{i,j}}{\sum_k n_{k,j}}
+\end{eqnarray}。
+\end{proposition}
+
+以上式子中$n_(i,j)$是该词在文件$d_j$ 中的出现次数，而分母则是在文件$d_j$中所有字词数之和。
+
+\begin{proposition}
+IDF计算：
+\begin{eqnarray}
+    idf_{i} = \frac{|D|}{|{j:t_i \in d_j|}}
+\end{eqnarray}。
+\end{proposition}
+
+其中：
+
+(1) $|D|$:语料中的文件总数。
+
+(2) $|{j:t_i∈d_j }|$:包含词语$t_i$的数目。
+
+\section{本体的关系}
+本体的体系结构包括三个要素：核心元素、元素之间的交互作用以及这些元素到语义规范之间的映射关系，Perez等对已有的本体进行分析，归纳出本体的基本建模元语，其中最终要的两个是类和关系。
+类是相似术语所表达的概念的集合体，可以指任何事物，如工作描述、功能、行为、策略和推理过程等等。
+关系代表了在领域中概念之间的交互作用。
+本体中对概念之间的关系进行了区分，并把所有的关系分成四类，分别是part-of，kind-of，instance-of和attribute-of。
+
+\begin{table}[!h]
+\caption{本体关系分类}\label{tab_environment}
+\vspace*{3mm}
+\tabcolsep 2pt
+\wuhao
+\begin{center}
+\begin{tabular}{|c|c|}
+    \hline
+    关系名 & 关系描述  \\
+    \hline
+    part-of & 部分与整体的关系 \\
+    \hline
+    kind-of & 概念之间的关系  \\
+    \hline
+    instance-of & 表达概念的实例和概念之间的关系\\
+    \hline
+    attribute-of & 表达某个概念是另一个概念属性的关系\\
+    \hline
+\end{tabular}
+\end{center}
+\vspace*{-5mm}
+\end{table}

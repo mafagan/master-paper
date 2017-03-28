@@ -1,0 +1,54 @@
+\IncMargin{1em}
+\begin{algorithm}
+  \SetKwData{Left}{left}\SetKwData{This}{this}\SetKwData{Up}{up}
+  \SetKwFunction{Union}{Union}\SetKwFunction{FindCompress}{FindCompress}
+  \SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+
+  \Input{一个~ParseNode~类型的链表头指针~p~\\存储依赖图全部环的~map~类型变量~$\_$circle~}
+  \Output{逻辑程序是~HDLP~，是则返回~True~，否则返回~False~}
+  \BlankLine
+
+    judge $\leftarrow$ true \tcp*[h]{定义~bool~类型的变量~judge~}     \\
+    cursor $\leftarrow$ p \tcp*[h]{定义一个~ParseNode~类型的指针~cursor~}\\
+
+
+    \While{cursor $\neq$ NIL}
+    {
+       %\For{对于变量~circle~里的每一个环~c~}
+       \For{each circle c in $\_$circle}
+       {
+          %\If(\tcp*[h]{aaaaa}){~cursor~所指节点中的规则头部出现两个文字在环~c~中}
+          \If(\tcp*h{~cursor~所指节点中的规则头部出现两个文字在环~c~中}){two literals appear in the head of rule in cursor are in c}
+          {
+            judge $\leftarrow$ false \\
+            store the rule in cursor \tcp*[h]{将当前造成~head-cycle~的规则存起来，为后续的其他模块使用}\\
+            break \tcp*[h]{跳出最内层~for~循环} \\
+          }
+       }
+       \BlankLine
+        \tcc*[h]{处理完该条规则，准备处理下一条规则；} \\
+        set the cursor point to next rule \\
+    }
+
+    return judge \\
+
+
+  %  v $\leftarrow$ $\emptyset$ \tcp*[h]{定义一个~vector$<$int$>$~类型的变量~v~，用于在运算过程中作为存储环的临时变量}\\
+%
+%    \For{$i = 1$ \KwTo $node\_num$}
+%    {
+%
+%      v $\leftarrow$ v $\cup$ i \\
+%      mark node i has been visited \tcp*[h]{记录标号为~i~的文字已经被访问过}     \\
+%
+%      deep$\_$search(v) \tcp*[h]{递归求解从标号~i~出发回到自身的所有环}     \\
+%
+%      \BlankLine
+%      \tcc*[h]{深搜回溯，恢复变量的初始值}\\
+%
+%      remove the mark on node i \\
+%      erase the node i from v \\
+%    }
+
+  \caption{判断输入的逻辑程序是否是~HDLP~}\label{is:Hedlp}
+\end{algorithm}\DecMargin{1em} 

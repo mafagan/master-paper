@@ -1,0 +1,10 @@
+%begin:   added by dannylin
+@ARTICLE{bosong,
+        author      = {刘伯嵩},
+        title       = {一种基于 Web 的通用本体学习框架},
+        journal     = {计算机工程},
+        year        = {2008},
+        month       = {Aug.},
+        pages       = {229-231},
+}
+%}

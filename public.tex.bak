@@ -1,0 +1,15 @@
+\chapter*{在学期间论文发表情况}
+
+\addcontentsline{toc}{chapter}{在学期间论文发表情况}
+
+\renewcommand{\labelenumi}{[\arabic{enumi}].}
+\begin{enumerate}
+\item Computing General First-order Parallel and Prioritized Circumscription [C].
+      Proceedings of the Twenty-eighth AAAI Conference on Artificial
+      Intelligence (AAAI-14). 2014. （已录用，但未发表。第二作者，导师为第一作者，与本文的第三、四章直接相关）
+\item Elementary Loops Revisited [C].
+      Proceedings of the Twenty-eighth AAAI Conference on Artificial
+      Intelligence (AAAI-14). 2014.（已录用，但未发表。第五作者，导师为第二作者，与本文的第五章相关）
+\item Point-Sensitive Circumscription Computation via Answer Set Programming and Application (Preliminary Report) [C]. Proceedings of the Tenth International Workshop on Non-monotonic Reasoning, Action and Change (NRAC-13, Workshop in IJCAI-13). 2013. （第二作者，导师为第一作者，与本文的第三章相关）
+\item $\tau\varepsilon$2asp : Implementing $\mathcal{TE}$ via Answer Set Programming. Proceedings of the Twelfth Pacific Rim International Conference on Artificial Intelligence (PRICAI-12). 2013. （第三作者，导师为第一作者，与本文的第三章相关）
+\end{enumerate} 

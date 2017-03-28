@@ -1,0 +1,74 @@
+\relax 
+\providecommand\HyperFirstAtBeginDocument{\AtBeginDocument}
+\HyperFirstAtBeginDocument{\ifx\hyper@anchor\@undefined
+\global\let\oldcontentsline\contentsline
+\gdef\contentsline#1#2#3#4{\oldcontentsline{#1}{#2}{#3}}
+\global\let\oldnewlabel\newlabel
+\gdef\newlabel#1#2{\newlabelxx{#1}#2}
+\gdef\newlabelxx#1#2#3#4#5#6{\oldnewlabel{#1}{{#2}{#3}}}
+\AtEndDocument{\ifx\hyper@anchor\@undefined
+\let\contentsline\oldcontentsline
+\let\newlabel\oldnewlabel
+\fi}
+\fi}
+\global\let\hyper@last\relax 
+\gdef\HyperFirstAtBeginDocument#1{#1}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand {\FN@pp@footnotehinttrue }{}
+\providecommand {\FN@pp@footnote@aux }[2]{}
+\select@language{british}
+\@writefile{toc}{\select@language{british}}
+\@writefile{lof}{\select@language{british}}
+\@writefile{lot}{\select@language{british}}
+\@writefile{toc}{\ttl@change@i {\@ne }{chapter}{0.0em}{\bfseries \song \addvspace {2bp minus 0bp}}{\contentslabel {2em}}{}{\titlerule *[4pt]{.}\contentspage }\relax }
+\@writefile{toc}{\ttl@change@v {chapter}{}{}{}\relax }
+\@writefile{toc}{\ttl@change@i {\@ne }{section}{2.0em}{\song \addvspace {2bp minus 0bp}}{\thecontentslabel \hspace {1em}}{}{\titlerule *[4pt]{.}\contentspage }\relax }
+\@writefile{toc}{\ttl@change@v {section}{}{}{}\relax }
+\FN@pp@footnotehinttrue 
+\@input{abstract1.aux}
+\FN@pp@footnotehinttrue 
+\@input{abstract2.aux}
+\FN@pp@footnotehinttrue 
+\@writefile{loa}{\addvspace {10\p@ }}
+\FN@pp@footnotehinttrue 
+\FN@pp@footnotehinttrue 
+\@input{chap2.aux}
+\FN@pp@footnotehinttrue 
+\@input{chap3.aux}
+\FN@pp@footnotehinttrue 
+\bibstyle{paper2}
+\bibdata{cfo2lp}
+\bibcite{enderton2001mathematical}{{1}{}{{}}{{}}}
+\bibcite{McCarthy1980}{{2}{}{{}}{{}}}
+\bibcite{McCarthy1986}{{3}{}{{}}{{}}}
+\bibcite{Lifschitz1994}{{4}{}{{}}{{}}}
+\bibcite{de1989}{{5}{}{{}}{{}}}
+\bibcite{ferraris2005mathematical}{{6}{}{{}}{{}}}
+\bibcite{Ferraris2007}{{7}{}{{}}{{}}}
+\bibcite{bartholomew2013functional}{{8}{}{{}}{{}}}
+\bibcite{bartholomew2013stable}{{9}{}{{}}{{}}}
+\FN@pp@footnotehinttrue 
+\@writefile{toc}{\contentsline {chapter}{╡н©╪ндов}{25}{section*.5}}
+\@writefile{loa}{\addvspace {10\p@ }}
+\FN@pp@footnotehinttrue 
+\bibcite{Ferraris2011}{{10}{}{{}}{{}}}
+\bibcite{pearce2005first}{{11}{}{{}}{{}}}
+\bibcite{Ferrais2009}{{12}{}{{}}{{}}}
+\bibcite{Heng2011}{{13}{}{{}}{{}}}
+\bibcite{Cabalar2005reducing}{{14}{}{{}}{{}}}
+\bibcite{cabalar2007propositional}{{15}{}{{}}{{}}}
+\bibcite{Gelfond1988}{{16}{}{{}}{{}}}
+\bibcite{gelfond1991}{{17}{}{{}}{{}}}
+\bibcite{Heng2011thesis}{{18}{}{{}}{{}}}
+\bibcite{gebser2007conflict}{{19}{}{{}}{{}}}
+\bibcite{leone2006dlv}{{20}{}{{}}{{}}}
+\bibcite{janhunen2006unfolding}{{21}{}{{}}{{}}}
+\bibcite{niemela1997smodels}{{22}{}{{}}{{}}}
+\bibcite{eiter2009answer}{{23}{}{{}}{{}}}
+\bibcite{lifschitz2008answer}{{24}{}{{}}{{}}}
+\bibcite{gelfond2008answer}{{25}{}{{}}{{}}}
+\bibcite{cutland1980}{{26}{}{{}}{{}}}
+\FN@pp@footnotehinttrue 
+\@input{ack.aux}
+\providecommand\NAT@force@numbers{}\NAT@force@numbers
+\ttl@finishall

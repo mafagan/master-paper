@@ -1,0 +1,1065 @@
+%File: formatting-instruction.tex
+
+\documentclass[letterpaper]{article}
+\usepackage{aaai}
+\usepackage{times}
+\usepackage{helvet}
+\usepackage{courier}
+\usepackage{latexsym}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{epsfig}
+\usepackage{epsf}
+
+
+
+\newtheorem{THEOREM}{Theorem}
+\newenvironment{theorem}{\begin{THEOREM} }%
+                        {\end{THEOREM}}
+\newtheorem{LEMMA}[THEOREM]{Lemma}
+\newenvironment{lemma}{\begin{LEMMA} }%
+                      {\end{LEMMA}}
+\newtheorem{PROPOSITION}[THEOREM]{Proposition}
+\newenvironment{prop}{\begin{PROPOSITION} }
+                      {\end{PROPOSITION}}
+\newtheorem{COROLLARY}[THEOREM]{Corollary}
+\newenvironment{corollary}{\begin{COROLLARY}  }%
+                          {\end{COROLLARY}}
+\newtheorem{EXAMPLE}{Example}
+\newenvironment{example}{\begin{EXAMPLE} \rm}%
+                            {\end{EXAMPLE}}
+
+\newtheorem{DEFINITION}{Definition}
+\newenvironment{definition}{\begin{DEFINITION} \rm }
+                            {\end{DEFINITION}}
+
+\newenvironment{proof}{{\bf Proof:}}{\hfill\rule{2mm}{2mm} \vspace*{0.2cm}}
+\newenvironment{proof1}{{\bf Proof:}} {\vspace*{0.2cm}}
+\newcommand{\qed}{\hfill\rule{2mm}{2mm}}
+
+\newcommand{\tl}[1]{\addtolength{\itemsep}{#1}}
+
+\newcommand{\xvec}[1]{\smash{\vec{#1}}}
+\newcommand{\newd}[1]{\mbox{\underline{\it\smash{#1}\vphantom{\lower.1ex\hbox{x}}}}}
+
+\newcommand\ie{{\it i.e.}}
+\newcommand\etc{{\it et al. }}
+\newcommand\eg{{\it e.g.}}
+
+\newcommand{\psig}{\Sigma_p}
+
+\newcommand{\emodels}{\models_\Eaxiom}
+\newcommand{\slmodels}{\models}
+\newcommand{\slentails}{\models}
+\def \notmodels {\,{\mathrel|\joinrel\neq}\,}
+\newcommand{\operator}[2]{\mbox{\boldmath $#1$\hspace*{-#2ex}}}
+\newcommand{\B}{\operator{B}{.2}}
+
+\newcommand\red[1]{\M{(#1)\!\downarrow}}
+\newcommand\UP[1]{\M{\mbox{\ssf UP}(#1)}}
+\newcommand\VP[1]{\M{\mbox{\ssf VP}(#1)}}
+
+\newcommand\obar[1]{\M{\overline{#1}}}
+\newcommand\order[1]{\M{\parallel\!#1\!\parallel}}
+\newcommand\up{\M{\mbox{\ssf UP}}}
+\newcommand\vp{\M{\mbox{\ssf VP}}}
+
+\newcommand{\clmodels}{\M{\models_{\lower .2ex\hbox{\tiny\rm FOL}}\!}}
+
+\newcommand{\LBGolog}{\mathcal{LB}Golog}
+\newcommand{\properplus}{\mbox{proper$^+$}}
+\newcommand\forget{\mbox{forget}}
+\newcommand{\limp}{\M{\supset}}
+\newcommand{\Eaxiom}{{\M{\cal E}}}
+
+\newcommand{\SL}{\M{{\cal S}\!{\cal L}}}
+\newcommand{\Knows}{\mbox{\bf Knows}}
+
+\gdef\M#1{\ifmmode #1\else$#1$\fi}
+\newcommand\ssf{\small\sf}
+
+\newcommand{\Sa}{S_{\alpha}}
+\newcommand{\Lan}{\M{{\cal L}}}
+
+\newcommand{\gnd}{\mbox{gnd}}
+\newcommand\entails\models
+
+\newcommand{\at}{\M{{\cal D}}}
+\newcommand{\init}{\M{{\cal D}_{S_0}}}
+\newcommand{\calC}{\M{{\cal C}}}
+\newcommand{\FCD}{\M{{\cal F}_\at}}
+\newcommand{\CMD}{\M{{\cal C}_\at}}
+\newcommand{\EXD}{\M{{\cal E}_\at}}
+\newcommand{\FC}{\M{{\cal F}}}
+\newcommand{\CM}{\M{{\cal C}}}
+\newcommand{\TR}{\M{{\cal T}}}
+\newcommand{\EX}{\M{{\cal E}}}
+\newcommand{\clo}{\M{bcl}}
+\newcommand{\prog}{\M{prog}}
+
+%% Inside a list reduces the separation between items
+
+
+\newcommand{\exlist}{\addtolength{\itemsep}{-0.5ex}}
+
+\newcommand{\trans}{\rightarrow}
+
+\newcommand{\Eequiv}{\Leftrightarrow_{\Eaxiom}}
+
+%\frenchspacing
+\pdfinfo{
+/Title (Formatting Instructions for Authors Using LaTeX)
+/Subject (AAAI Publications)
+/Author (AAAI Press)}
+\setcounter{secnumdepth}{0}
+ \begin{document}
+% The file aaai.sty is the style file for AAAI Press
+% proceedings, working notes, and technical reports.
+%
+\title{A First-Order Interpreter for Knowledge-based Golog with Sensing\\ based on Exact Progression and Limited Reasoning}
+\author{Action, Change, and Causality, Cognitive Robotics, Knowledge Representation
+}
+\maketitle
+\begin{abstract}
+\begin{quote}
+While founded on the situation calculus, current implementations of Golog are mainly based on the closed-world assumption or its dynamic versions or the domain closure assumption. Also, they are exclusively based on regression. In this paper, we propose a first-order interpreter for knowledge-based Golog with sensing based on exact progression and limited reasoning. We assume infinitely many unique names and handle first-order disjunctive information in the form of the so-called \properplus\ KBs. Our implementation is based on the progression and limited reasoning algorithms for \properplus\ KBs proposed by Liu, Lakemeyer and Levesque. To improve efficiency, we implement the two algorithms by grounding via a trick based on the unique name assumption.
+The interpreter is online but the programmer can use two operators to specify offline execution for parts of programs. The search operator returns a conditional plan, while the planning operator is used when local closed-world information is available and calls a modern planner to generate a sequence of actions.
+
+\end{quote}
+\end{abstract}
+
+\vspace*{-5mm}\section{Introduction}
+When it comes to high-level robotic control, the idea of high-level program execution as embodied by the
+Golog language provides a useful alternative to planning. However, current implementations of Golog offer limited first-order capabilities. For example, implementation of Golog is based on the closed-world assumption (CWA), and that of IndiGolog \cite{GLS01} is based on a just-in-time assumption, reducing to a dynamic CWA. The interpreter for knowledge-based Golog proposed by Reiter \shortcite{Rei01a} is based on the domain closure assumption (DCA) and reduces first-order reasoning to propositional one. But in many real-world applications, CWA or even DCA are inappropriate. In particular, there is a need to deal with disjunctive information and the domain of individuals might be incompletely known. Such information can be conveniently represented as a proper$^+$ KB, which equals to a possibly infinite set of ground clauses.
+Liu, Lakemeyer and Levesque \shortcite{LLL04} proposed a logic of limited belief called the subjective logic $\SL$ and showed that $\SL$-based reasoning with proper$^+$ KBs is decidable.
+Recently, Cla{\ss}en and Lakemeyer \shortcite{CL09} proposed an $\SL$-based Golog interpreter.
+
+An essential component of any Golog interpreter is a query evaluation module, which solves the projection problem, that is, decide if a formula holds after a sequence of actions have been performed. Two methods to solve the projection problem are {\em
+regression} and {\em progression}.
+An advantage of progression
+compared to regression is that after a KB has been progressed, many
+queries about the resulting state can be processed without any extra
+overhead. Moreover, when the action sequence becomes very long,
+regression simply becomes unmanageable. However, current implementations
+of Golog are exclusively based on regression. This might be due to the negative result that
+progression is not always first-order definable. However,
+Liu and Lakemeyer \shortcite{LL09} showed that for a restricted class of the so-called local-effect actions and \properplus\ KBs, progression is not only first-order definable but also efficiently computable.
+
+Golog interpreters can be put into three categories: online, offline, and a combination of the two.
+In the presence of sensing, Reiter's interpreter for knowledge-based Golog is online, while the one for sGolog \cite{Lak99} is offline, and generates conditional plans. IndiGolog combines online execution with offline execution of parts of programs, specified by the programmer with a search operator. However, unlike sGolog, IndiGolog ignores sensing results during offline execution.
+To improve efficiency of Golog interpreters, there has been work on exploiting state-of-the-art planners. Baier \etc\ \shortcite{BFM07} developed an approach for compiling procedural domain control knowledge written in a Golog-like program into a planning instance.
+%Cla{\ss}en \etc\ \shortcite{Cla07} provided an operator to call a planner to achieve a goal in a version of Golog based on CWA.
+
+In this paper, we propose a first-order interpreter for knowledge-based Golog with sensing based on exact progression and limited reasoning. Hence we call our version $\LBGolog$ (Limited-Belief-based Golog). We handle first-order incomplete information in the form of \properplus\ KBs which assume infinitely many unique names. Our implementation is based on the aforementioned progression and limited reasoning algorithms for \properplus\ KBs by Liu, Lakemeyer and Levesque.
+To improve efficiency, we implement the two algorithms by grounding via a trick based on the unique name assumption.
+%To improve efficiency, we implement the two algorithms by grounding. The trick is that under the unique name assumption, constants not appearing in the KB behave the same, and so we can pick a certain number of representatives.
+The interpreter is online but the programmer can use two operators to specify offline execution for parts of programs. The search operator returns a conditional plan, while the planning operator is used when locally complete information is available and calls a modern planner to generate a sequence of actions.
+We have experimented our interpreter with a number of domains, and the results show the feasibility and efficiency of our approach.
+
+%The rest of the paper is organized as follows. In the next section, we introduce the background work of this paper. Then we present the syntax and semantics of LBGolog. Next, we show how to implement progression and query evaluation by grounding. In the following section,
+%we describe our implementation of a LBGolog interpreter and prove its correctness. After presenting some experimental results and examples, we discuss related work and conclude.
+
+\vspace*{-2mm}\section{Background work}
+In this section, we introduce the background work of this paper, \ie, proper$^+$ KBs, situation calculus, progression, subjective logic, and closed-world assumption on knowledge.
+
+We assume a first-order language $\Lan$
+with equality, a countably infinite set of constants, which are
+intended to be unique names, and no other function symbols. A literal is an atom or its negation, and a clause is a set of literals.
+We let $\Eaxiom$ denote the union of the axioms of equality and the infinite
+set $\{(d\neq d')\mid d$ and $d'$ are distinct constants$\}$.
+Let $\Gamma$ and $\Gamma'$ be two sets of sentences.
+We write $\Gamma \emodels \Gamma'$ to mean $\Eaxiom \cup \Gamma$ classically entails $\Gamma'$, and we write $\Gamma \Eequiv \Gamma'$ to mean $\Gamma \emodels \Gamma'$ and vice versa.
+Let $\phi$
+be a formula, and let $\mu$ and $\mu'$ be two expressions. We denote
+by $\phi(\mu/\mu')$ the result of replacing every occurrence of
+$\mu$ in $\phi$ with $\mu'$. We let $\phi^x_d$ denote $\phi$ with all free occurrences of variable $x$ replaced by constant $d$.
+
+%Intuitively, a $\properplus$ KB is equivalent to a (possibly infinite) set of ground clauses.
+To formally define proper$^+$ KBs, we let
+$e$ range over ewffs, \ie, quantifier-free formulas whose only
+predicate is equality, and we let $\forall\phi$ denote the universal
+closure~of~$\phi$. We let $\theta$ range over substitutions of all variables by constants, and
+write $\phi\theta$ as the result of applying $\theta$ to
+$\phi$.
+
+\begin{definition}\label{def:properplus}
+Let $e$ be an ewff and $c$ a clause.  formula of the form
+$\forall(e\limp c)$ is called a $\forall$-clause.  A KB is
+{\em \properplus} if it is a finite non-empty set of
+$\forall$-clauses. Given a $\text{proper}^+$ KB $\Sigma$,
+{$\gnd(\Sigma)$} is defined as
+$\{c\theta\mid \forall(e\supset c)\in \Sigma$ and $ \emodels e\theta\}$.
+\end{definition}
+
+
+\subsubsection{Situation calculus} \cite{Rei01}
+We will not go over the language $\Lan_{sc}$ here except to note the following components:
+action functions including those changing the world and binary sensing actions which do not change the world but inform the agent whether some condition holds in the current world;
+a constant $S_0$ denoting
+the initial situation; a function $do(a,s)$ denoting the
+successor situation to $s$ resulting from performing action $a$; a finite number
+of relational fluents, \ie, predicates taking a situation term as
+their last argument.
+Often, we need to restrict our attention to formulas that refer to a
+particular situation $\tau$, and we call such formulas uniform in $\tau$.
+We ignore functional fluents in this paper.
+
+A particular domain of application is specified by a basic
+action theory (BAT) of the following form:\\
+\hspace*{1cm}\(\at = \Sigma \cup \at_{ap} \cup \at_{ss} \cup \at_{sf}\cup \at_{una}\cup \at_{S_0}, \mbox{
+where} \)
+\vspace*{-1mm}
+\begin{enumerate}\addtolength{\itemsep}{-0.5ex}
+
+\item $\Sigma$ is the set of the foundational axioms for situations.
+
+\item $\at_{ap}$ is a set of action precondition axioms, one for each action, of the form
+\(Poss(A(\xvec{x}),s)\equiv \Pi_A(\xvec{x},s)\), where $\Pi_A(\xvec{x},s)$ is uniform in $s$.
+
+
+\item $\at_{ss}$ is a set of
+successor state axioms (SSAs), one for each
+fluent, of the form
+$F(\xvec{x},do(a,s))\equiv \Phi_F^(\xvec{x},a,s)$,
+where $\Phi_F(\xvec{x},a,s)$ is uniform in $s$.
+
+\item $\at_{sf}$ is a set of sensed fluent axioms, one for each sensing
+action, of the form
+\(SF(A(\xvec{x}),s)\equiv \Psi_A(\xvec{x},s),\)
+where $\Psi_A(\xvec{x},s)$ is uniform in $s$.
+
+\item $\at_{una}$ is the set of unique names axioms for actions.
+
+\item $\at_{S_0}$, the initial KB, is a set of sentences uniform in
+$S_0$.
+\end{enumerate}
+
+
+
+\subsubsection{Progression}
+
+Lin and Reiter \shortcite{LR97} formalized the notion of
+progression.
+Let $\alpha$ be a
+ground action and let $\Sa$
+represent $do(\alpha, S_0)$. They defined a similarity relation between two $\Lan_{sc}$ structures:
+$M\sim_{S_\alpha} M'$ if they agree on everything not related to situations and agree on every fluents at $\Sa$.
+
+\begin{definition} Let $\at_{S_\alpha}$ be a set of sentences uniform in $S_\alpha$. $\at_{S_\alpha}$ is a
+progression of the initial KB $\at_{S_0}$ wrt $\alpha$ if for any
+structure $M$, $M$ is a model of $\at_{S_\alpha}$ iff there is a
+model $M'$ of $\at$ such that $M\sim_{S_\alpha} M'$.
+\end{definition}
+
+Lin and Reiter showed that progression is not first-order definable in general.
+Recently, Liu and Lakemeyer \shortcite{LL09} showed that for local-effect actions, progression is always first-order definable and computable. Their proof is a very simple one via
+the concept of forgetting.
+Actions in many dynamic domains have only local effects in the sense
+that if an action $A(\xvec{c}\,)$ changes the truth value of an atom
+$F(\xvec{d},s)$, then $\xvec{d}$ is contained in $\xvec{c}\,$. We skip the formal definition here.
+\begin{theorem}\label{prog-thm}
+Let $\at$ be local-effect
+and $\alpha=A(\vec{c})$ a ground action. We use $\Omega(s)$ to denote the set of $F(\vec{a},s)$ where $F$ is a fluent, and $\vec{a}$ is contained in $\vec{c}$. Then the following is a  progression of $\at_{S_0}$ wrt $\alpha$:\\
+\hspace*{1cm}\(forget(\at_{S_0} \cup \at_{ss}[\Omega],\Omega(S_0))(S_0/\Sa),\)\\
+ where $\at_{ss}[\Omega]$ is the instantiation of $\at_{ss}$ wrt $\Omega$.
+\end{theorem}
+Forgetting an atom in a first-order formula can be done by a simple syntactic operation, resulting in a first-order formula.
+
+
+
+We now extend the notion of progression to accommodate sensing actions.
+For simplicity, for each ground sensing action $\alpha$, we introduce two
+auxiliary actions $\alpha_T$ and $\alpha_F$, which represent $\alpha$ with sensing results
+$true$ and $false$, respectively. We use the notation $(\neg)\phi$ to denote $\phi$ if the sensing result is $true$, and $\neg \phi$ otherwise. % It is easy to show the following propoposition.
+
+
+\begin{definition} Let $\alpha$ be a ground sensing action and $\mu \in \{T,F\}$. Let $\at_{S_\alpha}$ be a set of sentences uniform in $S_\alpha$. $\at_{S_\alpha}$ is a
+progression of $\at_{S_0}$ wrt $\alpha_\mu$ if for any
+structure $M$, $M$ is a model of $\at_{S_\alpha}$ iff there is a
+model $M'$ of $\at\cup \{(\neg) SF(\alpha,S_0)\}$ s.t. $M\sim_{S_\alpha} M'$.
+\end{definition}
+
+\begin{theorem}
+For a ground sensing action $\alpha=A(\vec{c})$,
+$(\at_{S_0} \cup \{(\neg) \Psi_A(\vec{c},S_0)\})(S_0/\Sa)$ is a progression of $\at_{S_0}$ wrt $\alpha_\mu$.
+\end{theorem}
+
+We say that $\at_{sf}$ is quantifier-free if for each action function $A(\vec{x})$, $\Psi_A$ is quantifier-free.
+We say that $\at_{ss}$ is essentially quantifier-free if for each action function $A(\vec{x})$ and each fluent $F$, by using $\at_{una}$,
+$\Phi_F(\xvec{x},A(\vec{x}),s)$ can be simplified to a quantifier-free formula.
+The following theorem follows from \cite{LL09}.
+
+\begin{definition} A well-formed basic action theory is a local-effect one
+such that $\at_{ss}$ is essentially quantifier-free, $\at_{sf}$ is quantifier-free, and $\at_{S_0}$ is proper$^+$.
+\end{definition}
+
+\begin{theorem} Suppose that $\at$ is well-formed. Then progression of
+$\at_{S_0}$ wrt any ground action is definable as a
+proper$^+$ KB and can be efficiently computed.
+\end{theorem}
+We use $prog(\at_{S_0},\alpha)$ to denote a proper$^+$ KB which is a progression of $\at_{S_0}$ wrt $\alpha$.
+It is straightforward to generalize the notation to $prog(\at_{S_0},\sigma)$, where $\sigma$ is a ground situation.
+We also use $\at_\sigma$ to denote $prog(\at_{S_0},\sigma)$.
+
+\subsubsection{The subjective logic $\SL$}
+
+With
+the goal of specifying a reasoning service for first-order KBs with
+disjunctive information in the form of \properplus\ KBs,
+\cite{LLL04}, later referred to by (LLL04),
+proposed a logic of limited belief called the
+subjective logic $\SL$. Reasoning based on $\SL$ is logically sound and
+sometimes complete.  Given disjunctive information, it performs unit propagation,
+but only does case analysis in a limited way.
+
+The
+language $\SL$ is a first-order logic with equality whose atomic formulas are
+belief atoms of form $\B_k \phi$ where $\phi\in
+{\cal L}$ and $\B_k$ is a modal operator for any $k\geq 0$.  $\B_k\phi$ is
+read as ``$\phi$ is a belief at level $k$''. We let $\SL_k$ denote the set of $\SL$-formulas whose only modal operators are $B_j$ for $j\leq k$. We call formulas of $\Lan$ objective, and formulas of $\SL$ subjective.
+
+Let $s$ be a
+set of ground clauses. The notation $\UP{s}$ is used to denote the closure of
+$s$ under unit propagation, that is, the least set $s'$ satisfying:
+1. $s \subseteq s'$; and
+2. if a literal $\rho \in s'$ and $\{\obar{\rho}\}\cup c \in s'$, where $\obar{\rho}$
+denotes the complement of $\rho$, then $c \in s'$.
+Let $\phi\in\Lan$. The notation
+$\red{\B_k\phi}$, called belief reduction, is defined as follows:
+\vspace*{-1mm}
+\begin{enumerate}\tl{-0.8ex}
+
+\item $\red{\B_k c}\,\,=\,\,\B_k c$, where $c$ is a clause;
+
+\item $\red{\B_k e}\,\,=\,\,e$, where $e$ is an equality literal;
+
+\item $\red{\B_k\lnot\lnot\phi}\,\,=\,\,\B_k\phi$;
+
+\item $\red{\B_k(\phi\lor\psi)}\,\,=\,\,(\B_k\phi\lor\B_k\psi)$,
+where $\phi$ or $\psi$ is not a clause; and
+ $\red{\B_k\lnot(\phi\lor\psi)}\,\,=\,\,(\B_k\lnot\phi\land\B_k\lnot\psi)$;
+
+\item $\red{\B_k\exists{x}\phi}\,\,=\,\,\exists{x}\B_k\phi$; and $\red{\B_k\lnot\exists{x}\phi}\,\,=\,\,\forall{x}\B_k\lnot\phi$.
+\end{enumerate}
+
+A setup is a
+set of non-empty {\em ground clauses}.
+For any setup $s$ and $\varphi \in \SL$, $s\slmodels \varphi$
+is defined inductively as follows:
+\vspace*{-1mm}\begin{enumerate}\tl{-0.8ex}
+\item $s\slmodels (d=d')$ iff $d$ and $d'$ are the same constant;
+\item $s\slmodels \neg \varphi$ iff $s \notmodels \varphi$;
+\item $s\slmodels \varphi \vee \omega$ iff $s\slmodels \varphi$ or $s\slmodels \omega$;
+\item $s\slmodels\exists x \varphi$ iff for some constant $d$, $s \slmodels \varphi^x_d$;
+\item $s\slmodels \B_k \phi$ iff one of the following holds:
+ {\it subsume}: $k=0$, $\phi$ is a clause $c$,
+and there is $c'\in\UP{s}$ s.t. $c'\subseteq c $;\\
+{\it reduce}: $\phi$ is not a clause and $s \slmodels \red{\B_k \phi}$;
+ {\it split}: $k>0$ and there is $c\in s$ s.t. for all $\rho\in
+  c$,\, $s\cup \{\rho\}\slmodels \B_{k-1}\phi$.
+\end{enumerate}
+A set $\Gamma$ of sentences entails a sentence $\varphi$, written
+$\Gamma \models \varphi$, if every setup $s$ satisfying every sentence of $\Gamma$ also satisfies $\varphi$.
+
+Reiter \shortcite{Rei01a} introduced the closed-world assumption on knowledge that a given ${\cal K}$ of axioms about what an agent knows captures everything that the agent knows; any knowledge sentences not following logically from ${\cal K}$ are taken to be false.
+ This assumption relieves the axiomatizer from having to figure out the relevant lack of knowledge axioms when given what the agent does know. Let $\Sigma$ be a proper$^+$ KB. We adapt Reiter's idea to $\SL$ as follows:
+\vspace*{-1mm}
+\begin{definition}
+\(\clo(B_0\Sigma) \overset{def}{=}
+B_0 \Sigma \cup \{\neg B_k\phi \mid B_0\Sigma \not \models B_k\phi\}.\)
+\end{definition}
+
+\vspace*{-1mm}
+By an important result from (LLL04) that
+$\models \B_0 \Sigma\limp\B_k\phi$ \,\,iff\,\, $\gnd(\Sigma)\entails\B_k\phi$, we
+have \(\clo(B_0\Sigma) =
+B_0 \Sigma \cup \{\neg B_k\phi \mid \gnd(\Sigma) \models \neg B_k\phi\}.\)
+Thus it is easy to prove
+
+\begin{theorem} \label{bcl-thm} Let $\Sigma$ be a proper$^+$ KB. Then
+\begin{enumerate}
+\item $\clo(B_0\Sigma)$ is satisfiable.
+
+\item For any $\varphi \in \SL$, $\clo(B_0\Sigma) \models \varphi$ or $\clo(B_0\Sigma) \models \neg \varphi$.
+
+\item For any $\varphi \in \SL$, $gnd(\Sigma)\models \varphi$ iff $\clo(B_0\Sigma) \models \varphi$.
+\end{enumerate}
+\end{theorem}
+
+Finally, we relate reasoning about subjective formulas to reasoning about objective formulas. Let $\varphi \in \SL$. We define its objective formula, denoted by $\varphi_o$, as the formula obtained from $\varphi$ by replacing each belief atom $B_k \phi$ with $\phi$. A \properplus\ KB $\Sigma$ is proper if $\gnd(\Sigma)$ is a consistent set of ground literals.
+It is easy to show that when a proper KB $\Sigma$ is complete, $\gnd(\Sigma) \models \varphi$ iff $\Sigma \emodels \varphi_o$. Thus
+
+\begin{theorem} \label{comp-thm} Let $\Sigma$ be a complete proper KB. Then
+$\clo(B_0\Sigma) \models \varphi$ iff $ \Sigma \emodels \varphi_o$.
+\end{theorem}
+
+
+\vspace*{-2mm}\section{$\LBGolog$: syntax and semantics}
+The following are the programming constructs of $\LBGolog$. A difference with normal Golog is that all tests $\phi$ are $\SL_0$ formulas. For readability, we also write $B_0 \psi$ as $\Knows\psi$.
+
+\noindent
+\begin{tabular}{llr}
+%$nil$ & \hspace*{-1.5cm} empty program \\
+1. &\hspace*{-0.3cm}$\alpha$ & \hspace*{-2.3cm} primitive action \\
+% $\beta$ & sensing action \\
+2. &\hspace*{-0.3cm}$\phi?$  & \hspace*{-2.3cm} test action \\
+3. &\hspace*{-0.3cm}$(\delta_1 ; \delta_2)$ & \hspace*{-2.3cm} sequence \\
+4. &\hspace*{-0.3cm}$(\delta_1 \thinspace | \thinspace \delta_2)$ & \hspace*{-2.3cm} nondeterministic choice of actions \\
+5. &\hspace*{-0.3cm}$(\pi\vec{x}. \phi \wedge \delta)$ & \hspace*{-2.3cm} guarded nondet. choice of arguments \\
+6. &\hspace*{-0.3cm}$\delta^*$ & nondeterministic iteration \\
+7. &\hspace*{-0.3cm}\textbf{if} $\phi$ \textbf{then} $\delta_1$ \textbf{else} $\delta_2$ {\bf endIf} & conditional \\
+8. &\hspace*{-0.3cm}\textbf{while} $\phi$ \textbf{do} $\delta$ {\bf endWhile} & while loop \\
+9. &\hspace*{-0.3cm}\textbf{proc} $P(\vec{x})$ $\delta$ {\bf endProc} & procedure definition \\
+10. &\hspace*{-0.3cm} $P(\vec{c})$ & procedure call \\
+11. & \hspace*{-0.3cm}$\Sigma \delta$ & search operator \\
+12. & \hspace*{-0.3cm}$\Upsilon (\tau,\delta)$ & planning operator \\
+\end{tabular}
+
+The first 10 constructs, called the basic constructs, are the same as those of Golog except that here we have guarded nondeterministic choice of arguments $\pi\vec{x}. \phi \wedge \delta$, where any variable of $\vec{x}$ must appear in $\phi$, and it is executed by nondeterministically picking $\vec{x}$ such that $\phi(\vec{x})$ holds and then performing $\delta(\vec{x})$. In such a way the program in $\pi$ construct is always performed with ground individuals as variables bound by guarded formula before.
+We call a program basic if it uses only basic constructs.
+
+As in IndiGolog, there is a search operator $\Sigma \delta$, where $\delta$ is a program, which specifies that lookahead should be performed over $\delta$ to ensure that nondeterministic choices are resolved in a way that guarantees its successful completion. We allow $\delta$ in $\Sigma \delta$ to use sensing actions, so the search operator returns a conditional plan, where branchings are conditioned on the results of sensing actions.
+
+In addition, there is a planning operator $\Upsilon (\tau,\delta)$, where $\tau$ is a type predicate with a finite domain, that is, the initial KB $\at_{S_0}$ contains a sentence of the form $\forall x. \tau(x) \equiv x = d_1 \vee \ldots \vee x=d_n$. Every constant appearing in $\delta$ must be of type $\tau$.
+$\delta$ is a basic program without sensing actions, and either $\delta$ is a procedure call itself and its procedure body does not contain any procedural call, or $\delta$ does not contain any procedural call. $\Upsilon (\tau,\delta)$ is executed by
+calling a state-of-the-art planner to
+generate a sequence of actions constituting a legal execution of program $\delta$ where objects are restricted to elements of type $\tau$.
+Thus we require that when executing $\Upsilon(\tau, \delta)$, the agent should have complete knowledge regarding the execution of $\delta$ restricted to $\tau$. We will formalize the latter requirement when we present the implementation of the planning operator.
+
+
+From now on, we restrict our attention to well-formed BATs.
+Following \cite{CL09}, the formal semantics we present here is an adaptation of the single-step transition semantics of \cite{GLL00}. A central concept is that of a configuration, denoted as a pair $(\delta,\sigma)$, where $\delta$ is a program (that remains to be executed) and $\sigma$ a situation (of actions that have been performed). A configuration can be final, \ie, the run can successfully terminate in that situation, or it can make certain transitions to other configurations. Our semantics is based on progression, $\SL$-based limited reasoning, and closed-world assumption on knowledge: when we evaluate a test $\phi$ wrt a configuration $(\delta,\sigma)$, we check if $\clo(B_0 \at_\sigma)\models \phi[\sigma]$, where $\at_\sigma$ denotes $\prog(\init,\sigma)$. Note that $\phi$ is a situation-suppressed formula, and $\phi[\sigma]$ denotes the formula obtained from $\phi$ by taking $\sigma$ as the situation arguments of all fluents.
+For lack of space, we leave out semantics of procedures, conditionals and loops.
+
+We first give the formal semantics for basic constructs.
+The set of final configurations wrt $\at$, denoted $\FCD$ (we often omit the $\at$ subscript), is inductively defined as follows:
+\begin{enumerate}\tl{-0.6ex}
+\item $(nil, \sigma)\in \FC$.
+
+\item $(\phi?, \sigma) \in \FC$ if $\clo(B_0 \at_\sigma)\models \phi[\sigma]$.
+
+\item $(\delta_1; \delta_2, \sigma)\in \FC$ if $(\delta_1, \sigma)\in \FC$ and $(\delta_2, \sigma)\in \FC$.
+\item $(\delta_1 \thinspace | \thinspace \delta_2, \sigma)\in \FC$ if $(\delta_1, \sigma)\in \FC$ or $(\delta_2, \sigma)\in \FC$.
+\item $(\pi \vec{x}.\phi \wedge \delta, \sigma)\in \FC$ if there exist constants $\vec{c}$ such that $\clo(B_0 \at_\sigma)\models \phi(\vec{c})[\sigma]$ and $( \delta(\vec{c}), \sigma)\in \FC$.
+\item $(\delta^*, \sigma)\in \FC$.
+\end{enumerate}
+
+\vspace*{-1mm}
+The transition relation between configurations wrt $\at$, denoted $\trans_\at$ (we often omit the $\at$ subscript), is inductively defined as follows:
+\begin{enumerate} \tl{-0.6ex}
+
+\item
+$(\alpha, \sigma) \trans (nil, do(\alpha, \sigma))$ if  $\alpha=A(\vec{c})$ is an ordinary primitive action and $\clo(B_0 \at_\sigma)\models B_0 \Pi_A(\vec{c},\sigma)$.
+
+%Recall that the action precondition axiom for $A(\vec{x})$ is
+%$Poss(A(\vec{x}) \equiv \Pi_A(\vec{x},s)$.
+
+\item $(\alpha, \sigma) \trans (nil, do(\alpha_\mu, \sigma))$ if  $\alpha=A(\vec{c})$ is a sensing action with result $\mu$, and $\clo(B_0 \at_\sigma)\models B_0 \Pi_A(\vec{c},\sigma)$.
+
+
+\item
+$(\delta_1 ; \delta_2, \sigma) \trans (\gamma; \delta_2, \sigma')$ if $(\delta_1, \sigma) \trans (\gamma, \sigma')$.
+
+\item $(\delta_1 ; \delta_2, \sigma) \!\trans \!(\gamma, \sigma') $ if $(\delta_1, \sigma)\! \in \!\FC$ and $(\delta_2, \sigma)\! \trans \!(\gamma, \sigma')$.
+
+\item $(\delta_1 \thinspace | \thinspace \delta_2, \sigma) \!\!\trans \!\! (\gamma, \sigma')$ if $(\delta_1, \sigma) \!\!\trans \!\! (\gamma, \sigma')$ or $(\delta_2, \sigma)  \!\!\trans \!\! (\gamma, \sigma')$.
+
+\item
+$(\pi \vec{x}. \phi \land \delta, \sigma) \trans (\gamma, \sigma')$ if there exist constants $\vec{c}$ s.t. $\clo(B_0 \at_\sigma)\models \phi(\vec{c})[\sigma]$ and $( \delta(\vec{c}), \sigma)\trans (\gamma, \sigma')$.
+
+\item
+$(\delta^*, \sigma) \trans (\gamma; \delta^*, \sigma')$ if $(\delta, \sigma) \trans (\gamma, \sigma')$.
+
+\end{enumerate}
+
+To define the semantics of search and planning operators wrt $\at$, we define a relation $\CM_\at$: intuitively,
+$(\delta,\sigma,\rho)\in \CM_\at$ means an offline execution of program $\delta$ in situation $\sigma$ results in conditional program $\rho$. To define $\CM_\at$, we introduce an auxiliary relation $\EX_\at$: intuitively, $(\rho,\delta,\sigma,\rho')\in \EX_\at$ means in situation $\sigma$, executing conditional program $\rho$ and then program $\delta$, leads to conditional program $\rho'$. we often omit the $\at$ subscript of $\CM_\at$ and $\EX_\at$ too.
+Formally,
+$\CM$ is defined as follows:
+\vspace*{-2mm}\begin{enumerate}\addtolength{\itemsep}{-0.3ex}
+\item
+$(nil, \sigma, nil) \in \CM$.
+
+\item
+$(\alpha, \sigma, \alpha) \in \CM$ if $\alpha$ is $A(\vec{c})$ and $\clo(B_0 \at_\sigma)\models B_0 \Pi_A(\vec{c},\sigma)$.
+
+\item
+$(\phi?, \sigma, nil) \in \CM$ if $\clo(B_0 \at_\sigma)\models \phi[\sigma]$.
+
+\item
+$(\delta_1 ; \delta_2, \sigma, \rho) \in \CM$ if  there exists $\rho'$ such that $(\delta_1, \sigma, \rho')\in \CM$ and $(\rho', \delta_2, \sigma, \rho)\in \EX$.
+
+\item
+$(\delta_1\thinspace|\thinspace\delta_2, \sigma, \rho) \in \CM$ if $(\delta_1, \sigma, \rho) \in \CM$ or $(\delta_2, \sigma, \rho)\in \CM$.
+
+\item
+$(\pi \vec{x}. \phi \land  \delta, \sigma, \rho )\in \CM$ if there exist constants $\vec{c}$ such that $\clo(B_0 \at_\sigma)\models \phi(\vec{c})[\sigma]$ and $(\delta(\vec{c}), \sigma, \rho)\in \CM$.
+
+\item $(\delta^*,\sigma,nil)\in \CM$; and $(\delta^*,\sigma,\rho)\in \CM$ if there exists $\rho'$ such that $(\delta,\sigma,\rho')\in \CM$ and $(\rho', \delta^*,\sigma, \rho)\in \EX$.
+
+\item
+$(\Sigma\delta, \sigma, \rho) \in \CM$ if $(\delta, \sigma, \rho) \in \CM$.
+
+\end{enumerate}
+
+
+The formal definition of $\EX$ is as follows:
+\vspace*{-1mm}
+\begin{enumerate}\addtolength{\itemsep}{-0.3ex}
+\item
+$(nil, \delta, \sigma, \rho') \in \EX$ if $(\delta,\sigma,\rho')\in \CM$.
+
+\item
+$(\alpha;\rho, \delta, \sigma, \alpha; \rho') \in \EX$ if $\alpha$ is an ordinary primitive action and  $(\rho, \delta, do(\alpha,\sigma), \rho')\in \EX$.
+
+\item
+$(\alpha; \rho, \delta, \sigma, \rho')\in \EX$ if $\alpha$ is a sensing action and there exist $\rho_1$ and $\rho_2$ such that
+$(\rho, \delta, do(\alpha_T, \sigma), \rho_1)\in \EX$ and
+$(\rho, \delta, do(\alpha_F, \sigma), \rho_2)\in \EX$ and $\rho'$ is: $\alpha;$ \textbf{if} $\Knows\Psi_A(\vec{c})$ \textbf{then} $\rho_1$ \textbf{else} $\rho_2$ {\bf endIf}.
+%Recall that the sensored fluent axiom for $A(\vec{x})$ is $SF(A(\vec{x}),s)\equiv \Psi_A(\vec{x},s)$.
+
+\item
+$($\textbf{if} $\phi$ \textbf{then} $\rho_1$ \textbf{else} $\rho_2$ {\bf endIf}$, \delta,\sigma, \rho) \in \EX$ if the following holds: if $\clo(B_0 \at_\sigma)\models \phi[\sigma]$, then
+$(\rho_1,\delta, \sigma, \rho) \in \EX$, otherwise $(\rho_2, \delta, \sigma, \rho) \in \EX$.
+
+\end{enumerate}
+
+To see why $\EX$ is needed, we would analyze the sequence case $(\delta_1;  \delta_2, \sigma, \rho)\in\CM$. Firstly it plans $\rho'$ for $\delta_1$,i.e. $(\delta_1, \sigma, \rho')\in\CM$. But we cannot obtain a unique situation from $\rho'$ and $\sigma$ as $\rho'$ can contain sensings, and so $\rho'$ has to take part in the planning of $\delta_2$. Therefore, we need $\EX$ to plan the remaining program with partial plan, i.e. $(\rho', \delta_2, \sigma, \rho)\in\EX$.
+
+To define the semantics of $\Upsilon (\tau,\delta)$, we define the restriction of $\delta$ to $\tau$, denoted by $\delta_\tau$. Intuitively, $\delta_\tau$ is $\delta$ where objects are restricted to elements of type $\tau$. Formally, $\delta_\tau$ is obtained from $\delta$ as follows: replace each formula of the form $\forall \vec{x} \phi$ with $\forall \vec{x}. \bigwedge\Knows\tau(x_i) \limp \phi$, and $\exists \vec{x} \phi$ with $\exists \vec{x}. \bigwedge\Knows\tau(x_i) \land \phi$, and replace each construct of the form $\pi \vec{x}.\phi \land \delta$ with $\pi \vec{x}.\bigwedge \Knows\tau(x_i) \land \phi \land \delta$. We require that the initial KB $\at_{S_0}$ contains a sentence of the form $\forall x. \tau(x) \equiv x = d_1 \vee \ldots \vee x=d_n$.
+
+We can now expand the definition of $\CM$ and $\trans$ as follows:
+\begin{enumerate}\addtolength{\itemsep}{-0.5ex}
+
+\item[9.]
+$(\Upsilon(\tau, \delta), \sigma, \rho) \in \CM$ if $(\delta_\tau, \sigma, \rho) \in \CM$.
+
+\item[8.]
+$(\Sigma \delta, \sigma) \trans (\rho, \sigma)$ if $(\delta,\sigma,\rho)\in\CM$.
+
+\item[9.]
+$(\Upsilon (\tau,\delta), \sigma) \trans (\rho, \sigma)$ if $(\delta_\tau,\sigma,\rho)\in\CM$.
+\end{enumerate}
+
+
+Finally an online execution of an $\LBGolog$ program $\delta_0$ starting from a situation $\sigma_0$ is a sequence of configurations
+$(\delta_0, \sigma_0), \ldots, (\delta_n, \sigma_n)$, s.t. for $i<n$, $(\delta_i, \sigma_i)\trans (\delta_{i+1}, \sigma_{i+1})$. The execution is successful if $(\delta_n, \sigma_n)\in \FC$.
+
+
+We now illustrate programming in LBGolog with the Wumpus World \cite{wumpus}. Below is the main program, where $n_1$ is a constant for coordinate 1, and $moveType$ is the domain of every coordinate. The agent first senses the environment. If she knows that the gold is at location $(1,1)$, she grabs the gold, otherwise, she explores the dungeon. After that, she moves to location $(1,1)$ by use of the planning operator, and climbs out.
+
+\noindent $\textbf{proc}\quad main\\
+\indent sense\_stench; sense\_breeze; sense\_gold;\\
+\indent\textbf{if}\thickspace \Knows(gold(n_1,n_1))
+\thickspace\textbf{then}\thickspace grab\\
+\indent\textbf{else} \thickspace explore \thickspace \textbf{endIf}\\
+\indent(climb\thickspace | \thickspace\Upsilon(moveType,moveLoc(n_1,n_1)); climb)\\
+\textbf{endProc}$
+
+The following procedure moves to location $(X,Y)$ by traversing only visited locations. Here $agt(x,y)$ means that
+the agent is at location $(x,y)$.
+
+\noindent $\textbf{proc}\quad moveLoc(X,Y)\\
+\indent [ \pi x_0,y_0,x_1,y_1. \Knows(agt(x_0,y_0) \wedge explored(x_1,y_1))\\
+\indent\indent  \wedge move(x_0,y_0,x_1,y_1) ]^*;\\
+\indent\pi x_2,y_2. \Knows(agt(x_2,y_2)) \wedge move(x_2,y_2,X,Y) \\
+\textbf{endProc}$
+
+The procedure below explores the dungeon. Here $wp(x,y)$ means that the wumpus is at location $(x,y)$. While the agent knows she has not got the gold, she picks an unvisited safe location, moves there, and senses the environment. If she knows the gold is at her location, she grabs the gold. Otherwise, if she knows that the wumpus is alive and she knows the location of the wumpus, she shoots the wumpus.
+
+
+\noindent$\textbf{proc}\quad explore\\
+\indent\textbf{while}\quad \Knows(\neg getsGold) \wedge\\
+\indent\exists x,y. \Knows((\neg wp(x,y) \vee \neg wpAlive) \wedge \neg pit(x,y)) \wedge\\
+\indent\indent\indent\indent\neg \Knows(explored(x,y)) \quad \textbf{do}\\
+\indent \pi x,y. \Knows((\neg wp(x,y) \vee \neg wpAlive) \wedge \neg pit(x,y)) \wedge\\
+\indent\indent\indent\indent\neg \Knows(explored(x,y)) \wedge\\
+\indent\indent\indent\Upsilon(moveType,moveLoc(x,y));  \\
+\indent\indent\indent sense\_stench; sense\_breeze; sense\_gold;\\
+\indent\indent\indent\textbf{if}\quad \Knows(\exists x_0,y_0. agt(x_0,y_0) \wedge gold(x_0,y_0))\\
+\indent\indent\indent\textbf{then}\quad grab \quad \textbf{else}\\
+\indent\indent\indent\indent\textbf{if}\quad \exists x_1,y_1.\Knows(wpAlive \wedge wp(x_1,y_1))\\
+\indent\indent\indent\indent\textbf{then}\quad shootWumpus\indent\textbf{endIf}
+\thickspace \textbf{endIf} \thickspace \textbf{endWhile}\\
+\textbf{endProc}$
+
+ Finally, the procedure for shooting the wumpus. Here $succ(x,y)$ means that $y$ is the successor coordinate of $x$. The agent picks an explored location $(x_2,y_2)$ which is adjacent to the wumpus' location, moves to $(x,y)$, shoots and senses if there is a scream.
+
+\noindent $\textbf{proc}\quad shootWumpus\\
+\indent[\pi x_1,y_1,x_2,y_2.\Knows(wp(x_1,y_1) \wedge explored(x_2,y_2) \wedge \\
+\indent\indent(x_1=x_2 \wedge succ(y_1,y_2)) \vee (x_1=x_2 \wedge succ(y_2,y_1))\\
+\indent\indent(y_1=y_2 \wedge succ(x_1,x_2)) \vee (y_1=y_2 \wedge succ(x_2,x_1))) \wedge \\
+\indent\indent \Upsilon(moveType,moveLoc(x_2,y_2));\\
+\indent\indent(succ(y_2,y_1)?;shoot\_up \thinspace | \thinspace succ(y_1,y_2)?;shoot\_down \thinspace |\\
+\indent\indent succ(x_1,x_2)?;shoot\_left\thinspace | \thinspace succ(x_2,x_1)?;shoot\_right)];\\
+\indent sense\_scream\\
+\textbf{endProc}$
+
+
+\vspace*{-2mm}\section{Implementing progression and query evaluation by grounding}
+
+To implement $\LBGolog$, we need to implement progression and evaluation of an $\SL$ formula against the closure of $B_0 \at_\sigma$, where $\at_\sigma$ is the current KB. Initially, we implemented the progression and query evaluation algorithms by Liu, Lakemeyer and Levesque. However, the implementations were not efficient. So we decided to implement them by grounding. But we have infinitely many unique names. The trick is to use an appropriate number of them as representatives of those not mentioned by the KB.
+Here is the general picture. We first ground the initial KB, perform unit propagation on it. When an action is performed,
+if it mentions new constants, we extend the current ground KB with these constants,
+then progress the ground KB, and perform unit propagation on it. Whenever we need to evaluate a query, we use the current ground KB to answer the query.
+%In the following, we present grounding, progression, and query evaluation in sequence.
+
+\subsubsection{Grounding}
+%We begin with initial grounding.
+We define the width of a proper$^+$ KB $\Sigma$ as the maximum number of distinct variables in a $\forall$-clause of $\Sigma$. Let $j$ be the width of $\Sigma$.
+For simplicity, we assume that there are a set $U$ of $j$ reserved constants $u_1, \ldots, u_j$: they do not appear in the initial KB and will not be mentioned by any action. We call constants not in $U$ normal constants. For a set $\Gamma$ of formulas, we use $H(\Gamma)$ to denote the set of normal constants appearing in $\Gamma$, and let $H^+(\Gamma)$ represent
+$H(\Gamma)$ extended with a normal constant not appearing in $\Gamma$.
+
+\begin{definition}
+Let $\Sigma$ be a proper$^+$ KB with width $j$.
+Let $N$ be a set of normal constants containing those appearing in $\Sigma$.
+We define $prop(\Sigma, N)$ as the set of those clauses of $\gnd(\Sigma)$ which uses only constants from $N$ or $U$.
+\end{definition}
+
+The intuition is that constants not appearing in $\Sigma$ behave the same, and we take U constants as their representatives.
+In the sequel, we let $\Sigma_p$ denote a ground \properplus\ KB with U constants. To prove correctness of grounding, we first define the first-order KB represented by $\Sigma_p$.
+
+\begin{definition} We define $FO(\Sigma_p)$ as follows: replace each $c$ in $\Sigma_p$ with $FO(c)$, denoting $\forall (e \supset c(u_1/x_1, \ldots, u_{j}/x_{j}))$, where $e$ is the ewff $\bigwedge^j_{i = 1}x_i\not\in H(\Sigma_p) \wedge \bigwedge_{i \neq k}x_i \neq x_k$, and $x\not \in N$ is the abbreviation for $\bigwedge_{d\in N}x\neq d$.
+\end{definition}
+
+\begin{theorem} \label{gnd-thm} $FO(prop(\Sigma, N)) \Eequiv \Sigma$.
+\end{theorem}
+
+\noindent We now define extended grounding and show its correctness.
+
+\begin{definition} \label{extend-ground-def}
+Let $B$ be a finite set of normal constants not occurring in $\Sigma_p$. We define $egnd(\Sigma_p,B)$ inductively as follows: 1. $egnd(\Sigma_p, \emptyset) = \Sigma_p$;
+\vspace*{-1mm}\begin{enumerate}\addtolength{\itemsep}{-0.3ex}
+\item[2.] $egnd(\Sigma_p, \{d\}) = \Sigma_p \cup \{c(u_k/d)\mid c\in \Sigma_p, 1\leq k\leq j\}$;
+\item[3.] $egnd(\Sigma_p, \{d\} \cup B) = egnd(egnd(\Sigma_p, \{d\}), B)$.
+\end{enumerate}
+\end{definition}
+
+%The following shows correctness of extended grounding.
+
+\begin{theorem}\label{egnd-thm}
+$egnd(prop(\Sigma, N), B)\Eequiv prop(\Sigma,N\cup B)$.
+\end{theorem}
+
+%Note that the way we do grounding is brute-force. For example, if $\Sigma$ contains $\forall x P(x)$, then its ground KB contains $P(u_1), \ldots, P(u_j)$, each of which carries the same information. However, brute-force grounding will facilitate later progression operation.
+
+\subsubsection{Progression}
+
+We now define progression of a ground KB, and show its equivalence to progression of the original KB. %Recall the notation from the background work section on progression.
+
+\begin{definition} Let $\at$ be a well-formed BAT, and $\alpha=A(\vec{c})$ a ground action.
+Let $B$ be the set of constants appearing in $\vec{c}$ but not $\Sigma_p$. We define $pprog(\Sigma_p, \alpha)$ as
+\[forget(egnd(\Sigma_p, B) \cup \mathcal{D}_{ss}(\Omega), \Omega(S_0))(S_0/\Sa),\]
+if $\alpha$ is an ordinary primitive action, and $ \Sigma_p(S_0/\Sa) \cup \{ (\neg) \Psi_A(\vec{c},S_\alpha)\}$ if $\alpha$ is a sensing action.
+\end{definition}
+Forgetting a ground atom $q$ from a set of ground clauses can be done by computing all resolvents wrt $q$ and then removing all clauses containing $q$. We generalize the notation to $pprog(\Sigma_p,\sigma)$, where $\sigma$ is a ground situation. The following lemma establishes connection between forgetting a ground atom from a proper$^+$ KB $\Sigma$ and from its ground KB.
+
+\begin{lemma}\label{gnd-forget-fo}
+Let $q$ be a ground atom. Let $N$ be a set of normal constants containing those that appear in $\Sigma$ or $q$.
+Then $forget(\Sigma, q) \Eequiv FO(forget(prop(\Sigma, N), q))$.
+\end{lemma}
+
+By Theorems \ref{prog-thm}, \ref{gnd-thm}, \ref{egnd-thm} and Lemma \ref{gnd-forget-fo}, we have
+
+\begin{theorem} \label{pprog-thm}
+$FO(pprog(prop(\Sigma, N), \alpha)) \Eequiv prog(\Sigma, \alpha) $.
+\end{theorem}
+
+
+\subsubsection{Query Evaluation}
+
+\hspace*{-0.2cm}We say  a query $\phi$ is suitable for $\Sigma_p$ if for each clause $c$ in $\phi$, the number of variables in $c$ and constants in $c$ but not $\Sigma_p$ is no more than that of $U$ constants in $\Sigma_p$.
+
+ We first define an evaluation procedure $G[\Sigma_p, \phi]$ where $\phi\in \Lan$ is suitable for $\Sigma_p$. It is the same as the $W[\Sigma,k,\phi]$ procedure from (LLL04) to decide if $B_0 \Sigma \models B_k \phi$ where $k=0$ except for the case of evaluating clauses.
+$G[\Sigma_p, \phi]=1$ if one of the following conditions holds, and 0 otherwise.
+\begin{enumerate}\addtolength{\itemsep}{-0.3ex}
+\item $\phi$ is a clause $c$ and there exists a clause $c' \in \UP{\Sigma_p}$ such that $c' \subseteq c(d_1/u_1,\ldots,d_k/u_k)$, where $\{d_1,\ldots,d_k\}$ is the set of normal constants that appear in $c$ but not $\Sigma_p$.
+
+\item $\phi = (d = d')$ and $d$ is identical to $d'$.
+
+\item $\phi = (d \neq d')$ and $d$ is distinct from $d'$.
+
+\item $\phi = \neg \neg \psi$ and $G[\Sigma_p, \psi] = 1$.
+
+\item $\phi = (\psi \vee \eta)$, $\psi$ or $\eta$ is not a clause, \\and $G[\Sigma_p, \psi] = 1$ or $G[\Sigma_p, \eta] = 1$.
+
+\item $\phi = \neg (\psi \vee \eta)$, $G[\Sigma_p, \neg \psi] = 1$ and $G[\Sigma_p, \neg \eta] = 1$.
+
+\item $\phi = \exists x\psi$ and $G[\Sigma_p, \psi^x_d]\! = \!1$ for some $d \!\in\! H^+(\psig \cup  \{\psi\})$.
+
+\item $\phi = \neg \exists x\psi$ and $G[\Sigma_p, \neg\psi^x_d]$ for all $d \in H^+(\psig \!\cup \!\{\psi\})$.
+\end{enumerate}
+
+
+
+Based on $G$, we now define an evaluation procedure $F[\Sigma_p, \varphi]$ where $\varphi \in \SL_0$ is suitable for $\Sigma_p$. $F[\Sigma_p, \varphi]=1$ if one of the following conditions holds, and 0 otherwise.
+\begin{enumerate}\tl{-0.5ex}
+\item $\varphi= B_{0}\phi$ and $G[\Sigma_p, \phi] = 1$.
+
+\item $\varphi = (t_1 = t_2)$ and $t_1$ is identical to $t_2$.
+
+\item $\varphi = \neg \omega$ and $F[\Sigma_p, \omega] = 0$.
+
+\item $\varphi = \varphi_1 \vee \varphi_2$, and $F[\Sigma_p, \varphi_1] = 1$ or $F[\Sigma_p, \varphi_2] = 1$.
+
+\item $\varphi \!= \!\exists x \omega$, and $F[\Sigma_p, \omega^x_d]\! = \!1$ for some $d \! \in \! H^+(\psig \cup \{\omega\})$.
+\end{enumerate}
+
+By exploiting that U constants serve as representatives of constants not appearing in $\Sigma_p$, we can prove
+
+\begin{lemma}\label{F-lem}
+$F[\Sigma_p, \varphi] = 1$ iff $\gnd( FO(\Sigma_p)) \models \varphi$.
+\end{lemma}
+
+By Lemma \ref{F-lem} and Theorem \ref{bcl-thm}(3), we have
+
+\begin{theorem}\label{F-thm}
+$F[\Sigma_p, \varphi] = 1$ iff $\clo(B_0 FO(\Sigma_p)) \models \varphi$.
+\end{theorem}
+
+We now obtain the main conclusion of this section, which shows the correctness of our implementation of progression and query evaluation by grounding:
+\begin{theorem}\label{main-thm}
+$F[pprog(prop(\at_{S_0},H(\at_{S_0})),\sigma), \varphi] = 1$ iff \\ $\clo(B_0 prog(\at_{S_0}, \sigma)) \models \varphi$, where $\sigma$ is a ground situation.
+\end{theorem}
+
+
+
+\vspace*{-2mm}\section{An interpreter}
+
+We have implemented an interpreter for $\LBGolog$ in Prolog.
+We assume the user provides the following set of clauses corresponding to the background basic action theory:
+
+\begin{itemize}
+\item \texttt{init\_kb}$(l)$: $l$ is a list of $\forall$-clauses of the initial KB;
+
+\item \texttt{poss}$(\alpha,\sigma,\phi)$: formula $\phi$ is the precondition for action $\alpha$ in situation $\sigma$;
+
+\item \texttt{ssa}$(F,\gamma^+,\gamma^-)$: $\gamma^+$ is the condition for making $F$ true, and $\gamma^-$ is the condition for making $F$ false;
+
+\item \texttt{sf}$(\beta,\sigma,\phi)$: formula $\phi$ holds as the result of sensing action $\beta$ is \texttt{true} in situation $\sigma$.
+\end{itemize}
+
+To improve efficiency, we implement the core parts of progression and query evaluation operations in C, and provide the following primitive predicates in Prolog:
+
+\begin{itemize}\addtolength{\itemsep}{-0.6ex}
+
+\item \texttt{bool\_query}$(\phi,\sigma)$: evaluate  formula $\phi$ in situation $\sigma$;
+
+\item \texttt{open\_query}$(\vec{x}, \phi, \sigma, \vec{c})$: return $\vec{c}$ such that subjective formula $\phi_{\vec{c}}^{\vec{x}}$ is evaluated true in situation $\sigma$;
+
+\item \texttt{prim\_prog}$(\alpha,\sigma,\sigma')$: progress the KB of situation $\sigma$ to situation $\sigma'$ wrt ordinary primitive action $\alpha$;
+
+\item \texttt{sens\_prog}$(\beta,\mu,\sigma,\sigma')$: progress the KB of situation $\sigma$ to situation $\sigma'$ wrt sensing action $\beta$ with sensing result $\mu$;
+
+\item \texttt{del\_sit($\sigma$)}: delete the KB about situation $\sigma$.
+
+\end{itemize}
+The two progression operators yield the new KBs while keeping the old ones. Thus we need the \texttt{del\_sit} predicate.
+
+%In the following, we present the implementation of the basic constructs, search and planning operators in sequence, and end with correctness theorems of the interpreter.
+
+\subsubsection{Basic constructs}
+
+We define predicates \texttt{bfinal/2} and \texttt{btrans/4} to implement the $\FC$ and $\trans $ relations. We only present some example clauses.Predicate \texttt{sub\_arg}$(l_x, l_c, p_x, p_c)$ substitutes all variables of $l_x$ occurring in program $p_x$ with corresponding constants of $l_c$, resulting in program $p_c$. And predicate \texttt{pos}$(\alpha,\sigma,\phi')$ makes $\phi'$ be $\phi$ with situation argument suppressed, where \texttt{poss}$(\alpha,\sigma,\phi)$ is hold.
+
+\vspace*{-1mm}{\small
+\begin{verbatim}
+bfinal(?(P),S):-bool_query(P,S).
+bfinal(E1#E2,S):-bfinal(E1,S);bfinal(E2,S).
+bfinal(pi(L,G,E),S):-open_query(L,G,S,L1),
+   sub_arg(L,L1,E,E1),bfinal(E1,S).
+bfinal(star(_),_).
+btrans(B,S,nil,S1):-sens_action(B),pos(B,S,P),
+    bool_query(knows(P),S),do(B,S,S1).
+btrans(E1:E2,S,E,S1):-btrans(E1,S,E3,S1),
+    E=(E3:E2);bfinal(E1,S),btrans(E2,S,E,S1).
+btrans(star(E),S,E1:star(E),S1):-
+    btrans(E,S,E1,S1).
+do(B,S,S1):-sens_action(B),exec(B,R),
+    sens_prog(B,R,S,S1),del_sit(S).
+exec(B,R):-write(B),write(':(y/n)'),read(T),
+    (T=y->R=true;R=false).
+\end{verbatim}}
+
+The top part of the interpreter uses \texttt{btrans} and \texttt{bfinal} to determine the next action to perform or to terminate. To perform an action, do the corresponding input/output actions, and then do progression.
+{\small \begin{verbatim}
+lbGolog(E,S):-bfinal(E,S),!.
+lbGolog(E,S):-btrans(E,S,E1,S1),!,
+    lbGolog(E1,S1).
+\end{verbatim}}
+
+
+\subsubsection{Search operator $\Sigma$}
+
+We define predicates $bdo/3$ and $ext/4$ to implement relations $\CM$ and $\EX$ respectively. During search, we maintain KBs of different situations. Once search succeeds or backtracks, we delete KBs accordingly. Hence we design predicates \texttt{add\_extra\_sit}$(\sigma)$, \texttt{del\_extra\_sit}$(\sigma)$ and \texttt{clear\_extra\_sits} for managing the KBs of situations explored in search.
+And predicate \texttt{sfns}$(\alpha,\sigma,\phi')$ makes formula $\phi'$ be $\phi$ with situation argument suppressed, where \texttt{sf}$(\alpha,\sigma,\phi)$ is hold.
+{\small \begin{verbatim}
+bdo(B,S,B):-sens_action(B),pos(B,P),
+    bool_query(knows(P),S).
+bdo(E1:E2,S,C):-bdo(E1,S,C1),ext(C1,E2,S,C).
+bdo(star(E),S,C):-C=nil;bdo(E,S,C1),
+    ext(C1,star(E),S,C).
+ext(nil,E,S,C):-bdo(E,S,C).
+ext(A:C,E,S,A:C1):-prim_action(A),
+    prim_prog(A,S,S1),add_extra_sit(S1),
+    (ext(C,E,S1,C1);del_extra_sit(S1),fail).
+ext(B:C,E,S,C1):-sens_action(B),
+    sens_prog(B,true,S,ST),add_extra_sit(ST),
+    (ext(C,E,ST,CT);del_extra_sit(ST),fail),
+    sens_prog(B,0,S,SF),add_extra_sit(SF),
+    (ext(C,E,SF,CF);del_extra_sit(SF),fail),
+    sfns(B,S,F),C1=(B:if(knows(F),CT,CF)).
+ext(if(P,C1,C2),E,S,C):-bool_query(P,S)->
+    ext(C1,E,S,C);ext(C2,E,S,C).
+search(E,S,C):-bdo(E,S,C),clear_extra_sits.
+btrans(search(E),S,E1,S):-search(E,S,E1).
+\end{verbatim}}
+
+The implementation of the search operator ensures that nondeterministic choices are resolved in a way that guarantees the successful completion of the program. To see an example, consider the program
+\texttt{E} below for catching a plane:
+
+{\small \begin{verbatim}
+sense_gate_A : buy_paper :
+(goto(gate_A) : buy_coffee #
+buy_coffee : goto(gate_B)) : board_plane
+\end{verbatim}}
+
+Assume that there are only two gates \texttt{A} and \texttt{B}, and \texttt{sense\_gate\_A} tells the agent which gate to take. Note that \texttt{board\_plane} is executable only if the agent gets to the right gate. So an online execution of \texttt{E} might fail.
+This problem can be solved by using the search operator. The interpretation of \texttt{search(A)} results in the following program, whose online execution is guaranteed to be successful.
+
+{\small \begin{verbatim}
+sense_gate_A :
+if(knows(it_is_gate_A),
+buy_paper:goto(gate_A):buy_coffee:board_plane,
+buy_paper:buy_coffee:goto(gate_B):board_plane)
+\end{verbatim}}
+
+\subsubsection{Planning operator $\Upsilon$}
+The main idea of our implementation of the planning operator $\Upsilon(\tau,\delta)$ is this: we construct a planning instance from the BAT $\at$, $\tau$ and $\delta$, and call an existing planner to solve the instance. Our implementation is based the work by \cite{BFM07} on compiling procedural domain control knowledge written in a Golog-like program into a planning instance.
+
+A planning instance is a pair $I=(D,P)$, where $D$ is a domain definition and $P$ is a problem. We assume that $D$ and $P$ are described in ADL. A domain definition consists of domain predicates and operators. A problem consists of domain objects, an initial state and a goal. 
+
+Baier \etc define a compiling function which, given a planning instance $I$ and a program $\delta$, outputs a new instance $I_\delta$ such that planning for the generated instance $I_\delta$ is equivalent to planning for the original instance $I$ under the control of $\delta$, except that plans for $I_\delta$ contain some auxiliary actions.
+
+We now present a translation function which, given a well-formed BAT $\at$, a program $\Upsilon(\tau, \delta)$ and a ground situation $\sigma$, outputs a planning instance $I$.
+Since $\at$ is local-effect, for any action $A(\vec{x})$, we can generate an operator $O(A(\vec{x}))$ from $\at_{ap}$ and $\at_{ss}$. We omit the details here.
+We let ${\cal P}(\delta)$ denote the set of predicates relevant to $\delta$ (wrt $\at$), \ie, the set of predicates that occur in tests of $\delta$ or precondition or effect axioms
+for actions that occur in $\delta$.
+
+
+\begin{definition} \label{translate} {\bf (Translation function $T$)}
+Given a well-formed BAT $\mathcal{D}$, a program $\Upsilon(\tau, \delta)$ and a ground situation $\sigma$, we define a planning instance $I$ as follows:
+
+\vspace*{-1mm}\begin{enumerate}\exlist
+  \item the domain predicates are elements of ${\cal P}(\delta)$;
+
+  \item the operations are $O(A(\vec{x}))$ where $A$ appears in $\delta$;
+
+  \item the objects are elements of the type predicate $\tau$;
+
+  \item the initial state consists of ground atoms $P(\vec{c})\in \UP{\at_\sigma}$ s.t. $P \in {\cal P}(\delta)$, $\vec{c}\in \tau$ and $\at_\sigma$ is the KB of $\sigma$.
+  \item the goal is $True$.
+\end{enumerate}
+\end{definition}
+
+Noted that the goal is $True$, we want to remind that as no goal formula is provided in $\Upsilon(\tau,\delta)$, a plan for $\Upsilon(\tau,\delta)$ is the one accepted by $\delta_\tau$ in $\CM$ (Recall that $\delta_\tau$ denotes the restriction of $\delta$ to $\tau$). So the goal of the planning instance generated by $T$ is temporally $True$, until the program is compiled into the instance, which makes the goal be to achieve the final state of the program.
+To prove property of $T$, we define a just-in-time assumption:
+\begin{definition}
+We say that a ground situation $\sigma$ is just-in-time for $\Upsilon(\tau,\delta)$ wrt $\at$,
+if for each ground atom $P(\vec{c})$ s.t. $P \in {\cal P}(\delta)$ and  $\vec{c}\in \tau$,
+$P(\vec{c})\in \UP{\at_\sigma}$ or $\neg P(\vec{c})\in \UP{\at_\sigma}$.
+\end{definition}
+
+Thus the just-in-time assumption ensures complete information regarding the execution of $\delta$.
+Let $\delta$ be a program. We define its objective program, denoted by $\delta_o$, as the program obtained from $\delta$ by replacing each test with its objective formula.
+Under the just-in-time assumption, by a generalized version of Theorem \ref{comp-thm}, $\SL$-based reasoning coincides with database query evaluation.
+So we get:
+
+\begin{lemma}\label{plan-lem} If $\sigma$ is just-in-time for $\Upsilon(\tau, \delta)$, then
+$(\delta_\tau,\sigma, \rho) \in \CM_\at$ iff $\rho$ is a plan for $I=T(\at,\tau,\delta, \sigma)$ under control of $\delta_o$.
+\end{lemma}
+
+\normalsize
+We implement a predicate \texttt{plan}$(\tau, \delta, \sigma, \delta')$ which does the following: First, apply $T$ on $(\at,\tau,\delta,\sigma)$ to generate a planning instance $I$.
+Then apply Baier \etc 's compiling function (with a slight modification) on $(I,\delta_o)$ to obtain a planning instance $I_{\delta_o}$, call FF planner \cite{FF} on $I_{\delta_o}$ to get a plan $\rho$. Finally, filter out the auxiliary actions from $\rho$.
+Then the \texttt{btrans} clause for the planning operator is:
+{\small \begin{verbatim}
+btrans(planning(T,E),S,E1,S):-plan(T,E,S,E1).
+\end{verbatim}}
+
+Actually, the domain part of the planning instance $I_{\delta_o}$ does not depend on the current situation, and is generated during preprocessing of the program. Only the problem part is generated each time $\Upsilon(\tau, \delta)$ is called.
+
+\subsubsection{Correctness of the interpreter}
+
+
+Due to correctness of progression and query evaluation (Theorems \ref{main-thm}), by induction on the program,
+it is easy to prove Theorems \ref{structures theorem} and \ref{search theorem} below. Theorem \ref{planning theorem} follows from Lemma \ref{plan-lem}.
+
+\begin{theorem}\label{structures theorem}
+{\bf (Correctness of basic constructs)} Let $\at$ be well-formed, $\delta$ a basic program, and $\sigma$ a ground situation. Then  {\em bfinal}($\delta, \sigma$)  succeeds  iff $(\delta, \sigma)\in \FC$, and
+{\em btrans}($\delta, \sigma, \delta', \sigma'$) succeeds iff $(\delta,\sigma) \trans (\delta', \sigma')$.
+\end{theorem}
+
+\begin{theorem}\label{search theorem} {\small {\bf (Soundness and weak completeness of search)}}
+Let $\at$ be well-fromed, $\delta$ a basic program and $\sigma$ a ground situation. Then
+if {\em btrans}(search($\delta), \sigma,\! P, \!S)$ {\small succeeds with} $P\! \!= \!\!\rho$, then $(\delta, \sigma, \rho)\in\CM$;
+and if $(\delta, \sigma, \rho)\in\CM$ for some $\rho$, then
+{\em btrans}({\em search}$(\delta), \sigma, P, S)$ succeeds or does not terminate.
+\end{theorem}
+
+To see why we get weak completeness, consider  program $\delta= (\alpha^*;False?) \thinspace  | \thinspace True?$. Although
+$(\delta,\sigma,nil)\in \CM$, to search $\delta$, we first search $\alpha^*;False?$ and wouldn't terminate.
+
+\begin{theorem}\label{planning theorem} {\bf (Correctness  of planning operator)}
+Suppose $\sigma$ is just-in-time for $\Upsilon(\tau,\delta)$ wrt well-formed BAT $\at$. We have:
+if {\em btrans}({\em planning}($\tau, \delta$), $\sigma, P$, $S$) succeeds with $P = \rho$, then
+   $(\delta, \sigma, \rho)\in\CM$;
+and if $(\delta, \sigma, \rho)\in\CM$ for some $\rho$, then {\em btrans}({\em planning}($\tau, \delta$), $\sigma, P$, $S$) succeeds.
+\end{theorem}
+
+Since the implementation of basic constructs and search operator are in direct correspondence with their semantics, the proofs of theorem \ref{structures theorem} and theorem \ref{search theorem} are trivial by structure induction. To prove theorem \ref{planning theorem}, firstly prove the equivalence of interpreting programs between the compiling function defined in \cite{BFM07} and the online semantics $\trans$ and $\FC$; and then prove the corresponding relation between online semantics and offline semantics $\CM$. And the theorem is proved with the two relations.
+
+\vspace*{-2mm}\section{Experiments}
+We have experimented our interpreter with Wumpus world, blocks world, Unix domain, and
+service robot domain. Table 1 shows our experimental data about Wumpus world.
+We assume there is only one piece of gold. When writing the control program,
+we take a cautious strategy and ensure that the agent keeps alive. In Table 1,
+\emph{Prob} is the probability of a location containing a pit. For each probability,
+we tested on 3000 random 8$\times 8$ maps.  \emph{IMP} is the number of
+maps for which it is impossible to explore. The rest of the columns show the average of the reward,
+the number of moves, the running time in seconds, and the number of calling the FF planner.
+Note that the average running time is less than 0.4 seconds, which shows the efficiency of our interpreter.
+
+\small\noindent
+\begin{center}
+
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+Prob & Gold & IMP & Reward & Moves & Time & Calls \\
+\hline
+10\% & 1412 & 695 & 437 & 33 & 0.670 & 16 \\
+\hline
+15\% & 890 & 917 & 275 & 22 & 0.430 & 11 \\
+\hline
+20\% & 567 & 1171 & 175 & 14 & 0.254 & 7 \\
+\hline
+30\% & 263 & 1581 & 82 & 6 & 0.112 & 3 \\
+\hline
+40\% & 182 & 1924 & 58 & 3 & 0.064 & 2 \\
+\hline
+\end{tabular}
+Table 1. Experimental results for Wumpus world (8$\times$8, 3000)
+\end{center}
+\normalsize
+
+
+\vspace*{-2mm}\section{Conclusions}
+
+Other than those related work mentioned in the introduction, Petrick and Bacchus \shortcite{PB02} proposed a planning system with incomplete information and sensing called PKS. The form of incomplete knowledge they consider is mainly a set of ground literals but also exclusive disjunctive knowledge.
+It does offline execution based on approximate progression and approximate reasoning; but the approximate procedures do not come with semantic characterizations.
+PKS has a limited support for functions, which we do not support.
+Now we summarize the contribution of this paper. First of all,
+as far as we know, this is the first implementation of Golog based on progression.
+Secondly, we make the unique name but not the closed-world or domain closure assumption; we also make
+the dynamic CWA on knowledge; and we do limited reasoning with first-order incomplete information. The only
+other similar system we are aware of is the one by \cite{CL09}, but it is based on regression.
+ Thirdly, we implement the progression and limited reasoning algorithms by Liu,
+Lakemeyer and Levesque by grounding, and we provide theoretical foundation for it. Fourthly, we provide a search operator different from the one by \cite{GLS01} in that ours returns a conditional plan. Lastly,
+ we provide a planning operator based on the work by \cite{BFM07}; however, they
+transform a program execution task into a single planning task while for us, a planning problem is dynamically generated each time the planner is called
+during a single program execution task.
+%Our work is also different from the one by \cite{Cla07} because when they call a planner they only provide a goal without providing a program encoding domain control knowledge.
+However, we have only implemented limited reasoning at the $B_0$ level;
+and planning operator could not handle the program with nested procedures which is invalid in \cite{BFM07}, and even asks just-in-time assumption to preserve the correctness.
+In the future, we would like to implement reasoning at the $B_1$ level and explore the support of state constraints in our system. 
+Moreover, to improve the ability of planning operator, we would like to compile the nested procedures case into planning instance, and explore a way to get rid of the just-in-time assumption.
+
+\small
+\bibliography{int}
+\bibliographystyle{aaai}
+
+\end{document}
+
+In the blocks world, we assume a number of blocks on or above the table, and the goal of the agent is to make clear some of them.
+The only primitive action is $move(x, y, z)$, moving block $x$ from the top of $y$ to the top of $z$.
+There are 2 fluents: $clear(x)$ and $on(x, y)$, with the usual meaning.
+
+The initial KB is as follows: ?? and other domain axioms
+
+\vspace*{.1cm}
+\noindent $\forall x.x \neq a \wedge x \neq b \wedge x \neq c \wedge x \neq d \supset clear(x)$,
+
+\noindent $\forall x,y.x \neq a \wedge x \neq b \wedge x \neq c \wedge x \neq d \wedge x \neq y \supset \neg on(x, y)$,
+
+\noindent $\forall x, y. x \neq y \supset (on(x, y) \supset \neg clear(y))$,
+
+\noindent Note that 4 blocks \verb"a", \verb"b", \verb"c" and \verb"d" appear in the initial KB.
+To save space, we do not present the other axioms and the program
+
+An example execution is given below:
+{\small \begin{verbatim}
+?- lbGolog(make_clear_all([a, b, c, d])).
+1.sense_clear(a):no.   2.sense_on(b,a):no.
+3.sense_on(c,a):no.    4.sense_on(d,a):yes.
+5.sense_clear(d):no.   6.sense_on(b,d):no.
+7.sense_on(c,d):yes.   8.sense_clear(c):yes.
+9.move(c,d,c1)         10.move(d,a,c2)
+11.sense_clear(b):yes. 12.true.
+\end{verbatim}
+}
+
+
+
+Note how clever our agent is.
+Having discovered that \verb"c" is clear and on top of \verb"d", she considers to move \verb"c" away.
+Realizing that she cannot put \verb"c" on any mentioned block, the agent attempts to find an extra block and at last, she successfully accomplishes her tasks with two extra blocks \verb"c1" and \verb"c2".
+
+\section{Introduction}
+
+When it comes to high-level robotic control, the idea of high-level program execution as embodied by the
+Golog language \cite{Golog} provides a useful alternative to planning. Golog is theoretically based on the situation calculus \cite{Rei01}, which is a first-order language. However, current implementations of Golog offer limited first-order capabilities. For example, implementation of classic Golog is based on the closed-world assumption (CWA). Although variants of Golog have been proposed to handle incomplete information and sensing, their implementations resort to dynamic versions of CWA or at least the domain closure assumption (DCA). For example, implementation of IndiGolog \cite{GLS01} is based on a just-in-time assumption, which reduces to a dynamic CWA. The interpreter for knowledge-based Golog as proposed by Reiter \shortcite{Rei01a} is based on DCA and reduces first-order reasoning to propositional one. However, in many real-world applications, it is inappropriate to have CWA, or dynamic CWA, or domain closure axiom.
+
+An essential component of any Golog interpreter is a query evaluation module, which solves the projection problem, that is, decide if a formula holds after a sequence of actions have been performed. Two powerful methods to solve the projection problem are {\em
+regression} and {\em progression}. Roughly, regression reduces a
+query about the future to a query about the initial knowledge base
+(KB). Progression, on the other hand, changes the initial KB
+according to the effects of each action and then checks whether the
+formula holds in the resulting KB.
+One advantage of progression
+compared to regression is that after a KB has been progressed, many
+queries about the resulting state can be processed without any extra
+overhead. Moreover, when the action sequence becomes very long,
+regression simply becomes unmanageable. However, current implementations
+of Golog are exclusively based on regression. This might be due to the negative result that
+in general progression is not first-order definable. However, recently,
+Liu and Lakemeyer \shortcite{LL09} showed that for the so-called local-effect actions, progression is always first-order definable and computable.
+
+Golog interpreters can be put into three categories: online, offline, and a combination of the two.
+An online interpreter is incomplete because no backtracking is allowed, while an offline interpreter is computationally expensive because of the much larger search space. In the presence of sensing, Reiter's interpreter for knowledge-based Golog is online, while the one for sGolog \cite{Lak99} is offline, outputting a tree of actions. On the other hand, IndiGolog combines online execution with offline execution of parts of programs, specified by the programmer with a search operator. However, unlike sGolog, IndiGolog ignores sensing results during offline execution of programs.
+To improve efficiency of Golog interpreters, there has been work on exploiting state-of-the-art planners. For example, Cla{\ss}en and Lakemeyer \shortcite{CL09} proposed to call a planner to achieve a goal during the execution of a Golog program.
+Baier \etc\ \shortcite{BFM07} developed an approach for compiling procedural domain control knowledge written in a Golog-like program into a planning instance which can then be solved by a planner.
+
+In this paper, we propose an interpreter for knowledge-based Golog with first-order incomplete information and sensing. We do not assume any of the CWA, dynamic CWA and DCA. The incomplete information is in the form of the so-called \properplus\ KBs \cite{LL02}, which is equivalent to a possibly infinite set of ground clauses. Our solution to the projection problem is based on exact progression and limited reasoning, and we exploit existing results regarding proper$^+$ KBs.
+Since the deduction problem for \properplus\ KBs is undecidable, Liu, Lakemeyer and Levesque \shortcite{LLL04} proposed a logic of limited belief called the subjective logic $\SL$, and proved that $\SL$-based reasoning with \properplus\ KBs is decidable. Reasoning based on $\SL$ is logically sound and sometimes complete. Given disjunctive information, it performs unit propagation, but only does case analysis in a limited way.
+On the other hand, Liu and Lakemeyer \shortcite{LL09} showed that for a restricted class of local-effect actions and \properplus\ KBs, progression is not only first-order definable but also efficiently computable.
+To improve efficiency, we implement the reasoning (right now, we do not do any case analysis) and progression procedures by grounding. The trick here is to use an appropriate number of special constants, which actually carries first-order information.
+
+We provide a search operator, which, unlike in indiGolog, returns a conditional program where branchings are conditioned on the results of sensing actions. We also provide a planning operator, which is used with a program when locally complete information is available, and calls a state-of-the-art planner to generate a sequence of actions constituting a legal execution of the program.
+
+We have experimented our interpreter with Wumpus world, blocks world, Unix domain, and service robot domains; the results showed the feasibility and efficiency of our approach.
+
+%The rest of the paper is organized as follows. In the next section, we introduce the background work of this paper. Then we present the syntax and semantics of LBGolog. Next, we show how to implement progression and query evaluation by grounding. In the following section,
+%we describe our implementation of a LBGolog interpreter and prove its correctness. After presenting some experimental results and examples, we discuss related work and conclude.
+
+
+\subsection{Implementation}
+We use the classic data structure of SAT solvers -- counter-based adjacency list to represent a ground clause. In this structure, literals are represented as integers, clauses are represented as lists of literals and have associated indexes. For each clause, there is a counter which keeps track of the number of literals in it. Each atom $p$ is associated with a list of indexes of clauses containing $p$ and a list of indexes of clauses containing $\neg p$. ?? So the main components of a KB are a CNF formula, a bijection between propositional atoms and indexes, and a situation in which the KB holds.
+
+?? When computing resolution between $\rho$ and $C \vee \overline{\rho}$ where $\rho$ is a literal and $C$ is a clause, we simply decrease the counter of $C \vee \overline{\rho}$ and delete $\overline{\rho}$ in it.
+When the counter becomes 1, the remaining literal will become a unit clause and trigger unit resolution.
+Similarly when a literal $\rho$ is obtained or generated in resolution, we need to delete all the clauses containing it, except $\rho$ itself.
+Here the list of indexes of all clauses containing $\rho$ can be obtained in constant time.
+For evaluating a clause, we need to search for its subset.
+For example, if we need to evaluate a clause, $p \vee \neg q \vee \neg r$, we only need to traverse clauses associated with the propositional atoms, $p$, $q$ and $r$, never considering the others.
+
+?? clarify the contribution, what's different from existing work 

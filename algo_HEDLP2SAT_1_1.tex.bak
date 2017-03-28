@@ -1,0 +1,33 @@
+\IncMargin{1em}
+\begin{algorithm}
+  \SetKwData{Left}{left}\SetKwData{This}{this}\SetKwData{Up}{up}
+  \SetKwFunction{Union}{Union}\SetKwFunction{FindCompress}{FindCompress}
+  \SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+
+  \Input{逻辑程序~$\Pi$~依赖图~$G_\Pi$~中的顶点~u~}
+  \Output{Nothing}
+  \BlankLine
+
+   %深搜函数~$DFS\_VISIT($~顶点~$~u~)$~的实现流程如下：
+   
+   color[u] $\leftarrow$ gray \tcp*[h]{将顶点~u~置为灰色}\\
+   time $\leftarrow$ time + 1 \\
+   d[u] $\leftarrow$ time \\
+   
+   
+   %\For{对于依赖图~$G_\Pi$~中的每一个顶点~v~}
+   \For{each vertex v in $G_\Pi$}
+   {
+     \tcc*[h]{依赖图~$G_\Pi$~中存在有向边~$<u,v>$~ 且 顶点~v~的颜色为白色}\\
+     \If{matrix[u][v]=1 and color[v]=white} 
+     {
+       DFS$\_$VISIT(v)\\
+     }
+   }
+   color[u] $\leftarrow$ black \\
+   time $\leftarrow$ time + 1 \\
+   f[u] $\leftarrow$ time；\\
+
+
+  \caption{~DFS$\_$VISIT(u)~}\label{find AllSCC 1}
+\end{algorithm}\DecMargin{1em} 

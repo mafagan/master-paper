@@ -1,0 +1,594 @@
+\chapter{从限定理论到稳定理论}
+
+本文主要考虑如何从一阶限定理论转化为一阶稳定理论，以实现一阶限定理论的计算方法。
+正是因为一阶稳定理论与回答集程序的关系以及回答集求解器的存在，我们只需要关注如何将
+一个一阶限定理论翻译为一个一阶稳定理论，使两者具有相同的或相应的模型；
+同时要尽量减少这一翻译过程的时间，以及由翻译造成的理论规模的膨胀和辅助谓词的增加，
+减少求解时额外的时间花销。
+
+本章将先给出需要用到的一些基本定义及已有的结果；
+然后分别提出两个翻译：从一阶并行限定理论到一阶稳定理论$Tr_v$，从一若干个一阶并行限定理论的合取到一阶稳定理论$Tr^s_v$；
+然后再将$Tr^s_v$可以扩展到适合一个或者多个带优先级的稳定理论；
+接下来还在不管辅助谓词的解释的情况下，原理论与翻译后的理论在任意论域下是等价的；
+最后对由翻译造成的理论规模的膨胀和辅助谓词的增加进行了分析。
+
+\section{基本定义及性质}
+
+如前所述，一阶限定理论和一阶稳定理论都是二阶逻辑的片段。
+因此，我们可将从前者到后者的翻译定义为一类公式到另一类公式的映射，
+形式化的定义如下所示：
+
+\begin{definition}
+设~$\Phi$~与~$\Psi$~为两类二阶语句，$R\subseteq \Phi \times \Psi$是一个二元关系，~$Tr:~ \Phi \rightarrow \Phi$~是一个函数，
+则：
+\begin{itemize}
+  \item ~$Tr$~是~$\Phi$~到~$\Phi$~的一个{\kai 翻译}当且仅当~$Tr$~是可计算的\footnote{经典的可计算论一般都指在集合上面的可计算函数\cite{cutland1980}，但在本文中的而这里的公式类并非是集合
+。但我们可以通过对符号集进行限制来将公式类变成公式集合。}；
+  \item ~$Tr$~{\kai 保持}关系$R$当且仅当对任意语句$\varphi\in \Phi$均有$(\varphi,Tr(\varphi))\in R$；
+  \item 从$\Phi$到$\Psi$在关系$R$下是{\kai 可译的}当且仅当存在一个从从$\Phi$到$\Psi$保持$R$的翻译。
+\end{itemize}
+\end{definition}
+
+\begin{example}
+根据上述定义，经典一阶逻辑中化合取范式、析取范式、否定范式、前缀范式的算法，均可是作从一阶公式到一阶合取范式、析取范式、否定范式、前缀范式保持逻辑等价关系的翻译。
+\end{example}
+
+在本文中，我们关注的翻译保持关系除了逻辑等价关系，还有另一种等价关系：
+\begin{definition}  
+设~$\varphi$~与~$\psi$~为两个二阶语句，$\Sigma$是一类结构，令$\sigma$为在$\psi$中出现但不在$\varphi$中出现的常元的集合。
+若$\varphi$在$\Sigma$上与$\exists \sigma\psi$逻辑等价，则称$\psi$在$\Sigma$上{\kai 投影等价}于$\varphi$，记作$\psi \propto_{\Sigma} \varphi$。
+特别地，当$\Sigma$包含所有结构时，则称$\psi$投影等价于$\varphi$，记作$\psi \propto \varphi$；
+当$\Sigma$仅包含所有有穷结构时，则称$\psi$投影等价于$\varphi$，记作$\psi \propto_{fin} \varphi$。
+\end{definition}
+
+在上面的定义中，$\exists \tau \psi$表示将$\tau$中的(个体、谓词、函词)常元在$\psi$中的所有出现替换为对应的(个体、谓词、函词)变元(仍记作$\tau$)后，
+再作用于二阶量词$\exists \tau$后得到的语句。
+如果$\varphi$的符号集与$\psi$的符号集除了$\tau$中的常元之外是相同的，即$v(\varphi)=v(\psi)-\tau$，
+那么$\varphi$与$\exists \tau \psi$才有可能逻辑等价，因为变元是不需要解释的，不会导致模型的不同。
+投影等价实际上不是一种等价关系，但我们仍称其为“等价”，因为只要将$\tau$中的变元赋值为对应常元的解释，两者的模型就是一样的，类似于逻辑等价。
+
+对于一个语句$\varphi$，我们引入一些未出现在$\varphi$中的谓词常元，然后再变换$\varphi$后得到$\psi$，
+最终仍能够使得$\varphi$与$\psi$在不管这些谓词常元的解释的情况下，具有相同的模型。
+这些引入的未出现在原公式中的用于辅助的谓词常元，我们称之为{\kai 辅助谓词常元}，其相应的变元称为{\kai 辅助谓词变元}。
+辅助谓词常元的引入，使得我们转换公式的时候更加灵活更加多样化。
+因此，保持投影等价的翻译，比起保持逻辑等价关系的翻译具有更好的灵活性和多样性，而发挥同样的效果。
+而保持投影等价的翻译，正是本文实现一阶限定理论的计算方法的重要手段。
+
+下面我们给出翻译的一些性质。
+
+设$\varphi$与$\psi$是任意两个语句，$\Sigma$是一类结构，若$\varphi$在$\Sigma$上与$\psi$逻辑等价，则$\varphi$在$\Sigma$上投影等价于$\psi$。
+与逻辑等价不同的是，投影等价一般是单方向的。例如，一阶语句$\forall x(P(x)\wedge Q(x))$投影等价于$\forall xP(x)$，但后者却不投影等价于前者。
+因此，对于两类公式$\Phi$和$\Psi$，从$\Phi$到$\Psi$保持逻辑等价关系的翻译，必定也是从$\Phi$到$\Psi$保持投影等价关系的翻译。
+换句话说，若从$\Phi$到$\Psi$在逻辑等价关系下是可译的，则从$\Phi$到$\Psi$在投影等价关系下也是可译的。
+
+设$\Phi$和$\Psi$为两类公式，$\Sigma$是一类结构，$\Sigma_0$是$\Sigma$的一个子类。
+若$Tr$是从$\Phi$到$\Psi$保持在$\Sigma$上的投影(逻辑)等价关系的翻译，
+$Tr$也是从$\Phi$到$\Psi$保持在$\Sigma_0$上的投影(逻辑)等价关系的翻译。
+
+语句间的可译性是传递的。设$\Phi,\Psi$和$\Theta$为三类公式，$\Sigma$是一类结构。若从$\Phi$到$\Psi$，
+以及从$\Psi$到$\Theta$均存在保持在$\Sigma$上的投影(逻辑)等价关系的翻译，那么必定存在从$\Phi$到$\Theta$保持在$\Sigma$上的投影(逻辑)等价关系的翻译。
+
+一阶并行限定理论有如下性质：
+\begin{proposition}\label{equcirc}
+设$\varphi$是任意一阶语句，$\psi$是与$\varphi$逻辑等价的一阶语句，则$\textrm{CIRC}[\varphi;$
+$\sigma_m;\sigma_{v}]$与$\textrm{CIRC}[\psi;\sigma_m;\sigma_{v}]$逻辑等价。
+\end{proposition}
+
+\begin{proof}
+设$\varphi$是任意一阶语句，若$\psi$是与$\varphi$逻辑等价的一阶语句，则
+$\varphi$与$\psi$具有相同的符号集，并且具有相同的模型。
+那么，$\varphi$与$\psi$具有在偏序关系$\preceq_{\sigma_m,\sigma_v}$下相同的极小模型，
+$\textrm{CIRC}[\varphi;\sigma_m;\sigma_{v}]$与$\textrm{CIRC}[\psi;\sigma_m;\sigma_{v}]$具有相同的模型。
+\end{proof}
+该命题说明了并行限定理论没有改变一阶语句间的逻辑等价性，换句话说，若两个一阶理论逻辑等价，则它们在相同限定策略的并行限定理论语义下仍然逻辑等价。
+根据该命题，我们可以将被限定的一阶语句转换成与之逻辑等价的范式，以此获得某些性质，这也是本文的主要工作的根本。
+
+这个性质可以推广到一阶带优先级的限定理论：
+\begin{proposition}\label{equpri}
+设$\varphi$是任意一阶语句，$\psi$是与$\varphi$逻辑等价的一阶语句，则$\textrm{CIRC}[\varphi;$
+$\sigma_1>\sigma_2> \cdots >\sigma_k;\sigma_{v}]$与$\textrm{CIRC}[\psi;\sigma_1>\sigma_2> \cdots >\sigma_k;\sigma_{v}]$逻辑等价。
+\end{proposition}
+
+\section{从一阶并行限定理论到一阶稳定理论的翻译}
+
+在这一节中， 我们将分析一阶并行限定理论与一阶稳定理论的公式结构的相似性，然后基于这种相似性，
+提出一个从一阶并行限定理论到一阶稳定理论的翻译，
+然后分析由这个翻译造成的理论膨胀和引入的辅助谓词的个数。
+
+在前面的章节中，我们强调了
+一阶并行限定理论与一阶稳定理论都是二阶语言类。
+回顾两者的二阶公式形式的定义：
+\begin{eqnarray}\label{defcirc}
+\textrm{CIRC}[\varphi;\sigma_m;\sigma_{v}]=\varphi\wedge\forall \sigma^*_m\sigma^{*}_{v}(\sigma^*_m < \sigma_m \rightarrow \neg\varphi(\sigma^*_m, \sigma^{*}_{v}))
+\end{eqnarray}
+\begin{eqnarray}\label{defsm}
+\textrm{SM}[\psi;\sigma_i]=\psi\wedge\forall\sigma^*_i(\sigma^*_i<\sigma_i\rightarrow\neg\mathrm{St}(\psi;\sigma_i))
+\end{eqnarray}
+从结构上看，一阶并行限定理论与一阶稳定理论具有近似的形式，都逻辑等价于一个一阶语句与一个二阶语句的合取。
+正是因为公式结构的相似性，我们猜想，是否存在一个从阶并行限定理论到一阶稳定理论保持在某类结构上的逻辑等价或者投影等价关系的翻译呢？
+我们希望设计出一种可以保持在尽可能多的结构上的等价关系的翻译，
+并且使得由翻译所造成的理论的膨胀和其他额外花销尽可能小，以及有计算机实现翻译的算法所耗时间也尽可能少。
+
+从公式结构看，要设计两者具有想用模型的翻译$Tr$，我们要解决下列四个难点：
+\begin{enumerate}
+  \item 使原一阶语句$\varphi$与翻译后的一阶语句$Tr(\varphi)$具有相同的模型；
+  \item 让原二阶公式$\varphi(\sigma^*_m, \sigma^{*}_{v})$与翻译后的二阶公式$\mathrm{St}(Tr(\varphi);\sigma_i)$等价；
+  \item 对原公式的翻译不会影响$\sigma^*_m < \sigma_m$的判断；
+  \item 模拟可以在论域中任意改变的可变谓词变元$\sigma^*_v$。
+\end{enumerate}
+
+从定义来看，除了可变谓词变元$\sigma^*_v$，一阶并行限定理论与一阶稳定理论最大的不同在于二阶公式部分，
+分别是$\varphi(\sigma^*_m, \sigma^{*}_{v})$和$\mathrm{St}(\psi;\sigma_i)$。
+前者是将变元直接替换相应的常元，后者除了对于蕴含式的处理外也是用谓词变元替换谓词常元，
+因此，我们只要尽可能的排除或者减少蕴含子式，就可以更容易的解决第2个难点。
+
+根据上一节的命题\ref{equcirc}，一阶语句间的逻辑等价性在一阶并行限定理论中仍然得到保持。
+我们从前一章中了解到，每个一阶公式都可以变换为与之逻辑等价的否定范式(NNF)，而每一个NNF仅由文字、$\wedge$、$\vee$、$\forall$和$\exists$构成，
+也就消除了公式中的$\rightarrow$和$\leftrightarrow$。
+虽然NNF中可能会包含形如$\neg P(\bar{t})$的负文字，在本文中被看作成$P(\bar{t})\rightarrow \bot$，
+所以NNF中仍可能包含蕴含联结符$\rightarrow$，但是，
+这些$\rightarrow$只会出现在原子公式的前面，这就使得公式结构更简单。
+因此，如果我们将一阶限定理论中的一阶语句转换成相应的否定范式形式，那么当我们在设计翻译的时候，就能更好地处理这些蕴含联结符。
+
+上一章中提到，Heng Zhang等人在\cite{Heng2011}中提出了一个从一阶限定理论到一阶稳定理论保持逻辑等价关系的翻译(定理\ref{theorem_c2sm})，
+将一阶限定理论的计算嵌入到一阶稳定理论的计算中，实际上解决了上述四个难点中的第1和2个难点。
+但是，他们的方法不允许可变谓词和函词常元的存在，
+而不允许可变常元的限定策略会使限定理论的约束太强，以致较难应用于很多问题的表达上。
+因为很多谓词常元的解释都是根据极小化谓词的解释而变化，如果限制它们变成不变谓词，则会导致找到的极小模型过多，往往不止我们预期的模型。
+因此，可变常元在限定理论的形式化中占有相当重要的地位。
+
+另外，相比于函词常元和个体常元，本文更关注的是谓词常元。因为，对于每个$n$元函词，我们往往可以用一个$n+1$元的辅助谓词去刻画它。
+具体地说，对于一阶公式$\varphi$中的函词$f(\bar{x})$，我们可以引入公式$\theta_f$：$P_f(\bar{x},y) \wedge \neg[P_f(\bar{x},y)\wedge P_f(\bar{x},z) \wedge (y \neq z)]$，
+然后用$y$代替原公式$\varphi$中的$f(\bar{x})$后得到的$\varphi'$，
+然后再将新引入的公式和替换后的公式作用于量词$\exists y\forall z$，最终得到无函词$f$的一阶语句$\exists y\forall z(\varphi' \wedge \theta_f)$投影等价于原公式$\varphi$。
+特别地，对于0元函词常元，即个体常元，我们只需要用一个存在量词即可刻画它。
+因此，我们可以用辅助谓词来刻画公式中的所有函词，实现从任意一阶语句到不带函词和个体常元的一阶语句保持投影等价关系的翻译。
+所以，从本章开始，本文将不额外讨论不变函词(和个体)常元以及可变函词(和个体)常元，只讨论谓词。
+
+因为在一阶限定理论的定义公式(\ref{defcirc})中，存在着$\sigma^*_v$这种不参与谓词集的比较$\sigma^*_m < \sigma_m$的谓词变元，但却能任意变化；
+而在一阶稳定理论的定义公式(\ref{defsm})中， 所有谓词变元都会参与谓词集的比较，因此我们优先考虑引入辅助谓词来模拟这些可变谓词变元，设计出一个保持在投影等价关系的翻译。
+幸运的是，我们确实找到了这样的翻译，具体定义如下：
+
+\begin{definition}\label{def_circ2sm}
+设$\varphi$为任意具有否定范式形式的一阶语句，$\sigma_m$和$\sigma_v$表示两个互不相交的谓词常元集合，定义
+$Tr_{v}(\varphi;\sigma_m;\sigma_v)$为如下公式的合取：
+\begin{eqnarray}
+\textstyle
+\varphi^{\neg \neg} \wedge \tilde{\varphi}\label{pe1} \hspace{-2.8cm}\\
+\gamma \leftrightarrow \bigwedge\limits_{P \in \sigma_m} \forall \bar{x}(P(\bar{x}) \vee \neg P(\bar{x}))\label{pe2} \hspace{-2.8cm}\\
+\bigwedge\limits_{Q' \in \sigma'_{v}} \forall \bar{x}(\gamma \rightarrow Q'(\bar{x}))\label{pe3}\hspace{-2.8cm}
+\end{eqnarray}
+其中：
+\begin{enumerate}
+  \item $\varphi^{\neg\neg}$是将$\varphi$中所有形如$P(\bar{x})(P\!\in\!\sigma_m)$的正文字替换为$\neg\neg P(\bar{x})$后所得到的公式；
+  \item $\tilde{\varphi}$是对$\varphi$按如下方法替换后得到的公式：
+  \begin{itemize}
+    \item 将$\varphi$中所有形如$\neg P(\bar{x})(P~\in~\sigma_m)$的负文字替换为$(P(\bar{x})\rightarrow \gamma)$，
+    \item 将$\varphi$中所有形如$Q(\bar{x})(Q~\in~\sigma_v)$的正文字替换为$Q'(\bar{x})$，
+    \item 将$\varphi$中所有形如$\neg Q(\bar{x})(Q~\in~\sigma_v)$的负文字替换为$(Q'(\bar{x})\rightarrow \gamma)$；
+  \end{itemize}
+  \item 0元谓词$\gamma$是从未出现过的辅助谓词，谓词$Q'$是相应于可变谓词常元$Q$引入的从未出现过的辅助谓词，并且每对$Q$和$Q'$具有相同的元数，谓词集$\sigma'_v$表示由这些辅助谓词$Q'$组成的集合。
+\end{enumerate}
+\end{definition}
+
+总的来说，翻译$Tr_v$通过引入辅助谓词，让翻译后的公式在一阶稳定模型语义下在所有结构上投影等价于原来的一阶限定理论，也解决了之前提出的四个难点。
+首先，翻译$Tr_v$保证了翻译后的一阶公式投影等价于原公式。第二，$\mathrm{St}(P(\bar{t}\rightarrow \bot);\sigma_m,\sigma'_v,\gamma)$模拟了$\neg P^*(\bar{t})$，
+最终使得原二阶公式$\varphi(\sigma^*_m, \sigma^{*}_{v})$与翻译后的二阶公式$\mathrm{St}(\tilde{\varphi};\sigma_m,\sigma'_v,\gamma)$等价。
+第三，当$\sigma^*_m < \sigma_m$时，0元谓词常元$\gamma$为真而其对应的变元$\gamma^*$为假；当$\sigma^*_m = \sigma_m$时，$\gamma$和$\gamma^*$都为真，然后使得所有辅助谓词常元的外延与其对应的变元的外延相同，因此辅助谓词的比较关系不会影响极小化谓词的比较。
+第四，因为公式(\ref{pe3})要被满足，所以$\sigma'_v$中的辅助谓词的外延始终被解释为整个论域。 
+
+下面的定理说明了翻译$Tr_v$的可靠和完备的。
+
+\begin{theorem}\label{theorem_pc2sm}
+设$\varphi$为任意具有否定范式的一阶语句，$\sigma_m$和$\sigma_v$表示两个互不相交的谓词常元集合，
+则有$\exists \sigma'_{v} \exists \gamma \textit{\textrm{SM}}[Tr_{v}(\varphi;$ $\sigma_m;$ $\sigma_{v});$ $\sigma_m, \sigma'_{v}, \gamma]$
+与$\textit{\textrm{CIRC}}[\varphi;\sigma_m;\sigma_{v}]$逻辑等价，其中$\sigma'_{v}$和$\gamma$是由翻译$Tr_v$引入的辅助谓词。
+\end{theorem}
+
+在证明此定理之前，我们需要用到某些引理。
+
+\begin{lemma}\label{lemma_ture}
+  对于一个具有否定范式形式的一阶语句$\varphi$,
+设将$\varphi$中的某些负文字替换为$\top$后得到语句$\varphi^{\top}$,
+则有$\varphi \wedge \varphi^{\top}$与$\varphi$逻辑等价.
+\end{lemma}
+\begin{proof}
+从左到右的等价性，即$\varphi \wedge \varphi^{\top}\models \varphi$可以立刻得到。
+
+要证明反方向，根据一阶逻辑的可靠性和完备性，我们只需要证明$\varphi\models \varphi^{\top}$。
+下面我们通过对否定范式$\varphi$的结构作归纳来证明。
+
+基始。
+若$\varphi$是正文字，则这时$\varphi^{\top}$就是$\varphi$，显然有$\varphi\models \varphi$。
+若$\varphi$是负文字，则这时$\varphi^{\top}$或者是$\top$，或者是$\varphi$，均能使$\varphi\models \varphi^{\top}$成立。
+
+归纳步骤。否定范式$\varphi$有一下四个形式之一：$\varphi_1\wedge\varphi_2$，$\varphi_1\vee\varphi_2$，$\forall x \varphi_1(x)$和$\exists x\varphi_1(x)$。
+
+若$\varphi=\varphi_1\wedge\varphi_2$，由归纳假设有$\varphi_1\models \varphi^{\top}_1$ 和 $\varphi_2\models \varphi^{\top}_2$。
+根据一阶逻辑的形式推演规则，我们可得到：
+$$\varphi_1\wedge \varphi_2\models  \varphi^{\top}_1$$
+$$\varphi_1\wedge \varphi_2\models  \varphi^{\top}_2$$
+因此有：
+$$\varphi_1\wedge \varphi_2\models \varphi^{\top}_1 \wedge \varphi^{\top}_2$$
+%即，$\varphi\models \varphi^{\top}$。
+
+若$\varphi=\varphi_1\vee\varphi_2$，
+由归纳假设和一阶逻辑的形式推演规则，我们有：
+$$\varphi_1\models  \varphi^{\top}_1 \vee \varphi^{\top}_2$$
+$$\varphi_2\models  \varphi^{\top}_2 \vee \varphi^{\top}_1$$
+则有：
+$$\varphi_1\wedge \varphi_2\models \varphi^{\top}_1 \vee \varphi^{\top}_2$$
+%即，$\varphi\models \varphi^{\top}$。
+
+若$\varphi=\forall x\varphi_1(x)$，设$u$是不在$\varphi_1(x)$中出现的自由变元，
+由归纳假设有$\varphi_1(u)\models \varphi^{\top}_1(u)$，
+根据一阶逻辑的形式推演规则，有：
+$$\forall x \varphi_1(x) \models \varphi_1(u)$$
+$$\varphi^{\top}_1(u)\models \forall x \varphi^{\top}_1(x)$$
+因此有：
+$$\forall x\varphi_1(x) \models \forall x \varphi^{\top}_1(x)$$
+%即，$\varphi\models \varphi^{\top}$。
+
+若$\varphi=\exists x\varphi_1(x)$，设$u$是不在$\varphi_1(x)$中出现的自由变元，
+由归纳假设有$\varphi_1(u)\models \varphi^{\top}_1(u)$，
+设$c$是不在$\varphi_1(x)$中出现的个体常元，根据一阶逻辑的形式推演规则，有：
+$$\varphi_1(c)\models \varphi^{\top}_1(c)$$
+因此有：
+$$\exists x\varphi_1(x) \models \exists x \varphi^{\top}_1(x)$$
+%即，$\varphi\models \varphi^{\top}$。
+
+由基始和归纳步骤我们证明了$\varphi\models \varphi^{\top}$，则显然有$\varphi\models \varphi \wedge \varphi^{\top}$。
+综合上述，我们证明了$\varphi\equiv \varphi \wedge \varphi^{\top}$，该引理得证。
+
+\end{proof}
+
+\begin{lemma}\label{lemma_negneg}
+  对任意一个一阶语句$\varphi$,设$\sigma_m$为$v(\varphi)$中的一个谓词常元集，
+设$\varphi^{\neg\neg}$表示将$\varphi$中所有形如$P(\bar{x})(P~\in~\sigma_m)$的正文字替换为$\neg\neg P(\bar{x})$后所得到的公式，
+若$\sigma^*_m<\sigma_m$，
+则有$\mathrm{St}(\varphi^{\neg\neg};\sigma_m)$与$\varphi$逻辑等价。
+\end{lemma}
+
+\begin{proof}
+根据命题\ref{negst}，
+对于形如$\neg P(\bar{x})$的负文字，当$\sigma^*_m<\sigma_m$时，有$\mathrm{St}(\neg P(\bar{x});\sigma_m) \equiv \neg P(\bar{x})$。
+
+同样的，对于形如$\neg\neg P(\bar{x})$的表达式，当$\sigma^*_m<\sigma_m$时，有$\mathrm{St}(\neg\neg P(\bar{x});\sigma_m) \equiv \neg\neg P(\bar{x})$。
+而$\neg\neg P(\bar{x})$又与$P(\bar{x})$逻辑等价。
+
+因此，将$\varphi$中所有形如$P(\bar{x})$的正文字替换为$\neg\neg P(\bar{x})$后，$\mathrm{St}(\varphi^{\neg\neg};\sigma_m)$与$\varphi$逻辑等价，该引理得证。
+\end{proof}
+
+基于以上两个引理，接下来我们证明定理\ref{theorem_pc2sm}。
+
+\begin{proof}
+在开始证明该定理前，我们先定义证明过程中用到的某些简写和符号。
+为简便起见，在此证明过程中，我们将翻译后的语句$Tr_{v}(\varphi;$ $\sigma_m;$ $\sigma_{v})$简写成$\pi(\varphi)$。
+因为整个证明过程中，内涵谓词集都是$\sigma_i\cup \sigma'_v \cup\gamma$，
+因此我们一般忽略表达式中的内涵谓词，即将$\mathrm{St}(\varphi;\sigma_i,\sigma'_v,\gamma)$简写成$\mathrm{St}(\varphi)$。
+令$\sigma$表示一阶语句$\varphi$的符号集，
+令$\tau$表示翻译后的语句$\pi(\varphi)$的符号集，即$\tau = \sigma \cup \sigma'_{v} \cup \{\gamma\}$，
+令$\tau_i$表示内涵谓词集，即$\tau_{i} = \sigma_m \cup \sigma'_{v} \cup \{\gamma\}$。
+设$\mu$为一个$\sigma$-结构，$\tau$-结构$\nu$是$\mu$关于符号集$\tau$的一个膨胀，即这两个结构在$\sigma$的谓词上的解释是一致的。
+
+“$\Rightarrow$”： 
+假设$\nu$满足$\textrm{SM}[\pi(\varphi);\tau_{i}]$，
+现在我们要证明的是，$\mu$是$\textrm{CIRC}[\varphi;\sigma_m;\sigma_{v}]$的一个模型。
+
+因为$\nu$是$\pi(\varphi)$关于$\tau_i$的稳定模型，所以$\nu$必定满足一阶语句$\varphi^{\neg \neg}$。
+而$\nu$和$\mu$在$\sigma$的谓词上的解释是一致的，因此$\mu$满足一阶语句$\varphi$。
+因为$\nu$满足公式(\ref{pe2})，又因为对于所有$\sigma_m$中的谓词$P$，$\forall \bar{x}(P(\bar{x}) \vee \neg P(\bar{x}))$总是为真，
+所以$\gamma$在$\nu$的解释下为真。
+另外，因为公式(\ref{pe3})被$\nu$满足，所以$\sigma'_{v}$中的所有谓词$Q'$都被解释为整个论域$A$。
+
+接下来，我们要用反证法证明$\mu$要满足该一阶并行限定理论的二阶语句部分。
+为导出矛盾，我们反设$\mu$是$\varphi$在关系$\prec_{\sigma_m,\sigma_v}$下的一个极小模型，即存在
+$\mu$上的一个赋值$\alpha$，在$\mu$上同时满足$\sigma^*_m < \sigma_m$和$\varphi(\sigma^*_m,\sigma^{*}_{v})$。
+
+设$\beta$是$\nu$上的一个赋值，并且$\beta$与$\alpha$在谓词变元$\gamma$和极小化谓词变元上的赋值是一致的，即
+$\beta(\sigma^*_m) = \alpha(\sigma^*_m)$和$\beta(\gamma^{*}) = \bot$。
+因为$\sigma'_{v}$中的所有谓词的外延在$\nu$中是整个论域，所以无论$\beta$对$\sigma'^*_v$中的谓词变元作如何的赋值，
+都会使得$\beta$在$\nu$上满足$\sigma'^{*}_{v} \leq \sigma'_{v}$。
+因此，$\beta$在$\nu$上满足$\tau^{*}_{i} < \tau_{i}$。
+
+根据引理\ref{lemma_negneg}，我们有：$\nu,\beta \models \mathrm{St}(\varphi^{\neg \neg})$当且仅当$\mu \models \varphi$。
+因此，$\beta$在$\nu$上满足$\mathrm{St}(\varphi^{\neg \neg})$。
+
+根据操作$\mathrm{St}$的定义，对于$\sigma_m$中的谓词常元$P$，
+我们有：
+  $$\begin{array}{ll}
+ & \mathrm{St}(\forall \bar{x}(P(\bar{x}) \vee \neg P(\bar{x})))\\
+ = & \forall \bar{x}(P(\bar{x}) \vee \mathrm{St}(\neg P(\bar{x})))\\
+ = & \forall \bar{x}(P^{*}(\bar{x}) \vee \neg P(\bar{x}))\\
+ = & \forall \bar{x}(P(\bar{x}) \rightarrow P^{*}(\bar{x}))\\
+ = & P \leq P^*
+  \end{array}$$
+因为$\beta$在$\nu$上满足$\sigma^*_m < \sigma_m$，则必定至少存在一对$P$和$P^*$不满足$P \leq P^*$，
+因此$\beta$在$\nu$上不满足这些形如$P \leq P^*$的公式的合取，即$(\nu,\beta) \not\models \bigwedge_{P\in\sigma_m}\mathrm{St}(\forall \bar{x}(P(\bar{x}) \vee \neg P(\bar{x})))$。
+而$\gamma^*$被$\beta$赋值为假，因此$\beta$在$\nu$上满足$\mathrm{St}((\ref{pe2}))$。
+
+因为$\mathrm{St}((\ref{pe3})) = \bigwedge_{Q'\in\sigma'_v} \forall \bar{x}(\gamma^{*} \rightarrow Q'^{*}(\bar{x})) \wedge (\ref{pe3})$，所以
+$\mathrm{St}((\ref{pe3}))$也被$\beta$在$\nu$上满足。
+
+正因为$\beta$在$\nu$上是否满足$\mathrm{St}((\ref{pe3}))$，与$\sigma'^*_v$中的谓词变元$Q'^*$的赋值无关，
+因此$\beta$可以对这些$Q'^*$进行任意赋值，
+这就刻画了一阶并行限定理论中的可变谓词变元。
+因此，我们可以将$\beta$对这些$Q'^*$的赋值与$\alpha$对$\sigma^*_v$中的可变谓词变元$Q^*$的赋值保持一致。
+因为$\varphi$具有否定范式的形式，对于$\sigma^*_m \cup \sigma'^*_v$中的谓词变元$P^*$，
+在$\varphi$中所有形如$P^*(\bar{x})$的正文字，在$\mathrm{St}(\tilde{(\varphi}))$中还是以$P^*(\bar{x})$的形式出现；
+在$\varphi$中所有形如$\neg P^*(\bar{x})$的负文字，在$\mathrm{St}(\tilde{(\varphi}))$中以$(P^*(\bar{x})\rightarrow \gamma^*)$即$(P^*(\bar{x})\rightarrow \bot)$的形式出现。
+因此，通过对$\varphi$的结构作归纳，可以证明$\beta$在$\nu$上满足$\mathrm{St}(\tilde{(\varphi}))$当且仅当$\alpha$在$\mu$上满足$\varphi(\sigma^*_m,\sigma^{*}_{v})$。
+根据反设，我们知道后者是成立的。
+
+因此，$\beta$在$\nu$上同时满足$\tau^{*}_{i} < \tau_{i}$和$\mathrm{St}(\varphi^{\neg \neg} \wedge \tilde{(\varphi})\wedge (\ref{pe2})\wedge (\ref{pe3}))$，
+但是，这与$\nu$是$\pi(\varphi)$关于$\tau_i$的稳定模型这一假设矛盾，则反设不成立。
+这就证明了$\mu$是$\varphi$在关系$\prec_{\sigma_m,\sigma_v}$下的一个极小模型。
+
+
+%Using \textit{reductio ad absurdum}, we assume that $\alpha$, an assignment in $\mu$,
+%satisfies both $\sigma^*_m < \sigma_m$ and $\varphi(\sigma^*_m,\sigma^{*}_{v})$.
+%Let $\beta$ be an assignment in $\nu$ s.t. $\beta(\sigma^*_m) = \alpha(\sigma^*_m)$ and $\beta(\gamma^{*}) = \bot$.
+%Due to the interpretation for $\sigma'_{v}$ in $\nu$, whatever predicate variables in $\sigma^{*}_{v}$ are assigned to,
+%$\beta$ satisfies $\sigma'^{*}_{v} \leq \sigma'_{v}$.
+%Obviously it is true that $\tau^{*}_{i} < \tau_{i}$ in $\beta$.
+%It is clear that $\beta$ satisfies $\mathrm{St}(\varphi^{\neg \neg};\tau_{i})$ iff $\mu$ satisfies $\varphi$.
+%Thanks to $\sigma^*_m < \sigma_m$, there is at least a predicate variable $P^{*} \in \sigma^*_m$
+%letting $\forall \bar{x}(P^{*}(\bar{x}) \vee \neg P(\bar{x}))$ be false and
+%$\mathrm{St}((\ref{pe2});\tau_{i})$ is satisfied by $\beta$.
+%In addition, $\beta$ satisfies $\mathrm{St}((\ref{pe3});\tau_{i})$
+%and predicate variables $Q'^{*}$ can be arbitrary on the domain.
+%Now we let $\beta$ assign $Q'^{*}$ in $\sigma'^{*}_{v}$ as same as $Q^{*}$ in $\sigma^{*}_{v}$ assigned by $\alpha$.
+%As $\varphi$ is in NNF without implication, by a simple induction on formula structure, it is proved that
+%$\beta$ satisfies $\mathrm{St}(\tilde{\varphi};\tau_{i})$ iff $\varphi(\sigma^*_m,\sigma^{*}_{v})$ is satisfied by $\beta$.
+%According to the above assumption, we conclude that $\beta$ satisfies $\tau^{*}_{i} < \tau_{i}$ and $\mathrm{St}(\pi(\varphi);\tau_{i})$.
+%Since a contradiction is obtained, we can know that $\mu$ is a model of $\textrm{CIRC}[\varphi;\sigma_m;\sigma_{v}]$.
+
+“$\Leftarrow$”：
+假设$\mu$满足$\textrm{CIRC}[\varphi;\sigma_m;\sigma_{v}]$，
+现在我们要证明的是，$\nu$是$\pi(\varphi)$关于$\tau_i$的一个稳定模型。
+
+令$\nu$将$\gamma$解释为$\top$，将$\sigma'_{v}$中的辅助谓词$Q'$解释为包含整个论域$A$中的元素的关系，
+因此，$\nu$满足(\ref{pe2})和(\ref{pe3})。
+因为$\mu$满足$\varphi$，而且$\nu$与$\mu$在$\sigma$的谓词上的解释是一致的，
+所以$\nu$也满足$\varphi$。
+因为$\nu(\gamma)=\top$，所以$\tilde{\varphi}$中所有形如$(P(\bar{x})\rightarrow \gamma)$的表达式也为真，
+根据引理\ref{lemma_ture}，$\nu$满足$\varphi^{\neg \neg} \wedge \tilde{\varphi}$。
+因此，$\nu$是$\pi(\varphi)$的一个模型。
+
+接下来，我们同样用反证法证明$\nu$满足一阶稳定理论中的二阶语句部分。
+为导出矛盾，我们反设$\nu$不是$\pi(\varphi)$关于$\tau_i$的稳定模型，即存在
+$\nu$上的一个赋值$\beta$，在$\nu$上同时满足$\tau^{*}_{i} < \tau_{i}$和$\mathrm{St}(\pi(\varphi))$。
+
+在此反设下，我们断言，$\beta$在$\nu$上满足$\sigma^*_m < \sigma_m$。
+否则，若$\beta$在$\nu$上满足$\sigma^*_m = \sigma_m$，
+则对于每对极小化谓词常元和变元$P$和$P^*$，都满足$P = P^*$以及$P \leq P^*$，
+即$(\nu,\beta) \models \bigwedge_{P\in\sigma_m}\mathrm{St}(\forall \bar{x}(P(\bar{x}) \vee \neg P(\bar{x})))$。
+而$\beta$在$\nu$上满足$\mathrm{St}((\ref{pe2}))$，则$\beta(\gamma^*)=\top =\nu(\gamma)$。
+又$\beta$在$\nu$上满足$\mathrm{St}((\ref{pe3}))$，则对于$\sigma'^*_v$中的每个谓词变元$Q'^*$以及对应的常元$Q'$，都有$\beta(Q'^*)=\nu(Q')$。
+因此，$\beta$在$\nu$上满足$\tau^{*}_{i} < \tau_{i}$，与反设不符，则我们的断言是有效的，即$(\nu,\beta) \models\sigma^*_m < \sigma_m$。
+
+既然$\beta$在$\nu$上满足$\sigma^*_m < \sigma_m$，那么必定至少存在一对极小化谓词常元和变元$P$和$P^*$，不满足$P \leq P^*$，
+因此，根据$\mathrm{St}((\ref{pe2}))$，$\gamma^*$应被$\beta$赋值为$\bot$。
+进一步地说，$\forall \bar{x}(\gamma^{*} \rightarrow Q'^{*}(\bar{x}))$在$\beta$的赋值下为真，
+则这些$Q'^{*}$实际上即使被任意赋值，仍让$\beta$在$\nu$上满足$\sigma'^*_v < \sigma'_v$。
+正因为$\varphi$具有否定范式的形式以及根据$\tilde(\varphi)$的获得方式，我们可以证明，如果$\beta(\sigma^{*}_{v}) = \beta(\sigma'^{*}_{v})$，那么$\beta$在$\nu$上满足$\varphi(\sigma^*_m,\sigma^{*}_{v})$当且仅当
+满足$\mathrm{St}(\tilde{(\varphi}))$。
+根据反设，后者显然成立，则$\beta$在$\nu$上满足$\mathrm{St}(\tilde{(\varphi}))$
+
+设$\alpha$是$\mu$上的一个赋值，而且满足$\alpha(\sigma^*_m)=\beta(\sigma^*_m)$以及$\alpha(\sigma^{*}_{v}) = \beta(\sigma'^{*}_{v})$。
+又根据前面的断言，$\alpha$在$\mu$上满足$\sigma^*_m < \sigma_m$。
+因此，$\alpha$在$\mu$上同时满足$\sigma^*_m < \sigma_m$和$\varphi(\sigma^*_m,\sigma^{*}_{v})$，
+但这与$\mu$满足$\textrm{CIRC}[\varphi;\sigma_m;\sigma_{v}]$一假设矛盾，则反设不成立。
+因此，$\nu$是$\pi(\varphi)$关于$\tau_i$的稳定模型。
+
+\end{proof}
+%First, we suppose that $\mu$ is a $\sigma$-structure satisfying $\textrm{CIRC}[\varphi;\sigma_m;\sigma_{v}]$ defined in a domain $D$.
+%Let $\nu$ interpret $\gamma$ to $\top$ and every $Q'$ in $\sigma'_{v}$ to a relation filled up with $D$.
+%In other words, for every $Q' \in \sigma'_{v}$, $Q'(\bar{x})$ and $\gamma$ are always valid in the interpretation of $\nu$.
+%Now we need to show that $\nu$ satisfies $\textrm{SM}[Tr_{v}(\varphi;\sigma_m;\sigma_{v});\tau_{i}]$.
+%%For convenience, we shortly rewrite $\pi(\varphi)$ for $Tr_{v}(\varphi;\sigma_m;\sigma_{v})$.
+%It is not difficult to check $\nu$ satisfies $Tr_{v}(\varphi;\sigma_m;\sigma_{v})$ (shortly, $\pi(\varphi)$).
+%To obtain a contradiction, we assume that $\nu$ is not a model of $\textrm{SM}[\pi(\varphi);\tau_{i}]$.
+%Suppose that an assignment $\beta$ satisfies both $\tau^{*}_{i} < \tau_{i}$
+%and $\mathrm{St}(\pi(\varphi);\tau_{i})$.
+%In this assumption, we assert that $\beta$ satisfies $\sigma^*_m < \sigma_m$.
+%Otherwise, $\sigma^*_m = \sigma_m$ implies that for all $P^{*} \in \sigma^*_m$, $\forall \bar{x}(P^{*}(\bar{x}) \vee \neg P(\bar{x}))$ are true. Next, $\beta$ satisfies $\gamma^{*} \leftrightarrow \forall \bar{x}(P^{*}(\bar{x}) \vee \neg P(\bar{x}))$, so $\gamma^{*}$ should be assigned to $\top$.
+%Accordingly for every $Q'^{*} \in \sigma'^{*}_{v}$, $Q'^{*}(\bar{x})$ is valid due to
+%$\mathrm{St}((\ref{pe3});\tau_{i})$.
+%As mentioned above, $\tau^{*}_{i} = \tau_{i}$ is satisfied by $\beta$ and
+%it breaks the assumption, so the assertion is true.
+%
+%Since $\beta$ satisfies $\sigma^*_m < \sigma_m$,
+%there is at least a predicate variable $P^{*} \in \sigma^*_m$
+%dissatisfying $\forall \bar{x}(P^{*}(\bar{x}) \vee \neg P(\bar{x}))$.
+%Hence $\gamma^{*}$ is assigned to $\bot$ by $\beta$.
+%
+%Moreover $\forall \bar{x}(\gamma^{*} \rightarrow Q'^{*}(\bar{x}))$ are valid and actually $Q'^{*}$ is arbitrary in the domain.
+%Note that $\beta$ satisfies $\mathrm{St}(P(\bar{x}) \rightarrow \gamma;\tau_{i})$ iff $\beta$ satisfies $\neg P^{*}(\bar{x})$.
+%According to the substitution method and the NNF of $\varphi$,
+%it is clear that if $\beta(\sigma'^{*}_{v}) = \beta(\sigma^{*}_{v})$,
+%$\beta$ satisfies $\mathrm{St}(\tilde{\varphi};\tau_{i})$
+%iff  $\beta$ satisfies $\varphi(\sigma^*_m,\sigma^{*}_{v})$.
+%Thus $\beta$ satisfies $\varphi(\sigma^*_m,\sigma^{*}_{v})$ in $\nu$.
+%
+%Let $\alpha$ be an assignment obtained by restricting $\beta$ to variables in $\sigma^*_m$
+%and let $\sigma^{*}_{v}$ in $\alpha$ be the same as $\sigma'^{*}_{v}$ in $\beta$.
+%So $\alpha$ satisfies $\sigma^*_m < \sigma_m$ and
+%$\varphi(\sigma^*_m,\sigma^{*}_{v})$ in $\mu$.
+%No doubt that this conclusion implies that $\mu$ is not a model of $\textrm{CIRC}[\varphi;\sigma_m;\sigma_{v}]$
+%and makes a contradiction.
+%So $\nu$ is a model of $\textrm{SM}[\pi(\varphi);\tau_{i}]$.
+
+诚然，翻译$Tr_v$保持在所有结构上的投影等价关系将一个一阶限定理论翻译成了一个一阶稳定理论，
+但与此同时，它不可避免的引入了辅助谓词和增大了理论的规模。
+
+我们定义一个理论的{\kai 规模}为理论中的所有逻辑联结符和原子公式的个数。
+我们往往使用引入的辅助谓词的个数和由翻译造成的理论的规模的变化，来评价一个翻译的优劣。
+翻译$Tr_v$引入的辅助谓词的个数比可变谓词常元的个数多一个，即$|\sigma_v|+1$。
+实际应用中，一阶限定理论中可变谓词常元的个数往往较少，所以我们认为该翻译引入的辅助谓词的个数在可接受范围内。
+一般来讲，一阶理论的规模往往远大于极小化和可变谓词常元的个数，
+所以翻译$Tr_v$中公式(\ref{pe1})的规模比起(\ref{pe2})和(\ref{pe3})的规模要大得多，
+因此，我们可以将翻译后的理论的规模视作是原理论的两倍。
+
+注意到翻译$Tr_v$实际上是基于一阶理论的语法而变换公式的，翻译后的理论在规模上也是原理论的两倍，
+若设原理论的规模为$n$，则我们可以很容易地在计算机上设计一个算法实现该翻译，而且其时间复杂度为$O(n)$。
+
+
+\section{若干个一阶并行限定理论到一阶稳定理论的翻译}
+
+在本节中，我们提出了一个从若干个一阶并行限定理论到一阶稳定理论的翻译，并且保持在所有结构上的投影等价关系，然后分析由这个翻译造成的理论膨胀和引入的辅助谓词的个数。
+
+在算法设计中，对于一类问题，我们往往采用分治的思想，将原问题拆分成若干个小问题，然后求解各个子问题，接着合并子问题的解而得到原问题的解。
+然而这些子问题往往不是独立的，很多时候都是包含公共的子子问题，如果我们将那些公共的子子问题的解只求一次，并且保存起来从而避免重复计算多次，
+这就是算法设计里动态规划法。
+在实际应用中，很多问题我们可以用若干个一阶并行限定理论来编码，然而这些一阶限定理论往往包含一些相同的公式。
+如果单独计算每个一阶限定理论，就会重复计算这些相同的公式，影响计算效率，
+因此，如果可以将这些公式都结合起来一起计算，就可以避免那些重复的计算了。
+然而，事实上， 除了某些特别的情况，例如这些一阶并行限定理论的一阶公式都是一样的，并且连限定策略中的可变谓词常元也一样，
+我们不能用一个一阶并行限定理论来代表这些一阶并行限定理论。
+
+在上一节中，我们介绍了一个从一阶并行限定理论到一阶稳定理论保持投影等价关系的翻译，
+但是该翻译只适用于一个在并行限定理论语义下的一阶理论，
+当我们要解决这些有重复公式的问题时，往往要将这些一阶并行限定理论逐个转换成一阶稳定理论，然后通过计算这些一阶稳定理论来解决这些问题。
+
+
+Paolo Ferraris等人在\cite{Ferrais2009}中提出了一阶稳定模型语义下的分割定理(见本文第二章定理\ref{splittingtheorem})，
+将一个一阶稳定理论划分成若干个较小的一阶稳定理论，通过计算每个较小的一阶稳定理论来计算原来的一阶稳定理论。
+这个定理也应用于逻辑程序设计中，将大规模的逻辑程序划分成若干个较小的子逻辑程序，通过快速求解每个子逻辑程序，
+然后合并它们的解从而求出原来的逻辑程序的解，贯彻程序设计中分治法的思想。
+换个方向想想，我们也可以将一些一阶稳定理论结合起来，合并某些重复的公式，通过一次计算来完成这些一阶稳定理论的计算问题。
+基于这种合并计算的思路以及上一节提出的翻译$Tr_v$，我们提出一个将若干个阶并行限定理论的合取转化成一个一阶稳定理论的翻译，
+具体定义如下：
+
+\begin{definition}\label{def_scirc2sm}
+设$\varphi_1,\varphi_2,\ldots,\varphi_k$为$k$个任意具有否定范式形式的一阶语句，$\sigma^m_{1},\sigma^m_{2},\ldots,\sigma^m_{k}$表示$k$个互不相交的谓词常元集合，
+$\sigma^v_1,\sigma^v_2,\ldots,\sigma^v_k$表示$k$个任意谓词常元集合，
+定义
+$Tr_{v}(\varphi_1,\varphi_2,\ldots,\varphi_k;\sigma^m_{1},\sigma^m_{2},\ldots,\sigma^m_{k};\sigma^v_1,\sigma^v_2,\ldots,\sigma^v_k)$为如下公式的合取：
+%\vspace*{-1.5mm}
+\begin{eqnarray}
+\textstyle
+\bigwedge\limits_{1 \leq j \leq k} (\varphi_j^{\neg \neg} \wedge \tilde{\varphi}_{j})\label{spe1} \hspace{-2cm}\\
+\bigwedge\limits_{1 \leq j \leq k}\Bigl(\gamma_{j} \leftrightarrow \bigwedge\limits_{P \in \sigma^m_{j}} \forall \bar{x}(P(\bar{x}) \vee \neg P(\bar{x}))\Bigr)\label{spe2} \hspace{-2cm}\\
+\bigwedge\limits_{1 \leq j \leq k}\forall \bar{x}\bigl(\gamma_{j} \rightarrow \bigwedge\limits_{Q^j \in \delta_{j}}Q^j(\bar{x})\bigr)\label{spe3}\hspace{-2cm}
+\end{eqnarray}
+%%\vspace*{-1.5mm}
+其中：
+\begin{enumerate}
+  \item $\varphi_j^{\neg \neg}$是将$\varphi_j$中所有形如$P(\bar{x})(P\in\bigcup_{1\leq i\leq k}\sigma_i)$的正文字替换为$\neg\neg P(\bar{x})$后所得到的公式；
+  \item $\tilde{\varphi}_{j}$是对$\varphi_j$按如下方法替换后得到的公式：
+  \begin{itemize}
+    \item 将$\varphi_j$中所有形如$\neg P(\bar{x})(P~\in~\sigma_j)$的负文字替换为$(P(\bar{x})\rightarrow \gamma_j)$，
+    \item 将$\varphi_j$中所有形如$P(\bar{x})(P~\in~\sigma_i,\ i\neq j)$的正文字替换为$\neg \neg(\bar{x})$，
+    \item 将$\varphi_j$中所有形如$Q(\bar{x})(Q~\in~\sigma^v_j)$的正文字替换为$Q^j(\bar{x})$，
+    \item 将$\varphi_j$中所有形如$\neg Q(\bar{x})(Q~\in~\sigma^v_j)$的负文字替换为$(Q^j(\bar{x})\rightarrow \gamma_j)$；
+  \end{itemize}
+  \item 
+  \begin{itemize}
+    \item 0元谓词$\gamma_j$是从未出现过的辅助谓词，
+    \item 谓词$Q^j$是相应于第$j$个可变谓词常元集中的$Q$引入的从未出现过的辅助谓词，
+      并且每对$Q$和$Q^j$具有相同的元数，
+    \item 谓词集$\delta_j$表示相应于$\sigma^v_j$的由辅助谓词$Q^j$组成的集合。
+  \end{itemize}
+\end{enumerate}
+\end{definition}
+
+为简便起见，本文中我们将使用下列简写：
+\begin{itemize}
+  \item $\Phi_k$ 表示一阶语句序列$\varphi_1,\varphi_2,\ldots,\varphi_k$；
+  \item $\Sigma^m_k$ 表示极小化谓词集序列$\sigma^m_{1},\sigma^m_{2},\ldots,\sigma^m_{k}$；
+  \item $\Sigma^v_k$ 表示可变谓词集序列$\sigma^v_1,\sigma^v_2,\ldots,\sigma^v_k$；
+  \item $\Gamma_k$ 表示0元辅助谓词的集合$\{\gamma_1,\gamma_2,\ldots,\gamma_k\}$；
+  \item $\Delta_k$ 表示辅助谓词集的并集$\delta_1 \cup \delta_2 \cup \ldots \cup \delta_k$。
+\end{itemize}
+
+总的来说，翻译$Tr^s_v$实际上是将翻译$Tr_v$分别应用于每一个一阶语句，
+然后合并相同的公式，再将$\neg\neg$加在那些极小化谓词前，以避免内涵谓词在语句中有严格正的出现，
+从而排除不同一阶语句之间的影响，
+最后得到的一阶稳定理论投影等价于这些一阶并行限定理论的合取。
+对于每个一阶并行限定理论，翻译$Tr^s_v$都引入一系列从未出现过的辅助谓词，以排除每个语句间的依赖关系。
+直观地说，翻译$Tr^s_v$引入的$\gamma_j(1 \leq j \leq k)$反映了第$j$个一阶并行限定理论的极小化情况：
+若$\gamma^*_j$为假(设$\gamma^*_j$是对应于$\gamma_j$的谓词变元)，则它还未求得极小模型；
+若$\gamma^*_j$为真，则它已求得极小模型。
+
+下面的定理说明了翻译$Tr^s_v$的可靠性和完备性。
+
+\begin{theorem}
+设$\Phi_k$为$k$个任意具有否定范式形式的一阶语句，$\Sigma^m_k$表示$k$个互不相交的谓词常元集合，
+$\Sigma^v_k$表示$k$个任意谓词常元集合，
+则有$\bigwedge_{1 \leq j \leq k}\!\textit{\textrm{CIRC}}[\varphi_j;\sigma^m_j;\sigma^{v}_j]$与
+$\exists \Gamma_k \exists \Delta_k \textit{\textrm{SM}}[Tr_{v}(\Phi_k; \Sigma^m_k;\Sigma^v_k);\Sigma^m_k, \Gamma_k,\Delta_k]$
+逻辑等价，其中$\Gamma_k$和$\Delta_k$是由翻译$Tr_v$引入的辅助谓词。
+\end{theorem}
+
+\begin{proof}
+在证明此定理前，我们先定义证明过程中用到的某些简写。
+
+我们将翻译$Tr_v$应用在每个$\varphi_j$上，再简单的将定义\ref{def_circ2sm}中的$\varphi^{\neg\neg}$修改为
+定义\ref{def_scirc2sm}中的$\varphi^{\neg\neg}_j$，将最后得到的一阶语句简称为$\pi(\varphi_j)$。
+因为整个证明过程中，内涵谓词集几乎都是$\bigcup_{1 \leq j \leq k}\Sigma^m_k \cup \Gamma_k \cup\Delta_k$，
+因此我们在使用$\mathrm{St}$，$\textrm{DG}$和$\textrm{SM}$时，除非特别说明，一般忽略表达式中的内涵谓词。
+
+因为$\varphi_j$都是具有否定范式形式的一阶语句，除了$\neg$不会包含蕴含联结符，
+因此，在$\pi(\varphi_j)$的谓词依赖图$\textrm{DG}[\varphi_j]$中，
+一阶语句$\varphi^{\neg\neg}_j$不会产生任何边。
+类似地，除了在$\tilde{\varphi}_j$中那些形如$(P(\bar{x}) \rightarrow \gamma_j)$的表达式外，$\tilde{\varphi}_j$也不会产生任何边。
+
+在公式(\ref{spe2})中，对于$\sigma^m_j$中的极小化谓词$P$，无论$P$出现在蕴含式的前件还是后件中，$P$在其中的出现都不是正的，而且都是否定的。
+因此，公式(\ref{spe2})在$\gamma_j$和$\sigma^m_j$中的谓词$P$之间不会产生边，也就是说，公式(\ref{spe2})也不会产生任何边。
+
+在公式(\ref{spe3})中，对于$\delta_j$中的辅助谓词$Q^j$，它们在蕴含式的后件中的出现都是严格正的，而$\gamma_j$在蕴含式的前件中的出现时正的和非否定的。
+因此，公式(\ref{spe3})产生从$\delta_j$中的每个$Q^j$到$\gamma_j$的边。
+
+在$\tilde{\varphi}_j$中的那些形如$(P(\bar{x}) \rightarrow \gamma_j)$的表达式，会产生从$\gamma_j$到$\delta_j$中的辅助谓词$Q^j$和$\sigma^m_j$中的极小化谓词$P$的边。
+
+因此，对于谓词依赖图$\textrm{DG}[\varphi_j]$和$\textrm{DG}[\varphi_i](i\neq j)$来说，两个图之间没有任何边连接，
+也就是说，每个强连通分量只可能出现在$\delta_j\cup \{\gamma_j\}$中。
+
+根据定义\ref{def_scirc2sm}，不同一阶限定理论的极小化谓词不会在对方的公式(\ref{spe1})中有严格正的出现，
+即那些在$\sigma^m_i$中的谓词在$\varphi^{\neg\neg}_j$和$\tilde{\varphi}_j(i\neq j)$中有严格正的出现。
+又因为每个辅助谓词$Q^j$和$\gamma_j$都是新引入的，未曾出现过在公式中，也是互不相交的，所以这些辅助谓词不会在其他语句中出现。
+因此，$\sigma^m_j,\delta_j$和$\gamma_j$不会在其他$\pi(\varphi_i)(i \neq j)$中有严格正的出现。
+
+因此，稳定模型语义下的分割定理的前提条件成立，
+则我们有$\bigwedge_{1 \leq j \leq k}\textrm{SM}[Tr_v(\varphi_j); \sigma_j,\delta_{j},\gamma_j]$
+与$\textrm{SM}[Tr^s_v(\varphi_o;\sigma_o;\sigma_v^o);\Sigma^m_k, \Gamma_k,\Delta_k]$逻辑等价。
+此定理得证。
+\end{proof}
+
+诚然，翻译$Tr^s_v$将若干个一阶并行限定理论合并为一个一阶稳定理论，虽然可以通过一次计算实现求解，但是也使得理论的规模增大了。
+在引入的辅助谓词方面，翻译$Tr^s_v$引入的辅助谓词个数与一阶限定理论之间的共享的谓词的个数有关，但至少有$\sum^k_{j=1}|\sigma^v_j|+k$个。
+在理论的规模变化方面，由翻译$Tr^s_v$造成的理论规模的增长与每个一阶限定理论共享的公式有关，一般为原理论的总和的两倍。
+
+类似于上一节的翻译$Tr_v$，翻译$Tr^s_v$也是基于语法层面上的变换公式的方法，若设原理论的规模的总和为$n$，
+则我们可以很容易地设计一个时间复杂度为$O(n)$的算法，在计算机上实现该翻译。
+
+对于任意的一阶并行限定理论，翻译$Tr^s_v$可能会导致最终的一阶稳定理论规模过大，以致无法计算，因此，翻译$Tr^s_v$在这些问题上没有太大的优势。
+但是，翻译$Tr^s_v$适合于那些可以通过有着大量的公共子公式的一阶并行限定理论编码的问题，翻译$Tr^s_v$可以有效地缩小翻译后的理论的规模，避免重复计算这些公共子公式。
+面对这类问题，
+利用翻译$Tr^s_v$通过一次一阶稳定理论的计算，比起逐个计算来求得结果具有更高的效率。
+
+
+\section{从一阶带优先级的限定理论到一阶稳定理论的翻译}
+
+在前两节中，我们主要关心从一阶并行限定理论和若干个一阶并行限定理论到一阶稳定理论，
+但作为一阶并行限定理论的泛化，一阶带优先级的限定理论具有更普遍的应用领域，
+因此，在本节我们关注于一阶带优先级的限定理论。
+
+在本节中，我们对上节提出的翻译$Tr^s_v$进行扩展和修改，使之适用于一阶带优先级的限定理论；
+基于逐层比较的思想，我们提出一个从一阶带优先级的限定理论到一阶稳定理论保持投影等价关系的翻译，
+并从引入的辅助谓词的数目和造成的理论规模的膨胀角度对两个翻译进行分析比较。
+
+Vladimir Lifschitz在\cite{Lifschitz1994}中证明了，一个一阶带优先级的限定理论可以用若干个一阶并行限定理论的合取表示(见本文第二章\ref{equ_pri_circ})，
+精确地说，就是：
+$$\mathbf{CIRC}[\varphi;\sigma_1>\sigma_2>\cdots>\sigma_k;\sigma_v] \equiv \bigwedge\limits_{1 \leq j \leq k}\textrm{CIRC}[\varphi;\sigma_j;\sigma_{j+1},\sigma_{j+2},...,\sigma_k,\sigma_v]$$
+这些一阶并行限定理论共享同一个一阶公式$\varphi$，我们只需要对翻译$Tr^s_v$进行适当的修改，即可使之适用于上式的右边部分，以达到计算一阶带优先级的限定理论的目的。
+
+根据命题\ref{equpri}，我们将一阶带优先级的限定理论中的任意一阶语句转换为等价的范式，仍保持逻辑等价性。
+因此，为了翻译为一阶稳定理论，我们首先将任意一阶语句转换为否定范式形式。
+
+扩展后的翻译$Tr^s_v$我们称为$Tr^p_v$，具体定义为：
+
+
+
+

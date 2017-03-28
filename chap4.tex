@@ -1,0 +1,105 @@
+\chapter{实验与分析}
+我们在本文介绍了一种从中文自然语言文本构建RDFS本体的框架，其中包含了术语识别与关系提取中用到的多种方法。在这一章当中，我们设计了一个系统Text2RDFS(以下简称t2r)对上文中的理论进行检验，并对比了不同方案表现的差异性。
+
+\section{实验基本情况}
+本实验系统t2r可以从中文语料库中构建出RDFS本体，实验系统使用java编写，自然语言预处理方面使用的是复旦大学自然语言处理库fnlp。
+\begin{table}[!h]
+\caption{实验环境}\label{tab_environment}
+\vspace*{-5mm}
+\tabcolsep 2pt
+\wuhao
+\begin{center}
+\def\temptablewidth{0.495\columnwidth}
+{\rule{\temptablewidth}{1pt}}\\
+\begin{tabular}{c|c}
+    环境 & 描述  \\
+    \hline
+    CPU & 1.4 GHz Intel Core i5 \\
+    \hline
+    RAM & 4GB  \\
+    \hline
+    OS & OS X Yosemite 10.10.3\\
+    \hline
+    自然语言处理库 & 复旦自然语言处理库fnlp
+\end{tabular}\\
+{\rule{\temptablewidth}{1pt}}
+\end{center}
+\vspace*{-5mm}
+\end{table}
+	t2r主要分为两个模块，第一个模块是术语提取模块，在t2r系统中我们分进行了使用语义分析法和使用统计法提取术语的实验。第二个模块是关系提取模块，在t2r系统中我们实现了非分类关系和分类关系的抽取模块。分类关系的提取采用的是借助wordnet进行上下位关系查询的方法，非分类关系的提取则是对本文第三部分介绍的方法进行实践。
+	对于t2r的语料库，我们在进行了仔细对比分析之后，选择了由复旦大学李荣提供的文本分类语料库中的测试预料。该语料库由人工分类，总数9833篇，共20个类别。其中的语料文章大多数来自于国家官方媒体的新闻通稿或者学术期刊中的文章，因此，这些文章具有较高的语法正确率，避免了口语化、网络化表达对实验测试的影响。文章中有合适比例的长句和短句，可检验t2r系统在不同环境中的性能表现。同时，语料库中的文章具有较高的时效性，一定程度上避免了构建出的RDFS模型过时的情况。在领域的选择上，我们挑选艺术领域的语料库进行测试。这三个领域具有广泛性，语料数量多，避免了个别极端情况对实验的影响。
+
+\section{实验结果与分析}
+由于t2r的设计中上下位关系的识别主要依靠现有的中文wordnet，因此对t2r的评价集中在领域术语识别和非分类关系提取两个模块的表现上。
+对于领域术语识别，我们使用IE领域广泛使用的准确率(precision)、召回率(recall)\upcite{ol19}对t2r术语识别模块的识别结果进行评价。我们这次总共测试了43篇文档，其中共有人工识别出的术语1236个。
+\begin{table}[!h]
+\caption{统计方法的领域术语提取结果}\label{tab_environment}
+\vspace*{3mm}
+\tabcolsep 2pt
+\wuhao
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+    \hline
+    阀值(\%) & 人工分析正确数 & 召回率(\%) & 准确率(\%)  \\
+    \hline
+    1 & 127 & 10.8 & 38.2\\
+    \hline
+    2 & 221 & 17.9 & 33.0\\
+    \hline
+    3 & 301 & 24.4 & 30.0\\
+    \hline
+    5 & 351 & 28.4 & 21.0\\
+    \hline
+    10 & 546 & 44.2 & 16.3\\
+    \hline
+\end{tabular}
+\end{center}
+\vspace*{-5mm}
+\end{table}
+
+\begin{table}[!h]
+\caption{结合语义分析法统计方法的领域术语提取结果}\label{tab_environment}
+\vspace*{3mm}
+\tabcolsep 2pt
+\wuhao
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+    \hline
+    阀值(\%) & 人工分析正确数 & 召回率(\%) & 准确率(\%)  \\
+    \hline
+    1 & 185 & 15.0 & 55.4\\
+    \hline
+    2 & 381 & 30.8 & 57.0\\
+    \hline
+    3 & 512 & 41.4 & 51.1\\
+    \hline
+    5 & 638 & 51.6 & 38.2\\
+    \hline
+    10 & 773 & 62.5 & 23.1\\
+    \hline
+\end{tabular}
+\end{center}
+\vspace*{-5mm}
+\end{table}
+从表4.2和表4.3可以看出，简单的统计学的方法难以在准确率和召回率之间取得较好的平衡，在保证足够回收率的同时难以保持较高的准确率，若要保持足够高的准确率，就不得不以较低的回收率为代价。而在结合了语义分析的相关方法之后，在相同阀值的情况下，准确率和回收率都获得了一定程度上的提高。
+
+在非分类关系抽取方面，我们难以统计所有的关系数量，因此我们以准确率来对结果进行评价。
+\begin{table}[!h]
+\caption{基于统计方法的领域术语提取结果}\label{tab_environment}
+\vspace*{3mm}
+\tabcolsep 2pt
+\wuhao
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+    \hline
+    文档类型 & 文档数量 & 关系抽取数量 & 准确数 &  准确率(\%)  \\
+    \hline
+    长句集 & 20 & 397 & 246 &  62.0 \\
+    \hline
+    短句集 & 32 & 683 & 584 & 85.5 \\
+    \hline
+\end{tabular}
+\end{center}
+\vspace*{-5mm}
+\end{table}
+关系抽取中我们基于主谓宾的方法在处理短句集方面取得了较好的效果，得到了较高的准确率，而面对长句的时候，由于中文长句的关系复杂性，准确率有所降低。在整体来看，我们的关系抽取模块有着相对优秀的表现。

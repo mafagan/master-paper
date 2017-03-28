@@ -1,0 +1,43 @@
+\IncMargin{1em}
+\begin{algorithm}
+  \SetKwData{Left}{left}\SetKwData{This}{this}\SetKwData{Up}{up}
+  \SetKwFunction{Union}{Union}\SetKwFunction{FindCompress}{FindCompress}
+  \SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+
+  \Input{一个~ParseNode~类型的链表头指针~p~\\一个~AtomSet~类型的对象~as~}
+  \Output{待求解的逻辑程序所对应的依赖图，使用二维矩阵~matrix~存储}
+  \BlankLine
+  %\emph{special treatment of the first line}\;
+  %\For{$i\leftarrow 2$ \KwTo $l$}{
+    %\emph{special treatment of the first element of line $i$}\;
+    %\lnl{InRes2}
+
+    matrix $\leftarrow$ \{~0~\} \tcp*[h]{给二维数组~matrix~置初值，每个位置全置为~0~}\\
+    cursor $\leftarrow$ p \tcp*[h]{定义一个~ParseNode~类型的指针~cursor~}\\
+
+    \While{cursor $\neq$ NIL}
+    {
+        \tcc*[h]{~cursor~所指节点中的规则体部的每一个文字~$L_i$~}\\
+        \For{each literal $L_i$ in the body of rule in cursor}
+        {
+          a $\leftarrow$ as.get$\_$index($L_i$) \tcp*[h]{调用对象~as~的类成员函数~get$\_$index~函数获得文字~$L_i$的标号}\\
+
+
+          \tcc*[h]{~cursor~所指节点中的规则头部的每一个文字~$L_j$~}\\
+          \For{each literal $L_j$ in the head of rule in cursor}
+          {
+            b $\leftarrow$ as.get$\_$index($L_j$) \tcp*[h]{调用对象~as~的类成员函数~get$\_$index~函数获得文字~$L_j$的标号}\\
+            \If{matrix[a][b]=0}
+            {
+              \tcc*[h]{代表标号~$a$~所代表的文字存在一条有向边指向标号~$b$~所代表的文字} \\
+              matrix[a][b] $\leftarrow$ 1 \\
+            }
+          }
+        }
+         \BlankLine
+        \tcc*[h]{处理完该条规则，准备处理下一条规则；} \\
+        set the cursor point to next rule \\
+    }
+
+  \caption{构建逻辑程序~$\Pi$~的依赖图~$G_\Pi$~}\label{create:graph}
+\end{algorithm}\DecMargin{1em} 

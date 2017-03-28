@@ -1,0 +1,104 @@
+\IncMargin{1em}
+\begin{algorithm}
+  \SetKwData{Left}{left}\SetKwData{This}{this}\SetKwData{Up}{up}
+  \SetKwFunction{Union}{Union}\SetKwFunction{FindCompress}{FindCompress}
+  \SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+
+  \Input{一个~ParseNode~类型的链表头指针~p~\\一个~AtomSet~类型的对象~as~}
+  \Output{待求解的逻辑程序所对应的依赖图，使用二维矩阵~matrix~存储}
+  \BlankLine
+  %\emph{special treatment of the first line}\;
+  %\For{$i\leftarrow 2$ \KwTo $l$}{
+    %\emph{special treatment of the first element of line $i$}\;
+    %\lnl{InRes2}
+
+    matrix $\leftarrow$ {~0~} \tcp*[h]{给二维数组~matrix~置初值，每个位置全置为~0~}\\
+    cursor $\leftarrow$ 
+    
+    
+
+    
+    定义一个~ParseNode~类型的指针~cursor~，置初值为~p~;\\
+    \While{~cursor~非空}
+    {
+        \For{~cursor~所指节点中规则体部的每一个文字~$L_i$~}
+        {
+          通过调用对象~as~的类成员函数~get$\_$index~函数获得文字~$L_i$的标号，记为~$a$~；\\
+          \For{~cursor~所指节点中规则头部的每一个文字~$L_j$~}
+          {
+            通过调用对象~as~的类成员函数~get$\_$index~函数获得文字~$L_j$的标号，记为~$b$~；\\
+            \If{~$matrix[a][b]$~ == ~0~}
+            {
+              \tcc*[h]{代表标号~$b$~所代表的文字存在一条有向边指向标号~$a$~所代表的文字} \\
+              将~$matrix[a][b]$~的值置为~1~；\\
+              依赖图的边数加一；\\
+            }
+          }
+        }
+         \BlankLine
+        \tcc*[h]{处理完该条规则，准备处理下一条规则；} \\
+        指针~cursor~的值被置为~cursor~$\rightarrow$~next~；\\
+
+    }
+
+color[u] $\leftarrow$ gray \tcp*[h]{将顶点~u~置为灰色}\\
+
+   %\For{对于依赖图~$G_\Pi$~中根据~f~值从大到小排序的每一个顶点~i~}
+   \For{each vertex i in $G_\Pi$}
+   {
+     \tcc*[h]{转置图~$G_{\Pi}^T$~中存在有向边~$<u,i>$~ 且 顶点~i~的颜色为白色}\\
+     \If{T$\_$matrix[u][i]=1 and color[i]=white}
+     {
+       v $\leftarrow$ v $\cup$ i  \tcp*[h]{将顶点~i~存入~v~中}\\
+       DFS$\_$VISIT2(i,v) \\
+     }
+   }
+
+  color[u] $\leftarrow$ black \\
+
+
+
+    %~cursor~~$\leftarrow$~~str~；\\
+%    \If{~id~号~$==$~ ~fpt~内部的子句容量}{扩充~fpt~的子句容量}
+%
+%    ~myClause~~$\leftarrow$~编号为~id~的子句的地址；\\
+%    ~myClause~指向的子句空间填入~id~号；\\
+%    ~fpt~内部的分配号~++~；\tcp*[h]{以便下次为新子句分配新的空间}\\
+%    \If{~fpt~可用的文字~literals~空间~$<$~子句的大小}{扩充~fpt~的文字~literals~空间}
+%    为~myClause~分配合适的~literals~空间；\\
+%    \For{~array~中的每个文字~literal~}{
+%    将~literal~写入分配的~literals~空间；\\
+%    根据~literal~建立子句的指针索引，必要时扩大指向子句的指针空间；
+%    }
+%    在分配的~literals~空间最后位置填入~0~；\tcp*[h]{~0~是终结符}\\
+%    更新~literals~空间可用位置的信息；\tcp*[h]{以便新的子句插入}\\
+%    \If{子句~array~长度~$==$~~$1$~}{将~array~加入~fpt~的~unitClauses~中，必要时先扩充~unitClauses~}
+%
+%
+%    \While{~unitClauses~非空}
+%    {
+%       取出~unitClauses~中的一个文字~$l$~，并在其中删除中所有的~$l$~，\\
+%       \For{包含~$l$~的每个子句~$c$~}{\If(){~$c$~不是~l~}{从~KB~中删除~$c$~}}
+%       %删除~KB~中除~l~以外，任何包含文字~l~的子句\\
+%      \For{~KB~中任何包含~$\neg l$~的子句~c~}{
+%         从~$c$~中删除~$\neg l$~ 并使~$c$~的长度减~$1$~；\\
+%         \If(){ ~$c$~的长度~==~ ~$1$~ }{\label{ut}
+%        将~$c$~加入~unitClauses~中；
+%        %\tcp{\This is put under \Up to keep tree as flat as possible}\label{cmt}
+%        %\lElse{\Union{\This,\Up}}\tcp*[r]{\This linked to \Up}\label{lelse}
+%      }
+%        }
+%    }
+%
+%
+%    用~old\_clauses\_start~标识~clauses~空间；\\
+%    在新的位置重建~$2$~倍的子句空间，仍记为~clauses~；\\
+%    将原来内容复制到新的~clauses~空间；\\
+%    更新~clauses~空间的容量；\\
+%    \For{每个命题原子~$p$~}{
+%    \For{包含~$p$~的每个子句~$c$~的索引}{将指针偏移到新的~clause~空间的同样子句上\\\tcc*[h]{偏移前后指针指向的子句编号不变}}
+%    \For{包含~$\neg p$~的每个子句~$c$~的索引}{将指针偏移到新的~clause~空间的同样子句上\\\tcc*[h]{偏移前后指针指向的子句编号不变}}
+%      }
+  %}
+  \caption{构建逻辑程序~$\Pi$~的依赖图~$G_\Pi$~}\label{create graph}
+\end{algorithm}\DecMargin{1em} 

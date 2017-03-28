@@ -1,0 +1,64 @@
+\IncMargin{1em}
+\begin{algorithm}
+  \SetKwData{Left}{left}\SetKwData{This}{this}\SetKwData{Up}{up}
+  \SetKwFunction{Union}{Union}\SetKwFunction{FindCompress}{FindCompress}
+  \SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+
+  \Input{多个~HDLP~，存储在~vector$< $vector$<$Rule$*>>$~类型的变量~vec$\_$nHDLP~中}
+  \Output{多个~HDLP~的回答集集合，存储在~set$<$set$<$int$>>$~类型的变量~all$\_$models~中}
+  \BlankLine
+
+    num $\leftarrow$ the number of HDLP in vec$\_$nHDLP \tcp*[h]{定义整型变量~num~}\\
+
+
+    \For{$i = 1$ \KwTo $num$}
+    {
+      tmp $\leftarrow \emptyset$ \tcp*[h]{定义~vector$<$set$<$int$>>$~类型的临时变量~tmp~} \\
+
+      invoke Module 1 to solve the i-th HDLP in vec$\_$nHDLP \\
+
+      %调用~Module 1~模块求解~vec$\_$nHEDLP~中第~i~个~HEDLP~的回答集；\\
+
+      tmp $\leftarrow$ all answer sets of the i-th HDLP in vec$\_$nHDLP \\
+
+      all$\_$models $\leftarrow$ all$\_$models $\cup$ tmp \tcp*[h]{将~tmp~里的每一个回答集存入数据结构~all$\_$models~中}\\
+    }
+
+%num $\leftarrow$ the number of rules in HEDLP \tcp*[h]{定义整型变量~num~，置初值为~HEDLP~中规则的数量}\\
+%    \For{$i = 1$ \KwTo $num$}
+%    {
+%        \tcc*[h]{定义整型变量~lit$\_$in$\_$head~，置初值为~HEDLP~第~i~个规则头部文字的个数}\\
+%        lit$\_$in$\_$head $\leftarrow$ the number of literals in the head of i-th rule \\
+%
+%
+%        \For{$j = 1$ \KwTo $lit\_in\_head$}
+%        {
+%            r $\leftarrow \emptyset$ \tcp*[h]{定义规则~r~，~r~即最终生成的~NLP~里面的一条规则} \\
+%
+%            \tcc*[h]{~r~头部的文字被置为当前第~i~个规则头部里的第~j~个文字}\\
+%            set the head of r by the literal of the j-th literal in head of i-th rule \\
+%
+%            %\tcc*[h]{~r~体部的正文字被置为当前第~i~个规则体部里的全部正文字}\\
+%            set the positive body of r by the positive body of i-th rule \\
+%
+%            %\tcc*[h]{~r~体部的负文字被置为当前第~i~个规则体部里的全部负文字}\\
+%            set the negative body of r by the negative body of i-th rule \\
+%
+%            \BlankLine
+%            \tcc*[h]{每一个新产生的规则，其体部的负文字部分都不相同} \\
+%            \For{$k = 1$ \KwTo $lit\_in\_head$}
+%            {
+%              \If{j$\neq$k}
+%              {
+%                \tcc*[h]{将当前第~i~个规则头部里的第~k~个文字加入~r~体部的负文字部分}\\
+%                add the k-th literal in head of i-th rule to the negative body of r \\
+%              }
+%            }
+%            \BlankLine
+%            \tcc*[h]{至此，已经正确生成一条~NLP~的规则} \\
+%            asp$\_$rule $\leftarrow$ asp$\_$rule $\cup$ r \tcp*[h]{将规则~r~存入数据结构~asp$\_$rule~中}\\
+%        }
+%    }
+
+  \caption{求解多个~HDLP~的回答集}\label{nHEDLP:call:nlpsolver}
+\end{algorithm}\DecMargin{1em} 

@@ -1,0 +1,263 @@
+\chapter{实验与分析}
+
+在上一章中，我们提出了一阶限定理论求解器的计算框架，
+基于前面章节所提出的翻译以及已有的理论结果，实现了一个通用一阶限定理论求解器cfo2lp，
+并将之与基于回答集程序的命题限定理论求解器在表达能力上进行了比较。
+通过比较分析，本文的一阶限定理论求解器具有更强的表达能力，能够更自然、更直观、更灵活地表示问题。
+
+对于一个知识表示语言来说，除了它对问题的表达自然性，它的计算效率也是评价其优劣重要的一个方面。
+因此，本章将关注于本文的一阶限定理论求解器cfo2lp与其他求解器在计算效率上的比较。
+
+\section{实验概述}
+
+正因为回答集程序的回答集语义以及其推理的高效率，
+实际上很多求解器都是基于回答集程序实现的。
+
+在2008年，Emilia Oikarinen和Tomi Janhunen在\cite{Oikarinen2008}中提出了
+一个将一阶带优先级的限定理论转化为回答集程序的翻译，并基于这个翻译实现了带优先级的限定理论的求解器，circ2dlp\footnote{关于求解器circ2dlp的更多资料，请参阅：http://www.tcs.hut.fi/Software/circ2dlp}。
+但是，该求解器限制其输入必须是不包含否定的析取逻辑程序，
+不允许存在量词的出现，
+实际上就是一个基于回答集程序的命题限定理论求解器。
+
+在2011年，Martin Gebser等人在\cite{gebser2011complex}中提出了一套基于逻辑程序设计中的饱和技术%\footnote{关于更多的逻辑程序设计的资料，可参考\cite{eiter1995computational}。}
+的元程序(meta-program)，在所有回答集上定义一个偏序，找出在该偏序下“最优”的回答集。
+其中，他们定义了一种在集合包含下的优先级的偏序，类似于带优先级的限定理论中的优先级限定策略，
+因此，基于该元程序实现的求解器metasp\footnote{关于求解器metasp的更多资料，请参阅：http://www.cs.uni-potsdam.de/wv/metasp}
+也可视作一个带优先级的限定理论求解器。
+求解器metasp本质上还是一个回答集求解器，
+因此其输入必须是回答集程序，
+虽然允许使用$\#sum$约束以提高表达能力，
+但却同样不允许存在量词的出现，
+因此，在本文它被视作一个命题限定理论求解器。
+
+无论上面提到的两个求解器circ2dlp和metasp，还是本文的一阶限定理论求解器cfo2lp，均是基于回答集程序，
+因此，在本章的实验比较中，我们使用相同的回答集求解器claspD\footnote{于求解器claspD的更多资料，请参阅：http://www.cs.uni-potsdam.de/claspD}，
+当今世界上是求解效率最高的回答集求解器之一。
+
+下面我们以极小电路诊断问题和扩展的稳定婚姻问题为例，
+根据这些问题的随机测例，
+分别用三种求解器的输入语言来表示这些问题，
+然后经过这些求解器的翻译后，再调用回答集求解器claspD，
+分别记录它们求出所有模型的所用时间，
+对它们的计算效率进行分析比较。
+
+此外，在第四章中我们提出了存在量词消去的优化翻译，也
+从引入的辅助谓词个数和造成的理论的规模的增长方面，
+对其优化效果做了分析，
+进一步地，本章将对优化翻译实际提升的计算效率进行分析。
+下面我们也将无优化的翻译和优化翻译在计算效率上进行比较分析。
+
+\begin{table}[!h]
+\caption{实验环境}\label{tab_environment}
+\vspace*{-5mm}
+\tabcolsep 2pt
+\wuhao
+\begin{center}
+\def\temptablewidth{0.495\columnwidth}
+{\rule{\temptablewidth}{1pt}}\\
+\begin{tabular}{c|c}
+    环境 & 描述  \\
+    \hline
+    处理器 & AMD A10-5800K 3.8GHz  \\
+    \hline
+    内存 & 8GB  \\
+    \hline
+    操作系统 & Linux Ubuntu 13.04LTS 64bit\\
+    \hline
+    回答集求解器 & claspD ver1.1.2
+\end{tabular}\\
+{\rule{\temptablewidth}{1pt}}
+\end{center}
+\vspace*{-5mm}
+\end{table}
+
+
+\section{极小电路诊断问题}
+
+\subsection{诊断问题}
+上世纪八十年代，Raymond Reiter在\cite{Reiter1987}中提出了基于模型的诊断的思想：
+将根据系统模型预测出系统的预期行为，与从实际的设备监控系统得到实际系统的观察值相比较，
+如果预期行为与实际观察值之间存在
+差异的话，则说明了系统存在异常，
+我们就可以根据这些差异推断出系统有哪些异常，在哪里出现了异常。
+
+沿着Raymond Reiter的基于模型的诊断的思想，Johan de Kleer等人在\cite{de1992characterizing}中进一步完善了基于模型诊断的理论，提出更为精确的定义。
+
+\begin{definition}
+一个{\kai 带有观察值的系统}（system）是一个由有穷个一阶语句组成的集合，可用三元组($SD,~COMP,~OBS$)表示，其中
+\begin{itemize}
+  \item $SD$，表示{\kai 系统描述}(system description)，是一阶语句的集合；
+  \item $COMP$，表示{\kai 系统组件}(system components)，是个体常元的集合；
+  \item $OBS$，表示{\kai 系统的观察值}(Observations)，一般是包含谓词常元和个体常元的集合。
+\end{itemize}
+\end{definition}
+
+集合$COMP$中的每一个元素表示一个组件。
+在实际系统中，一个组件要么工作正常，要么工作不正常。
+诊断的目的就是要找出工作不正常的组件。
+为了形式化诊断，我们用谓词$Ab$表示这种“异常”的工作状态，
+即对任意$c\in COMP$，若$Ab(c)$成立则组件$c$工作不正常，否则组件$c$工作正常。
+
+直观地，一个{\kai 解释诊断}(explanatory diagnosis)就是一个工作不正常的组件的集合，
+因为组件的工作状态是基于实际系统的观察值推测而来的，
+所以这些组件的不正常工作状态必定不能违反实际系统的观察值，
+具体定义如下：
+\begin{definition}\label{def_diagnosis}
+$\Delta~\subseteq~COMP$是一个带观察值的系统$(SD,~COMP,~OBS)$的一个解释诊断，当且仅当
+\begin{equation}
+    SD~\cup~OBS~\cup~\{\neg Ab(c)~|~c~\in~COMP-\Delta\}~\cup~\{Ab(c)~|~c~\in~\Delta\}
+\end{equation}
+是一致的。
+\end{definition}
+
+Olivier Raiman在\cite{raiman1990circumscribed}中将“极小”的概念引入到诊断问题中，提出了极小解释诊断的概念：
+\begin{definition}\label{def_minimaldiagnosis}
+$\Delta~\subseteq~COMP$是一个带观察值的系统$(SD,~COMP,~OBS)$的一个极小解释诊断，当且仅当
+$\Delta$是$(SD,~COMP,~OBS)$的一个解释诊断，并且
+不存在$(SD,~COMP,~OBS)$的一个解释诊断$\Delta'$满足$\Delta' \subset \Delta$。
+\end{definition}
+
+极小解释诊断的概念派生出了一类
+有着重要研究意义的诊断问题：
+极小解释诊断问题\cite{BesnardC1994diagnoses}。
+极小解释诊断问题就是，给定一个带观察值的系统$(SD,~COMP,~OBS)$，
+找出该系统的极小解释诊断。
+
+当以一个电路系统为对象时，极小解释诊断问题被称为极小电路诊断。
+
+\subsection{基于加法器的极小电路诊断问题}
+
+串行进位加法器，作为一个门电路系统，它的结构相对简单，
+输入值和输出值都只包含0和1，
+十分适合进行大批量的随机测例的生成。
+因此，本章将以基于加法器的极小电路诊断问题为例，进行实验比较。
+
+一个串行进位加法器是由若干个全加器组成，而一个全加器由两个{\kai 异或门}(xor gate)、两个{\kai 与门}(and gate)和一个{\kai 或门}(or gate)。全加器的电路连接如图\ref{fig:fulladder}所示。其中，$A$和$B$为全加器的两个输入数值，
+$C$为低位的进位输入，$A\oplus B\oplus C$为该全加器的加法输出，$(A\oplus B)C+AB$为该全加器的进位输出。 
+
+\begin{figure}[htb]
+  \center
+  \includegraphics[width=0.95\textwidth]{img/fulladder.jpg}\\
+  \caption{全加器连接电路图}\label{fig:fulladder}
+\end{figure}
+
+一个$n$位串行进位加法器由$n$个全加器通过串联组合而成，低位的全加器的进位输出与其相邻的高位的全加器的进位输入相连，
+串联方式如图\ref{fig:rippleadder}所示。
+最低位的全加器的进位输入$C_0$一般为0，
+$n$位串行进位加法器实现了两个$n$位二进制数的求和，即$A_n A_{n-1}\ldots A_2 A_1 + B_n B_{n-1}\ldots B_2 B_1~=~S_n S_{n-1}\ldots S_2 S_1$。
+
+\begin{figure}[htb]
+  \center
+  \includegraphics[width=0.95\textwidth]{img/rippleadder.jpg}\\
+  \caption{$n$位串行进位加法器电路图}\label{fig:rippleadder}
+\end{figure}
+
+对于整个加法器的电路系统来说，我们可以轻易的得到其总输入和总输出，即$A_i,B_i,S_i~(1 \leq i \leq n)$和$C_n$的值。
+而这些值就可以作为电路系统的观察值，通过随机生成这些输入值和输出值，从而产生基于加法器的极小电路诊断问题的不同实例。
+
+下面我们对基于加法器的极小电路诊断问题进行形式化：
+
+加法器电路系统，仅涉及三种门元件：与门、或门、异或门，我们分别用一元谓词$And$、$Or$和$Xor$表示；
+每个门元件均有两个输入端和一个输出端，我们分别用$Ina$、$Inb$和$Out$表示；
+每种门元件
+的工作状态造成的影响都不一样，
+因此我们分别用不同的异常工作状态谓词描述，
+其中，谓词$Ab_a$表示与门工作不正常，
+$Ab_o$表示或门工作不正常，
+$Ab_x$表示异或门工作不正常。
+
+因为串行进位加法器由若干个全加器通过串联组合而成，
+而每个全加器的连接方式是相同的，
+因此我们只需要扩展上述的谓词，添加一元以表示第$i$个全加器，即可简单直观地描述整个串行进位加法器。
+因为我们往往能观察到的是电路系统的总输入和总输出，
+用谓词$InA(i)$和$InB(i)$表示第$i$位的输入值，
+$OutS(i)$表示第$i$位的输出值，
+$C_n$表示第$n$个全加器的进位输出值。
+
+根据与门、或门、异或门的真值表，我们可以用以下一阶公式的全称闭包的合取来
+描述这三种门元件在正常工作状态：
+与门：
+\begin{align}
+% \nonumber to remove numbering (before each equation)
+  And(x)~\wedge~Ina(i,x)~\wedge~Inb(i,x)~\wedge~\neg Ab_a(i,x)~&\rightarrow~Out(i,x) \label{formula_sd1}\\
+  And(x)~\wedge~\neg Inb(i,x)~\wedge~\neg Ab_a(i,x)~&\rightarrow~\neg Out(i,x) \\
+  And(x)~\wedge~\neg Ina(i,x)~\wedge~\neg Ab_a(i,x)~&\rightarrow~\neg Out(i,x) 
+\end{align}
+或门：
+\begin{align}
+    Or(x)~\wedge~Ina(i,x)~\wedge~\neg Ab_o(i,x)~&\rightarrow~Out(i,x) \\
+    Or(x)~\wedge~Inb(i,x)~\wedge~\neg Ab_o(i,x)~&\rightarrow~Out(i,x) \\
+    Or(x)~\wedge~\neg Ina(i,x)~\wedge~\neg Inb(i,x)~\wedge~\neg Ab_o(i,x)~&\rightarrow~\neg Out(i,x)
+\end{align}
+异或门：
+\begin{align}
+    Xor(x)~\wedge~Ina(i,x)~\wedge~Inb(i,x)~\wedge~\neg Ab_x(i,x)~&\rightarrow~\neg Out(i,x) \\
+    Xor(x)~\wedge~Ina(i,x)~\wedge~\neg Inb(i,x)~\wedge~\neg Ab_x(i,x)~&\rightarrow~Out(i,x) \\
+    Xor(x)~\wedge~\neg Ina(i,x)~\wedge~Inb(i,x)~\wedge~\neg Ab_x(i,x)~&\rightarrow~Out(i,x) \\
+    Xor(x)~\wedge~\neg Ina(i,x)~\wedge~\neg Inb(i,x)~\wedge~\neg Ab_x(i,x)~&\rightarrow~\neg Out(i,x)
+\end{align}
+根据图\ref{fig:fulladder}的电路描述，
+我们可以用以下一阶公式的全称闭包的合取来描述单个全加器电路内部连接情况以及门元件的输入输出与全加器的关系：
+\begin{align}
+    Out(i,1) \leftrightarrow Ina(i,4) \\
+    Out(i,4) \leftrightarrow Ina(i,5) \\
+    Ina(i,1) \leftrightarrow Ina(i,3) \\
+    Out(i,3) \leftrightarrow Inb(i,5) \\
+    IntA(i) \leftrightarrow Ina(i,1)\\
+    IntB(i) \leftrightarrow Inb(i,1)\\
+    OutS(i) \leftrightarrow Out(i,2)\\
+    C_n \leftrightarrow Out(n,5)
+\end{align}
+根据图\ref{fig:rippleadder}的电路描述，
+我们可以用以下一阶公式的全称闭包来描述$n$个全加器的电路连接情况：
+\begin{align}
+    i=j-1 \rightarrow (Inb(j,4) \leftrightarrow Out(i,5))
+\end{align}
+因为加法器的电路系统的每个输入值和输出值要么为0，要么为1，
+不能同时取0和1，
+可以用以下一阶公式的全称闭包的合取来描述这种约束：
+\begin{align}
+    Ina(i,x)~\vee~\neg Ina(i,x)\\
+    Inb(i,x)~\vee~\neg Inb(i,x)\\
+    Out(i,x)~\vee~\neg Out(i,x) \label{formula_sdn}
+\end{align}
+
+令$\Phi_{SD}$表示公式(\ref{formula_sd1})-(\ref{formula_sdn})的合取，是对串行进位加法器的电力系统描述。
+其中，$i$表示第$i$个全加器，$x$表示元件。
+
+根据图\ref{fig:fulladder}的描述，我们知道元件1和2都是异或门，元件3和4都是与门，元件5为或门，
+因此，我们可以构造用于描述系统组件$COMP$的一阶语句$\Phi_{COMP}$：
+\begin{align}
+    \forall i~(Xor(i,1)~\wedge~Xor(i,2)~\wedge~And(i,3)~\wedge~And(i,4)~\wedge~Or(i,5))
+\end{align}
+
+令$\Phi_{OBS}$表示用于描述系统观察值的一阶语句，它与实际观察值有关，也就是说，对于不同实例，$\Phi_{OBS}$都不一样。
+例如，观察到3位加法器的输入分别为100和010，输出为100，进位输出为0，则其表示的$\Phi_{OBS}$为下列公式：
+\begin{align}
+    & InA(3)~\wedge~\neg InA(2)~\wedge~ \neg InA(1)\\
+\wedge~~~ & \neg InB(3)~\wedge~ InB(2)~\wedge~ \neg InB(1) \\
+\wedge~~~ & OutS(3) ~\wedge~ \neg OutS(2) ~\wedge~ \neg OutS(1) \\
+\wedge~~~ & \neg C_3 ~\wedge~ \neg Inb(1,4)
+\end{align}
+
+根据极小解释诊断的概念，一个加法器电路系统的极小诊断实际上
+就是一阶理论$\Phi_{SD}\wedge\Phi_{COMP}\wedge\Phi_{OBS}$关于偏序$\preceq^{\{Ab_a,Ab_o,Ab_x\};\{Ina,Inb,Out\}}$的极小模型。
+
+在工业生产中，由于生产工艺的不同和材料的差异，不同种类的电路元件的出错的概率都不一样。
+现在我们假设
+在这三种门元件中，
+与门有最高的概率会工作不正常，
+异或门次之，
+或门有最低的概率。
+根据带优先级的限定理论的定义，我们可以将更高的极小化优先级赋给
+那些有更低出错概率的元件的异常工作状态，
+即假设优先级限定策略为$Ab_o > Ab_x > Ab_a$。
+
+在这样的假设下，我们有：
+门元件的集合$\Delta$
+是加法器电路系统($SD,$~$COMP,$~$OBS$)的一个极小解释诊断
+当且仅当$\Delta$是$\textrm{CIRC}[\Phi_{SD}\wedge\Phi_{COMP}\wedge\Phi_{OBS};Ab_o > Ab_x > Ab_a;Ina,Inb,Out]$的一个模型。
+
+
+
+\section{扩展的稳定婚姻问题}

@@ -1,0 +1,27 @@
+\IncMargin{1em}
+\begin{algorithm}
+  \SetKwData{Left}{left}\SetKwData{This}{this}\SetKwData{Up}{up}
+  \SetKwFunction{Union}{Union}\SetKwFunction{FindCompress}{FindCompress}
+  \SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+
+  \Input{逻辑程序~$\Pi$~依赖图~$G_\Pi$~中的顶点~u~\\~vector$<$int$>$~类型的变量~v~}
+  \Output{Nothing}
+  \BlankLine
+
+   color[u] $\leftarrow$ gray \tcp*[h]{将顶点~u~置为灰色}\\
+
+   %\For{对于依赖图~$G_\Pi$~中根据~f~值从大到小排序的每一个顶点~i~}
+   \For{each vertex i in $G_\Pi$}
+   {
+     \tcc*[h]{转置图~$G_{\Pi}^T$~中存在有向边~$<u,i>$~ 且 顶点~i~的颜色为白色}\\
+     \If{T$\_$matrix[u][i]=1 and color[i]=white}
+     {
+       v $\leftarrow$ v $\cup$ i  \tcp*[h]{将顶点~i~存入~v~中}\\
+       DFS$\_$VISIT2(i,v) \\
+     }
+   }
+
+  color[u] $\leftarrow$ black \\
+
+  \caption{~DFS$\_$VISIT2(u,v)~}\label{find:AllSCC:2}
+\end{algorithm}\DecMargin{1em} 
