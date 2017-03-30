@@ -206,41 +206,63 @@
     蕴含值$r_{Nationality}(Mike, China)$的决断集:
     \begin{center}
         \item 1) $r_{BornInCity} \circ r_{CityInProvince} \sqsubseteq r_{BornInProvince}$
-        \item 3) $r_{BornInProvince} \circ r_{ProvinceInCountry} \sqsubseteq r_{Nationality}$
-		\item 4) $r_{BornInCity} (Mike, Guangzhou)$
-        \item 5) $r_{CityInProvince} (Guangzhou, Guangdong)$
-		\item 6) $r_{ProvinceInCountry} (Guangdong, China)$
+        \item 2) $r_{BornInProvince} \circ r_{ProvinceInCountry} \sqsubseteq r_{Nationality}$
+		\item 3) $r_{BornInCity} (Mike, Guangzhou)$
+        \item 4) $r_{CityInProvince} (Guangzhou, Guangdong)$
+		\item 5) $r_{ProvinceInCountry} (Guangdong, China)$
     \end{center}
 	
 	训练集：
     \begin{center}
-        \item 1) $(Lily, \emph{BornInCity}, Hangzhou)$
-        \item 2) $Beihai, \emph{CityInProvince}, Guangxi)$
-		\item 3) $(Guangxi, \emph{ProvinceInCountry}, China)$
+        \item 1) $(Mike, \emph{BornInCity}, Hangzhou)$
+        \item 2) $(Beihai, \emph{CityInProvince}, Guangxi)$
+		\item 3) $(Zhejiang, \emph{ProvinceInCountry}, China)$
     \end{center}
     
     
 \end{example}
-    \ \ \ \ \ \ \ \ 对于例中的训练集，关系路径以及观察值，我们使用本体语言对其进行表达，分别得到TBox $\mathcal{T}$,ABox $\mathcal{A}$以及观察值$\alpha$。\\
-    其中$\mathcal{T}$为：
-        \begin{center}
-	       \item $isFatherOf\left(a, b\right) \wedge isParentOf\left(a, c\right) \wedge isMotherOf\left(c, d\right) \to isGrandpaOf\left(a, d\right)$
-\end{center}
-    $\mathcal{A}$为:
-        \begin{center}
-        \item 1) $\emph{isFatherOf}(Mike, Josan)$
-        \item 2) $\emph{isParentOf}(Mike, Lily)$
-        \item 3) $\emph{isFriendOf}(Hill, Peter)$
+    根据例子，首先使用本体语言对训练集进行表达，得到ABox $\mathcal{A}$：
+	\begin{center}
+        \item 1) $r_{BornInCity}(Mike, Hangzhou)$
+        \item 2) $r_{CityInProvince}(Beihai, Guangxi)$
+		\item 3) $r_{ProvinceInCountry}(Zhejiang, China)$
     \end{center}
+	
+	然后可得本体$\mathcal{O}$：
+    \begin{center}
+	    \item 1) $r_{BornInCity} \circ r_{CityInProvince} \sqsubseteq r_{BornInProvince}$
+        \item 2) $r_{BornInProvince} \circ r_{ProvinceInCountry} \sqsubseteq r_{Nationality}$
+        \item 4) $r_{BornInCity}(Mike, Hangzhou)$
+        \item 5) $r_{CityInProvince}(Beihai, Guangxi)$
+		\item 6) $r_{ProvinceInCountry}(Zhejiang, China)$
+    \end{center}
+	易得，$\mathcal{O}$与$\mathcal{O}\cup r_{Nationality}(Mike, China)$都是是一致的。又，通过决断集可以得到蕴含$r_{Nationality}(A, B)$的基于决断集模板$\mathcal{J}_p$:
+		\begin{center}
+	       \item $r_{BornInCity} (A, C)$
+		   \item $r_{CityInProvince} (C, D)$ 
+		   \item $r_{ProvinceInCountry} (D, B)$
+	\end{center}
     观察值$\alpha$为:
     \begin{center}
-        \item $\emph{isGrandpaOf}(Mike, Peter)$
+        \item $r_{Nationality}(Mike, China)$
     \end{center}
 
-    使用二分法对$\mathcal{T}$中的公理进行划分，分别得到以下公理集：
+    对决断集模板进行二分划分$(\mathcal{J}_1, \mathcal{J}_2)$，使得$\mathcal{J}_1 \cap \mathcal{J}_2 = \emptyset$且$\mathcal{J}_1 \cup \mathcal{J}_2 = \mathcal{J}_p$。
         \begin{center}
-	    \item 1)\ $J_1$: $isFatherOf\left(a, b\right) \wedge isParentOf\left(a, c\right)$$J_2$: $isMotherOf\left(c, d\right)$
-        \item 2)\ $J_1$: $isParentOf\left(a, c\right) \wedge isMotherOf\left(c, d\right)$$J_2$: $isFatherOf\left(a, b\right)$
+	    \item 1)\ $J_1$= $\{r_{BornInCity}(A, C), r_{CityInProvince}(C, D)\}$, $J_2$=$\{r_{ProvinceInCountry}(D, B)\}$
+		\end{center}
+		由于不存在一个差异化实例替换$\theta$使得$\mathcal{J}_1\theta \subseteq \mathcal{O}$，因此划分1)无法生成合理解释。
+		\begin{center}
+        \item 2)\ $J_1$ $\{r_{BornInCity}(A, C)\}$, $J_2$=$\{r_{CityInProvince}(C, D), r_{ProvinceInCountry}(D, B)\}$
+		\end{center}
+		根据划分2)，可以得到一个$\theta$使得 $\mathcal{J}_1\theta \subseteq \mathcal{O}$，其中$\theta = \{A \mapsto Mike, C \mapsto Hangzhou, B \mapsto China\}$，所以我们设$\mathcal{E}_1 = \mathcal{J}_2\theta = \{r_{CityInProvince}(Hangzhou, e_1), r_{ProvinceInCountry}(e_1, China)\}$，又因为$\mathcal{O} \cup \mathcal{J}_2\theta$是一致的，$\mathcal{O} \cup \mathcal{J}_2\theta \models \alpha$，且对于所有的$\mathcal{E}' \in subs_1(\mathcal{E}_1) \cup lifts_1(\mathcal{E}_1)$都有$\mathcal{O} \cup \mathcal{E}' \not \models \alpha$，所以$\mathcal{E}_1$是一个合理的解释。
+		
+		\begin{center}
+	    \item 3)\ $J_1$= $\{r_{BornInCity}(A, C), r_{ProvinceInCountry}(D, B)\}$, $J_2$=$\{r_{CityInProvince}(C, D)\}$
+		\end{center}
+		根据划分3)，可以得到一个$\theta$使得 $\mathcal{J}_1\theta \subseteq \mathcal{O}$，其中$\theta = \{A \mapsto Mike, C \mapsto Hangzhou, B \mapsto China, D \mapsto Zhejiang\}$，所以我们设$\mathcal{E}_2 = \mathcal{J}_2\theta = \{r_{CityInProvince}(Hangzhou, Zhejiang)\}$，又因为$\mathcal{O} \cup \mathcal{J}_2\theta$是一致的，$\mathcal{O} \cup \mathcal{J}_2\theta \models \alpha$，且对于所有的$\mathcal{E}' \in subs_1(\mathcal{E}_2) \cup lifts_1(\mathcal{E}_2)$都有$\mathcal{O} \cup \mathcal{E}' \not \models \alpha$，所以$\mathcal{E}_2$是一个合理的解释。
+		\begin{center}
+		
         \item 3)\ $J_1$: $isFatherOf\left(a, b\right) \wedge isMotherOf\left(c, d\right)$$J_2$: $isParentOf\left(a, c\right)$
         \item 4)\ $J_1$: $isMotherOf\left(c, d\right)$$J_2$: $isFatherOf\left(a, b\right) \wedge isParentOf\left(a, c\right)$
         \item 5)\ $J_1$: $isFatherOf\left(a, b\right)$$J_2$: $isParentOf\left(a, c\right) \wedge isMotherOf\left(c, d\right)$

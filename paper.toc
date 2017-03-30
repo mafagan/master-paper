@@ -23,21 +23,21 @@
 \contentsline {section}{\numberline {2.7}本体的关系}{16}{section.2.7}
 \contentsline {chapter}{\numberline {}第三章\hspace {0.8em}基于决断集模板进行溯因诊断}{18}{chapter.3}
 \contentsline {section}{\numberline {3.1}解释与决定集}{18}{section.3.1}
-\contentsline {section}{\numberline {3.2}RDFS构建框架}{29}{section.3.2}
-\contentsline {subsection}{\numberline {3.2.1}目标本体特性}{30}{subsection.3.2.1}
-\contentsline {subsection}{\numberline {3.2.2}中文文本预处理}{31}{subsection.3.2.2}
-\contentsline {subsection}{\numberline {3.2.3}本体概念的识别}{31}{subsection.3.2.3}
-\contentsline {subsection}{\numberline {3.2.4}分类关系的抽取}{32}{subsection.3.2.4}
-\contentsline {subsection}{\numberline {3.2.5}非分类关系的抽取}{33}{subsection.3.2.5}
-\contentsline {subsection}{\numberline {3.2.6}基于RDFS的本体模型的构建}{35}{subsection.3.2.6}
-\contentsline {chapter}{\numberline {}第四章\hspace {0.8em}实验与分析}{37}{chapter.4}
-\contentsline {section}{\numberline {4.1}实验基本情况}{37}{section.4.1}
-\contentsline {section}{\numberline {4.2}实验结果与分析}{38}{section.4.2}
-\contentsline {chapter}{\numberline {}第五章\hspace {0.8em}总结与展望}{40}{chapter.5}
-\contentsline {section}{\numberline {5.1}工作总结}{40}{section.5.1}
-\contentsline {section}{\numberline {5.2}不足与改进方向}{40}{section.5.2}
-\contentsline {chapter}{致\hskip 1em\relax 谢}{41}{chapter*.5}
-\contentsline {chapter}{参考文献}{42}{section*.6}
-\contentsline {chapter}{附\hskip 1em\relax 录}{43}{chapter*.8}
-\contentsline {chapter}{原创性声明}{44}{chapter*.9}
+\contentsline {section}{\numberline {3.2}RDFS构建框架}{30}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}目标本体特性}{31}{subsection.3.2.1}
+\contentsline {subsection}{\numberline {3.2.2}中文文本预处理}{32}{subsection.3.2.2}
+\contentsline {subsection}{\numberline {3.2.3}本体概念的识别}{32}{subsection.3.2.3}
+\contentsline {subsection}{\numberline {3.2.4}分类关系的抽取}{33}{subsection.3.2.4}
+\contentsline {subsection}{\numberline {3.2.5}非分类关系的抽取}{34}{subsection.3.2.5}
+\contentsline {subsection}{\numberline {3.2.6}基于RDFS的本体模型的构建}{36}{subsection.3.2.6}
+\contentsline {chapter}{\numberline {}第四章\hspace {0.8em}实验与分析}{38}{chapter.4}
+\contentsline {section}{\numberline {4.1}实验基本情况}{38}{section.4.1}
+\contentsline {section}{\numberline {4.2}实验结果与分析}{39}{section.4.2}
+\contentsline {chapter}{\numberline {}第五章\hspace {0.8em}总结与展望}{41}{chapter.5}
+\contentsline {section}{\numberline {5.1}工作总结}{41}{section.5.1}
+\contentsline {section}{\numberline {5.2}不足与改进方向}{41}{section.5.2}
+\contentsline {chapter}{致\hskip 1em\relax 谢}{42}{chapter*.5}
+\contentsline {chapter}{参考文献}{43}{section*.6}
+\contentsline {chapter}{附\hskip 1em\relax 录}{44}{chapter*.8}
+\contentsline {chapter}{原创性声明}{45}{chapter*.9}
 \contentsfinish 

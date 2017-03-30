@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2017.1.21)  30 MAR 2017 21:30
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2017.1.21)  31 MAR 2017 01:26
 entering extended mode
 **C:/Users/Margo/Documents/æ¯•ä¸šè®ºæ–‡/latex-æœ¬/paper.tex
 (C:/Users/Margo/Documents/æ¯•ä¸šè®ºæ–‡/latex-æœ¬/paper.tex
@@ -1153,96 +1153,141 @@ l.132 	\begin{proposition}
 
 LaTeX Warning: Float too large for page by 28.52959pt on input line 199.
 
-[26] [27] [28] [29] <img/3.jpg, id=605, 496.10344pt x 437.38406pt>
+[26] [27] [28]
+Overfull \hbox (27.57126pt too wide) in paragraph at lines 258--259
+\C19/song/bx/n/12/42 Š \C19/song/bx/n/12/46 â \C19/song/bx/n/12/44 y \C19/song/
+bx/n/12/41 ©\OT1/ppl/m/n/12 2)\C19/song/bx/n/12/26 § \C19/song/bx/n/12/47 Œ \C1
+9/song/bx/n/12/61 ± \C19/song/bx/n/12/40   \C19/song/bx/n/12/61 ˜ \C19/song/b
+x/n/12/42 ‡$\OML/cmm/m/it/12 $\C19/song/bx/n/12/55 ¦ \C19/song/bx/n/12/40 $\O
+MS/cmsy/m/n/12 J[]\OML/cmm/m/it/12  \OMS/cmsy/m/n/12  O$\C19/song/bx/n/12/26 
+§ \C19/song/m/n/12/52 Ù \C19/song/bx/n/12/64 ¥$\OML/cmm/m/it/12  \OT1/cmr/m/n/
+12 = \OMS/cmsy/m/n/12 f\OML/cmm/m/it/12 A \OMS/cmsy/m/n/12 7! \OML/cmm/m/it/12 
+Mike; C \OMS/cmsy/m/n/12 7! \OML/cmm/m/it/12 Hangzhou; B \OMS/cmsy/m/n/12 7!$
+ []
+
+
+Overfull \hbox (62.2314pt too wide) in paragraph at lines 258--259
+$\OML/cmm/m/it/12 China\OMS/cmsy/m/n/12 g$\C19/song/bx/n/12/26 § \C19/song/bx/n
+/12/56 ¤ \C19/song/bx/n/12/61 ± \C19/song/bx/n/12/58 · \C19/song/bx/n/12/50 ‚ \
+C19/song/bx/n/12/55 $\OMS/cmsy/m/n/12 E[] \OT1/cmr/m/n/12 = \OMS/cmsy/m/n/12 J
+[]\OML/cmm/m/it/12  \OT1/cmr/m/n/12 = \OMS/cmsy/m/n/12 f\OML/cmm/m/it/12 r[]\O
+T1/cmr/m/n/12 (\OML/cmm/m/it/12 Hangzhou; e[]\OT1/cmr/m/n/12 )\OML/cmm/m/it/12 
+; r[]\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 e[]; China\OT1/cmr/m/n/12 )\OMS/cmsy/m/n
+/12 g$\C19/song/bx/n/12/26 §
+ []
+
+
+Overfull \hbox (27.57126pt too wide) in paragraph at lines 263--264
+\C19/song/bx/n/12/42 Š \C19/song/bx/n/12/46 â \C19/song/bx/n/12/44 y \C19/song/
+bx/n/12/41 ©\OT1/ppl/m/n/12 2)\C19/song/bx/n/12/26 § \C19/song/bx/n/12/47 Œ \C1
+9/song/bx/n/12/61 ± \C19/song/bx/n/12/40   \C19/song/bx/n/12/61 ˜ \C19/song/b
+x/n/12/42 ‡$\OML/cmm/m/it/12 $\C19/song/bx/n/12/55 ¦ \C19/song/bx/n/12/40 $\O
+MS/cmsy/m/n/12 J[]\OML/cmm/m/it/12  \OMS/cmsy/m/n/12  O$\C19/song/bx/n/12/26 
+§ \C19/song/m/n/12/52 Ù \C19/song/bx/n/12/64 ¥$\OML/cmm/m/it/12  \OT1/cmr/m/n/
+12 = \OMS/cmsy/m/n/12 f\OML/cmm/m/it/12 A \OMS/cmsy/m/n/12 7! \OML/cmm/m/it/12 
+Mike; C \OMS/cmsy/m/n/12 7! \OML/cmm/m/it/12 Hangzhou; B \OMS/cmsy/m/n/12 7!$
+ []
+
+
+Overfull \hbox (40.20296pt too wide) in paragraph at lines 263--264
+$\OML/cmm/m/it/12 China; D \OMS/cmsy/m/n/12 7! \OML/cmm/m/it/12 Zhejiang\OMS/cm
+sy/m/n/12 g$\C19/song/bx/n/12/26 § \C19/song/bx/n/12/56 ¤ \C19/song/bx/n/12/61 
+± \C19/song/bx/n/12/58 · \C19/song/bx/n/12/50 ‚ \C19/song/bx/n/12/55 $\OMS/cms
+y/m/n/12 E[] \OT1/cmr/m/n/12 = \OMS/cmsy/m/n/12 J[]\OML/cmm/m/it/12  \OT1/cmr/
+m/n/12 = \OMS/cmsy/m/n/12 f\OML/cmm/m/it/12 r[]\OT1/cmr/m/n/12 (\OML/cmm/m/it/1
+2 Hangzhou; Zhejiang\OT1/cmr/m/n/12 )\OMS/cmsy/m/n/12 g$\C19/song/bx/n/12/26 §
+ []
+
+[29] [30] <img/3.jpg, id=609, 496.10344pt x 437.38406pt>
 File: img/3.jpg Graphic file (type jpg)
-
-<use img/3.jpg>
-Package pdftex.def Info: img/3.jpg used on input line 276.
+ <use img/3.jpg>
+Package pdftex.def Info: img/3.jpg used on input line 298.
 (pdftex.def)             Requested size: 405.45047pt x 357.4626pt.
- [30 <C:/Users/Margo/Documents/æ¯•ä¸šè®ºæ–‡/latex-æœ¬/img/3.jpg>]
 
-Package natbib Warning: Citation `ol8' on page 31 undefined on input line 285.
+[31 <C:/Users/Margo/Documents/æ¯•ä¸šè®ºæ–‡/latex-æœ¬/img/3.jpg>]
 
-
-Package natbib Warning: Citation `ol10' on page 31 undefined on input line 285.
+Package natbib Warning: Citation `ol8' on page 32 undefined on input line 307.
 
 
+Package natbib Warning: Citation `ol10' on page 32 undefined on input line 307.
 
-Package natbib Warning: Citation `ol11' on page 31 undefined on input line 287.
+
+
+Package natbib Warning: Citation `ol11' on page 32 undefined on input line 309.
 
 
 pdfTeX warning (ext4): destination with the same identifier (name{definition.10
 }) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.288 \begin{proposition}
-                          [31]
+l.310 \begin{proposition}
+                          [32]
 
-Package natbib Warning: Citation `ol12' on page 32 undefined on input line 295.
+Package natbib Warning: Citation `ol12' on page 33 undefined on input line 317.
 
 
 pdfTeX warning (ext4): destination with the same identifier (name{definition.11
 }) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.296 \begin{definition}
+l.318 \begin{definition}
                         
 
-Package natbib Warning: Citation `ol12' on page 32 undefined on input line 301.
+Package natbib Warning: Citation `ol12' on page 33 undefined on input line 323.
 
 
 
-Package natbib Warning: Citation `ol13' on page 32 undefined on input line 312.
+Package natbib Warning: Citation `ol13' on page 33 undefined on input line 334.
 
 
 
-Package natbib Warning: Citation `ol14' on page 32 undefined on input line 312.
+Package natbib Warning: Citation `ol14' on page 33 undefined on input line 334.
 
 
-[32]
+[33]
 
-Package natbib Warning: Citation `ol15' on page 33 undefined on input line 318.
+Package natbib Warning: Citation `ol15' on page 34 undefined on input line 340.
 
 
-<img/4.jpg, id=623, 508.14844pt x 201.75375pt>
+<img/4.jpg, id=627, 508.14844pt x 201.75375pt>
 File: img/4.jpg Graphic file (type jpg)
  <use img/4.jpg>
-Package pdftex.def Info: img/4.jpg used on input line 322.
+Package pdftex.def Info: img/4.jpg used on input line 344.
 (pdftex.def)             Requested size: 405.45047pt x 160.98453pt.
- [33] [34 <C:/Users/Margo/Documents/æ¯•ä¸šè®ºæ–‡/latex-æœ¬/img/4.jpg>]
+ [34] [35 <C:/Users/Margo/Documents/æ¯•ä¸šè®ºæ–‡/latex-æœ¬/img/4.jpg>]
 
-Package natbib Warning: Citation `16' on page 35 undefined on input line 366.
+Package natbib Warning: Citation `16' on page 36 undefined on input line 388.
 
 
-Package natbib Warning: Citation `17' on page 35 undefined on input line 366.
+Package natbib Warning: Citation `17' on page 36 undefined on input line 388.
 
-<img/5.jpg, id=635, 390.70969pt x 344.78813pt>
+<img/5.jpg, id=639, 390.70969pt x 344.78813pt>
 File: img/5.jpg Graphic file (type jpg)
  <use img/5.jpg>
-Package pdftex.def Info: img/5.jpg used on input line 369.
+Package pdftex.def Info: img/5.jpg used on input line 391.
 (pdftex.def)             Requested size: 405.45047pt x 357.8136pt.
-) [35] [36 <C:/Users/Margo/Documents/æ¯•ä¸šè®ºæ–‡/latex-æœ¬/img/5.jpg>]
+) [36] [37 <C:/Users/Margo/Documents/æ¯•ä¸šè®ºæ–‡/latex-æœ¬/img/5.jpg>]
 (C:\Users\Margo\Documents\æ¯•ä¸šè®ºæ–‡\latex-æœ¬\chap4.tex
 µÚËÄÕÂ
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `\CJKnumber' on input line 1.
 
-[37
+[38
 
 
 
 ]
 
-Package natbib Warning: Citation `ol19' on page 38 undefined on input line 34.
+Package natbib Warning: Citation `ol19' on page 39 undefined on input line 34.
 
-[38]) [39] (C:\Users\Margo\Documents\æ¯•ä¸šè®ºæ–‡\latex-æœ¬\chap5.tex
+[39]) [40] (C:\Users\Margo\Documents\æ¯•ä¸šè®ºæ–‡\latex-æœ¬\chap5.tex
 µÚÎåÕÂ
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `\CJKnumber' on input line 1.
 
-) [40
+) [41
 
 
 
@@ -1252,7 +1297,7 @@ Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                \hskip 12.0pt
 (hyperref)                replaced by space on input line 26.
 
-) [41
+) [42
 
 
 
@@ -1261,7 +1306,7 @@ Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 
 Package natbib Warning: Empty `thebibliography' environment on input line 3.
 
-) [42
+) [43
 
 
 ] (C:\Users\Margo\Documents\æ¯•ä¸šè®ºæ–‡\latex-æœ¬\fulu.tex
@@ -1270,10 +1315,10 @@ Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                \hskip 12.0pt
 (hyperref)                replaced by space on input line 3.
 
-) [43
+) [44
 
 
-] (C:\Users\Margo\Documents\æ¯•ä¸šè®ºæ–‡\latex-æœ¬\ack.tex) [44
+] (C:\Users\Margo\Documents\æ¯•ä¸šè®ºæ–‡\latex-æœ¬\ack.tex) [45
 
 
 
@@ -1310,10 +1355,10 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 15387 strings out of 495354
- 226475 string characters out of 3182739
+ 15392 strings out of 495354
+ 226525 string characters out of 3182739
  342937 words of memory out of 3000000
- 17570 multiletter control sequences out of 15000+200000
+ 17574 multiletter control sequences out of 15000+200000
  103823 words of font info for 337 fonts, out of 3000000 for 9000
  14 hyphenation exceptions out of 8191
  43i,21n,58p,3787b,1193s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -1415,9 +1460,9 @@ m Files (x86)/CTEX/MiKTeX/fonts/type1/urw/palatino/uplb8a.pfb><C:/Program Files
  (x86)/CTEX/MiKTeX/fonts/type1/urw/palatino/uplr8a.pfb><C:/Program Files (x86)/
 CTEX/MiKTeX/fonts/type1/urw/palatino/uplr8a.pfb><C:/Program Files (x86)/CTEX/Mi
 KTeX/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on paper.pdf (50 pages, 1194528 bytes).
+Output written on paper.pdf (51 pages, 1198088 bytes).
 PDF statistics:
- 1197 PDF objects out of 1200 (max. 8388607)
- 146 named destinations out of 1000 (max. 500000)
+ 1201 PDF objects out of 1440 (max. 8388607)
+ 147 named destinations out of 1000 (max. 500000)
  471 words of extra memory for PDF output out of 10000 (max. 10000000)
 
