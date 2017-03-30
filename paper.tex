@@ -84,7 +84,7 @@
 
 \usepackage{listings}
 
-\lstset{language=C++}%这条命令可以让LaTeX排版时将C++键字突出显示
+\lstset{language=C++}%这条命令可以让LaTeX排版时将C++ 键字突出显示
 
 \lstset{breaklines}%这条命令可以让LaTeX自动将长的代码行换行排版
 
@@ -112,7 +112,7 @@
 
 %\setlength{\parindent}{22.4 pt}        %段落首行缩进量
 \setlength{\parskip}{2pt plus1pt minus1pt} %段落之间的竖直距离
-%\setlength{\baselineskip}{20pt plus2pt minus1pt}%段落内的行距
+%\setlength{\baselineskip}{20pt plus2pt minus1pt}% 段落内的行距
 \renewcommand{\baselinestretch}{1.2} % This command is to define space between lines.
         % Use 2.0 for double-space lines, 1.2 for single-space lines.
 
@@ -179,7 +179,7 @@
 \def\GAZK{\hspace*{11mm}}
 \def\FZK{\hspace*{14mm}}
 
-% 若文稿使用\textwidth指令设定正文宽度，应将其置于fancyhdr宏包指令之前
+% 若文稿使用\textwidth指令设定正文宽度，应将其置于fancyhdr 宏包指令之前
 \usepackage{fancyhdr}
 
 \newcommand{\makeheadrule}{%
@@ -223,12 +223,12 @@
     % Note: the command \cite generates in-text citation, not superscript one.
 
 % 重定义字体命令
-\newcommand{\song}{\CJKfamily{song}}    % 宋体   (Windows自带simsun.ttf)
+\newcommand{\song}{\CJKfamily{song}}    % 宋体   (Windows 自带simsun.ttf)
 \newcommand{\fs}{\CJKfamily{fs}}        % 仿宋体 (华天字库htfs.ttf)
 \newcommand{\kai}{\CJKfamily{kai}}      % 楷体   (华天字库htkai.ttf)
-\newcommand{\hei}{\CJKfamily{hei}}      % 黑体   (Windows自带simhei.ttf)
-\newcommand{\li}{\CJKfamily{li}}        % 隶书   (Windows自带simli.ttf)
-\newcommand{\you}{\CJKfamily{you}}      % 幼圆体 (Windows自带simyou.ttf)
+\newcommand{\hei}{\CJKfamily{hei}}      % 黑体   (Windows 自带simhei.ttf)
+\newcommand{\li}{\CJKfamily{li}}        % 隶书   (Windows 自带simli.ttf)
+\newcommand{\you}{\CJKfamily{you}}      % 幼圆体 (Windows 自带simyou.ttf)
 %%%  以上六种字体均为标准 GBK 字体, 包括 GBK 繁体字和一些不常用字, 推荐!!!
 
 \newcommand{\xs}{\CJKfamily{xs}}
@@ -241,22 +241,22 @@
 % define the size of CJK characters.
 %
 \newdimen\bp@  \bp@=1bp % 字体定义中使用 PS 磅值。 1 in = 72 bp = 72.27 pt
-\def\@cjk@normaleightbp{5}    \def\@cjk@normaleightskip{7}   %八号字
-\def\@cjk@normalsevenbp{5.5}  \def\@cjk@normalsevenskip{8}   %七号字
-\def\@cjk@smallsixbp{6.5}     \def\@cjk@smallsixskip{9}      %小六号
-\def\@cjk@normalsixbp{7.5}    \def\@cjk@normalsixskip{10.5}  %六号字
-\def\@cjk@smallfivebp{9}      \def\@cjk@smallfiveskip{13.5}  %小五号
-\def\@cjk@normalfivebp{10.5}  \def\@cjk@normalfiveskip{15}   %五号字
-\def\@cjk@smallfourbp{12}     \def\@cjk@smallfourskip{17}    %小四号
-\def\@cjk@normalfourbp{14}    \def\@cjk@normalfourskip{19.5} %四号字
-\def\@cjk@smallthreebp{15}    \def\@cjk@smallthreeskip{21}   %小三号
-\def\@cjk@normalthreebp{16}   \def\@cjk@normalthreeskip{22.5}%三号字
-\def\@cjk@smalltwobp{18}      \def\@cjk@smalltwoskip{25}     %小二号
-\def\@cjk@normaltwobp{22}     \def\@cjk@normaltwoskip{31}    %二号字
-\def\@cjk@smallonebp{24}      \def\@cjk@smalloneskip{33}     %小一号
-\def\@cjk@normalonebp{26}     \def\@cjk@normaloneskip{36}    %一号字
-\def\@cjk@smallzerobp{36}     \def\@cjk@smallzeroskip{48}    %小初号
-\def\@cjk@normalzerobp{42}    \def\@cjk@normalzeroskip{56}   %初号字
+\def\@cjk@normaleightbp{5}    \def\@cjk@normaleightskip{7}   % 八号字
+\def\@cjk@normalsevenbp{5.5}  \def\@cjk@normalsevenskip{8}   % 七号字
+\def\@cjk@smallsixbp{6.5}     \def\@cjk@smallsixskip{9}      % 小六号
+\def\@cjk@normalsixbp{7.5}    \def\@cjk@normalsixskip{10.5}  % 六号字
+\def\@cjk@smallfivebp{9}      \def\@cjk@smallfiveskip{13.5}  % 小五号
+\def\@cjk@normalfivebp{10.5}  \def\@cjk@normalfiveskip{15}   % 五号字
+\def\@cjk@smallfourbp{12}     \def\@cjk@smallfourskip{17}    % 小四号
+\def\@cjk@normalfourbp{14}    \def\@cjk@normalfourskip{19.5} % 四号字
+\def\@cjk@smallthreebp{15}    \def\@cjk@smallthreeskip{21}   % 小三号
+\def\@cjk@normalthreebp{16}   \def\@cjk@normalthreeskip{22.5}% 三号字
+\def\@cjk@smalltwobp{18}      \def\@cjk@smalltwoskip{25}     % 小二号
+\def\@cjk@normaltwobp{22}     \def\@cjk@normaltwoskip{31}    % 二号字
+\def\@cjk@smallonebp{24}      \def\@cjk@smalloneskip{33}     % 小一号
+\def\@cjk@normalonebp{26}     \def\@cjk@normaloneskip{36}    % 一号字
+\def\@cjk@smallzerobp{36}     \def\@cjk@smallzeroskip{48}    % 小初号
+\def\@cjk@normalzerobp{42}    \def\@cjk@normalzeroskip{56}   % 初号字
 
 
 \newcount\CJK@ZihaoNo
@@ -333,7 +333,7 @@
 
  \begin{CJK*}{GBK}{}
  \makeatletter
- \newtheoremstyle{myplain}% 定义自己的定理风格。首行缩进2个汉字，其余部分与环境外的格式相同
+ \newtheoremstyle{myplain}% 定义自己的定理风格。首行缩进2 个汉字，其余部分与环境外的格式相同
 %   {\item[　　\hskip\labelsep \theorem@headerfont ##1\ ##2\theorem@separator]}%
 %   {\item[　　\hskip\labelsep \theorem@headerfont ##1\ ##2\ (##3)\theorem@separator]}
     {\item[　　\hskip\labelsep \theorem@headerfont ##1\ ##2]}%      %把上面两句中的  \theorem@separator   删掉后，定义XX、证明XX等就不会在XX后面出现冒号！！！
@@ -350,7 +350,7 @@
  \newtheorem{theorem}{\hei 定理}[chapter]
  \newtheorem{axiom}{\hei 公理}
  \newtheorem{corollary}[definition]{\hei 推论}
- %\theorembodyfont{\CJKfamily{song}\rmfamily} % body部分为书宋体
+ %\theorembodyfont{\CJKfamily{song}\rmfamily} % body 部分为书宋体
  \newtheorem{exercise}[definition]{\hei 练习}
  \newtheorem{example}{\hei 例}[chapter]
 
@@ -358,7 +358,7 @@
  % 定义自己的定理风格。首行缩进2个汉字，其余部分与环境外的格式相同。但定理的证明无须标号
  \makeatletter
  \newtheoremstyle{mynonumberplain}%
-  {\item[\hspace*{2em}\theorem@headerfont\hskip\labelsep ##1\theorem@separator]}%如果换成与上面的相同，
+  {\item[\hspace*{2em}\theorem@headerfont\hskip\labelsep ##1\theorem@separator]}% 如果换成与上面的相同，
                                   % 则“证明”也将出现标号。为什么？
   {\item[\hspace*{2em}\theorem@headerfont\hskip\labelsep ##1\ (##3)\theorem@separator]}
  \makeatother
@@ -378,7 +378,7 @@
 % 请问，\eqnarray如果很长，影响分栏、换行和分页（整块挪动，造成页面空白），
 % 是否可以设置成为自动调整模式？
 %
-% 答：如果您使用\ducomentclass{amsart}或{amsbook}等，在\begin{document}前加上
+% 答：如果您使用\ducomentclass{amsart}或{amsbook} 等，在\begin{document}前加上
 % 命令\allowdisplaybreaks[4]，在排版数学公式时使用下列命令（不要使用\eqnarray）
 % 即可解决您的问题：
 % \begin{equation}
@@ -530,7 +530,8 @@
 \newcommand{\operator}[2]{\mbox{\boldmath $#1$\hspace*{-#2ex}}}
 \newcommand{\mb}{\operator{B}{.2}}
 
-
+\SetKw{Continue}{continue}
+\SetKw{Or}{or}
 \begin{document}
 \begin{CJK*}{GBK}{song}
 \CJKtilde

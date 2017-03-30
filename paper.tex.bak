@@ -4,16 +4,9 @@
 %\def\QEDclosed{\mbox{\rule[0pt]{1.3ex}{1.3ex}}} % 定义实心符
 %\def\QEDopen{{\setlength{\fboxsep}{0pt}\setlength{\fboxrule}{0.2pt}\fbox{\rule[0pt]{0pt}{1.3ex}\rule[0pt]{1.3ex}{0pt}}}} %定义空心符
 %\def\QED{\QEDclosed} % 选填\QEDclosed得到实心
-%\def\proof{\noindent{\bf Proof}: } %定义证明，注意选择中英文
-%\def\endproof{\hspace*{\fill}~\QED\par\endtrivlist\unskip}%在proof环境自动添加结束符。
+%\def\proof{\noindent{\bf Proof}: } % 定义证明，注意选择中英文
+%\def\endproof{\hspace*{\fill}~\QED\par\endtrivlist\unskip}% 在proof环境自动添加结束符。
 
-\def\E{\mathcal{E}}
-\def\I{\mathcal{I}}
-\def\J{\mathcal{J}}
-\def\P{\mathcal{P}}
-\def\S{\mathcal{S}}
-\def\T{\mathcal{T}}
-\def\O{\mathcal{O}}
 
 %\documentclass[12pt,a4paper]{book}
 \documentclass[12pt,a4paper,openany,oneside]{book}  %去掉参数openany与oneside，用以实现论文的每一个章节从奇数页开始打印
@@ -119,7 +112,7 @@
 
 %\setlength{\parindent}{22.4 pt}        %段落首行缩进量
 \setlength{\parskip}{2pt plus1pt minus1pt} %段落之间的竖直距离
-%\setlength{\baselineskip}{20pt plus2pt minus1pt}%段落内的行距
+%\setlength{\baselineskip}{20pt plus2pt minus1pt}% 段落内的行距
 \renewcommand{\baselinestretch}{1.2} % This command is to define space between lines.
         % Use 2.0 for double-space lines, 1.2 for single-space lines.
 
@@ -215,7 +208,7 @@
 %\newcommand \ {}
 %例如：下面这个宏是非常有用的。
 %\renewcommand{\theequation}{\arabic{chapter}.\arabic{section}.\arabic{equation}}
-%\renewcommand \sectionformat{}     %去掉中间对齐的sectionformat，这样就把节的标题左对齐了。
+%\renewcommand \sectionformat{}     % 去掉中间对齐的sectionformat，这样就把节的标题左对齐了。
 
 % \renewcommand{\mathbf}[1]{\mbox{\boldmath $ #1 $}}
     %Redefine the default command \mathbf to make math symbol both bold and italic.
@@ -649,7 +642,7 @@
  \include{xiexie}   %论文感谢部分
 
 %\addcontentsline{toc}{chapter}{\numberline{}\bibname} % 解决目录中没有相应的参考文献的条目问题
-                                                       %  (其位置对生成pdf书签也有问题.2004.4.9)
+                                                       %  (其位置对生成pdf 书签也有问题.2004.4.9)
 
 
 %\begin{thebibliography}{99}
