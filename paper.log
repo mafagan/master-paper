@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2017.1.21)  31 MAR 2017 01:26
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2017.1.21)  1 APR 2017 01:35
 entering extended mode
 **C:/Users/Margo/Documents/æ¯•ä¸šè®ºæ–‡/latex-æœ¬/paper.tex
 (C:/Users/Margo/Documents/æ¯•ä¸šè®ºæ–‡/latex-æœ¬/paper.tex
@@ -615,7 +615,10 @@ subscribe by emailing sympa@lirmm.fr with 'subscribe <list> <firstname name>'
 \c@algocf=\count170
 \algocf@algoframe=\box41
 \algocf@algobox=\box42
-) (C:\Users\Margo\Documents\æ¯•ä¸šè®ºæ–‡\latex-æœ¬\paper.aux
+) ("C:\Program Files (x86)\CTEX\MiKTeX\tex\latex\multirow\multirow.sty"
+\bigstrutjot=\dimen175
+)
+(C:\Users\Margo\Documents\æ¯•ä¸šè®ºæ–‡\latex-æœ¬\paper.aux
 (C:\Users\Margo\Documents\æ¯•ä¸šè®ºæ–‡\latex-æœ¬\abstract1.aux)
 (C:\Users\Margo\Documents\æ¯•ä¸šè®ºæ–‡\latex-æœ¬\abstract2.aux)
 (C:\Users\Margo\Documents\æ¯•ä¸šè®ºæ–‡\latex-æœ¬\chap1.aux)
@@ -649,89 +652,98 @@ LaTeX Warning: Label `tab_environment' multiply defined.
 
 LaTeX Warning: Label `tab_environment' multiply defined.
 
+
+LaTeX Warning: Label `tab_environment' multiply defined.
+
+
+LaTeX Warning: Label `tab_environment' multiply defined.
+
+
+LaTeX Warning: Label `tab_environment' multiply defined.
+
 ) (C:\Users\Margo\Documents\æ¯•ä¸šè®ºæ–‡\latex-æœ¬\chap5.aux)
 (C:\Users\Margo\Documents\æ¯•ä¸šè®ºæ–‡\latex-æœ¬\xiexie.aux)
 (C:\Users\Margo\Documents\æ¯•ä¸šè®ºæ–‡\latex-æœ¬\fulu.aux)
 (C:\Users\Margo\Documents\æ¯•ä¸šè®ºæ–‡\latex-æœ¬\ack.aux))
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 535.
-LaTeX Font Info:    ... okay on input line 535.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 535.
-LaTeX Font Info:    ... okay on input line 535.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 535.
-LaTeX Font Info:    ... okay on input line 535.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 535.
-LaTeX Font Info:    ... okay on input line 535.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 535.
-LaTeX Font Info:    ... okay on input line 535.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 535.
-LaTeX Font Info:    ... okay on input line 535.
-LaTeX Font Info:    Checking defaults for C00/song/m/n on input line 535.
-LaTeX Font Info:    ... okay on input line 535.
-LaTeX Font Info:    Checking defaults for C05/song/m/n on input line 535.
-LaTeX Font Info:    ... okay on input line 535.
-LaTeX Font Info:    Checking defaults for C09/song/m/n on input line 535.
-LaTeX Font Info:    ... okay on input line 535.
-LaTeX Font Info:    Checking defaults for C10/song/m/n on input line 535.
-LaTeX Font Info:    ... okay on input line 535.
-LaTeX Font Info:    Checking defaults for C20/song/m/n on input line 535.
-LaTeX Font Info:    ... okay on input line 535.
-LaTeX Font Info:    Checking defaults for C19/song/m/n on input line 535.
-LaTeX Font Info:    ... okay on input line 535.
-LaTeX Font Info:    Checking defaults for C40/song/m/n on input line 535.
-LaTeX Font Info:    ... okay on input line 535.
-LaTeX Font Info:    Checking defaults for C42/song/m/n on input line 535.
-LaTeX Font Info:    ... okay on input line 535.
-LaTeX Font Info:    Checking defaults for C43/song/m/n on input line 535.
-LaTeX Font Info:    ... okay on input line 535.
-LaTeX Font Info:    Checking defaults for C50/song/m/n on input line 535.
-LaTeX Font Info:    ... okay on input line 535.
-LaTeX Font Info:    Checking defaults for C52/song/m/n on input line 535.
-LaTeX Font Info:    ... okay on input line 535.
-LaTeX Font Info:    Checking defaults for C49/song/m/n on input line 535.
-LaTeX Font Info:    ... okay on input line 535.
-LaTeX Font Info:    Checking defaults for C60/mj/m/n on input line 535.
-LaTeX Font Info:    ... okay on input line 535.
-LaTeX Font Info:    Checking defaults for C61/mj/m/n on input line 535.
-LaTeX Font Info:    ... okay on input line 535.
-LaTeX Font Info:    Checking defaults for C63/mj/m/n on input line 535.
-LaTeX Font Info:    ... okay on input line 535.
-LaTeX Font Info:    Checking defaults for C64/mj/m/n on input line 535.
-LaTeX Font Info:    ... okay on input line 535.
-LaTeX Font Info:    Checking defaults for C65/mj/m/n on input line 535.
-LaTeX Font Info:    ... okay on input line 535.
-LaTeX Font Info:    Checking defaults for C70/song/m/n on input line 535.
-LaTeX Font Info:    ... okay on input line 535.
-LaTeX Font Info:    Checking defaults for C31/song/m/n on input line 535.
-LaTeX Font Info:    ... okay on input line 535.
-LaTeX Font Info:    Checking defaults for C32/song/m/n on input line 535.
-LaTeX Font Info:    ... okay on input line 535.
-LaTeX Font Info:    Checking defaults for C33/song/m/n on input line 535.
-LaTeX Font Info:    ... okay on input line 535.
-LaTeX Font Info:    Checking defaults for C34/song/m/n on input line 535.
-LaTeX Font Info:    ... okay on input line 535.
-LaTeX Font Info:    Checking defaults for C35/song/m/n on input line 535.
-LaTeX Font Info:    ... okay on input line 535.
-LaTeX Font Info:    Checking defaults for C36/song/m/n on input line 535.
-LaTeX Font Info:    ... okay on input line 535.
-LaTeX Font Info:    Checking defaults for C37/song/m/n on input line 535.
-LaTeX Font Info:    ... okay on input line 535.
-LaTeX Font Info:    Checking defaults for C80/song/m/n on input line 535.
-LaTeX Font Info:    ... okay on input line 535.
-LaTeX Font Info:    Checking defaults for C81/song/m/n on input line 535.
-LaTeX Font Info:    ... okay on input line 535.
-LaTeX Font Info:    Checking defaults for C01/song/m/n on input line 535.
-LaTeX Font Info:    ... okay on input line 535.
-LaTeX Font Info:    Checking defaults for C11/song/m/n on input line 535.
-LaTeX Font Info:    ... okay on input line 535.
-LaTeX Font Info:    Checking defaults for C21/song/m/n on input line 535.
-LaTeX Font Info:    ... okay on input line 535.
-LaTeX Font Info:    Checking defaults for C41/song/m/n on input line 535.
-LaTeX Font Info:    ... okay on input line 535.
-LaTeX Font Info:    Checking defaults for C62/song/m/n on input line 535.
-LaTeX Font Info:    ... okay on input line 535.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 535.
-LaTeX Font Info:    ... okay on input line 535.
-LaTeX Font Info:    Try loading font information for OT1+ppl on input line 535.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 536.
+LaTeX Font Info:    ... okay on input line 536.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 536.
+LaTeX Font Info:    ... okay on input line 536.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 536.
+LaTeX Font Info:    ... okay on input line 536.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 536.
+LaTeX Font Info:    ... okay on input line 536.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 536.
+LaTeX Font Info:    ... okay on input line 536.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 536.
+LaTeX Font Info:    ... okay on input line 536.
+LaTeX Font Info:    Checking defaults for C00/song/m/n on input line 536.
+LaTeX Font Info:    ... okay on input line 536.
+LaTeX Font Info:    Checking defaults for C05/song/m/n on input line 536.
+LaTeX Font Info:    ... okay on input line 536.
+LaTeX Font Info:    Checking defaults for C09/song/m/n on input line 536.
+LaTeX Font Info:    ... okay on input line 536.
+LaTeX Font Info:    Checking defaults for C10/song/m/n on input line 536.
+LaTeX Font Info:    ... okay on input line 536.
+LaTeX Font Info:    Checking defaults for C20/song/m/n on input line 536.
+LaTeX Font Info:    ... okay on input line 536.
+LaTeX Font Info:    Checking defaults for C19/song/m/n on input line 536.
+LaTeX Font Info:    ... okay on input line 536.
+LaTeX Font Info:    Checking defaults for C40/song/m/n on input line 536.
+LaTeX Font Info:    ... okay on input line 536.
+LaTeX Font Info:    Checking defaults for C42/song/m/n on input line 536.
+LaTeX Font Info:    ... okay on input line 536.
+LaTeX Font Info:    Checking defaults for C43/song/m/n on input line 536.
+LaTeX Font Info:    ... okay on input line 536.
+LaTeX Font Info:    Checking defaults for C50/song/m/n on input line 536.
+LaTeX Font Info:    ... okay on input line 536.
+LaTeX Font Info:    Checking defaults for C52/song/m/n on input line 536.
+LaTeX Font Info:    ... okay on input line 536.
+LaTeX Font Info:    Checking defaults for C49/song/m/n on input line 536.
+LaTeX Font Info:    ... okay on input line 536.
+LaTeX Font Info:    Checking defaults for C60/mj/m/n on input line 536.
+LaTeX Font Info:    ... okay on input line 536.
+LaTeX Font Info:    Checking defaults for C61/mj/m/n on input line 536.
+LaTeX Font Info:    ... okay on input line 536.
+LaTeX Font Info:    Checking defaults for C63/mj/m/n on input line 536.
+LaTeX Font Info:    ... okay on input line 536.
+LaTeX Font Info:    Checking defaults for C64/mj/m/n on input line 536.
+LaTeX Font Info:    ... okay on input line 536.
+LaTeX Font Info:    Checking defaults for C65/mj/m/n on input line 536.
+LaTeX Font Info:    ... okay on input line 536.
+LaTeX Font Info:    Checking defaults for C70/song/m/n on input line 536.
+LaTeX Font Info:    ... okay on input line 536.
+LaTeX Font Info:    Checking defaults for C31/song/m/n on input line 536.
+LaTeX Font Info:    ... okay on input line 536.
+LaTeX Font Info:    Checking defaults for C32/song/m/n on input line 536.
+LaTeX Font Info:    ... okay on input line 536.
+LaTeX Font Info:    Checking defaults for C33/song/m/n on input line 536.
+LaTeX Font Info:    ... okay on input line 536.
+LaTeX Font Info:    Checking defaults for C34/song/m/n on input line 536.
+LaTeX Font Info:    ... okay on input line 536.
+LaTeX Font Info:    Checking defaults for C35/song/m/n on input line 536.
+LaTeX Font Info:    ... okay on input line 536.
+LaTeX Font Info:    Checking defaults for C36/song/m/n on input line 536.
+LaTeX Font Info:    ... okay on input line 536.
+LaTeX Font Info:    Checking defaults for C37/song/m/n on input line 536.
+LaTeX Font Info:    ... okay on input line 536.
+LaTeX Font Info:    Checking defaults for C80/song/m/n on input line 536.
+LaTeX Font Info:    ... okay on input line 536.
+LaTeX Font Info:    Checking defaults for C81/song/m/n on input line 536.
+LaTeX Font Info:    ... okay on input line 536.
+LaTeX Font Info:    Checking defaults for C01/song/m/n on input line 536.
+LaTeX Font Info:    ... okay on input line 536.
+LaTeX Font Info:    Checking defaults for C11/song/m/n on input line 536.
+LaTeX Font Info:    ... okay on input line 536.
+LaTeX Font Info:    Checking defaults for C21/song/m/n on input line 536.
+LaTeX Font Info:    ... okay on input line 536.
+LaTeX Font Info:    Checking defaults for C41/song/m/n on input line 536.
+LaTeX Font Info:    ... okay on input line 536.
+LaTeX Font Info:    Checking defaults for C62/song/m/n on input line 536.
+LaTeX Font Info:    ... okay on input line 536.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 536.
+LaTeX Font Info:    ... okay on input line 536.
+LaTeX Font Info:    Try loading font information for OT1+ppl on input line 536.
 
 
 ("C:\Program Files (x86)\CTEX\MiKTeX\tex\latex\psnfss\ot1ppl.fd"
@@ -777,19 +789,19 @@ Package caption Info: End \AtBeginDocument code.
 ("C:\Program Files (x86)\CTEX\MiKTeX\tex\context\base\supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count172
-\scratchdimen=\dimen175
+\scratchdimen=\dimen176
 \scratchbox=\box43
 \nofMPsegments=\count173
 \nofMParguments=\count174
 \everyMPshowfont=\toks42
 \MPscratchCnt=\count175
-\MPscratchDim=\dimen176
+\MPscratchDim=\dimen177
 \MPnumerator=\count176
 \makeMPintoPDFobject=\count177
 \everyMPtoPDFconversion=\toks43
 )
 \AtBeginShipoutBox=\box44
-Package hyperref Info: Link coloring OFF on input line 535.
+Package hyperref Info: Link coloring OFF on input line 536.
  ("C:\Program Files (x86)\CTEX\MiKTeX\tex\latex\hyperref\nameref.sty"
 Package: nameref 2010/04/30 v2.40 Cross-referencing by name of section
 
@@ -798,9 +810,9 @@ Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
 \c@section@level=\count178
 )
-LaTeX Info: Redefining \ref on input line 535.
-LaTeX Info: Redefining \pageref on input line 535.
-LaTeX Info: Redefining \nameref on input line 535.
+LaTeX Info: Redefining \ref on input line 536.
+LaTeX Info: Redefining \pageref on input line 536.
+LaTeX Info: Redefining \nameref on input line 536.
 (C:\Users\Margo\Documents\æ¯•ä¸šè®ºæ–‡\latex-æœ¬\paper.out)
 (C:\Users\Margo\Documents\æ¯•ä¸šè®ºæ–‡\latex-æœ¬\paper.out)
 \@outlinefile=\write3
@@ -808,7 +820,7 @@ LaTeX Info: Redefining \nameref on input line 535.
 (C:\Users\Margo\Documents\æ¯•ä¸šè®ºæ–‡\latex-æœ¬\GB_452.cpx
 File: GB.cap 2003/05/18 4.5.2for Standard LaTeX document class
 )
-LaTeX Font Info:    Try loading font information for C19+song on input line 539
+LaTeX Font Info:    Try loading font information for C19+song on input line 540
 .
 
 ("C:\Program Files (x86)\CTEX\CTeX\tex\latex\CJK\GB\c19song.fd"
@@ -1154,7 +1166,7 @@ l.132 	\begin{proposition}
 LaTeX Warning: Float too large for page by 28.52959pt on input line 199.
 
 [26] [27] [28]
-Overfull \hbox (27.57126pt too wide) in paragraph at lines 258--259
+Overfull \hbox (27.57126pt too wide) in paragraph at lines 262--263
 \C19/song/bx/n/12/42 Š \C19/song/bx/n/12/46 â \C19/song/bx/n/12/44 y \C19/song/
 bx/n/12/41 ©\OT1/ppl/m/n/12 2)\C19/song/bx/n/12/26 § \C19/song/bx/n/12/47 Œ \C1
 9/song/bx/n/12/61 ± \C19/song/bx/n/12/40   \C19/song/bx/n/12/61 ˜ \C19/song/b
@@ -1166,7 +1178,7 @@ Mike; C \OMS/cmsy/m/n/12 7! \OML/cmm/m/it/12 Hangzhou; B \OMS/cmsy/m/n/12 7!$
  []
 
 
-Overfull \hbox (62.2314pt too wide) in paragraph at lines 258--259
+Overfull \hbox (62.2314pt too wide) in paragraph at lines 262--263
 $\OML/cmm/m/it/12 China\OMS/cmsy/m/n/12 g$\C19/song/bx/n/12/26 § \C19/song/bx/n
 /12/56 ¤ \C19/song/bx/n/12/61 ± \C19/song/bx/n/12/58 · \C19/song/bx/n/12/50 ‚ \
 C19/song/bx/n/12/55 $\OMS/cmsy/m/n/12 E[] \OT1/cmr/m/n/12 = \OMS/cmsy/m/n/12 J
@@ -1176,10 +1188,10 @@ T1/cmr/m/n/12 (\OML/cmm/m/it/12 Hangzhou; e[]\OT1/cmr/m/n/12 )\OML/cmm/m/it/12
 /12 g$\C19/song/bx/n/12/26 §
  []
 
-
-Overfull \hbox (27.57126pt too wide) in paragraph at lines 263--264
+[29]
+Overfull \hbox (27.57126pt too wide) in paragraph at lines 267--268
 \C19/song/bx/n/12/42 Š \C19/song/bx/n/12/46 â \C19/song/bx/n/12/44 y \C19/song/
-bx/n/12/41 ©\OT1/ppl/m/n/12 2)\C19/song/bx/n/12/26 § \C19/song/bx/n/12/47 Œ \C1
+bx/n/12/41 ©\OT1/ppl/m/n/12 3)\C19/song/bx/n/12/26 § \C19/song/bx/n/12/47 Œ \C1
 9/song/bx/n/12/61 ± \C19/song/bx/n/12/40   \C19/song/bx/n/12/61 ˜ \C19/song/b
 x/n/12/42 ‡$\OML/cmm/m/it/12 $\C19/song/bx/n/12/55 ¦ \C19/song/bx/n/12/40 $\O
 MS/cmsy/m/n/12 J[]\OML/cmm/m/it/12  \OMS/cmsy/m/n/12  O$\C19/song/bx/n/12/26 
@@ -1189,7 +1201,7 @@ Mike; C \OMS/cmsy/m/n/12 7! \OML/cmm/m/it/12 Hangzhou; B \OMS/cmsy/m/n/12 7!$
  []
 
 
-Overfull \hbox (40.20296pt too wide) in paragraph at lines 263--264
+Overfull \hbox (40.20296pt too wide) in paragraph at lines 267--268
 $\OML/cmm/m/it/12 China; D \OMS/cmsy/m/n/12 7! \OML/cmm/m/it/12 Zhejiang\OMS/cm
 sy/m/n/12 g$\C19/song/bx/n/12/26 § \C19/song/bx/n/12/56 ¤ \C19/song/bx/n/12/61 
 ± \C19/song/bx/n/12/58 · \C19/song/bx/n/12/50 ‚ \C19/song/bx/n/12/55 $\OMS/cms
@@ -1198,73 +1210,124 @@ m/n/12 = \OMS/cmsy/m/n/12 f\OML/cmm/m/it/12 r[]\OT1/cmr/m/n/12 (\OML/cmm/m/it/1
 2 Hangzhou; Zhejiang\OT1/cmr/m/n/12 )\OMS/cmsy/m/n/12 g$\C19/song/bx/n/12/26 §
  []
 
-[29] [30] <img/3.jpg, id=609, 496.10344pt x 437.38406pt>
+
+Overfull \hbox (6.61353pt too wide) in paragraph at lines 273--274
+\C19/song/bx/n/12/42 Š \C19/song/bx/n/12/46 â \C19/song/bx/n/12/44 y \C19/song/
+bx/n/12/41 ©\OT1/ppl/m/n/12 4)\C19/song/bx/n/12/26 § \C19/song/bx/n/12/47 Œ \C1
+9/song/bx/n/12/61 ± \C19/song/bx/n/12/40   \C19/song/bx/n/12/61 ˜ \C19/song/b
+x/n/12/42 ‡$\OML/cmm/m/it/12 $\C19/song/bx/n/12/55 ¦ \C19/song/bx/n/12/40 $\O
+MS/cmsy/m/n/12 J[]\OML/cmm/m/it/12  \OMS/cmsy/m/n/12  O$\C19/song/bx/n/12/26 
+§ \C19/song/m/n/12/52 Ù \C19/song/bx/n/12/64 ¥$\OML/cmm/m/it/12  \OT1/cmr/m/n/
+12 = \OMS/cmsy/m/n/12 f\OML/cmm/m/it/12 A \OMS/cmsy/m/n/12 7! \OML/cmm/m/it/12 
+Mike; B \OMS/cmsy/m/n/12 7! \OML/cmm/m/it/12 China; D \OMS/cmsy/m/n/12 7!$
+ []
+
+
+Overfull \hbox (39.10214pt too wide) in paragraph at lines 273--274
+$\OML/cmm/m/it/12 Zhejiang\OMS/cmsy/m/n/12 g$\C19/song/bx/n/12/26 § \C19/song/b
+x/n/12/56 ¤ \C19/song/bx/n/12/61 ± \C19/song/bx/n/12/58 · \C19/song/bx/n/12/50 
+‚ \C19/song/bx/n/12/55 $\OMS/cmsy/m/n/12 E[] \OT1/cmr/m/n/12 = \OMS/cmsy/m/n/1
+2 J[]\OML/cmm/m/it/12  \OT1/cmr/m/n/12 = \OMS/cmsy/m/n/12 f\OML/cmm/m/it/12 r[
+]\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 Mike; e[]\OT1/cmr/m/n/12 )\OML/cmm/m/it/12 ;
+ r[]\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 e[]; Zhejiang\OT1/cmr/m/n/12 )\OMS/cmsy/m
+/n/12 g$\C19/song/bx/n/12/26 §
+ []
+
+
+Overfull \hbox (8.50363pt too wide) in paragraph at lines 278--279
+\C19/song/bx/n/12/42 Š \C19/song/bx/n/12/46 â \C19/song/bx/n/12/44 y \C19/song/
+bx/n/12/41 ©\OT1/ppl/m/n/12 5)\C19/song/bx/n/12/26 § \C19/song/bx/n/12/47 Œ \C1
+9/song/bx/n/12/61 ± \C19/song/bx/n/12/40   \C19/song/bx/n/12/61 ˜ \C19/song/b
+x/n/12/42 ‡$\OML/cmm/m/it/12 $\C19/song/bx/n/12/55 ¦ \C19/song/bx/n/12/40 $\O
+MS/cmsy/m/n/12 J[]\OML/cmm/m/it/12  \OMS/cmsy/m/n/12  O$\C19/song/bx/n/12/26 
+§ \C19/song/m/n/12/52 Ù \C19/song/bx/n/12/64 ¥$\OML/cmm/m/it/12  \OT1/cmr/m/n/
+12 = \OMS/cmsy/m/n/12 f\OML/cmm/m/it/12 A \OMS/cmsy/m/n/12 7! \OML/cmm/m/it/12 
+Mike; C \OMS/cmsy/m/n/12 7! \OML/cmm/m/it/12 Beihai; B \OMS/cmsy/m/n/12 7!$
+ []
+
+
+Overfull \hbox (8.50363pt too wide) in paragraph at lines 283--284
+\C19/song/bx/n/12/42 Š \C19/song/bx/n/12/46 â \C19/song/bx/n/12/44 y \C19/song/
+bx/n/12/41 ©\OT1/ppl/m/n/12 6)\C19/song/bx/n/12/26 § \C19/song/bx/n/12/47 Œ \C1
+9/song/bx/n/12/61 ± \C19/song/bx/n/12/40   \C19/song/bx/n/12/61 ˜ \C19/song/b
+x/n/12/42 ‡$\OML/cmm/m/it/12 $\C19/song/bx/n/12/55 ¦ \C19/song/bx/n/12/40 $\O
+MS/cmsy/m/n/12 J[]\OML/cmm/m/it/12  \OMS/cmsy/m/n/12  O$\C19/song/bx/n/12/26 
+§ \C19/song/m/n/12/52 Ù \C19/song/bx/n/12/64 ¥$\OML/cmm/m/it/12  \OT1/cmr/m/n/
+12 = \OMS/cmsy/m/n/12 f\OML/cmm/m/it/12 A \OMS/cmsy/m/n/12 7! \OML/cmm/m/it/12 
+Mike; C \OMS/cmsy/m/n/12 7! \OML/cmm/m/it/12 Beihai; B \OMS/cmsy/m/n/12 7!$
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 283--284
+
+ []
+
+[30] <img/3.jpg, id=608, 496.10344pt x 437.38406pt>
 File: img/3.jpg Graphic file (type jpg)
  <use img/3.jpg>
-Package pdftex.def Info: img/3.jpg used on input line 298.
+Package pdftex.def Info: img/3.jpg used on input line 308.
 (pdftex.def)             Requested size: 405.45047pt x 357.4626pt.
+ [31]
+[32 <C:/Users/Margo/Documents/æ¯•ä¸šè®ºæ–‡/latex-æœ¬/img/3.jpg>]
 
-[31 <C:/Users/Margo/Documents/æ¯•ä¸šè®ºæ–‡/latex-æœ¬/img/3.jpg>]
-
-Package natbib Warning: Citation `ol8' on page 32 undefined on input line 307.
-
-
-Package natbib Warning: Citation `ol10' on page 32 undefined on input line 307.
+Package natbib Warning: Citation `ol8' on page 33 undefined on input line 317.
 
 
+Package natbib Warning: Citation `ol10' on page 33 undefined on input line 317.
 
-Package natbib Warning: Citation `ol11' on page 32 undefined on input line 309.
+
+
+Package natbib Warning: Citation `ol11' on page 33 undefined on input line 319.
 
 
 pdfTeX warning (ext4): destination with the same identifier (name{definition.10
 }) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.310 \begin{proposition}
-                          [32]
+l.320 \begin{proposition}
+                         
 
-Package natbib Warning: Citation `ol12' on page 33 undefined on input line 317.
+Package natbib Warning: Citation `ol12' on page 33 undefined on input line 327.
 
 
 pdfTeX warning (ext4): destination with the same identifier (name{definition.11
 }) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.318 \begin{definition}
-                        
+l.328 \begin{definition}
+                         [33]
 
-Package natbib Warning: Citation `ol12' on page 33 undefined on input line 323.
-
-
-
-Package natbib Warning: Citation `ol13' on page 33 undefined on input line 334.
+Package natbib Warning: Citation `ol12' on page 34 undefined on input line 333.
 
 
 
-Package natbib Warning: Citation `ol14' on page 33 undefined on input line 334.
+Package natbib Warning: Citation `ol13' on page 34 undefined on input line 344.
 
 
-[33]
 
-Package natbib Warning: Citation `ol15' on page 34 undefined on input line 340.
+Package natbib Warning: Citation `ol14' on page 34 undefined on input line 344.
+
+
+
+Package natbib Warning: Citation `ol15' on page 34 undefined on input line 350.
 
 
 <img/4.jpg, id=627, 508.14844pt x 201.75375pt>
 File: img/4.jpg Graphic file (type jpg)
  <use img/4.jpg>
-Package pdftex.def Info: img/4.jpg used on input line 344.
+Package pdftex.def Info: img/4.jpg used on input line 354.
 (pdftex.def)             Requested size: 405.45047pt x 160.98453pt.
  [34] [35 <C:/Users/Margo/Documents/æ¯•ä¸šè®ºæ–‡/latex-æœ¬/img/4.jpg>]
 
-Package natbib Warning: Citation `16' on page 36 undefined on input line 388.
+Package natbib Warning: Citation `16' on page 36 undefined on input line 398.
 
 
-Package natbib Warning: Citation `17' on page 36 undefined on input line 388.
+Package natbib Warning: Citation `17' on page 36 undefined on input line 398.
 
-<img/5.jpg, id=639, 390.70969pt x 344.78813pt>
+<img/5.jpg, id=637, 390.70969pt x 344.78813pt>
 File: img/5.jpg Graphic file (type jpg)
  <use img/5.jpg>
-Package pdftex.def Info: img/5.jpg used on input line 391.
+Package pdftex.def Info: img/5.jpg used on input line 401.
 (pdftex.def)             Requested size: 405.45047pt x 357.8136pt.
 ) [36] [37 <C:/Users/Margo/Documents/æ¯•ä¸šè®ºæ–‡/latex-æœ¬/img/5.jpg>]
 (C:\Users\Margo\Documents\æ¯•ä¸šè®ºæ–‡\latex-æœ¬\chap4.tex
@@ -1273,21 +1336,32 @@ Package pdftex.def Info: img/5.jpg used on input line 391.
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `\CJKnumber' on input line 1.
 
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
 [38
 
 
 
 ]
 
-Package natbib Warning: Citation `ol19' on page 39 undefined on input line 34.
+LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[39]) [40] (C:\Users\Margo\Documents\æ¯•ä¸šè®ºæ–‡\latex-æœ¬\chap5.tex
+[39] [40]
+
+Package natbib Warning: Citation `ol19' on page 41 undefined on input line 112.
+
+
+
+LaTeX Warning: File ot163.cmap not found on input line 164.
+
+[41]) [42] (C:\Users\Margo\Documents\æ¯•ä¸šè®ºæ–‡\latex-æœ¬\chap5.tex
 µÚÎåÕÂ
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `\CJKnumber' on input line 1.
 
-) [41
+) [43
 
 
 
@@ -1297,7 +1371,7 @@ Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                \hskip 12.0pt
 (hyperref)                replaced by space on input line 26.
 
-) [42
+) [44
 
 
 
@@ -1306,7 +1380,7 @@ Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 
 Package natbib Warning: Empty `thebibliography' environment on input line 3.
 
-) [43
+) [45
 
 
 ] (C:\Users\Margo\Documents\æ¯•ä¸šè®ºæ–‡\latex-æœ¬\fulu.tex
@@ -1315,10 +1389,10 @@ Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                \hskip 12.0pt
 (hyperref)                replaced by space on input line 3.
 
-) [44
+) [46
 
 
-] (C:\Users\Margo\Documents\æ¯•ä¸šè®ºæ–‡\latex-æœ¬\ack.tex) [45
+] (C:\Users\Margo\Documents\æ¯•ä¸šè®ºæ–‡\latex-æœ¬\ack.tex) [47
 
 
 
@@ -1328,8 +1402,8 @@ Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 
 Package natbib Warning: There were undefined citations.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 680.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 680.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 681.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 681.
 (C:\Users\Margo\Documents\æ¯•ä¸šè®ºæ–‡\latex-æœ¬\paper.aux
 (C:\Users\Margo\Documents\æ¯•ä¸šè®ºæ–‡\latex-æœ¬\abstract1.aux)
 (C:\Users\Margo\Documents\æ¯•ä¸šè®ºæ–‡\latex-æœ¬\abstract2.aux)
@@ -1341,8 +1415,8 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 680.
 (C:\Users\Margo\Documents\æ¯•ä¸šè®ºæ–‡\latex-æœ¬\xiexie.aux)
 (C:\Users\Margo\Documents\æ¯•ä¸šè®ºæ–‡\latex-æœ¬\fulu.aux)
 (C:\Users\Margo\Documents\æ¯•ä¸šè®ºæ–‡\latex-æœ¬\ack.aux))
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 680.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 680.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 681.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 681.
 Package rerunfilecheck Info: File `paper.out' has not changed.
 (rerunfilecheck)             Checksum: EB37D160BFAD3F2217A76B7C722F2B12;2138.
 
@@ -1355,36 +1429,42 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 15392 strings out of 495354
- 226525 string characters out of 3182739
- 342937 words of memory out of 3000000
- 17574 multiletter control sequences out of 15000+200000
- 103823 words of font info for 337 fonts, out of 3000000 for 9000
+ 15431 strings out of 495354
+ 227250 string characters out of 3182739
+ 350123 words of memory out of 3000000
+ 17602 multiletter control sequences out of 15000+200000
+ 103841 words of font info for 337 fonts, out of 3000000 for 9000
  14 hyphenation exceptions out of 8191
  43i,21n,58p,3787b,1193s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/s
 imhei.ttf><C:/Program Files (x86)/CTEX/CTeX/fonts/truetype/chinese/simsun.ttf><
-C:/Windows/Fonts/simkai.ttf><C:/Windows/Fonts/simkai.ttf><C:/Program Files (x86
-)/CTEX/CTeX/fonts/truetype/chinese/simsun.ttf><C:/Program Files (x86)/CTEX/CTeX
+C:/Program Files (x86)/CTEX/CTeX/fonts/truetype/chinese/simsun.ttf><C:/Windows/
+Fonts/simkai.ttf><C:/Windows/Fonts/simkai.ttf><C:/Program Files (x86)/CTEX/CTeX
 /fonts/truetype/chinese/simsun.ttf><C:/Program Files (x86)/CTEX/CTeX/fonts/true
 type/chinese/simsun.ttf><C:/Program Files (x86)/CTEX/CTeX/fonts/truetype/chines
 e/simsun.ttf><C:/Program Files (x86)/CTEX/CTeX/fonts/truetype/chinese/simsun.tt
-f><C:/Windows/Fonts/simkai.ttf><C:/Windows/Fonts/simkai.ttf><C:/Windows/Fonts/s
-imkai.ttf><C:/Windows/Fonts/simkai.ttf><C:/Windows/Fonts/simhei.ttf><C:/Program
- Files (x86)/CTEX/CTeX/fonts/truetype/chinese/simsun.ttf><C:/Program Files (x86
-)/CTEX/CTeX/fonts/truetype/chinese/simsun.ttf><C:/Windows/Fonts/simkai.ttf><C:/
-Program Files (x86)/CTEX/CTeX/fonts/truetype/chinese/simsun.ttf><C:/Program Fil
-es (x86)/CTEX/CTeX/fonts/truetype/chinese/simsun.ttf><C:/Windows/Fonts/simhei.t
-tf><C:/Windows/Fonts/simhei.ttf>{C:/Program Files (x86)/CTEX/MiKTeX/fonts/enc/d
-vips/fontname/8r.enc}<C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/simhei.ttf>
+f><C:/Program Files (x86)/CTEX/CTeX/fonts/truetype/chinese/simsun.ttf><C:/Windo
+ws/Fonts/simkai.ttf><C:/Windows/Fonts/simkai.ttf><C:/Windows/Fonts/simkai.ttf><
+C:/Windows/Fonts/simkai.ttf><C:/Windows/Fonts/simhei.ttf><C:/Program Files (x86
+)/CTEX/CTeX/fonts/truetype/chinese/simsun.ttf><C:/Program Files (x86)/CTEX/CTeX
+/fonts/truetype/chinese/simsun.ttf><C:/Windows/Fonts/simkai.ttf><C:/Program Fil
+es (x86)/CTEX/CTeX/fonts/truetype/chinese/simsun.ttf><C:/Program Files (x86)/CT
+EX/CTeX/fonts/truetype/chinese/simsun.ttf><C:/Windows/Fonts/simhei.ttf><C:/Wind
+ows/Fonts/simhei.ttf>{C:/Program Files (x86)/CTEX/MiKTeX/fonts/enc/dvips/fontna
+me/8r.enc}<C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/simhei.ttf><C:/Windows
+/Fonts/simhei.ttf><C:/Windows/Fonts/simkai.ttf><C:/Windows/Fonts/simkai.ttf><C:
+/Windows/Fonts/simkai.ttf><C:/Windows/Fonts/simkai.ttf><C:/Windows/Fonts/simkai
+.ttf><C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/simhei.ttf><C:/Windows/Font
+s/simhei.ttf><C:/Windows/Fonts/simkai.ttf><C:/Windows/Fonts/simkai.ttf><C:/Wind
+ows/Fonts/simkai.ttf><C:/Windows/Fonts/simkai.ttf><C:/Windows/Fonts/simkai.ttf>
 <C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/simkai.ttf><C:/Windows/Fonts/sim
-kai.ttf><C:/Windows/Fonts/simkai.ttf><C:/Windows/Fonts/simkai.ttf><C:/Windows/F
-onts/simkai.ttf><C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/simhei.ttf><C:/W
-indows/Fonts/simhei.ttf><C:/Windows/Fonts/simkai.ttf><C:/Windows/Fonts/simkai.t
+kai.ttf><C:/Windows/Fonts/simkai.ttf><C:/Windows/Fonts/simhei.ttf><C:/Windows/F
+onts/simhei.ttf><C:/Windows/Fonts/simkai.ttf><C:/Windows/Fonts/simkai.ttf><C:/W
+indows/Fonts/simkai.ttf><C:/Windows/Fonts/simkai.ttf><C:/Windows/Fonts/simkai.t
 tf><C:/Windows/Fonts/simkai.ttf><C:/Windows/Fonts/simkai.ttf><C:/Windows/Fonts/
-simkai.ttf><C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/simkai.ttf><C:/Window
-s/Fonts/simkai.ttf><C:/Windows/Fonts/simkai.ttf><C:/Windows/Fonts/simhei.ttf><C
-:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/simkai.ttf><C:/Windows/Fonts/simka
+simkai.ttf><C:/Windows/Fonts/simkai.ttf><C:/Windows/Fonts/simkai.ttf><C:/Window
+s/Fonts/simkai.ttf><C:/Windows/Fonts/simkai.ttf><C:/Windows/Fonts/simkai.ttf><C
+:/Windows/Fonts/simkai.ttf><C:/Windows/Fonts/simkai.ttf><C:/Windows/Fonts/simka
 i.ttf><C:/Windows/Fonts/simkai.ttf><C:/Windows/Fonts/simkai.ttf><C:/Windows/Fon
 ts/simkai.ttf><C:/Windows/Fonts/simkai.ttf><C:/Windows/Fonts/simkai.ttf><C:/Win
 dows/Fonts/simkai.ttf><C:/Windows/Fonts/simkai.ttf><C:/Windows/Fonts/simkai.ttf
@@ -1392,16 +1472,10 @@ dows/Fonts/simkai.ttf><C:/Windows/Fonts/simkai.ttf><C:/Windows/Fonts/simkai.ttf
 mkai.ttf><C:/Windows/Fonts/simkai.ttf><C:/Windows/Fonts/simkai.ttf><C:/Windows/
 Fonts/simkai.ttf><C:/Windows/Fonts/simkai.ttf><C:/Windows/Fonts/simkai.ttf><C:/
 Windows/Fonts/simkai.ttf><C:/Windows/Fonts/simkai.ttf><C:/Windows/Fonts/simkai.
-ttf><C:/Windows/Fonts/simkai.ttf><C:/Windows/Fonts/simkai.ttf><C:/Windows/Fonts
-/simkai.ttf><C:/Windows/Fonts/simkai.ttf><C:/Windows/Fonts/simkai.ttf><C:/Windo
-ws/Fonts/simkai.ttf><C:/Windows/Fonts/simkai.ttf><C:/Windows/Fonts/simkai.ttf><
-C:/Windows/Fonts/simkai.ttf><C:/Windows/Fonts/simkai.ttf><C:/Windows/Fonts/simk
-ai.ttf><C:/Windows/Fonts/simkai.ttf><C:/Windows/Fonts/simkai.ttf><C:/Windows/Fo
-nts/simkai.ttf><C:/Windows/Fonts/simkai.ttf><C:/Program Files (x86)/CTEX/CTeX/f
-onts/truetype/chinese/simsun.ttf><C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts
-/simhei.ttf><C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/simhei.ttf><C:/Windo
-ws/Fonts/simhei.ttf><C:/Program Files (x86)/CTEX/CTeX/fonts/truetype/chinese/si
-msun.ttf><C:/Program Files (x86)/CTEX/CTeX/fonts/truetype/chinese/simsun.ttf><C
+ttf><C:/Windows/Fonts/simkai.ttf><C:/Program Files (x86)/CTEX/CTeX/fonts/truety
+pe/chinese/simsun.ttf><C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/simhei.ttf
+><C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/si
+mhei.ttf><C:/Program Files (x86)/CTEX/CTeX/fonts/truetype/chinese/simsun.ttf><C
 :/Program Files (x86)/CTEX/CTeX/fonts/truetype/chinese/simsun.ttf><C:/Program F
 iles (x86)/CTEX/CTeX/fonts/truetype/chinese/simsun.ttf><C:/Program Files (x86)/
 CTEX/CTeX/fonts/truetype/chinese/simsun.ttf><C:/Program Files (x86)/CTEX/CTeX/f
@@ -1412,9 +1486,9 @@ simsun.ttf><C:/Program Files (x86)/CTEX/CTeX/fonts/truetype/chinese/simsun.ttf>
  Files (x86)/CTEX/CTeX/fonts/truetype/chinese/simsun.ttf><C:/Program Files (x86
 )/CTEX/CTeX/fonts/truetype/chinese/simsun.ttf><C:/Program Files (x86)/CTEX/CTeX
 /fonts/truetype/chinese/simsun.ttf><C:/Program Files (x86)/CTEX/CTeX/fonts/true
-type/chinese/simsun.ttf><C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/simhei.t
-tf><C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/simhei.ttf><C:/Program Files 
-(x86)/CTEX/CTeX/fonts/truetype/chinese/simsun.ttf><C:/Program Files (x86)/CTEX/
+type/chinese/simsun.ttf><C:/Program Files (x86)/CTEX/CTeX/fonts/truetype/chines
+e/simsun.ttf><C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/simhei.ttf><C:/Wind
+ows/Fonts/simhei.ttf><C:/Windows/Fonts/simhei.ttf><C:/Program Files (x86)/CTEX/
 CTeX/fonts/truetype/chinese/simsun.ttf><C:/Program Files (x86)/CTEX/CTeX/fonts/
 truetype/chinese/simsun.ttf><C:/Program Files (x86)/CTEX/CTeX/fonts/truetype/ch
 inese/simsun.ttf><C:/Program Files (x86)/CTEX/CTeX/fonts/truetype/chinese/simsu
@@ -1441,28 +1515,31 @@ ype/chinese/simsun.ttf><C:/Program Files (x86)/CTEX/CTeX/fonts/truetype/chinese
 m Files (x86)/CTEX/CTeX/fonts/truetype/chinese/simsun.ttf><C:/Program Files (x8
 6)/CTEX/CTeX/fonts/truetype/chinese/simsun.ttf><C:/Program Files (x86)/CTEX/CTe
 X/fonts/truetype/chinese/simsun.ttf><C:/Program Files (x86)/CTEX/CTeX/fonts/tru
-etype/chinese/simsun.ttf><C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/simhei.
-ttf><C:/Program Files (x86)/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.p
-fb><C:/Program Files (x86)/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pf
-b><C:/Program Files (x86)/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb>
-<C:/Program Files (x86)/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C
-:/Program Files (x86)/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/
-Program Files (x86)/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Pro
-gram Files (x86)/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Progra
-m Files (x86)/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmss12.pfb><C:/Program
- Files (x86)/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmss8.pfb><C:/Program F
-iles (x86)/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Fi
-les (x86)/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Program File
-s (x86)/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files 
-(x86)/CTEX/MiKTeX/fonts/type1/public/amsfonts/symbols/msam10.pfb><C:/Program Fi
-les (x86)/CTEX/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb><C:/Progra
-m Files (x86)/CTEX/MiKTeX/fonts/type1/urw/palatino/uplb8a.pfb><C:/Program Files
- (x86)/CTEX/MiKTeX/fonts/type1/urw/palatino/uplr8a.pfb><C:/Program Files (x86)/
-CTEX/MiKTeX/fonts/type1/urw/palatino/uplr8a.pfb><C:/Program Files (x86)/CTEX/Mi
-KTeX/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on paper.pdf (51 pages, 1198088 bytes).
+etype/chinese/simsun.ttf><C:/Program Files (x86)/CTEX/CTeX/fonts/truetype/chine
+se/simsun.ttf><C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/simhei.ttf><C:/Pro
+gram Files (x86)/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Prog
+ram Files (x86)/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Progr
+am Files (x86)/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Progra
+m Files (x86)/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Program 
+Files (x86)/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Fi
+les (x86)/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program File
+s (x86)/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files 
+(x86)/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Program Files (x8
+6)/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files (x86)/
+CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmss12.pfb><C:/Program Files (x86)/C
+TEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmss8.pfb><C:/Program Files (x86)/CTE
+X/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files (x86)/CTEX
+/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Program Files (x86)/CTEX/M
+iKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files (x86)/CTEX/MiK
+TeX/fonts/type1/public/amsfonts/symbols/msam10.pfb><C:/Program Files (x86)/CTEX
+/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb><C:/Program Files (x86)/
+CTEX/MiKTeX/fonts/type1/urw/palatino/uplb8a.pfb><C:/Program Files (x86)/CTEX/Mi
+KTeX/fonts/type1/urw/palatino/uplr8a.pfb><C:/Program Files (x86)/CTEX/MiKTeX/fo
+nts/type1/urw/palatino/uplr8a.pfb><C:/Program Files (x86)/CTEX/MiKTeX/fonts/typ
+e1/urw/palatino/uplri8a.pfb>
+Output written on paper.pdf (53 pages, 1234054 bytes).
 PDF statistics:
- 1201 PDF objects out of 1440 (max. 8388607)
- 147 named destinations out of 1000 (max. 500000)
+ 1225 PDF objects out of 1440 (max. 8388607)
+ 152 named destinations out of 1000 (max. 500000)
  471 words of extra memory for PDF output out of 10000 (max. 10000000)
 

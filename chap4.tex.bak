@@ -1,56 +1,182 @@
-\def\qed{\hfill \vrule height6pt width 6pt depth 0pt}
 \chapter{实验与分析}
+在本文中，我们实现了算法1中的算法逻辑，并把程序命名成Pattern Based Abduction(PBA)。PBA是一个用Java写成的程序，其中我们使用了本体语言编辑库OWL API(vesion 3.5.1)来进行本体的生成、编辑与持久化存储，本体语言的推理机我们使用的是 Pellet API(version 2.3.1)，我们利用Pellet API完成的主要任务包括蕴含检测，蕴含寻找以及一致性检测。我们使用的数据库系统是Mysql(version 5.7)，利用Mysql我们主要完成以下几个任务：第一是完成数据的存储。这里的数据主要包括本体中的ABox，训练集的数据和测试数据，实验完成后生成的解释集合也会存储在相同数据库的不同表中。使用Mysql完成的第二个主要任务是寻找差异化实例替换$\theta$。通过把决断集模板编译成sql语句后，我们可以根据数据库中的ABox计算出相对应的差异化实例替换$\theta$。
 
-在上一章中，我们介绍了如何将一阶并行限定理论，若干个一阶并行限定理论以及一阶带优先级的限定理论转换成等价的一阶稳定理论，
-但是，却没有讨论如何计算一阶稳定理论。
-如果我们能够实现一阶稳定理论的计算方法，那么我们也就能够实现一阶限定理论的计算方法。
-而在第二章提到，要将一阶稳定理论转化为逻辑程序来求解稳定模型，必须要消去其中的存在量词。
-本章将关注于消去这些存在量词的方法。
+我们按照基数对实验中计算出的解释进行划分，直观上地，在其它条件不变的情况下，基数越低的解释意味着训练集的数据中与决断集模板的重合度越高，所以可以非常合理的推测基数越低的解释在语义上觉有更高的可信度 。解释的生成条件虽然已经在定义中进行了限制，但是解释的数量仍然较大，因此我们对基数较低的解释赋予了更高的计算优先级，这样我们可以优先计算出语义可信度较高的解释。
 
-本章首先提出一个翻译，在从一阶并行限定理论转换到一阶稳定理论的过程中，结合稳定模型语义下的量词消去方法，
-在消去存在量词的过程中进行优化，减少引入的辅助谓词和缩小翻译后的理论规模。
-然后将这个优化消去存在量词的翻译推广到一阶带优先级的限定理论。
-最后分析这个优化算法减少的辅助谓词数目和缩小的理论规模。
+本次实验的数据，我们使用了两组数据，它们都来自FreeBase，分别是FB15K和FB40K。因为我们的问题输入还有一项是观察值，因此这些数据我们没有直接使用。我们从FB15K的有效三元组中抽取了1295组作为我们求问题的输入，也就是观察值，同时也会从训练集中把这1295组三元组移除，以避免影响实验结果。 它们的具体数据如下表[ptranse]：
+\begin{table}[!h]
+\caption{FreeBase数据集相关数据}\label{tab_environment}
+\vspace*{-5mm}
+\tabcolsep 2pt
+\wuhao
+\begin{center}
+\def\temptablewidth{0.495\columnwidth}
+{\rule{\temptablewidth}{1pt}}\\
+\begin{tabular}{c|ccccc}
+    Dataset & \#Rel & \#Ent & \#Train & \#Valid & \#Observation  \\
+    \hline
+    FB15K & 1,345 & 14,951 & 483,142 & 50,000 & 59,071 \\
+    \hline
+    FB40K & 1,336 & 39,528 & 370,648 & 67,946 & 96,678 \\
 
-\section{稳定模型语义下的存在量词消去}
+\end{tabular}\\ 
+{\rule{\temptablewidth}{1pt}}
+\end{center}
+\vspace*{-5mm}
+\end{table}
+	我们对诊断结果的评价方法由[3]中的方法调整而来。在利用现有的构造知识库模型的方法构造出向量模型之后，我们使用观察值集作为测试集来对模型进行测试。测试的时候我们对于测试集中的三元组(称为“有效三元组”)进行拆散操作，例如对于三元组$(h,r,t)$，我们首先移除三元组中的实体$h$，然后使用实体集合中的实体构造新的三元组，这些三元组我们称为“损坏三元组”，然后我们在把有效三元组和损坏三元组放在一起进行计算，分别计算这些三元组的能量函数，最后根据能量得分对它们进行由高到低排列。我们关注的指标有两个，一个是$MeanRank$，表示测试集中有效三元组的平均排名，平均排名越高代表模型表达该三元组的能力越强。另一个指标是$hits@10$，它表示测试集中有效三元组进入排名前百分之10的比率，同$MeanRank$，$hits@10$的比率也是越高越好。 测试过程会进行两次，一次是诊断前，第二次是诊断后，对比诊断前后的模型性能，我们就可以验证诊断结果对知识库模型的修复效果。
+	
+	我们利用脚本对FB15K的数据进行处理，根据实体关系的限制筛选出二元关系链的断言集合，然后我们请了语义网领域内的专家对数据进行复查，人工确认了其中正确的决断集。我们对处理后的数据进行转化，得到了决断集模版。
+	
+	我们所有的实验运行在同一台机器上，机器的配置如下：
+	\begin{table}[!h]
+	\caption{实验环境}\label{tab_environment}
+\vspace*{-5mm}
+\tabcolsep 2pt
+\wuhao
+\begin{center}
+\def\temptablewidth{0.495\columnwidth}
+{\rule{\temptablewidth}{1pt}}\\
+\begin{tabular}{c|c}
+    环境 & 描述  \\
+    \hline
+    CPU & 1.4 GHz Intel Core i5 \\
+    \hline
+    RAM & 4GB  \\
+    \hline
+    OS & OS X Yosemite 10.10.3\\
+    \hline
+    Java Heap Space & 4GB 
+\end{tabular}\\
+{\rule{\temptablewidth}{1pt}}
+\end{center}
+\vspace*{-5mm}
+\end{table}
+		
+\begin{table}[!h]
+\caption{诊断前后知识库模型的数据}\label{tab_environment}
+\vspace*{-5mm}
+\tabcolsep 2pt
+\wuhao
+\begin{center}
+\def\temptablewidth{0.495\columnwidth}
+\renewcommand{\multirowsetup}{\centering} 
+        \begin{tabular}{|l|l|l|l|l|l|l|l|l|l|l|l|l|}
+        \hline 
+         \multirow{3}{*}{Metric} & \multicolumn{4}{*}{Multi-Column}& & & & C4a& C4a& C4a& C4a& C4a& C4a& C4a& C4a\\
+                & C2b & c3 & C4b& C4a& C4a& C4a& C4a& C4a& C4a& C4a& C4a& C4a\\
+                & C2c & c3 & C4c& C4a& C4a& C4a& C4a& C4a& C4a& C4a& C4a& C4a\\
+		\hline 
+           c1     & C2d & c3 & C4d& C4a& C4a& C4a& C4a& C4a& C4a& C4a& C4a& C4a\\
+        \hline
+\end{tabular}
+\end{center}
+\vspace*{-5mm}
+\end{table}
 
-在一阶理论中，存在量词的出现是无法避免的。
-在经典一阶逻辑中，我们往往对公式作Skolem化，即通过引入Skolem函词的方法来模拟存在量词，以达到消去存在量词的目的。
-但在二阶逻辑中，对二阶公式Skolem化必须引入一个三阶Skolem函词，这就使得公式更加复杂。
-由一阶限定理论和一阶稳定模型语义的定义可知，一个一阶限定理论或者一个一阶稳定理论实际上就是一个全称二阶公式，
-因此，Skolem化的思想似乎不能用来消去存在量词。实际上，这一结论在\cite{Heng2011thesis}中被证明。
+\section{实验基本情况}
+本实验系统t2r可以从中文语料库中构建出RDFS本体，实验系统使用java编写，自然语言预处理方面使用的是复旦大学自然语言处理库fnlp。
+\begin{table}[!h]
+\caption{实验环境}\label{tab_environment}
+\vspace*{-5mm}
+\tabcolsep 2pt
+\wuhao
+\begin{center}
+\def\temptablewidth{0.495\columnwidth}
+{\rule{\temptablewidth}{1pt}}\\
+\begin{tabular}{c|c}
+    环境 & 描述  \\
+    \hline
+    CPU & 1.4 GHz Intel Core i5 \\
+    \hline
+    RAM & 4GB  \\
+    \hline
+    OS & OS X Yosemite 10.10.3\\
+    \hline
+    Hard Drive & 128GB SSD \\ 
+	\hline
+    Java Heap Space & 4GB 
+\end{tabular}\\
+{\rule{\temptablewidth}{1pt}}
+\end{center}
+\vspace*{-5mm}
+\end{table}
 
-Heng Zhang等人在\cite{Heng2011}中，提出了一个从一阶稳定理论到一阶稳定理论
-保持在有穷结构上投影等价关系的翻译$Tr_{QE}$(见第二章定义\ref{def_smqe})，
-通过引入辅助谓词在稳定模型语义下消去一个存在量词块，
-随后在其博士论文\cite{Heng2011thesis}中证明了引入辅助谓词是必须的，以及否证了在所有结构上消去量词的可能性。
 
-对于任意一个一阶语句，我们总是可以找到一个与之强等价的具有前缀范式形式的一阶语句。
-因此，给定任意一个一阶稳定理论，我们可以首先将之转化成前缀范式形式，在使用翻译$Tr_{QE}$来消去存在量词。
-若该语句$\varphi$为$\Pi^0_{2}$-语句，则$Tr_{QE}(\varphi)$是一个$\Pi^0_{1}$-语句，不包含存在量词。
-但若$\varphi$为更复杂的语句，则不能直接使用翻译$Tr_{QE}$。
-根据命题\ref{strongequv}中的强等价关系，对于任何一个$\Pi^0_{k+1}$-语句$\varphi$(其中$k$为自然数)，
-我们可以通过合理地选择提取量词的顺序，将$Tr_{QE}(\varphi)$转化为一个与之强等价的$\Pi^0_{k}$-语句。
-根据保持有穷结构上的投影等价关系的可译性的传递性，我们可以递归地调用翻译$Tr_{QE}$和合理转化前缀范式，
-最终得到一个在稳定模型语义下的$\Pi^0_{1}$-语句。
-由定理\ref{theorem_sm2lp}可知，每个在稳定模型语义下的全称一阶公式都可以被翻译为一个与之强等价的扩充的析取逻辑程序。
-通过一个回答集程序求解器，我们可以计算出该逻辑程序的回答集，从而求得原语句的稳定模型。
+	t2r主要分为两个模块，第一个模块是术语提取模块，在t2r系统中我们分进行了使用语义分析法和使用统计法提取术语的实验。第二个模块是关系提取模块，在t2r系统中我们实现了非分类关系和分类关系的抽取模块。分类关系的提取采用的是借助wordnet进行上下位关系查询的方法，非分类关系的提取则是对本文第三部分介绍的方法进行实践。
+	对于t2r的语料库，我们在进行了仔细对比分析之后，选择了由复旦大学李荣提供的文本分类语料库中的测试预料。该语料库由人工分类，总数9833篇，共20个类别。其中的语料文章大多数来自于国家官方媒体的新闻通稿或者学术期刊中的文章，因此，这些文章具有较高的语法正确率，避免了口语化、网络化表达对实验测试的影响。文章中有合适比例的长句和短句，可检验t2r系统在不同环境中的性能表现。同时，语料库中的文章具有较高的时效性，一定程度上避免了构建出的RDFS模型过时的情况。在领域的选择上，我们挑选艺术领域的语料库进行测试。这三个领域具有广泛性，语料数量多，避免了个别极端情况对实验的影响。
 
-若设原$\Pi^0_{k}$-语句$\varphi$的规模为$n$，则通过递归调用翻译$Tr_{QE}$，
-得到的$\Pi^0_{1}$-语句的规模为$O(3^{k-2}\times 4n)$。
-接下来，再使用Pedro Cabalar等人在\cite{cabalar2007propositional}中给出的翻译，将这个全称一阶语句翻译为与之强等价的扩充的析取逻辑程序。
-在这个过程中，需要频繁地使用类似“分配律”的规则，所以最终得到的逻辑程序的规模会是这个$\Pi^0_{1}$-语句的超多项式倍。
-因此，在消去存在量词的过程中，一阶稳定理论规模的$3^k$倍增长，使得最终的逻辑程序规模增长过快，严重影响求解效率。
-因此，对消去存在量词的翻译的优化就很有必要了。
+\section{实验结果与分析}
+由于t2r的设计中上下位关系的识别主要依靠现有的中文wordnet，因此对t2r的评价集中在领域术语识别和非分类关系提取两个模块的表现上。
+对于领域术语识别，我们使用IE领域广泛使用的准确率(precision)、召回率(recall)\upcite{ol19}对t2r术语识别模块的识别结果进行评价。我们这次总共测试了43篇文档，其中共有人工识别出的术语1236个。
+\begin{table}[!h]
+\caption{统计方法的领域术语提取结果}\label{tab_environment}
+\vspace*{3mm}
+\tabcolsep 2pt
+\wuhao
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+    \hline
+    阀值(\%) & 人工分析正确数 & 召回率(\%) & 准确率(\%)  \\
+    \hline
+    1 & 127 & 10.8 & 38.2\\
+    \hline
+    2 & 221 & 17.9 & 33.0\\
+    \hline
+    3 & 301 & 24.4 & 30.0\\
+    \hline
+    5 & 351 & 28.4 & 21.0\\
+    \hline
+    10 & 546 & 44.2 & 16.3\\
+    \hline
+\end{tabular}
+\end{center}
+\vspace*{-5mm}
+\end{table}
 
-通过对翻译$Tr_{QE}$的分析，实际上翻译$Tr_{QE}$具有以下性质：
-\begin{proposition}\label{pro_sm_qe_split}
-\textbf{(文献\cite{Heng2011thesis} 命题6.1)}
-任意给定两个$L^v$-公式$\varphi$和$\psi$，设$\sigma_i$是$v$中的一集谓词常元，则有$\mathbf{SM}[Tr_{QE}(\varphi)\wedge \psi;\sigma_i,S,T]$
-在有穷结构上投影等价于$\mathbf{SM}[\varphi\wedge \psi;\sigma_i]$。
-\end{proposition}
+\begin{table}[!h]
+\caption{结合语义分析法统计方法的领域术语提取结果}\label{tab_environment}
+\vspace*{3mm}
+\tabcolsep 2pt
+\wuhao
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+    \hline
+    阀值(\%) & 人工分析正确数 & 召回率(\%) & 准确率(\%)  \\
+    \hline
+    1 & 185 & 15.0 & 55.4\\
+    \hline
+    2 & 381 & 30.8 & 57.0\\
+    \hline
+    3 & 512 & 41.4 & 51.1\\
+    \hline
+    5 & 638 & 51.6 & 38.2\\
+    \hline
+    10 & 773 & 62.5 & 23.1\\
+    \hline
+\end{tabular}
+\end{center}
+\vspace*{-5mm}
+\end{table}
+从表4.2和表4.3可以看出，简单的统计学的方法难以在准确率和召回率之间取得较好的平衡，在保证足够回收率的同时难以保持较高的准确率，若要保持足够高的准确率，就不得不以较低的回收率为代价。而在结合了语义分析的相关方法之后，在相同阀值的情况下，准确率和回收率都获得了一定程度上的提高。
 
-根据此命题，我们可以将原一阶稳定理论转化为多个公式的合取，即形如$\vartheta_1 \wedge \vartheta_2 \wedge \ldots \wedge \vartheta_n$，
-然后只对那些包含存在量词的子公式$\vartheta_i(1 \leq i\leq n)$递归调用翻译$Tr_{QE}$，
-这样就使得$3^k$倍的理论增长只发生在那些包含存在量词的子公式上，
-有效降低最终生成的不含存在量词的一阶稳定理论的规模。
+在非分类关系抽取方面，我们难以统计所有的关系数量，因此我们以准确率来对结果进行评价。
+\begin{table}[!h]
+\caption{基于统计方法的领域术语提取结果}\label{tab_environment}
+\vspace*{3mm}
+\tabcolsep 2pt
+\wuhao
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+    \hline
+    文档类型 & 文档数量 & 关系抽取数量 & 准确数 &  准确率(\%)  \\
+    \hline
+    长句集 & 20 & 397 & 246 &  62.0 \\
+    \hline
+    短句集 & 32 & 683 & 584 & 85.5 \\
+    \hline
+\end{tabular}
+\end{center}
+\vspace*{-5mm}
+\end{table}
+关系抽取中我们基于主谓宾的方法在处理短句集方面取得了较好的效果，得到了较高的准确率，而面对长句的时候，由于中文长句的关系复杂性，准确率有所降低。在整体来看，我们的关系抽取模块有着相对优秀的表现。

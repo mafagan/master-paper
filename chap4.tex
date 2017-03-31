@@ -1,5 +1,79 @@
 \chapter{实验与分析}
-我们在本文介绍了一种从中文自然语言文本构建RDFS本体的框架，其中包含了术语识别与关系提取中用到的多种方法。在这一章当中，我们设计了一个系统Text2RDFS(以下简称t2r)对上文中的理论进行检验，并对比了不同方案表现的差异性。
+在本文中，我们实现了算法1中的算法逻辑，并把程序命名成Pattern Based Abduction(PBA)。PBA是一个用Java写成的程序，其中我们使用了本体语言编辑库OWL API(vesion 3.5.1)来进行本体的生成、编辑与持久化存储，本体语言的推理机我们使用的是 Pellet API(version 2.3.1)，我们利用Pellet API完成的主要任务包括蕴含检测，蕴含寻找以及一致性检测。我们使用的数据库系统是Mysql(version 5.7)，利用Mysql我们主要完成以下几个任务：第一是完成数据的存储。这里的数据主要包括本体中的ABox，训练集的数据和测试数据，实验完成后生成的解释集合也会存储在相同数据库的不同表中。使用Mysql完成的第二个主要任务是寻找差异化实例替换$\theta$。通过把决断集模板编译成sql语句后，我们可以根据数据库中的ABox计算出相对应的差异化实例替换$\theta$。
+
+我们按照基数对实验中计算出的解释进行划分，直观上地，在其它条件不变的情况下，基数越低的解释意味着训练集的数据中与决断集模板的重合度越高，所以可以非常合理的推测基数越低的解释在语义上觉有更高的可信度 。解释的生成条件虽然已经在定义中进行了限制，但是解释的数量仍然较大，因此我们对基数较低的解释赋予了更高的计算优先级，这样我们可以优先计算出语义可信度较高的解释。
+
+本次实验的数据，我们使用了两组数据，它们都来自FreeBase，分别是FB15K和FB40K。因为我们的问题输入还有一项是观察值，因此这些数据我们没有直接使用。我们从FB15K的有效三元组中抽取了1295组作为我们求问题的输入，也就是观察值，同时也会从训练集中把这1295组三元组移除，以避免影响实验结果。 它们的具体数据如下表[ptranse]：
+\begin{table}[!h]
+\caption{FreeBase数据集相关数据}\label{tab_environment}
+\vspace*{-5mm}
+\tabcolsep 2pt
+\wuhao
+\begin{center}
+\def\temptablewidth{0.495\columnwidth}
+{\rule{\temptablewidth}{1pt}}\\
+\begin{tabular}{c|ccccc}
+    Dataset & \#Rel & \#Ent & \#Train & \#Valid & \#Observation  \\
+    \hline
+    FB15K & 1,345 & 14,951 & 483,142 & 50,000 & 59,071 \\
+    \hline
+    FB40K & 1,336 & 39,528 & 370,648 & 67,946 & 96,678 \\
+
+\end{tabular}\\
+{\rule{\temptablewidth}{1pt}}
+\end{center}
+\vspace*{-5mm}
+\end{table}
+	我们对诊断结果的评价方法由[3]中的方法调整而来。在利用现有的构造知识库模型的方法构造出向量模型之后，我们使用观察值集作为测试集来对模型进行测试。测试的时候我们对于测试集中的三元组(称为“有效三元组”)进行拆散操作，例如对于三元组$(h,r,t)$，我们首先移除三元组中的实体$h$，然后使用实体集合中的实体构造新的三元组，这些三元组我们称为“损坏三元组”，然后我们在把有效三元组和损坏三元组放在一起进行计算，分别计算这些三元组的能量函数，最后根据能量得分对它们进行由高到低排列。我们关注的指标有两个，一个是$MeanRank$，表示测试集中有效三元组的平均排名，平均排名越高代表模型表达该三元组的能力越强。另一个指标是$hits@10$，它表示测试集中有效三元组进入排名前百分之10的比率，同$MeanRank$，$hits@10$的比率也是越高越好。 测试过程会进行两次，一次是诊断前，第二次是诊断后，对比诊断前后的模型性能，我们就可以验证诊断结果对知识库模型的修复效果。
+	
+	我们利用脚本对FB15K的数据进行处理，根据实体关系的限制筛选出二元关系链的断言集合，然后我们请了语义网领域内的专家对数据进行复查，人工确认了其中正确的决断集。我们对处理后的数据进行转化，得到了决断集模版。
+	
+	我们所有的实验运行在同一台机器上，机器的配置如下：
+	\begin{table}[!h]
+	\caption{实验环境}\label{tab_environment}
+\vspace*{-5mm}
+\tabcolsep 2pt
+\wuhao
+\begin{center}
+\def\temptablewidth{0.495\columnwidth}
+{\rule{\temptablewidth}{1pt}}\\
+\begin{tabular}{c|c}
+    环境 & 描述  \\
+    \hline
+    CPU & 1.4 GHz Intel Core i5 \\
+    \hline
+    RAM & 4GB  \\
+    \hline
+    OS & OS X Yosemite 10.10.3\\
+    \hline
+    Java Heap Space & 4GB
+\end{tabular}\\
+{\rule{\temptablewidth}{1pt}}
+\end{center}
+\vspace*{-5mm}
+\end{table}
+		
+	\begin{table}[!h]
+	\caption{实验环境}\label{tab_environment}
+\vspace*{-5mm}
+\tabcolsep 2pt
+\wuhao
+\begin{center}
+\def\temptablewidth{0.495\columnwidth}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+        \hline
+         \multirow{3}{*}{Metric} &\multicolumn{4}{c|}{Base Model}&\multicolumn{4}{c|}{$Exp. C \leq 1$}& \multicolumn{4}{c|}{$Exp. C \leq 2$} \\
+		 \cline{2-13}
+                & \multicolumn{2}{c|}{$MeanRank$} & \multicolumn{2}{c|}{$Hit@10$}& \multicolumn{2}{c|}{$MeanRank$}& \multicolumn{2}{c|}{$Hit@10$}& \multicolumn{2}{c|}{$MeanRank$}& \multicolumn{2}{c|}{$Hit@10$}\\
+		 \cline{2-13}
+                & Raw & Filter & Raw& Filter& Raw& Filter& Raw& Filter& Raw& Filter& Raw& Filter\\
+		\hline
+           c1     & C2d & c3 & C4d& C4a& C4a& C4a& C4a& C4a& C4a& C4a& C4a& C4a\\
+        \hline
+\end{tabular}
+\end{center}
+\vspace*{-5mm}
+\end{table}
 
 \section{实验基本情况}
 本实验系统t2r可以从中文语料库中构建出RDFS本体，实验系统使用java编写，自然语言预处理方面使用的是复旦大学自然语言处理库fnlp。
@@ -20,12 +94,16 @@
     \hline
     OS & OS X Yosemite 10.10.3\\
     \hline
-    自然语言处理库 & 复旦自然语言处理库fnlp
+    Hard Drive & 128GB SSD \\
+	\hline
+    Java Heap Space & 4GB
 \end{tabular}\\
 {\rule{\temptablewidth}{1pt}}
 \end{center}
 \vspace*{-5mm}
 \end{table}
+
+
 	t2r主要分为两个模块，第一个模块是术语提取模块，在t2r系统中我们分进行了使用语义分析法和使用统计法提取术语的实验。第二个模块是关系提取模块，在t2r系统中我们实现了非分类关系和分类关系的抽取模块。分类关系的提取采用的是借助wordnet进行上下位关系查询的方法，非分类关系的提取则是对本文第三部分介绍的方法进行实践。
 	对于t2r的语料库，我们在进行了仔细对比分析之后，选择了由复旦大学李荣提供的文本分类语料库中的测试预料。该语料库由人工分类，总数9833篇，共20个类别。其中的语料文章大多数来自于国家官方媒体的新闻通稿或者学术期刊中的文章，因此，这些文章具有较高的语法正确率，避免了口语化、网络化表达对实验测试的影响。文章中有合适比例的长句和短句，可检验t2r系统在不同环境中的性能表现。同时，语料库中的文章具有较高的时效性，一定程度上避免了构建出的RDFS模型过时的情况。在领域的选择上，我们挑选艺术领域的语料库进行测试。这三个领域具有广泛性，语料数量多，避免了个别极端情况对实验的影响。
 

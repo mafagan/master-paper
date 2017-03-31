@@ -201,7 +201,7 @@
 \begin{example}[诊断)]
 	考虑以下诊断问题，其中观察值为:
     \begin{center}
-        \item $(Lily, Nationality, China)$
+        \item $(Mike, Nationality, China)$
     \end{center}
     蕴含值$r_{Nationality}(Mike, China)$的决断集:
     \begin{center}
@@ -217,6 +217,7 @@
         \item 1) $(Mike, \emph{BornInCity}, Hangzhou)$
         \item 2) $(Beihai, \emph{CityInProvince}, Guangxi)$
 		\item 3) $(Zhejiang, \emph{ProvinceInCountry}, China)$
+		\item 4) $(Guangxi, \emph{ProvinceInCountry}, China)$
     \end{center}
     
     
@@ -226,15 +227,18 @@
         \item 1) $r_{BornInCity}(Mike, Hangzhou)$
         \item 2) $r_{CityInProvince}(Beihai, Guangxi)$
 		\item 3) $r_{ProvinceInCountry}(Zhejiang, China)$
+		\item 4) $r_{ProvinceInCountry}(Guangxi, China)$
     \end{center}
 	
 	然后可得本体$\mathcal{O}$：
     \begin{center}
 	    \item 1) $r_{BornInCity} \circ r_{CityInProvince} \sqsubseteq r_{BornInProvince}$
         \item 2) $r_{BornInProvince} \circ r_{ProvinceInCountry} \sqsubseteq r_{Nationality}$
-        \item 4) $r_{BornInCity}(Mike, Hangzhou)$
-        \item 5) $r_{CityInProvince}(Beihai, Guangxi)$
-		\item 6) $r_{ProvinceInCountry}(Zhejiang, China)$
+        \item 3) $r_{BornInCity}(Mike, Hangzhou)$
+        \item 4) $r_{CityInProvince}(Beihai, Guangxi)$
+		\item 5) $r_{ProvinceInCountry}(Zhejiang, China)$
+		\item 6) $r_{ProvinceInCountry}(Guangxi, China)$
+
     \end{center}
 	易得，$\mathcal{O}$与$\mathcal{O}\cup r_{Nationality}(Mike, China)$都是是一致的。又，通过决断集可以得到蕴含$r_{Nationality}(A, B)$的基于决断集模板$\mathcal{J}_p$:
 		\begin{center}
@@ -255,28 +259,34 @@
 		\begin{center}
         \item 2)\ $J_1$ $\{r_{BornInCity}(A, C)\}$, $J_2$=$\{r_{CityInProvince}(C, D), r_{ProvinceInCountry}(D, B)\}$
 		\end{center}
-		根据划分2)，可以得到一个$\theta$使得 $\mathcal{J}_1\theta \subseteq \mathcal{O}$，其中$\theta = \{A \mapsto Mike, C \mapsto Hangzhou, B \mapsto China\}$，所以我们设$\mathcal{E}_1 = \mathcal{J}_2\theta = \{r_{CityInProvince}(Hangzhou, e_1), r_{ProvinceInCountry}(e_1, China)\}$，又因为$\mathcal{O} \cup \mathcal{J}_2\theta$是一致的，$\mathcal{O} \cup \mathcal{J}_2\theta \models \alpha$，且对于所有的$\mathcal{E}' \in subs_1(\mathcal{E}_1) \cup lifts_1(\mathcal{E}_1)$都有$\mathcal{O} \cup \mathcal{E}' \not \models \alpha$，所以$\mathcal{E}_1$是一个合理的解释。
+		根据划分2)，可以得到一个$\theta$使得 $\mathcal{J}_1\theta \subseteq \mathcal{O}$，其中$\theta = \{A \mapsto Mike, C \mapsto Hangzhou, B \mapsto China\}$，所以我们设$\mathcal{E}_2 = \mathcal{J}_2\theta = \{r_{CityInProvince}(Hangzhou, e_1), r_{ProvinceInCountry}(e_1, China)\}$，又因为$\mathcal{O} \cup \mathcal{J}_2\theta$是一致的，$\mathcal{O} \cup \mathcal{J}_2\theta \models \alpha$，且对于所有的$\mathcal{E}' \in subs_1(\mathcal{E}_2) \cup lifts_1(\mathcal{E}_2)$都有$\mathcal{O} \cup \mathcal{E}' \not \models \alpha$，所以$\mathcal{E}_2$是一个合理的解释。
 		
 		\begin{center}
 	    \item 3)\ $J_1$= $\{r_{BornInCity}(A, C), r_{ProvinceInCountry}(D, B)\}$, $J_2$=$\{r_{CityInProvince}(C, D)\}$
 		\end{center}
-		根据划分3)，可以得到一个$\theta$使得 $\mathcal{J}_1\theta \subseteq \mathcal{O}$，其中$\theta = \{A \mapsto Mike, C \mapsto Hangzhou, B \mapsto China, D \mapsto Zhejiang\}$，所以我们设$\mathcal{E}_2 = \mathcal{J}_2\theta = \{r_{CityInProvince}(Hangzhou, Zhejiang)\}$，又因为$\mathcal{O} \cup \mathcal{J}_2\theta$是一致的，$\mathcal{O} \cup \mathcal{J}_2\theta \models \alpha$，且对于所有的$\mathcal{E}' \in subs_1(\mathcal{E}_2) \cup lifts_1(\mathcal{E}_2)$都有$\mathcal{O} \cup \mathcal{E}' \not \models \alpha$，所以$\mathcal{E}_2$是一个合理的解释。
-		\begin{center}
+		根据划分3)，可以得到一个$\theta$使得 $\mathcal{J}_1\theta \subseteq \mathcal{O}$，其中$\theta = \{A \mapsto Mike, C \mapsto Hangzhou, B \mapsto China, D \mapsto Zhejiang\}$，所以我们设$\mathcal{E}_3 = \mathcal{J}_2\theta = \{r_{CityInProvince}(Hangzhou, Zhejiang)\}$，又因为$\mathcal{O} \cup \mathcal{J}_2\theta$是一致的，$\mathcal{O} \cup \mathcal{J}_2\theta \models \alpha$，且对于所有的$\mathcal{E}' \in subs_1(\mathcal{E}_2) \cup lifts_1(\mathcal{E}_3)$都有$\mathcal{O} \cup \mathcal{E}' \not \models \alpha$，所以$\mathcal{E}_3$是一个合理的解释。
 		
-        \item 3)\ $J_1$: $isFatherOf\left(a, b\right) \wedge isMotherOf\left(c, d\right)$$J_2$: $isParentOf\left(a, c\right)$
-        \item 4)\ $J_1$: $isMotherOf\left(c, d\right)$$J_2$: $isFatherOf\left(a, b\right) \wedge isParentOf\left(a, c\right)$
-        \item 5)\ $J_1$: $isFatherOf\left(a, b\right)$$J_2$: $isParentOf\left(a, c\right) \wedge isMotherOf\left(c, d\right)$
-        \item 6)\ $J_1$: $isParentOf\left(a, c\right)$$J_2$: $isFatherOf\left(a, b\right) \wedge isMotherOf\left(c, d\right)$
-        \end{center}
-   首先，我们使用第1个公理集中的$J_1$ 在$\mathcal{A}$中进行实例化，得出以下替换$\mathcal{M}$:
-   \begin{center}
-    \item $\{a \to Mike, b \to Josan, c \to Lily, d \to Peter\}$
-   \end{center}
-   根据得出的替换$\mathcal{M}$,对公理集中的$J_2$执行实例化，因此得到的第一个解释$\mathcal{E}_1$为：
-   \begin{center}
-    \item $\{\emph{isMotherOf}(Lily, Peter)\}$
-   \end{center}
-
+		
+		\begin{center}
+	    \item 4)\ $J_1$=$\{r_{ProvinceInCountry}(D, B)\}$, $J_2$= $\{r_{BornInCity}(A, C), r_{CityInProvince}(C, D)\}$
+		\end{center}
+		根据划分4)，可以得到一个$\theta$使得 $\mathcal{J}_1\theta \subseteq \mathcal{O}$，其中$\theta = \{A \mapsto Mike, B \mapsto China, D \mapsto Zhejiang\}$，所以我们设$\mathcal{E}_4 = \mathcal{J}_2\theta = \{r_{BornInCity}(Mike, e_1), r_{CityInProvince}(e_1, Zhejiang)\}$，又因为$\mathcal{O} \cup \mathcal{J}_2\theta$是一致的，$\mathcal{O} \cup \mathcal{J}_2\theta \models \alpha$，且对于所有的$\mathcal{E}' \in subs_1(\mathcal{E}_4) \cup lifts_1(\mathcal{E}_4)$都有$\mathcal{O} \cup \mathcal{E}' \not \models \alpha$，所以$\mathcal{E}_4$是一个合理的解释。
+		
+		\begin{center}
+	    \item 5)\ $J_1$=$\{r_{CityInProvince}(C, D), r_{ProvinceInCountry}(D, B)\}$, $J_2$ $\{r_{BornInCity}(A, C)\}$ 
+		\end{center}
+		根据划分5)，可以得到一个$\theta$使得 $\mathcal{J}_1\theta \subseteq \mathcal{O}$，其中$\theta = \{A \mapsto Mike, C \mapsto Beihai, B \mapsto China, D \mapsto Guangxi\}$，所以我们设$\mathcal{E}_5 = \mathcal{J}_2\theta = \{r_{BornInCity}(Mike, Beihai)\}$，又因为$\mathcal{O} \cup \mathcal{J}_2\theta$是一致的，$\mathcal{O} \cup \mathcal{J}_2\theta \models \alpha$，且对于所有的$\mathcal{E}' \in subs_1(\mathcal{E}_5) \cup lifts_1(\mathcal{E}_5)$都有$\mathcal{O} \cup \mathcal{E}' \not \models \alpha$，所以$\mathcal{E}_5$是一个合理的解释。。
+		
+		\begin{center}
+	    \item 6)\ $J_2$=$\{r_{CityInProvince}(C, D)\}$, $J_1$= $\{r_{BornInCity}(A, C), r_{ProvinceInCountry}(D, B)\}$
+		\end{center}
+		根据划分6)，可以得到一个$\theta$使得 $\mathcal{J}_1\theta \subseteq \mathcal{O}$，其中$\theta = \{A \mapsto Mike, C \mapsto Beihai, B \mapsto China, D \mapsto Guangxi\}$，所以我们设$\newline$
+		\begin{center}
+		\item $\mathcal{E}_6 = \mathcal{J}_2\theta = \{r_{BornInCity}(Mike, Beihai), r_{ProvinceInCountry}(Guangxi, China)\}$
+		\end{center}
+		又$\mathcal{O} \cup \mathcal{J}_2\theta$是一致的，$\mathcal{O} \cup \mathcal{J}_2\theta \models \alpha$。但是因为存在一个$\mathcal{E}' \in subs_1(\mathcal{E}_6) \cup lifts_1(\mathcal{E}_6)$使得$\mathcal{O} \cup \mathcal{E}'  \models \alpha$，所以$\mathcal{E}_6$不是一个合理的解释。
+		
+		综上所述，可以得到可接受的解释为$\{\mathcal{E}_2,\mathcal{E}_3,\mathcal{E}_4,\mathcal{E}_5,\mathcal{E}_6\}$，经验证，其中合理的解释为$\{\mathcal{E}_2,\mathcal{E}_3,\mathcal{E}_4,\mathcal{E}_5\}$。
 \section{RDFS构建框架}
 
 通过对本体学习以及RDFS相关的知识的研究，综合考虑到中文自然语言的特点、RDFS的表达方式以及本体的基本元素需要，设计出了一个基本的从中文自然语言文本构建基于RDFS本体模型的系统框架。
