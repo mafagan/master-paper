@@ -1,7 +1,53 @@
 \chapter{预备知识}
-\section{知识表示学习}
-
-\section{本体语言以及推理}
+\section{知识库模型研究}
+知识库存储的是客观事实的元数据，构建知识库模型是知识表示学习的重要内容。构建知识库模型的主要任务，是寻找构建模型的方法完成对知识库中实体关系进行表达。在近年来，研究者对知识库模型进行了深入的研究，提出了多种知识库模型的构建方法，并对他们的研究成果进行了验证。
+\subsection{知识库与建模}
+首先我们先给出知识库的定义：
+\begin{equation}
+	G = (E,R,S)
+\end{equation}
+在这个式子中$G$表示知识库，其中
+\begin{equation}
+	E = \{e_1, e_2, \cdots, e_{\mid E \mid}\}
+\end{equation}
+$E$表示的由知识库中实体组成的集合，$\mid R \mid$表示在知识库中二元关系组成的集合。一般的，我们会用$(h,r,t)$表示一个表达实体间二元关系的三元组，其中$h \in E$，$r \in R$，$t \in E$，对于知识库中的所有$h$和$t$，我们把它称之为头实体和尾实体，$r$则称之为头实体和尾实体的关系。例如(特朗普，总统，美国)就是一个二元关系三元组的实例，它表达的意思是特朗普是美国的总统，这里的特朗普和美国就是头实体与尾实体，总统表示的是特朗普和美国之间的关系。在式子2.1中的$S$表示所有二元关系的三元组集合，记作$S\subseteq E \times R \times E$。对知识库$G$的建模可以看做是对$(E,R,S)$建立模型的研究。
+	
+	目前构建知识库模型主要方法分为两大类，一类是语义网领域的本体构建方法，本体是一种概念模型的建模工具，构建本体虽然比较复杂，目前构造本体的方法大多基于手动或者是手动加半自动的方法，但是这种方法构建出来的本体可以对知识和语义进行表达，而且本体对于在人可读性与机器可读性中间找到了一个平衡点，在两者的可读性上都要比以往的模型要友好。另一种构建知识库模型的方法是基于机器学习的知识库建模，目前基于机器学习方法的知识库模型有几个具有代表性的模型：距离模型、单层神经网络模型、能量模型、双线性模型、张量神经网络模型、矩阵分解模型和翻译模型[]。
+	
+	距离模型是由(Bordes)早期提出的使用结构表示(structured embedding, SE)进行知识表示的方法，这种方法的主要思想是[]：
+	\begin{itemize}
+		\item 所有的实体都可以通过使用一个$d$-维的向量空间进行表达，把实体转化作多维向量空间中向量的操作记作“嵌入空间”。第$i$个实体会被转化成一个向量$E_i$，其中$E_i \in \mathcal{R}^d$。
+		\item 在被嵌入的向量空间中，对于任意给定的关系类型，都存在一个特定的相似度衡量值，这个衡量值就是关系的向量空间。在判断头实体和尾实体是否满足该关系时，头实体和尾实体会被投射到关系所在的向量空间，在关系的向量空间中，头实体和尾实体的向量距离越近，就表示关系成立的可能性越大。作者对$k^{th}$个给定的关系上的实体对记作$R_k = (R^{lhs}_k, R^{rhs}_k)$，其中$R_k = (R^{lhs}_k$和$R^{rhs}_k)$都是一个$d\times d$的矩阵。因此，在该关系下$R_k = (R^{lhs}_k$和$R^{rhs}_k)$的相似度计算如下：
+		\begin{equation}
+			S_k(E_i, E_j) = \mid\mid R^{lhs}_k E_i - R^{lhs}_k E_j \mid\mid
+		\end{equation}
+	\end{itemize}
+	
+	距离模型的建模方式利用实体在关系的向量空间上的投影进行相似度计算是合理的，但是在投影的时候，距离模型对关系中的头实体和尾实体采用了两个不同的投影矩阵，这种方法难以保证协同性，因此距离模型在链接预测等任务上没有表现出足够优秀的能力。
+	
+	单层神经网络模型(single layer model, SLM)是Socher等人提出的新的神经网络模型，为了解决距离模型头尾实体投影矩阵不同带来的协同带来的关系刻画误差问题，单层神经网络模型对二元关系三元组使用了如下评分函数：
+	\begin{equation}
+		g(e_1,R,e_2) = u^T_Rf(M_{r,1}l_h + M_{r,2}l_t)
+	\end{equation}
+	在评分函数$g(e_1,R,e_2)$中，$M_{r,1}l_h$和$M_{r,2}l_t$是投影矩阵，$u^T_R$是关系$R$的表示向量，$f = tanh$。单层神经网络模型一定程度上优化了距离模型刻画关系不精准的问题，但是却带来了较大的计算量，降低了计算效率。
+	
+	DISTMUL是Yang等人提出的一种简化的神经嵌入法，对于一个给定的由关系三元组$(e_1, r, e_2)$(定义$e_1$是在关系$r$下的主体，$e_2$是客体)知识库$KB$，DISTMUL的主要想法是对于正向的三元组，根据评分函数(能量函数)可以获得较高的评分(或者是较低的能量)，而不成立的关系三元组在相同的评分函数则只能得到相反的评分(能量)结果。在DISTMUL模型中，关系矩阵被限制为对角矩阵，这种限制虽然增加了矩阵生成的难度，但是这种对角关系矩阵不仅简化了模型的运算复杂度，也提高了模型的语义表达效果。利用DISTMUL模型还可以完成知识表示学习的子任务关系规则的挖掘。关系规则是知识库的一个重要部分，例如，给定一个事实：一个人是出生在纽约，并且纽约是美国的一个城市，那么这个人的国籍就是美国：
+	\begin{equation}
+		BornInCity(a,b)\wedge CityOfCountry(b,c)\Longrightarrow Nationality(a,c)
+	\end{equation}
+	
+	类似的逻辑规则可以帮助从知识库中获取新知识，而且它也可以优化知识的存储方式，利用规则的存储减少事实的存储，从而减小知识库的体积。更重要的，这些规则可以满足复杂的推理需求[]。DISTMUL模型挖掘关系规则的主要思想是: 如果二元关系三元组$(e_1, r, e_2)$是一个正向例的且二元关系$r$对应的翻译向量$V$满足$y_a + V - y_b \approx 0$，那么应该会有以下规则属性成立：从$y_a + V_1 \approx y_b$和$y_b + V_2 \approx y_c$得出$y_a + (V_1 + V_2) \approx 0$。DISTMUL在挖掘基数为2和基数为3的规则时取得了不错的效果，但是由于算法复杂度较高，在面对更高基数的规则挖掘时耗时增长严重。
+	
+\subsection{翻译模型的研究}
+	2013年由Mikolov领导的一支谷歌研究团队提供了一种对词的向量表示进行运算的方法，这种方法是将深度学习技术引入自然语言处理领域的一项核心技术，Mikolov还提供了一个开源的Word2vec版本，这项技术使得自然语言处理多了一个新的研究方向。受到词向量特性的启发，Bordes等人提出了TransE模型。
+	
+	TransE是一个为了学习出实体在低纬嵌入空间的基于能量的模型。在TransE中，关系会被认为是到嵌入空间的一个翻译[]。例如假设$(h,l,t)$是一个正向的二元关系三元组，那么在这个模型下尾部实体$t$在空间的嵌入应该约等于头部实体$r$和关系$l$的空间嵌入向量的和：
+	\begin{equation}
+		h + r \approx t
+	\end{equation}
+	
+	对于一个给定的由三元组$(h,l,t)$构成的集合$S$，其中$h,t \in E$(实体的集合)以及关系$l \in L$(关系集合)，
+\section{本体知识库模型}
 
 \subsection{本体与一致性}
     对于描述逻辑语言$\mathcal{L}$包含以下三个集合，分别是一个由个体名组成的集合$N_I$，一个由概念名组成集合$N_C$以及一个由二元关系名组成的集合$N_R$。 我们把$\mathcal{L}$ 的\emph{语义演绎}表示为$\mathcal{I}=(\Delta^\mathcal{I},\cdot^\mathcal{I})$，其中$\Delta^\mathcal{I}$表示$\mathcal{I}$的定义域，是一个非空的个体集合，$\cdot^\mathcal{I}$是一个映射函数，这个映射函数可以完成概念名到$\Delta^\mathcal{I}$子集的映射，二元关系到$\Delta^\mathcal{I}\times\Delta^\mathcal{I}$ 子集的映射以及个体到$\Delta^\mathcal{I}$元素的映射。在本文中，我们考虑表2.1中的语言片段。
@@ -86,12 +132,12 @@
                \item [a.]所有已知的A为B。
                \item [b.]因此，A为B。
         \end{enumerate}
-    
+
     溯因推理是推理方式中的第三种方式，溯因推理的方式与前两种推理方式有着本质的区别，溯因推理又称作反绎推理，是推理到最佳解释的过程。一般的，它是开始于事实的集合并推导出它们的最合适的解释的推理过程。术语溯因（abduction）意味生成假设来解释观察或结论。因为需要生成假设来解释观察或结论，因此溯因推理会在进行解释的过程中为前提事实增加新的知识使得前提事实与解释的并集可以通过演绎推理的方式演绎出观察值或结论。在描述逻辑本体中，溯因推理是一种重要的推理方式。在描述逻辑本体的构建过程中，本体由于构建不够完善，会经常性出现本体无法蕴含观察值的现象。因此，这个时候就需要进行利用溯因推理的方法，已构建的本体进行诊断，找出本体不完善的原因，并在找到的原因的基础上，提出解释对本体进行修复。这种找出原因并提出解释的推理方法就叫做溯因诊断。溯因诊断对修复本体有着重要的意义。我们对术语断言的溯因诊断问题进行了如下两个定义[ABox Abduction in the Description Logic ALC]：
     \begin{definition}[术语断言溯因诊断问题)]
         令$\mathcal{L}_K$和$\mathcal{L}_Q$为两个DL本体，$\mathcal{K}=(\mathcal{T}, \mathcal{A})$是一个$\mathcal{L}_K$中的一个知识库，$\Phi$是一个在$\mathcal{L}_Q$中的术语断言集合。当且仅当 $\mathcal{K} \nvDash \Phi$ 且$\mathcal{K} \cup \Phi \nvDash \bot$的时候，二元组$\langle \mathcal{K}, \Phi \rangle$被称作术语断言的溯因诊断问题。
     \end{definition}
-    
+
     \begin{definition}[术语断言溯因诊断解释)]
         令$\mathcal{L}_S$为一个DL本体，且$A$为一个多个在$\mathcal{L}_S$中的术语断言集合。对于一个溯因诊断问题$\langle \mathcal{K}, \Phi \rangle$，当且仅当$\mathcal{K} \cup A \vDash \Phi$我们把$A$称为可接受解释。更多的，我们把$A$称为：
         \begin{enumerate}
@@ -99,7 +145,7 @@
                \item $(\emph{非平凡})$ 当且仅当 $\mathcal{K} \nvDash \Phi$。
                \item $(\emph{最小})$ 当且仅当不存在对于$\langle \mathcal{K}, \Phi \rangle$问题的解释$B$，其中$B$是$A$的实例化子集。我们说$B$是$A$的实例化子集当且仅当存在一个重命名映射$\rho$:$N_I^*(B) \mapsto N_I^*(A)$，其中$N_I^*(B)$和$N_I^*(A)$是来自于$A$和$B$的个体名且不出现于$\mathcal{K}$，使得$A \vDash \rho B$。但是对于所有的$\varrho$:$N_I^*(A) \mapsto N_I^*(B)$满足$B \nvDash \varrho A$。满足以上条件的，我们称$A$是问题$\langle \mathcal{K}, \Phi \rangle$的最小解释。
         \end{enumerate}
-        
+
     \end{definition}
     术语断言的溯因诊断需要计算出由一条或多条术语断言的集合，这些集合需要满足最小集的条件。当这些集合被加入到本体中的时候，它需要保持本体的一致性，并且可以使得更新后的本体能够蕴含($\vDash$)含观察值。$\mathcal{O} \vDash \alpha$表示对于所有满足本体$\mathcal{O}$的模，都可以使得$\alpha$成立。
 \section{定义}
@@ -205,117 +251,3 @@
     \item $\{\emph{isMotherOf}(Lily, Peter)\}$
    \end{center}
 
-
-
-句法分析是自然语言处理领域的一个关键问题，正确地解析出句法的结构对于自然语言处理的相关任务意义重大。目前已经有多种文法体系存在，其中影响最广泛、研究成果较为成熟的是最早由法国语言学家L.Tesniere在其著作《结构句法基础》(1959)提出的依存句法。他主张主要动词作为一个句子的中心支配其它成分，而它本身不受任何其它成分支配。他主张主要动词作为一个句子依存句法的提出对语言学的发展产生了深远的影响，尤其是在计算机语言学界。Robinson J.J提出了依存关系的四大公理，奠定了依存句法的基础，这四条公理是：
-(1)	一个句子只有一个成分是独立的；
-(2)	其它成分直接依存于某一个成分；
-(3)	任何一个成分都不能依存于两个或两个以上的成分；
-(4)	如果A成分直接依存于B成分，而C成分在句子中位于A和B之间的话，那么，C或直接依存于A，或者直接依存于B，或者直接依存于A和B之间的某一成分\upcite{ol7}。
-以句子“聪明的小华想出了一种解法。”为例，进行依存句法分析，
-
-\begin{figure}[htb]
-  \center
-  \includegraphics[width=0.95\textwidth]{img/1.jpg}\\
-  \caption{依存句法树}\label{fig:fulladder}
-\end{figure}
-
-整棵语法依存关系树以动词“想“为核心，按照依存关系逐步往下构建。目前汉语中的依存关系分类一般以清华大学计算机科学系的周明教授的分类方法为主，共有44 种依存关系\upcite{ol7}。包括SBV-主谓关系、VOB-动宾关系等。
-
-
-\section{RDF三元组}
-
-RDF全称Resource Description Framework，中文名资源描述框架，是一门基于XML的向万维网表达信息的语言，主要用于描述Web资源，使用RDF，人们可以使用自己的词汇表描述任何资源。
-
-\begin{definition}
-RDF三个基本元素：
-\begin{enumerate}
-\item $URIs$: 用于指代资源
-\item $Literals$: 数据值
-\item $Blank nodes$: 空变量
-\end{enumerate}
-\end{definition}
-
-\begin{definition}
-
-我们定义三个集合:
-\begin{enumerate}
-  \item $U$：资源的集合
-  \item $B$：空变量的集合
-  \item $L$：数据值的集合	
-\end{enumerate}
-\end{definition}
-
-
-我们通过对它们的名字进行串联表示它们的并集，例如：UBL作为$U∪B∪L$的简写。
-RDF文件是一条条陈述的集合，每条陈述又叫做三元组，
-
-\begin{definition}
-三元组的定义如下：
-\begin{eqnarray}
-    \left(s,p,o\right) \in UB \times U \times UBL
-\end{eqnarray}
-在这条triplet中，$s$是$subject$，$p$是$predicate$，$o$是$object$。
-\end{definition}
-图Fig 3-2为其中一组RDF Triplet：
-
-\begin{figure}[htb]
-  \center
-  \includegraphics[width=0.95\textwidth]{img/2.jpg}\\
-  \caption{RDF triplet}\label{fig:fulladder}
-\end{figure}
-
-
-\section{TFIDF}
-
-TFIDF（term frequency–inverse document frequency）是一种用于资讯检索与文本挖掘的词频加权技术，属于统计学的一种方法，用以评估一个单词或字词短语对于一个文集或一个语料库中的其中一份文件的重要程度。字词的重要性随着它在文件中出现的次数成正比增加，但同时会随着它在语料库中出现的频率成反比下降\upcite{ol8}。
-TFIDF的主要思想是：如果某个词或短语在一片文章中出现的频率TF高，并在其他文章中很少出现，则认为此词或者短语具有很好的类别区分能力，适合用来分类。\upcite{ol8}\upcite{ol9}TF(Term Frequence) 意为词频，表达的是一个一个词在一个文档中出现的频率，IDF(Inverse Document Frequency) 意为逆向文件频率，TFIDF 认为如果一个词在一个文件中频繁出现，也就是说这个词的TF比较高，意味着这个词具有很好的代表性。同时这个词在整个文档集中出现的频率比较低，则表示这个词具有较好的类别区分能力。之所以使用词频而不是词数，是因为在较长的文件中，同一个词数出现的次数一般会更多。
-\begin{proposition}
-\begin{eqnarray}
-    tf_{i,j} = \frac{n_{i,j}}{\sum_k n_{k,j}}
-\end{eqnarray}。
-\end{proposition}
-
-以上式子中$n_(i,j)$是该词在文件$d_j$ 中的出现次数，而分母则是在文件$d_j$中所有字词数之和。
-
-\begin{proposition}
-IDF计算：
-\begin{eqnarray}
-    idf_{i} = \frac{|D|}{|{j:t_i \in d_j|}}
-\end{eqnarray}。
-\end{proposition}
-
-其中：
-
-(1) $|D|$:语料中的文件总数。
-
-(2) $|{j:t_i∈d_j }|$:包含词语$t_i$的数目。
-
-\section{本体的关系}
-本体的体系结构包括三个要素：核心元素、元素之间的交互作用以及这些元素到语义规范之间的映射关系，Perez等对已有的本体进行分析，归纳出本体的基本建模元语，其中最终要的两个是类和关系。
-类是相似术语所表达的概念的集合体，可以指任何事物，如工作描述、功能、行为、策略和推理过程等等。
-关系代表了在领域中概念之间的交互作用。
-本体中对概念之间的关系进行了区分，并把所有的关系分成四类，分别是part-of，kind-of，instance-of和attribute-of。
-
-\begin{table}[!h]
-\caption{本体关系分类}\label{tab_environment}
-\vspace*{3mm}
-\tabcolsep 2pt
-\wuhao
-\begin{center}
-\begin{tabular}{|c|c|}
-    \hline
-    关系名 & 关系描述  \\
-    \hline
-    part-of & 部分与整体的关系 \\
-    \hline
-    kind-of & 概念之间的关系  \\
-    \hline
-    instance-of & 表达概念的实例和概念之间的关系\\
-    \hline
-    attribute-of & 表达某个概念是另一个概念属性的关系\\
-    \hline
-\end{tabular}
-\end{center}
-\vspace*{-5mm}
-\end{table}
