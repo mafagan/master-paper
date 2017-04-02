@@ -31,13 +31,19 @@
 \contentsline {subsection}{\numberline {3.2.5}非分类关系的抽取}{35}{subsection.3.2.5}
 \contentsline {subsection}{\numberline {3.2.6}基于RDFS的本体模型的构建}{36}{subsection.3.2.6}
 \contentsline {chapter}{\numberline {}第四章\hspace {0.8em}实验与分析}{38}{chapter.4}
-\contentsline {section}{\numberline {4.1}实验基本情况}{40}{section.4.1}
-\contentsline {section}{\numberline {4.2}实验结果与分析}{41}{section.4.2}
-\contentsline {chapter}{\numberline {}第五章\hspace {0.8em}总结与展望}{43}{chapter.5}
-\contentsline {section}{\numberline {5.1}工作总结}{43}{section.5.1}
-\contentsline {section}{\numberline {5.2}不足与改进方向}{43}{section.5.2}
-\contentsline {chapter}{致\hskip 1em\relax 谢}{44}{chapter*.5}
-\contentsline {chapter}{参考文献}{45}{section*.6}
-\contentsline {chapter}{附\hskip 1em\relax 录}{46}{chapter*.8}
-\contentsline {chapter}{原创性声明}{47}{chapter*.9}
+\contentsline {section}{\numberline {4.1}实验工具与环境}{38}{section.4.1}
+\contentsline {section}{\numberline {4.2}程序框架}{39}{section.4.2}
+\contentsline {section}{\numberline {4.3}解释基数对生成解释的效率以及数量对比实验}{40}{section.4.3}
+\contentsline {subsection}{\numberline {4.3.1}实验设计}{40}{subsection.4.3.1}
+\contentsline {subsection}{\numberline {4.3.2}实验结果与数据分析}{41}{subsection.4.3.2}
+\contentsline {section}{\numberline {4.4}决断集模板解释修复知识库模型对比实验}{41}{section.4.4}
+\contentsline {subsection}{\numberline {4.4.1}实验设计}{42}{subsection.4.4.1}
+\contentsline {subsection}{\numberline {4.4.2}实验结果与数据分析}{43}{subsection.4.4.2}
+\contentsline {chapter}{\numberline {}第五章\hspace {0.8em}总结与展望}{45}{chapter.5}
+\contentsline {section}{\numberline {5.1}工作总结}{45}{section.5.1}
+\contentsline {section}{\numberline {5.2}不足与改进方向}{45}{section.5.2}
+\contentsline {chapter}{致\hskip 1em\relax 谢}{46}{chapter*.5}
+\contentsline {chapter}{参考文献}{47}{section*.6}
+\contentsline {chapter}{附\hskip 1em\relax 录}{48}{chapter*.8}
+\contentsline {chapter}{原创性声明}{49}{chapter*.9}
 \contentsfinish 

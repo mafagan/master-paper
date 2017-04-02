@@ -25,12 +25,18 @@
 \BOOKMARK [2][-]{subsection.3.2.5}{非分类关系的抽取}{section.3.2}% 25
 \BOOKMARK [2][-]{subsection.3.2.6}{基于RDFS的本体模型的构建}{section.3.2}% 26
 \BOOKMARK [0][-]{chapter.4}{第4章 实验与分析}{}% 27
-\BOOKMARK [1][-]{section.4.1}{实验基本情况}{chapter.4}% 28
-\BOOKMARK [1][-]{section.4.2}{实验结果与分析}{chapter.4}% 29
-\BOOKMARK [0][-]{chapter.5}{第5章 总结与展望}{}% 30
-\BOOKMARK [1][-]{section.5.1}{工作总结}{chapter.5}% 31
-\BOOKMARK [1][-]{section.5.2}{不足与改进方向}{chapter.5}% 32
-\BOOKMARK [0][-]{chapter*.5}{致 谢}{}% 33
-\BOOKMARK [0][-]{section*.6}{参考文献}{}% 34
-\BOOKMARK [0][-]{chapter*.8}{附 录}{}% 35
-\BOOKMARK [0][-]{chapter*.9}{原创性声明}{}% 36
+\BOOKMARK [1][-]{section.4.1}{实验工具与环境}{chapter.4}% 28
+\BOOKMARK [1][-]{section.4.2}{程序框架}{chapter.4}% 29
+\BOOKMARK [1][-]{section.4.3}{解释基数对生成解释的效率以及数量对比实验}{chapter.4}% 30
+\BOOKMARK [2][-]{subsection.4.3.1}{实验设计}{section.4.3}% 31
+\BOOKMARK [2][-]{subsection.4.3.2}{实验结果与数据分析}{section.4.3}% 32
+\BOOKMARK [1][-]{section.4.4}{决断集模板解释修复知识库模型对比实验}{chapter.4}% 33
+\BOOKMARK [2][-]{subsection.4.4.1}{实验设计}{section.4.4}% 34
+\BOOKMARK [2][-]{subsection.4.4.2}{实验结果与数据分析}{section.4.4}% 35
+\BOOKMARK [0][-]{chapter.5}{第5章 总结与展望}{}% 36
+\BOOKMARK [1][-]{section.5.1}{工作总结}{chapter.5}% 37
+\BOOKMARK [1][-]{section.5.2}{不足与改进方向}{chapter.5}% 38
+\BOOKMARK [0][-]{chapter*.5}{致 谢}{}% 39
+\BOOKMARK [0][-]{section*.6}{参考文献}{}% 40
+\BOOKMARK [0][-]{chapter*.8}{附 录}{}% 41
+\BOOKMARK [0][-]{chapter*.9}{原创性声明}{}% 42
