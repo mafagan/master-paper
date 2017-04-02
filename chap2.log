@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2017.1.21)  19 MAR 2017 23:24
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2017.1.21)  2 APR 2017 18:51
 entering extended mode
 **C:/Users/Margo/Documents/æ¯•ä¸šè®ºæ–‡/latex-æœ¬/chap2.tex
 (C:/Users/Margo/Documents/æ¯•ä¸šè®ºæ–‡/latex-æœ¬/chap2.tex
@@ -6,11 +6,11 @@ LaTeX2e <2011/06/27>
 Babel <v3.8m> and hyphenation patterns for loaded.
 ! Undefined control sequence.
 l.1 \chapter
-            {ÂÛÎÄºËÐÄ¶¨ÀíÒÔ¼°¶¨Òå}
+            {Ô¤±¸ÖªÊ¶}
 ? 
 ! Emergency stop.
 l.1 \chapter
-            {ÂÛÎÄºËÐÄ¶¨ÀíÒÔ¼°¶¨Òå}
+            {Ô¤±¸ÖªÊ¶}
 End of file on the terminal!
 
  
@@ -21,5 +21,5 @@ Here is how much of TeX's memory you used:
  3276 multiletter control sequences out of 15000+200000
  3640 words of font info for 14 fonts, out of 3000000 for 9000
  14 hyphenation exceptions out of 8191
- 5i,0n,1p,91b,8s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 5i,0n,1p,79b,8s stack positions out of 5000i,500n,10000p,200000b,50000s
 !  ==> Fatal error occurred, no output PDF file produced!

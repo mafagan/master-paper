@@ -41,16 +41,63 @@ $E$表示的由知识库中实体组成的集合，$\mid R \mid$表示在知识库中二元关系组成的集合
 \subsection{翻译模型的研究}
 	2013年由Mikolov领导的一支谷歌研究团队提供了一种对词的向量表示进行运算的方法，这种方法是将深度学习技术引入自然语言处理领域的一项核心技术，Mikolov还提供了一个开源的Word2vec版本，这项技术使得自然语言处理多了一个新的研究方向。受到词向量特性的启发，Bordes等人提出了TransE模型。
 	
-	TransE是一个为了学习出实体在低纬嵌入空间的基于能量的模型。在TransE中，关系会被认为是到嵌入空间的一个翻译[]。例如假设$(h,l,t)$是一个正向的二元关系三元组，那么在这个模型下尾部实体$t$在空间的嵌入应该约等于头部实体$r$和关系$l$的空间嵌入向量的和：
+	TransE是一个为了学习出实体在低纬嵌入空间的基于能量的模型。在TransE中，关系会被认为是到嵌入空间的一个翻译[]。例如假设$(h,l,t)$是一个正向的二元关系三元组，那么在这个模型下尾部实体$t$在空间的嵌入应该约等于头部实体$h$和关系$l$的空间嵌入向量的和：
 	\begin{equation}
-		h + r \approx t
+		h + l \approx t
 	\end{equation}
 	
-	对于一个给定的由三元组$(h,l,t)$构成的集合$S$，其中$h,t \in E$(实体的集合)以及关系$l \in L$(关系集合)，
+	对于一个给定的由三元组$(h,l,t)$构成的集合$S$，其中$h,t \in E$(实体的集合)以及关系$l \in L$(关系集合)，以下算法的目标是学习关系和实体的嵌入向量。TransE根据能量框架定义三元组的能量等价于相似性测量$d(h+l,t)$，在TransE里d可以是曼哈顿距离或者是欧几里得距离。TransE对训练集数据的训练目标是最小化以下函数：
+	\begin{equation}
+		\mathcal{L} = \sum\limits_{(h,l,t)\in S} \sum\limits_{(h',l,t')\in S'_{(h,l,t)}} [\gamma + d(h+l,t)-d(h'+l,t')]_{+}
+	\end{equation}
+	
+	在以上函数中，$[x]_+$表示$max(0, x)$。由于训练的时候需要生成反例(不成立的二元关系三元组)，这里的反例可以通过正向三元组提取。具体做法是取一正向实例$(h,l,t)$，从三元组中移除头部(或尾部)实体，使用实体集合中选择一个实体$h'$($h' \in E$)组成损坏三元组$(h',l,t)$，其中损坏三元组满足$(h',l,t) \not \in S_{(h,l,t)}$。所以对所有损坏三元组，有：
+	\begin{equation}
+		S'_{(h,l,t)} = \{(h', l, t\mid h'\in E)\} \cup \{(h,l,t')\mid t' \in E\}
+	\end{equation}
+	
+	TransE选择了随机梯度下降法(Stochastic Gradient Descent，SGD)作为优化方法，随机梯度下降法在进行训练的时候，并不需要对所有的和求梯度，因此随机梯度下降法也不需要在每次循环的时候更新所有的向量，而只需要对一个批次的向量进行求梯度计算就可以更新$theta$值。
+	
+	TransE在实验中设置两组实验，分别验证模型在实体预测以及链接预测上的能力，与之对比的还有RESCAL，SE，SME(linear)/SME(bilinear)以及LFM等知识库模型，从实验数据可以看出，TransE取得的效果非常优秀，在三组数据集的两种评价方法下，TransE都取得最好的成绩，值得注意的是在一个体量较大的数据集FB1M的测试中，TransE不仅完成了测试，对比以往的模型还获得了较大的提高。但是，TransE方法也有自身的缺点。假设有两组三元组分别为(上海，位于，中国)记为$(h,l,t)$以及(通州，位于，中国)记为$(h,l,t')$。根据TransE的损失函数，训练出来的模型会有$h+l\approx t$ 以及 $h + l \approx t'$，所以我们有$t \approx t'$，也就是说在TransE的表达模型中，“上海”和“通州”的嵌入向量会近似相等，即使这两个实体具有较大的差异。也就意味着，TransE虽然在处理一对一关系的时候有着不错得性能，但是在面对一对多的关系的时候，TransE方法具有缺陷。
+	
+	受TransE的启发，Wang等人在2014年时基于TransE提出了一种新的翻译模型，称之为TransH。TransH的提出就是为了解决在TransE中无法很好处理地一对多，多对多的关系。TransE在建立关系实体的向量空间的时候关系和实体都被嵌入到了平面空间，这个因素限制了TransE在处理多对多、多对一以及一对多的关系的表达能力。因此，为了解决这个问题，在TransH中关系被嵌入到了超平面空间。对于一个关系$r$，TransH用超平面$w_r$和在超平面上的向量$d_r$进行表示。特别地，对于一个二元关系三元组$(h,r,t)$，$h$和$t$将会被首先投影到平面$w_r$上，投影后的向量分别被记作$h_{\bot}$和$t_{\bot}$。在TransH中，如果$(h,r,t)$是一个正向三元组，$h_{\bot}$和$t_{\bot}$会被期望能够被超平面上的向量$d_r$联系起来。因此在TansH中的评分函数为：
+	\begin{equation}
+		\mid\mid h_{\bot} + d_r - t_{\bot} \mid\mid^2_2
+	\end{equation}
+	通过限制$\mid\mid w_r \mid\mid_2 = 1$，我们可以得到：
+	\begin{equation}
+		h_{\bot}=h-w_r^{\top}hw_r,\ \ t_{\bot}=t-w_r^{\top}tw_r
+	\end{equation}可以得到评分函数：
+	\begin{equation}
+		f_r(h,t) = \mid\mid (h-w_r^{\top}hw_r)+d_r-(t-w_r^{\top}tw_r) \mid\mid^2_2
+	\end{equation}损失函数为：
+	\begin{equation}
+		\mathcal{L} = \sum\limits_{(h,l,t)\in S} \sum\limits_{(h',l,t')\in S'_{(h,l,t)}} [\gamma + f_r(h,t)-f_{r'}(h',t')]_{+}
+	\end{equation}
+	
 \section{本体知识库模型}
+	
+\subsection{描述逻辑与OWL}
+	描述逻辑(description logic)是一种用于知识表示的逻辑语言和以其为对象的推理方法，主要用于描述概念分类及其概念之间的关系[]。描述逻辑是一阶逻辑的可决定性片段，但是描述逻辑又具有强的表达能力，描述逻辑在表达能力和推理能力之间取得了平衡。
 
-\subsection{本体与一致性}
-    对于描述逻辑语言$\mathcal{L}$包含以下三个集合，分别是一个由个体名组成的集合$N_I$，一个由概念名组成集合$N_C$以及一个由二元关系名组成的集合$N_R$。 我们把$\mathcal{L}$ 的\emph{语义演绎}表示为$\mathcal{I}=(\Delta^\mathcal{I},\cdot^\mathcal{I})$，其中$\Delta^\mathcal{I}$表示$\mathcal{I}$的定义域，是一个非空的个体集合，$\cdot^\mathcal{I}$是一个映射函数，这个映射函数可以完成概念名到$\Delta^\mathcal{I}$子集的映射，二元关系到$\Delta^\mathcal{I}\times\Delta^\mathcal{I}$ 子集的映射以及个体到$\Delta^\mathcal{I}$元素的映射。在本文中，我们考虑表2.1中的语言片段。
+    描述逻辑语言$\mathcal{L}$包含以下三个集合，分别是一个由个体名组成的集合$N_I$，一个由概念名组成集合$N_C$以及一个由二元关系名组成的集合$N_R$。 
+	\begin{definition}[描述逻辑词汇表)]
+		描述逻辑词汇表$\mathcal{V}$是一个三元组$(N_C,N_R,N_I)$，其中$N_C$是概念名的集合，$N_R$是关系名的集合，$N_I$是个体名的集合。
+	\end{definition}
+	
+	我们把$\mathcal{L}$ 的\emph{语义演绎}表示为$\mathcal{I}=(\Delta^\mathcal{I},\cdot^\mathcal{I})$，其中$\Delta^\mathcal{I}$表示$\mathcal{I}$的域，是一个非空的个体集合，$\cdot^\mathcal{I}$是一个映射函数，这个映射函数可以完成概念名到$\Delta^\mathcal{I}$子集的映射，二元关系到$\Delta^\mathcal{I}\times\Delta^\mathcal{I}$ 子集的映射以及个体到$\Delta^\mathcal{I}$元素的映射。定义如下[]：
+	
+	\begin{definition}
+		一个演绎$\mathcal{I}$是二元组$(\Delta^\mathcal{I},\cdot^\mathcal{I})$，其中$\Delta^\mathcal{I}$被称为域，$\cdot^\mathcal{I}$是一个从$N_I$到$\Delta^\mathcal{I}$的函数。
+		\begin{itemize}
+			\item $a^{\mathcal{I}} \in \Delta^\mathcal{I}$ 
+			\item $A^{\mathcal{I}} \subseteq \Delta^\mathcal{I}$ 
+			\item $R^{\mathcal{I}} \subseteq \Delta^\mathcal{I} \times \Delta^\mathcal{I}$ 
+			\item $(C_1 \sqcap C_2)^\mathcal{I} \subseteq C_1^{\mathcal{I}} \cap C_2^{\mathcal{I}}$
+		\end{itemize}
+	\end{definition}
+	
+	在本文中，我们考虑表2.1中的语言片段。
     \begin{table}[!h]
 	\centering
 	\caption{语法以及语义表}
