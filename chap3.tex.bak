@@ -1,6 +1,8 @@
 \def\qed{\hfill \vrule height6pt width 6pt depth 0pt}
 \chapter{基于决断集模板进行溯因诊断}
-    本体中的知识库以及规则是本体可以进行推理的前提。目前的本体构造主要由手工或者是半手工构建。由于本体的结构复杂，信息量大，因此本体的构建是一个长期的过程。在本体的构建过程中，构建的本体与观察值的不一致是一个常会发生的问题。因此，找到问题的原因，对观察值提出合理解释成为本体推理中的一个重要任务，这类任务也被称作是溯因推理问题。
+	本体中的知识库以及规则是本体可以进行推理的前提。目前的本体构造主要由手工或者是半手工构建。由于本体的结构复杂，信息量大，因此本体的构建是一个长期的过程。在本体的构建过程中，构建的本体与观察值的不一致是一个常会发生的问题。因此，找到问题的原因，对观察值提出合理解释成为本体推理中的一个重要任务，这类任务也被称作是溯因推理问题。
+\section{知识库诊断问题}
+	对于一个知识库$G = (E,R,S)$，我们定义在$G$经过深度学习构建出的知识库模型为$\$
 \section{解释与决定集}
     溯因推理的一个重要目的就是需要找出合理的解释对观察值的进行解释。一般的，这个解释不应该导致诊断本体的不一致，同时，结合本体中的背景知识，新构建出的本体能够蕴含观察值，且新构建的本体能够保持一致的特性。因此，我们对解释有以下定义：
 \begin{definition}[解释)]
@@ -134,118 +136,157 @@
 	\end{proposition}
 	
 	
-	证明：(1)令$\mathcal{E}$是集合$\mathcal{S}$中的一个元素，存在一个或多个的$\mathcal{J}_p\in\mathcal{P}$，$(\mathcal{J}_1,\mathcal{J}_2) \in B^*(\mathcal{J}_p)$以及对于$\mathcal{J}_2 \cup \{r_o(X, Y)\}$的差异化实例替换$\theta$使得$\mathcal{E} = \emph{inst}(\mathcal{J}_1\theta), X\theta=A, Y\theta=B,\mathcal{J}_2\theta \subseteq \mathcal{O}, \mathcal{E} \not \models r_o(A, B)$，$\mathcal{O} \cup \mathcal{E}$是一致的。$\mathcal{J}_2\theta \in Jst(r_o(A, B), \mathcal{O} \cup \mathcal{E})$，并且不存在一个在$\mathcal{O}$中对于$r_o(A, B)$的解释$\mathcal{E}'$满足$\mathcal{E}'\subseteq_\mathsf{ds} \mathcal{E} $且$\mathcal{E} \not \subseteq_\mathsf{ds} \mathcal{E}'$。由于$\mathcal{E}$是由$\mathcal{J}_1\theta$通过实例化替换而来，因此一定存在一个$\mathcal{J}_p$的实例化替换$\theta'$使得$\mathcal{J}_1\theta' = \mathcal{E}$，$\mathcal{J}_2\theta' = \mathcal{J}_2\theta, X\theta' = X\theta = A$以及$Y\theta' = Y\theta = B$。通过定义可知，我们有$\mathcal{J}_p\theta' \models r_o(X, Y)$。由于$\mathcal{J}_p\theta' = \mathcal{J}_2\theta \cup \mathcal{E}$并且$\mathcal{J}_2\theta \subseteq \mathcal{O}$，我们有$\mathcal{J}_p\theta \subseteq \mathcal{O} \cup \mathcal{E}$所以$\mathcal{O} \cup \mathcal{E} \models r_o(A, B)$，$\mathcal{E}$是在本体$\mathcal{O}$中对于观察值$r_o(A, B)$的一个解释。另外，$\mathcal{E}$满足基于决断集模板解释的四个特性：非平凡(i.e., $\mathcal{E} \not \models \alpha$)，一致(i.e. $\mathcal{O} \cup \mathcal{E}$ 是一致的)以及$\subseteq_\mathsf{ds}-\emph{minimal}$(不存在这样一个解释$\mathcal{E}'$使得$\mathcal{E}'\subseteq_\mathsf{ds}\mathcal{E}$ 且$\mathcal{E}\not\subseteq_\mathsf{ds}\mathcal{E}'$，其中$\mathcal{E}'\subseteq_\mathsf{ds}\mathcal{E}$ 表示存在一个$\mathcal{E}'$的差异化替换$\theta$，使得$\mathcal{E}'\theta\subseteq\mathcal{E}$)，以及可容许(存在一个决定集模版$\mathcal{J}_p \in \mathcal{P}$以及$\mathcal{J}_p$的一个差异化替换$\theta$使得$\alpha = r_o(X\theta, Y\theta)$，$\mathcal{E} \subseteq \mathcal{J}_p\theta$且$\mathcal{J}_p\theta \in Jst(\alpha, \mathcal{O}\cup\mathcal{E})$)，所以$\mathcal{E}$是一个在$\mathcal{O}$中对于$r_o(A, B)$ 的一个基于决断集模板的解释。(2)令$\mathcal{E}$为在本体$\mathcal{O}$中基于决断集模板$\mathcal{P}$对观察值$r_o(A,B)$的解释。由于$\mathcal{E}$是一个可接受的解释，因此必定存在一个决断集模板$\mathcal{J}_p \in  \mathcal{P}$以及一个$\mathcal{J}_p$的差异化实例替换$\theta$使得$X\theta=A, Y\theta=B, \mathcal{E}\subseteq \mathcal{J}_p\theta$以及$\mathcal{J}_p\theta \in Jst(r_o(A,B), \mathcal{O}\cup \mathcal{E})$。
-\section{RDFS构建框架}
+	证明：(1)令$\mathcal{E}$是集合$\mathcal{S}$中的一个元素，存在一个或多个的$\mathcal{J}_p\in\mathcal{P}$，$(\mathcal{J}_1,\mathcal{J}_2) \in B^*(\mathcal{J}_p)$以及对于$\mathcal{J}_2 \cup \{r_o(X, Y)\}$的差异化实例替换$\theta$使得$\mathcal{E} = \emph{inst}(\mathcal{J}_1\theta), X\theta=A, Y\theta=B,\mathcal{J}_2\theta \subseteq \mathcal{O}, \mathcal{E} \not \models r_o(A, B)$，$\mathcal{O} \cup \mathcal{E}$是一致的。$\mathcal{J}_2\theta \in Jst(r_o(A, B), \mathcal{O} \cup \mathcal{E})$，并且不存在一个在$\mathcal{O}$中对于$r_o(A, B)$的解释$\mathcal{E}'$满足$\mathcal{E}'\subseteq_\mathsf{ds} \mathcal{E} $且$\mathcal{E} \not \subseteq_\mathsf{ds} \mathcal{E}'$。由于$\mathcal{E}$是由$\mathcal{J}_1\theta$通过实例化替换而来，因此一定存在一个$\mathcal{J}_p$的实例化替换$\theta'$使得$\mathcal{J}_1\theta' = \mathcal{E}$，$\mathcal{J}_2\theta' = \mathcal{J}_2\theta, X\theta' = X\theta = A$以及$Y\theta' = Y\theta = B$。通过定义可知，我们有$\mathcal{J}_p\theta' \models r_o(X, Y)$。由于$\mathcal{J}_p\theta' = \mathcal{J}_2\theta \cup \mathcal{E}$并且$\mathcal{J}_2\theta \subseteq \mathcal{O}$，我们有$\mathcal{J}_p\theta \subseteq \mathcal{O} \cup \mathcal{E}$所以$\mathcal{O} \cup \mathcal{E} \models r_o(A, B)$，$\mathcal{E}$是在本体$\mathcal{O}$中对于观察值$r_o(A, B)$的一个解释。另外，$\mathcal{E}$满足基于决断集模板解释的四个特性：非平凡(i.e., $\mathcal{E} \not \models \alpha$)，一致(i.e. $\mathcal{O} \cup \mathcal{E}$ 是一致的)以及$\subseteq_\mathsf{ds}-\emph{minimal}$(不存在这样一个解释$\mathcal{E}'$使得$\mathcal{E}'\subseteq_\mathsf{ds}\mathcal{E}$ 且$\mathcal{E}\not\subseteq_\mathsf{ds}\mathcal{E}'$，其中$\mathcal{E}'\subseteq_\mathsf{ds}\mathcal{E}$ 表示存在一个$\mathcal{E}'$的差异化替换$\theta$，使得$\mathcal{E}'\theta\subseteq\mathcal{E}$)，以及可容许(存在一个决定集模版$\mathcal{J}_p \in \mathcal{P}$以及$\mathcal{J}_p$的一个差异化替换$\theta$使得$\alpha = r_o(X\theta, Y\theta)$，$\mathcal{E} \subseteq \mathcal{J}_p\theta$且$\mathcal{J}_p\theta \in Jst(\alpha, \mathcal{O}\cup\mathcal{E})$)，所以$\mathcal{E}$是一个在$\mathcal{O}$中对于$r_o(A, B)$ 的一个基于决断集模板的解释。(2)令$\mathcal{E}$为在本体$\mathcal{O}$中基于决断集模板$\mathcal{P}$对观察值$r_o(A,B)$的解释。由于$\mathcal{E}$是一个可接受的解释，因此必定存在一个决断集模板$\mathcal{J}_p \in  \mathcal{P}$以及一个$\mathcal{J}_p$的差异化实例替换$\theta$使得$X\theta=A, Y\theta=B, \mathcal{E}\subseteq \mathcal{J}_p\theta$以及$\mathcal{J}_p\theta \in Jst(r_o(A,B), \mathcal{O}\cup \mathcal{E})$。由于$\mathcal{E}\subseteq \mathcal{J}_p\theta$以及$\mathcal{J}_p\theta \subseteq $，所以必定存在一个$\mathcal{J}_p$的二分$(\mathcal{J}_1, \mathcal{J}_2)$使得$\mathcal{E}=\mathcal{J}_1\theta$以及$\mathcal{J}_2\theta \subseteq \mathcal{O}$。令$\theta'$是一个$\mathcal{J}_2 \cup \{r_o(A,B)\}$使得$X\theta'=X\theta, Y\theta'=Y\theta$以及$\mathcal{J}_2\theta'=\mathcal{J}_2\theta$，所以$X\theta'A=A,Y\theta'=B,\mathcal{J}_2\theta' \subseteq \mathcal{O}$以及$\mathcal{E}$是$\emph{inst}(\mathcal{J}_1\theta')$的重名等价解。又一次$\mathcal{E}$是非平凡的，我们有$\emph{inst}(\mathcal{J}_1\theta')\not \models r_o(A,B)$。$\mathcal{E}$是一致的，因此$\mathcal{O} \cup \emph{inst}(\mathcal{J}_1\theta')$是一致的。$\mathcal{J}_2\theta \cup \mathcal{E} \in Jst(r_o(A,B), \mathcal{O}\cup \mathcal{E})$，我们有$\mathcal{J}_2\theta' \cup \emph{inst}(\mathcal{J}_1\theta') \in Jst(r_o(A,B), \mathcal{O} \cup \emph{inst}(\mathcal{J}_1\theta'))$。又$\mathcal{E}$是$\subseteq_\mathsf{ds}-\emph{minimal}$的，因此不存在一个在本体$\mathcal{O}$对于观察值$r_o(A,B)$的解释$\mathcal{E}'$ 使得$\mathcal{E}'\subseteq_\mathsf{ds} \emph{inst}(\mathcal{J}_1\theta')$并$\emph{inst}(\mathcal{J}_1\theta')  \not \subseteq_\mathsf{ds}\mathcal{E}'$
 
-通过对本体学习以及RDFS相关的知识的研究，综合考虑到中文自然语言的特点、RDFS的表达方式以及本体的基本元素需要，设计出了一个基本的从中文自然语言文本构建基于RDFS本体模型的系统框架。
+    在上文中，我们已经证明了基于决定集模板的解释可以在一个有限的空间中形成。
 
-\subsection{目标本体特性}
-要从中文自然语言文本中构建出准确的RDFS本体模型，该系统框架应该具有且不限于以下几点特征:
-
-(1)	能够以较高的精度完成中文的自然语言处理
-
-(2)	能从信息源中识别出领域概念
-
-(3)	能自动抽取出分类层次关系
-
-(4)	能抽取出概念之间的非分类关系
-
-基于以上几点，可以设计出系统主要流程为：读取输入信息源——自然语言处理——本体概念识别——概念以及关系抽取——元素转换——构建RDFS模型。
-\begin{figure}[htb]
-  \center
-  \includegraphics[width=0.95\textwidth]{img/3.jpg}\\
-  \caption{基于RDFS的本体学习框架}\label{fig:fulladder}
-\end{figure}
-
-\subsection{中文文本预处理}
-本文设计的系统框架的输入信息源为中文自然语言文本，为了进行术语识别以及该概念关系抽取的相关操作，需要对输入信息进行预处理，包括分词、语义角色标注、依存句法树生成等工作。	
-	目前国外的自然语言处理框架在完成自然语言处理的基本任务时能有较高的准确率，但是这些框架要么不支持中文，要么在中文环境中处理的准确率较低，影响系统的准确性。在国内目前也已经研发出面向中文的自然语言处理框架，其中已经发展得比较成熟的有哈尔滨工业大学的nlp 和复旦大学的nlp，这两者对中文自然语言的处理都有较高的准确率，鉴于哈尔滨工业大学nlp需要通过WebAPI的方式进行调用，而复旦大学的fnlp可以在本地以第三库的形式进行调用，在使用大规模文本作为信息输入源进行测试的时候会有相对较好的速度性能表现。所以本文选择使用由国内复旦大学研发的中文自然语言框架fnlp来进行中文文本的预处理工作。
-
-\subsection{本体概念的识别}
-术语是一种结合紧密的固定或半固定的词或短语，具有结合紧密型和语言完备性特点，进而，它还是一种具有很强的领域特征的词语，具有领域性\upcite{ol8}。在本体中，术语与概念在概念上是一致的，概念的自动提取是构建本体的重要工作之一\upcite{ol10}。
-	在目前的本体构建中，领域概念的抽取主要有两类方法，分别是基于统计的方法和基于语义处理的方法。语义处理通过对文档进行预处理，如分词、语义标注、语法树分析、依存结构生成、实体识别等，对信息源进行结构与模式分析，提取出术语。	通过语义分析抽取术语不需要大量的信息源，相对较少的计算量，但是语义分析的方法依赖于严格的语法结构，对于口语化的表达难以达到理想的效果，对输入信息源的质量有着较高的要求。而基于统计学的方法并没有这些限制，基于统计学的方法不需要输入的信息源严格遵循语法结构，能够比较容易地提取出未登录词。与之相对的，统计学的方法也有缺点。统计学的方法在抽取低频术语的时候容易遗漏，且统计学需要大量的输入信息源。
-    推荐度的计算主要基于统计学方法中的词频逆文档频率(term frequency–inverse document frequency)。TF.IDF用于对词语的区分能力进行计算，分数越高，意味着词语的区分能力越强，表达范围归入该领域的可能性就越大\upcite{ol11}。
-\begin{proposition}
-    词频逆文件频率的计算:
-\begin{eqnarray}
-    tf_{i,j}idf_{i} = \frac{n_{i,j}}{\sum_k n_{k,j}}\frac{|D|}{|{j:t_i \in d_j|}}
-\end{eqnarray}。
-\end{proposition}
-    词频逆文件频率对单位字词有较好的计算能力，但是在计算时难以对复合型短语进行计算。以“书画艺术”为例，经过自然语言处理之后，会被分词模块识别成“书画”和“艺术”两个词语，而“书画艺术”是在艺术领域里一个重要的术语。
-    在Dennis, B等人对术语的研究中，他们证明了术语在主要由名词和名词短语表达，在名词短语中，又以双词组合占多数\upcite{ol12}。
-\begin{definition}
-    以一个或者两个字词组成的有完整意义的短语，我们称为base-item。
-
-\end{definition}
-
-在中文中，通过对语料的文档人工处理，我们提取出三组典型的base-item的语义形式，[名词]，[形容词，名词]，[名词，名词]\upcite{ol12}。根据这三组语义形式，我们可以过滤出候选的术语集，包括字词和短语，然后再使用统计学方法进行筛选，具体步骤如下：
-
-\begin{itemize}
- \item 对文档按照标点符号进行分句操作，对于非规则或者无符号文本部分，利用空格与换行等符号进行断句。
- \item 利用fnlp对句子进行分词操作，并为每个字词标注词性。
- \item 通过应用语义表达规则从字词集中提取出候选的术语。
- \item 计算出候选术语的推荐度，制定阀值，筛选出最终的术语集。
-\end{itemize}
-
-\subsection{分类关系的抽取}
-概念之间的关系是本体构建中的重点。本体通过关系把各种概念连成一体，以此表达领域之中概念之间的联系。在本体中的关系主要有两类，分别是分类关系和非分类关系。这两类关系在文本中不管是体现的方法还是形式都不一样，因此对于这两种关系的提取需要使用不同的方法分别进行操作。
-系的方法主要是基于Hearst模式的抽取方法。Hearst模式是一种基于模式的信息抽取方法\upcite{ol13}\upcite{ol14}，它通过识别句子中的特定模式来抽取概念之间的关系。由于自然语言句式较多，表达方式多样，因此准确率较低。而且Hearst 模式是基于西文的，在中文上并不适用。中文的语法相较英文要复杂不少，从模式上进行信息抽取的难度较大，因此本文通过结合Wordnet的方法进行信息抽取。Wordnet中保存了与词原有上下位关系的词，通过查询中文Wordnet可以对领域概念之间的上下位关系进行验证。
-
-\subsection{非分类关系的抽取}
-非分类关系与分类关系不同，非分类关系可以相对容易的根据文本中进行提取。GOLF系统中对非分类关系的抽取采用的是关联规则的VCC(n)事务方法，VCC(n)事务方法假定：如果概念c1和c2间具有非分类关系v，当且仅当c1和c2 都出现在带有动词v的n个词内(即c1和c2都出现在动词v的周围)，可以用一个条件概率来表示动词和概念对之间的关联度。这种方法虽然可以从文本中提取出大部分的关系，但是缺点是会抽取出太多无意义的和错误的关系，这种情况在长难句中更加明显。考虑以下例子：
-		戴着帽子的老师在看书。			(1)
-	这是一个比较常见的句式，在VCC(n) 的提取方法中由于“帽子”与“书”都在动词“看”的附近，因此“帽子”与“书”的关系得分会比较高，而这种关系并不是我们需要的。
-    针对以上情况，本文选择利用语义分析的方法来提高关系抽取的准确度。在汉语中，谓语是表达两个概念之间关系的最直接和最主要的方式，而“主谓宾”则是汉语中最基本的句式，其中“主宾”相当于一个关系实例中的两个概念，主、谓、宾模式构成的三元组可以为领域关系的抽取提供强有力的参考\upcite{ol15}。 主谓宾的模式(subject, Verb, Object)类似于RDF 模型中的(Subject, Predicate, Object) 三元组，本文会使用RDF三元组的形式进行表达。
-	主谓宾的提取首先需要借助fnlp对句子进行自然语言预处理，生成依存句法树，依旧以句子(1)为例，生成该句子的语法生成树：
-\begin{figure}[htb]
-  \center
-  \includegraphics[width=0.95\textwidth]{img/4.jpg}\\
-  \caption{基于RDFS的本体学习框架}\label{fig:fulladder}
-\end{figure}
-从依存句法中提取主谓宾的算法如下：
-	输入：中文句子s。
-	输出：句子主谓宾结构
-	1.  遍历句子中的元素，找到HED词。
-	2. 提取出依存HED词的词集D。
-	3. 遍历D，找到与HED有SBV关系的词S，若无，返回空。
-	4. 继续遍历，找到与HED有VOB关系的词O，若无，返回空。
-	5. 返回(S, HED, O)组成的主谓宾三元组。
+    算法一最终可以对输入的问题求解出所有基于决断集模板的合理解释。
 
 \begin{algorithm}
-  \caption{SVO Extraction}
-  \KwIn{Dependency Tree $t$}
-  \KwOut{$svotriplet(r)$}
+  \caption{基于决断集模板诊断算法}
+  \KwIn{Triples $\mathcal{A}$ in training data set, observation $r_o(A,B)$, Justification Pattern Set $\mathcal{P}$ for $r_o(X,Y)$ }
+  \KwOut{Justification Pattern based Explanations $\mathcal{S}$ for observation $r_o(A,B)$ in $\mathcal{A}$ w.r.t $\mathcal{P}$}
 
-  \For{each $word$ in tree $t$}
+  $\mathcal{S}\gets \emptyset $\
+   
+  \For{each $\mathcal{J}_p$ in Justification Pattern Set $\mathcal{P}$}
   {
-    $res$ instance of svotriplet\;
-    \If{$word$ is HED}
+	$\mathcal{T}_p \gets TBox \ \mathcal{T}$ in $\mathcal{J}_p$\;
+	$\mathcal{O} \gets \mathcal{T}_p \cup \mathcal{A}$\;
+	\If{$\mathcal{O}$ is not consistent}
     {
-        $wordset$ = words depend on $word$\;
-        $res.HED$ = $word$\;
-        \For{each $w$ in $wordset$}
-        {
-            \If{relation between $w$ and $word$ is $SBV$}
-            {
-                $res.subject$ = $w$\;
-            }
-
-            \If{relation between $w$ and $word$ is $VOB$}
-            {
-                $res.object$ = $w$\;
-            }
-        }
+        \Continue \;
     }
+		
+	\If{$\mathcal{O} \cup r_o(A,B)$ is not consistent}
+    {
+        \Continue \;
+    }
+		
+	$\mathcal{B}^* \gets bipart(\mathcal{J}_p)$\;
+	\For{each $(\mathcal{J}_1, \mathcal{J}_2) \in \mathcal{B}^*$}
+	{
+		$\mathcal{D} \gets \{\theta| \theta$ is a differentiated substitution for $\mathcal{J}_p$ such that $X\theta=A, Y\theta=B, \mathcal{J}_1 \theta \subseteq \mathcal{O} \}$\;
+		\For{each $\theta \in \mathcal{D}$}
+		{
+			\If{$\mathcal{J}_2 \theta \models r_o(A,B)$ }
+			{
+				\Continue \;
+			}
+			
+			\If{$\mathcal{J}_2 \theta$ \Or $\mathcal{J}_2 \theta \cup \mathcal{O}$ is not consistent }
+			{
+				\Continue \;
+			}
+			
+			$\mathcal{S}_e \gets \{\mathcal{E}' \mid \mathcal{E}' \in subs_1(\mathcal{J}_2\theta) \cup lifts_1(\mathcal{J}_2\theta) \}$\;
+			$isMinimal \gets true$\;
+			\For{each $\mathcal{E}' \in \mathcal{S}_e$}
+			{
+				\If{$\mathcal{E}' \cup \mathcal{O} \models r_o(X,Y)$}
+				{
+					$isMinimal \gets false$\;
+					\Continue \;
+				}
+			}
+			
+			\If{$isMinimal$}
+			{
+				$\mathcal{S} \gets \mathcal{S} \cup \mathcal{E}'$
+			}
+		}
+	}
   }
-  return $res$\;
+  
 \end{algorithm}
 
-对Fig 3.2中的句法树进行操作，分别找到与HED词“看”有SBV依存关系的“老师”与有VOB关系的“书”，可以提取出句子(1)的主谓宾结构三元组(老师, 看， 书)，而这就是我们需要的一条RDF关系实例。
+\begin{example}[诊断)]
+	考虑以下诊断问题，其中观察值为:
+    \begin{center}
+        \item $(Mike, Nationality, China)$
+    \end{center}
+    蕴含值$r_{Nationality}(Mike, China)$的决断集:
+    \begin{center}
+        \item 1) $r_{BornInCity} \circ r_{CityInProvince} \sqsubseteq r_{BornInProvince}$
+        \item 2) $r_{BornInProvince} \circ r_{ProvinceInCountry} \sqsubseteq r_{Nationality}$
+		\item 3) $r_{BornInCity} (Mike, Guangzhou)$
+        \item 4) $r_{CityInProvince} (Guangzhou, Guangdong)$
+		\item 5) $r_{ProvinceInCountry} (Guangdong, China)$
+    \end{center}
+	
+	训练集：
+    \begin{center}
+        \item 1) $(Mike, \emph{BornInCity}, Hangzhou)$
+        \item 2) $(Beihai, \emph{CityInProvince}, Guangxi)$
+		\item 3) $(Zhejiang, \emph{ProvinceInCountry}, China)$
+		\item 4) $(Guangxi, \emph{ProvinceInCountry}, China)$
+    \end{center}
+    
+    
+\end{example}
+    根据例子，首先使用本体语言对训练集进行表达，得到ABox $\mathcal{A}$：
+	\begin{center}
+        \item 1) $r_{BornInCity}(Mike, Hangzhou)$
+        \item 2) $r_{CityInProvince}(Beihai, Guangxi)$
+		\item 3) $r_{ProvinceInCountry}(Zhejiang, China)$
+		\item 4) $r_{ProvinceInCountry}(Guangxi, China)$
+    \end{center}
+	
+	然后可得本体$\mathcal{O}$：
+    \begin{center}
+	    \item 1) $r_{BornInCity} \circ r_{CityInProvince} \sqsubseteq r_{BornInProvince}$
+        \item 2) $r_{BornInProvince} \circ r_{ProvinceInCountry} \sqsubseteq r_{Nationality}$
+        \item 3) $r_{BornInCity}(Mike, Hangzhou)$
+        \item 4) $r_{CityInProvince}(Beihai, Guangxi)$
+		\item 5) $r_{ProvinceInCountry}(Zhejiang, China)$
+		\item 6) $r_{ProvinceInCountry}(Guangxi, China)$
 
-\subsection{基于RDFS的本体模型的构建}
-本体中的关系主要有是part-of，kind-of，instance-of和attribute-of\upcite{16}\upcite{17}。 这四个关系在RDFS中并没有具体指明两者之间的关系，但是我们可以在RDFS中找到表达方式与之相近的关系。在RDFS中，rdfs:type表示的是类与实例之间的关系，我们用来表示本体中instance-of的关系，同理，被用来表示概念之间的继承关系会映射到被用于表达父类与子类关系的rdfs:subClassos，而attribute-of则会使用RDF三元组中的property代替。至于part-of，由于RDFS中并无与之相近的表达，且part-of关系可以看做是attribute-of关系的细化，所以我们把part-of关系也映射到RDF三元组中的property来对其进行表达。最后的关系映射关系如图Fig 3.3：
-\begin{figure}[htb]
-  \center
-  \includegraphics[width=0.95\textwidth]{img/5.jpg}\\
-  \caption{基于RDFS的本体学习框架}\label{fig:fulladder}
-\end{figure}
+    \end{center}
+	易得，$\mathcal{O}$与$\mathcal{O}\cup r_{Nationality}(Mike, China)$都是是一致的。又，通过决断集可以得到蕴含$r_{Nationality}(A, B)$的基于决断集模板$\mathcal{J}_p$:
+		\begin{center}
+	       \item $r_{BornInCity} (A, C)$
+		   \item $r_{CityInProvince} (C, D)$ 
+		   \item $r_{ProvinceInCountry} (D, B)$
+	\end{center}
+    观察值$\alpha$为:
+    \begin{center}
+        \item $r_{Nationality}(Mike, China)$
+    \end{center}
+
+    对决断集模板进行二分划分$(\mathcal{J}_1, \mathcal{J}_2)$，使得$\mathcal{J}_1 \cap \mathcal{J}_2 = \emptyset$且$\mathcal{J}_1 \cup \mathcal{J}_2 = \mathcal{J}_p$。
+        \begin{center}
+	    \item 1)\ $J_1$= $\{r_{BornInCity}(A, C), r_{CityInProvince}(C, D)\}$, $J_2$=$\{r_{ProvinceInCountry}(D, B)\}$
+		\end{center}
+		由于不存在一个差异化实例替换$\theta$使得$\mathcal{J}_1\theta \subseteq \mathcal{O}$，因此划分1)无法生成合理解释。
+		\begin{center}
+        \item 2)\ $J_1$ $\{r_{BornInCity}(A, C)\}$, $J_2$=$\{r_{CityInProvince}(C, D), r_{ProvinceInCountry}(D, B)\}$
+		\end{center}
+		根据划分2)，可以得到一个$\theta$使得 $\mathcal{J}_1\theta \subseteq \mathcal{O}$，其中$\theta = \{A \mapsto Mike, C \mapsto Hangzhou, B \mapsto China\}$，所以我们设$\mathcal{E}_2 = \mathcal{J}_2\theta = \{r_{CityInProvince}(Hangzhou, e_1), r_{ProvinceInCountry}(e_1, China)\}$，又因为$\mathcal{O} \cup \mathcal{J}_2\theta$是一致的，$\mathcal{O} \cup \mathcal{J}_2\theta \models \alpha$，且对于所有的$\mathcal{E}' \in subs_1(\mathcal{E}_2) \cup lifts_1(\mathcal{E}_2)$都有$\mathcal{O} \cup \mathcal{E}' \not \models \alpha$，所以$\mathcal{E}_2$是一个合理的解释。
+		
+		\begin{center}
+	    \item 3)\ $J_1$= $\{r_{BornInCity}(A, C), r_{ProvinceInCountry}(D, B)\}$, $J_2$=$\{r_{CityInProvince}(C, D)\}$
+		\end{center}
+		根据划分3)，可以得到一个$\theta$使得 $\mathcal{J}_1\theta \subseteq \mathcal{O}$，其中$\theta = \{A \mapsto Mike, C \mapsto Hangzhou, B \mapsto China, D \mapsto Zhejiang\}$，所以我们设$\mathcal{E}_3 = \mathcal{J}_2\theta = \{r_{CityInProvince}(Hangzhou, Zhejiang)\}$，又因为$\mathcal{O} \cup \mathcal{J}_2\theta$是一致的，$\mathcal{O} \cup \mathcal{J}_2\theta \models \alpha$，且对于所有的$\mathcal{E}' \in subs_1(\mathcal{E}_2) \cup lifts_1(\mathcal{E}_3)$都有$\mathcal{O} \cup \mathcal{E}' \not \models \alpha$，所以$\mathcal{E}_3$是一个合理的解释。
+		
+		
+		\begin{center}
+	    \item 4)\ $J_1$=$\{r_{ProvinceInCountry}(D, B)\}$, $J_2$= $\{r_{BornInCity}(A, C), r_{CityInProvince}(C, D)\}$
+		\end{center}
+		根据划分4)，可以得到一个$\theta$使得 $\mathcal{J}_1\theta \subseteq \mathcal{O}$，其中$\theta = \{A \mapsto Mike, B \mapsto China, D \mapsto Zhejiang\}$，所以我们设$\mathcal{E}_4 = \mathcal{J}_2\theta = \{r_{BornInCity}(Mike, e_1), r_{CityInProvince}(e_1, Zhejiang)\}$，又因为$\mathcal{O} \cup \mathcal{J}_2\theta$是一致的，$\mathcal{O} \cup \mathcal{J}_2\theta \models \alpha$，且对于所有的$\mathcal{E}' \in subs_1(\mathcal{E}_4) \cup lifts_1(\mathcal{E}_4)$都有$\mathcal{O} \cup \mathcal{E}' \not \models \alpha$，所以$\mathcal{E}_4$是一个合理的解释。
+		
+		\begin{center}
+	    \item 5)\ $J_1$=$\{r_{CityInProvince}(C, D), r_{ProvinceInCountry}(D, B)\}$, $J_2$ $\{r_{BornInCity}(A, C)\}$ 
+		\end{center}
+		根据划分5)，可以得到一个$\theta$使得 $\mathcal{J}_1\theta \subseteq \mathcal{O}$，其中$\theta = \{A \mapsto Mike, C \mapsto Beihai, B \mapsto China, D \mapsto Guangxi\}$，所以我们设$\mathcal{E}_5 = \mathcal{J}_2\theta = \{r_{BornInCity}(Mike, Beihai)\}$，又因为$\mathcal{O} \cup \mathcal{J}_2\theta$是一致的，$\mathcal{O} \cup \mathcal{J}_2\theta \models \alpha$，且对于所有的$\mathcal{E}' \in subs_1(\mathcal{E}_5) \cup lifts_1(\mathcal{E}_5)$都有$\mathcal{O} \cup \mathcal{E}' \not \models \alpha$，所以$\mathcal{E}_5$是一个合理的解释。。
+		
+		\begin{center}
+	    \item 6)\ $J_2$=$\{r_{CityInProvince}(C, D)\}$, $J_1$= $\{r_{BornInCity}(A, C), r_{ProvinceInCountry}(D, B)\}$
+		\end{center}
+		根据划分6)，可以得到一个$\theta$使得 $\mathcal{J}_1\theta \subseteq \mathcal{O}$，其中$\theta = \{A \mapsto Mike, C \mapsto Beihai, B \mapsto China, D \mapsto Guangxi\}$，所以我们设$\newline$
+		\begin{center}
+		\item $\mathcal{E}_6 = \mathcal{J}_2\theta = \{r_{BornInCity}(Mike, Beihai), r_{ProvinceInCountry}(Guangxi, China)\}$
+		\end{center}
+		又$\mathcal{O} \cup \mathcal{J}_2\theta$是一致的，$\mathcal{O} \cup \mathcal{J}_2\theta \models \alpha$。但是因为存在一个$\mathcal{E}' \in subs_1(\mathcal{E}_6) \cup lifts_1(\mathcal{E}_6)$使得$\mathcal{O} \cup \mathcal{E}'  \models \alpha$，所以$\mathcal{E}_6$不是一个合理的解释。
+		
+		综上所述，可以得到可接受的解释为$\{\mathcal{E}_2,\mathcal{E}_3,\mathcal{E}_4,\mathcal{E}_5,\mathcal{E}_6\}$，经验证，其中合理的解释为$\{\mathcal{E}_2,\mathcal{E}_3,\mathcal{E}_4,\mathcal{E}_5\}$。
+\section{RDFS构建框架}

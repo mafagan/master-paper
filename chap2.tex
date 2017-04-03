@@ -75,9 +75,9 @@ $E$表示的由知识库中实体组成的集合，$\mid R \mid$表示在知识库中二元关系组成的集合
 		\mathcal{L} = \sum\limits_{(h,l,t)\in S} \sum\limits_{(h',l,t')\in S'_{(h,l,t)}} [\gamma + f_r(h,t)-f_{r'}(h',t')]_{+}
 	\end{equation}
 	
-\section{本体知识库模型}
-	
-\subsection{描述逻辑与OWL}
+\section{本体的研究}
+	语义网的发展依赖于本体的构建，构建本体的目的是对数据进行结构化处理，使得本体易于传播的同时有着较高的机器可读性。描述逻辑是当前语义网发展中本体的理论基础，本体的表达能力由它的描述语言描述逻辑的表达能力决定。描述逻辑根据表达能力的不同，形成了不同子语言。
+\subsection{描述逻辑与因特网本体语言}
 	描述逻辑(description logic)是一种用于知识表示的逻辑语言和以其为对象的推理方法，主要用于描述概念分类及其概念之间的关系[]。描述逻辑是一阶逻辑的可决定性片段，但是描述逻辑又具有强的表达能力，描述逻辑在表达能力和推理能力之间取得了平衡。
 
     描述逻辑语言$\mathcal{L}$包含以下三个集合，分别是一个由个体名组成的集合$N_I$，一个由概念名组成集合$N_C$以及一个由二元关系名组成的集合$N_R$。 
@@ -97,34 +97,41 @@ $E$表示的由知识库中实体组成的集合，$\mid R \mid$表示在知识库中二元关系组成的集合
 		\end{itemize}
 	\end{definition}
 	
-	在本文中，我们考虑表2.1中的语言片段。
-    \begin{table}[!h]
-	\centering
-	\caption{语法以及语义表}
-	\begin{tabular}{|c|c|c|}
+	在描述逻辑的基本语言片段$\mathcal{ALC}$(Attributive Language with Complement)中，概念表达方式如下例[]：
+	\begin{example}
+		令$N_C = \{Male, Female, Person, Student, Professor\}$，$N_R=\{hasChild\}$，可以构建以下概念：
+		\begin{table}[!h]
+		\centering
+		\caption{$\mathcal{ALC}$概念表达示例}
+		\begin{tabular}{cc}
+		
+		Concept & Intended meaning \\
 		\hline
-		Constructor & Syntax & Semantics \\
-		\hline
-		top concept & $\top$ & $\vartriangle ^\mathcal{I}$ \\
-		\hline
-		bottom concept  & $\bot$ & $\emptyset$ \\
-		\hline
-		conjunction & C $\sqcap$ D & $C ^\mathcal{I} \cap D^\mathcal{I}$\\
-		\hline
-		existential restriction & $\exists r.C$ &  $\{X \in \vartriangle ^\mathcal{I} | \exists y \in \vartriangle ^\mathcal{I} : \left(x, y \right) \in r ^\mathcal{I}  \wedge r \in C^\mathcal{I}\}$ \\
-		\hline
-		general concept inclusion & $C \sqsubseteq D$ & $C ^\mathcal{I} \subseteq D^\mathcal{I}$ \\
-		\hline
-		role inclusion & $r_1 \circ \cdots \circ r_k \subseteq r$ & $r^\mathcal{I}_1 \circ \cdots \circ r^\mathcal{I}_k \subseteq r^\mathcal{I}$ \\
-		\hline
+		$Male \sqcap Person$ & $\emph{male person}$ \\
+		
+		$Student \sqcup Professor$  & $\emph{student or professor}$\\
+
+		$Student \sqcap (\not Male)$ & $\emph{non-male student}$\\
+
+		$\exists hasChild.Person \sqsubseteq Person$ & $\emph{something having a child who is a person is also a person}$\\
+
+		$Female \sqcap \forall hasChild.Female$ & $\emph{Female person whose children are all female}$ \\
+		
 	\end{tabular}
+	\end{table}
+	\end{example}
+	$\mathcal{ALC}$可以表达概念以及个体断言[]:
+	
+	\begin{enumerate}
+		\item $C(a)$: $a$是$C$的实例。
+		\item $R(a,b)$: $a$和$b$存在关系$R$。
+		\item $C \sqsubseteq D$: $C$是$D$的子概念。
+		\item $C \equiv D$: $C$等价于$D$。
+	\end{enumerate}
 
-\end{table}
-
-
-
-    一个DL本体$\mathcal{O}=(\mathcal{T}, \mathcal{A})$包括两个部分，一个是TBox $\mathcal{T}$，它描述术语知识与应用领域相关的背景知识，处理概念的定义，由有限个公理构成，其中有引入新概念名和角色名称的公理，有断言包含关系的公理以及断言觉得可传递角色或功能性角色公理[面向Web 的个性化语义信息检索技术]。另一个是断言知识的集合ABox $\mathcal{A}$，它描述的是TBox词汇表中的个体断言,包括概念类的成员元素，二元关系的成员元素二元组以及二元关系的等价关系。在本文中，断言知识部分我们仅考虑二元关系的断言，形如$r(a,b)$，其中$r$是$\Delta^\mathcal{I}\times\Delta^\mathcal{I}$ 中的一个二元关系实例，$a$和$b$是$\Delta^\mathcal{I}$中的一个个体。表2.2展示了TBox与ABox的语法以及语义。
-        \begin{table}[!h]
+	式(1)和式(2)被称作断言公理，式(3)和式(4)被称作术语公理。在语义网中，由断言公理组成的集合称为 $\emph{assertion box}(ABox)$，由术语公理组成的集合称为$\emph{terminological box}(TBox)$。
+	
+		\begin{table}[!h]
 	\centering
 	\caption{DL示例公理的语义}
 	\begin{tabular}{|c|c|}
@@ -141,46 +148,176 @@ $E$表示的由知识库中实体组成的集合，$\mid R \mid$表示在知识库中二元关系组成的集合
 		\hline
 	\end{tabular}
 \end{table}
+	
+	一个DL本体$\mathcal{O}=(\mathcal{T}, \mathcal{A})$包括两个部分，一个是TBox $\mathcal{T}$，它描述术语知识与应用领域相关的背景知识，处理概念的定义，由有限个公理构成，其中有引入新概念名和角色名称的公理，有断言包含关系的公理以及断言觉得可传递角色或功能性角色公理[面向Web 的个性化语义信息检索技术]。另一个是断言知识的集合ABox $\mathcal{A}$，它描述的是TBox词汇表中的个体断言,包括概念类的成员元素，二元关系的成员元素二元组以及二元关系的等价关系。
+	
+	在本文中，断言知识部分我们仅考虑二元关系的断言，形如$r(a,b)$，其中$r$是$\Delta^\mathcal{I}\times\Delta^\mathcal{I}$ 中的一个二元关系实例，$a$和$b$是$\Delta^\mathcal{I}$中的一个个体。表2.2展示了TBox与ABox的语法以及语义。
+    
+	
+	语法和语义具有对应关系，如下表
+    \begin{table}[!h]
+	\centering
+	\caption{语法以及语义表}
+	\begin{tabular}{|c|c|c|}
+		\hline
+		Constructor & Syntax & Semantics \\
+		\hline
+		$\emph{top concept}$ & $\top$ & $\vartriangle ^\mathcal{I}$ \\
+		\hline
+		$\emph{bottom concept}$  & $\bot$ & $\emptyset$ \\
+		\hline
+		$\emph{conjunction}$ & C $\sqcap$ D & $C ^\mathcal{I} \cap D^\mathcal{I}$\\
+		\hline
+		$\emph{existential restriction}$ & $\exists r.C$ &  $\{X \in \vartriangle ^\mathcal{I} | \exists y \in \vartriangle ^\mathcal{I} : \left(x, y \right) \in r ^\mathcal{I}  \wedge r \in C^\mathcal{I}\}$ \\
+		\hline
+		$\emph{general concept inclusion}$ & $C \sqsubseteq D$ & $C ^\mathcal{I} \subseteq D^\mathcal{I}$ \\
+		\hline
+		$\emph{role inclusion}$ & $r_1 \circ \cdots \circ r_k \subseteq r$ & $r^\mathcal{I}_1 \circ \cdots \circ r^\mathcal{I}_k \subseteq r^\mathcal{I}$ \\
+		\hline
+	\end{tabular}
 
-    一个$\cdot^\mathcal{I}$如果能够满足本体$\mathcal{O}$中的所有公理，那么这个$\cdot^\mathcal{I}$就被称为本体的一个模。因此我们有以下定义：
-    \begin{definition}[一致)]
-    对于一个DL本体$O$，如果它有至少一个模，那么这个本体就会被称为是一致的，记作$\mathcal{O} \nvDash \bot$。相反地，如果一个DL本体$\mathcal{O}$没有至少一个模，那么这个本体就会被称为不一致的，记作$\mathcal{O} \vDash \bot$。
-\end{definition}
-\subsection{本体决断集}
-    本体包含TBox与ABox，因此本体具有从已有的知识库中获取新知识的能力，这种本体中没有，但是可以通过推理出来得到的公理就叫做蕴含。一个本体可能会有一个或多个蕴含，在本体的开发中，能够从蕴含逆推出在推理过程相关的公理具有重大的现实意义，这些公理的集合我们称之为决断集。
+\end{table}
+
+
+\subsection{本体推理问题的研究}
+	本体作为一种知识库模型，除了可以存储客观事实，另一个特点是可以存储规则。规则的允许使得本体具有从知识库中获取新知识的能力，在所有的描述逻辑本体中，推理是其中重要的研究任务，本体的推理任务主要有：一致性检测，实例查询，实例计算，子集计算，分类。定义如下：
+	
+	\begin{definition}{一致性}
+		给定一个本体$\mathcal{O}$，判断是否存在一个演绎$\mathcal{I}$满足$\mathcal{O}$。
+	\end{definition}
+	
+		一致性检测是本体最重要的推理任务之一，不一致的本体会导致查询结果的可信度降低，修复不一致本体是一项重要的任务。
+	\begin{definition}{实例查询}
+		给定一个本体$\mathcal{O}$以及一个概念断言$C(a)$，判断是否满足$\mathcal{O} \models C(a)$。
+	\end{definition}
+		
+		实例查询是本体在应用中使用最多的场景，在向本体了解个体信息的时候，实例查询可以对给定额查询个体通过搜索知识库与推理相结合的方式给出结果。
+	\begin{definition}{实例计算}
+		给定一个本体$\mathcal{O}$以及概念$C$，计算所有的个体$x$使得$\mathcal{O} \models C(x)$成立。
+	\end{definition}
+	
+	\begin{definition}{子集验证}
+		给定一个本体$\mathcal{O}$以及概念断言$C \sqsubseteq D$，判断本体$\mathcal{O}$是否满足$\mathcal{O} \models C \sqsubseteq D$。
+	\end{definition}
+	
+		子集又称上下位关系，是本体分类任务中的一个子任务，在区分概念上下位关系以及计算本体概念层次结构中具有重要作用。
+	\begin{definition}{分类}
+		给定一个本体$\mathcal{O}$，计算出所有由原子概念组成的二元组$(A,B)$使得$\mathcal{O} \models A \sqsubseteq B$。
+	\end{definition}
+	
+
+	\begin{example}
+		考虑以下本体$\mathcal{O} = (\mathcal{T}, \mathcal{A})$，其中$\mathcal{T}$为：
+		\begin{center}
+			\item $Father \sqsubseteq Male$
+			\item $Male \sqsubseteq Human$
+		\end{center}
+		
+		$\mathcal{A}$为：
+		\begin{center}
+			\item $Father(Tom)$
+			\item $Male(Tony)$
+		\end{center}
+		
+		显然，在本例中本体$\mathcal{O}$是一致的，又我们可以得出$\mathcal{O} \models Father \sqsubseteq Human$，$\mathcal{O} \models Male(Tom)$，$\mathcal{O} \models Human(Tony)$。
+	\end{example}
+	
+	
+\section{计算决断集的黑盒法与白盒法}   						
+
+	本体包含TBox与ABox，因此本体具有从已有的知识库中获取新知识的能力，这种本体中没有，但是可以通过推理出来得到的公理就叫做蕴含。一个本体可能会有一个或多个蕴含，在本体的开发中，能够从蕴含逆推出在推理过程相关的公理具有重大的现实意义，这些公理的集合我们称之为决断集。
     \begin{definition}[决断集)]
     令$\mathcal{O}$为一个一致的DL本体，且$\mathcal{O} \vDash \alpha$，其中$\alpha$是蕴含。对于$\mathcal{O}$的一个子集$\mathcal{O}'$，如果对于$\mathcal{O}'$的所有子集$\mathcal{O}''$满足$\mathcal{O}'' \nvDash \alpha$且$\mathcal{O}' \vDash \alpha$，那么$\mathcal{O}'$就是本体$\mathcal{O}$ 中对于$\alpha$的一个决断集。
     \end{definition}
      \begin{example}
         考虑一个一致的DL本体$\mathcal{O}$，其中TBox包含以下三条公理:
              \begin{center}
-               \item [(1)]$\mathsf{Girl} \sqsubseteq \mathsf{Female}$
-               \item [(2)]$\mathsf{Female} \sqsubseteq \mathsf{Person}$
-               \item [(3)]$\exists \mathsf{giveBirth}.\mathsf{Person} \sqsubseteq \mathsf{Female}$
+               \item [(1)]$Girl\sqsubseteq Female$
+               \item [(2)]$Female \sqsubseteq Person$
+               \item [(3)]$\exists giveBirth.Person \sqsubseteq Female$
              \end{center}
         ABox包含以下两条公理:
             \begin{center}
-               \item [(1)]$\mathsf{Female}(Mary)$
-               \item [(2)]$\mathsf{giveBirth}(Lily, Mary)$
+               \item [(1)]$Female(Mary)$
+               \item [(2)]$giveBirth(Lily, Mary)$
              \end{center}
         蕴含为：
              \begin{center}
-               \item $\mathsf{Female}(Lily)$
+               \item $Female(Lily)$
              \end{center}
+			 
+			 对于以上例子，我们根据$Female(Mary)$以及$Female \sqsubseteq Person$可以得出
+			 \begin{equation}
+				Person(Mary)
+			\end{equation}
+			 
+			 又根据$\exists giveBirth.Person \sqsubseteq Female$，$giveBirth(Lily, Mary)$以及个体断言$Person(Mary)$，我们可以得到：
+			 \begin{equation}
+				Female(Lily)
+			 \end{equation}
+			 
+			 令：
+			 	$$ \mathcal{S}=\left\{
+				\begin{aligned}
+				giveBirth(Lily, Mary)\\
+				Female(Mary)\\
+				\exists giveBirth.Person \sqsubseteq Female\\
+				Female \sqsubseteq Person\\
+				\end{aligned}
+				\right\}.
+				$$
+			 
+			 
+			 对于所有的$\mathcal{S}' \subseteq \mathcal{S}$都有$\mathcal{S}' \not \models Female(Lily)$，且$\mathcal{S} \models Female(Lily)$，所以$\mathcal{S}$是$Female(Lily)$在本体$\mathcal{O}$中的决断集。
     \end{example}
+	
+	寻找决断集模板的方法是本体推理任务中重要的一环，寻找决断集的方法分为黑盒法和白盒法。
+	
+	黑盒法需要依赖于本体的推理机，并且在方法的实现中不涉及推理机的改动，推理机在这类算法中扮演黑盒的角色，黑盒由此得名。推理机在黑盒算法中往往被应用在验证输入本体与蕴含值是否有蕴含关系，对于这类问题推理机只需要返回“是”或“否”。为了找到蕴含值的决断集，算法可以在本体中找到合理的子集作为推理机的输入，然后根据推理机的输出调整下一次输入，直到找到决断集为止。黑盒法需要有推理机运行蕴含值检测的次数较多，虽然易于实现，但是整体算法耗时一般偏大，以下是Kalyanpur等人提出的黑盒算法示例：
+	\begin{algorithm}
+  \caption{寻找单个决断集算法}
+  \KwIn{Ontology $\mathcal{O}$, entailment $\alpha$ }
+  \KwOut{Ontology $\mathcal{O}'$}
 
-\section{描述逻辑溯因诊断}
+	$\mathcal{O}'\gets \emptyset $\
+   
+   
+	\While{$\mathcal{O}' \not \models \alpha$}
+	{
+		select a set of axioms $s \subseteq \mathcal{O}\slash \mathcal{O}'$ \;
+		$\mathcal{O}' \gets \mathcal{O}' \cup s$ \; 
+	}
+	
+	\For{each axiom $k' \in \mathcal{O}'$}
+	{
+		$\mathcal{O}' \gets \mathcal{O}' - \{k'\}$ \;
+		
+		\If{$\mathcal{O}' \not \models \alpha$}
+		{
+			$\mathcal{O}' \gets \mathcal{O}' \cup \{k'\}$ \;
+		}
+	}
+\end{algorithm}
+	
+	
+	在黑盒算法中，主要分两步：1)快速地找到一个决断集的超集$\mathcal{O}'$使得$\mathcal{O}' \models \alpha$ 2)移除$\mathcal{O}'$中的一条或多条公理，使用推理机测试移除后得到的本体$\mathcal{O}'$是否可以蕴含$\alpha$，重复步骤1和2，就可以得到在$\mathcal{O}$中$\alpha$的一个决断集。可以看出，可以优化的关键步骤就在于每次添加公理和减少公理的个数，因为在整个算法中，推理机的蕴含检测是最为耗时的，减少推理机的运行次数可以有效地优化算法的耗时。
+	
+	白盒法计算决断集并不完全依赖于推理机的计算，其中一种白盒的算法是由Zhou等人提出的基于解释依赖图的决断集算法，这种算法可以在OWL 2 EL中计算本体$\mathcal{O}$蕴含值的决断集。解释依赖图算法需要先使用补全规则对本体$\mathcal{O}$进行蕴含值的计算，然后根据依赖图对本体中的蕴含值进行模板回溯。
+	
+	
+\section{本体溯因诊断的研究}
 
-\subsection{论域词汇表与术语断言}
-
-\subsection{溯因诊断}
-    逻辑研究的是基于规则的推理方式，目前的研究中把推理的方式分为三类，分别是演绎、归纳和溯因推理。演绎推理是最常用的推理方式，演绎推理根据已有的前提事实以及规则，得出结论。对于相同的输入，如果严格按照规则进行运算，演绎推理具有相同的输出，具有恒真性(truth-preserving)。归纳推理则是在已知事实的集合中寻找共同特性，推导出更多事实或同类事实的性质[论语用推理的逻辑属性]。它的推理格式形如以下形式：
+	逻辑研究的是基于规则的推理方式，目前的研究中把推理的方式分为三类，分别是演绎、归纳和溯因推理。演绎推理是最常用的推理方式，演绎推理根据已有的前提事实以及规则，得出结论。对于相同的输入，如果严格按照规则进行运算，演绎推理具有相同的输出，具有恒真性(truth-preserving)。归纳推理则是在已知事实的集合中寻找共同特性，推导出更多事实或同类事实的性质[论语用推理的逻辑属性]。它的推理格式形如以下形式：
         \begin{enumerate}
                \item [a.]所有已知的A为B。
                \item [b.]因此，A为B。
         \end{enumerate}
 
-    溯因推理是推理方式中的第三种方式，溯因推理的方式与前两种推理方式有着本质的区别，溯因推理又称作反绎推理，是推理到最佳解释的过程。一般的，它是开始于事实的集合并推导出它们的最合适的解释的推理过程。术语溯因（abduction）意味生成假设来解释观察或结论。因为需要生成假设来解释观察或结论，因此溯因推理会在进行解释的过程中为前提事实增加新的知识使得前提事实与解释的并集可以通过演绎推理的方式演绎出观察值或结论。在描述逻辑本体中，溯因推理是一种重要的推理方式。在描述逻辑本体的构建过程中，本体由于构建不够完善，会经常性出现本体无法蕴含观察值的现象。因此，这个时候就需要进行利用溯因推理的方法，已构建的本体进行诊断，找出本体不完善的原因，并在找到的原因的基础上，提出解释对本体进行修复。这种找出原因并提出解释的推理方法就叫做溯因诊断。溯因诊断对修复本体有着重要的意义。我们对术语断言的溯因诊断问题进行了如下两个定义[ABox Abduction in the Description Logic ALC]：
+    溯因推理是推理方式中的第三种方式，溯因推理的方式与前两种推理方式有着本质的区别，溯因推理又称作反绎推理，是推理到最佳解释的过程。一般的，它是开始于事实的集合并推导出它们的最合适的解释的推理过程。术语溯因（abduction）意味生成假设来解释观察或结论。因为需要生成假设来解释观察或结论，因此溯因推理会在进行解释的过程中为前提事实增加新的知识使得前提事实与解释的并集可以通过演绎推理的方式演绎出观察值或结论。在描述逻辑本体中，溯因推理是一种重要的推理方式。在描述逻辑本体的构建过程中，本体由于构建不够完善，会经常性出现本体无法蕴含观察值的现象。因此，这个时候就需要进行利用溯因推理的方法，已构建的本体进行诊断，找出本体不完善的原因，并在找到的原因的基础上，提出解释对本体进行修复。这种找出原因并提出解释的推理方法就叫做溯因诊断。
+
+\subsection{断言公理的溯因诊断}
+	
+	溯因诊断对修复本体有着重要的意义。我们对术语断言的溯因诊断问题进行了如下两个定义[ABox Abduction in the Description Logic $\mathcal{ALC}$]：
     \begin{definition}[术语断言溯因诊断问题)]
         令$\mathcal{L}_K$和$\mathcal{L}_Q$为两个DL本体，$\mathcal{K}=(\mathcal{T}, \mathcal{A})$是一个$\mathcal{L}_K$中的一个知识库，$\Phi$是一个在$\mathcal{L}_Q$中的术语断言集合。当且仅当 $\mathcal{K} \nvDash \Phi$ 且$\mathcal{K} \cup \Phi \nvDash \bot$的时候，二元组$\langle \mathcal{K}, \Phi \rangle$被称作术语断言的溯因诊断问题。
     \end{definition}
@@ -194,107 +331,45 @@ $E$表示的由知识库中实体组成的集合，$\mid R \mid$表示在知识库中二元关系组成的集合
         \end{enumerate}
 
     \end{definition}
-    术语断言的溯因诊断需要计算出由一条或多条术语断言的集合，这些集合需要满足最小集的条件。当这些集合被加入到本体中的时候，它需要保持本体的一致性，并且可以使得更新后的本体能够蕴含($\vDash$)含观察值。$\mathcal{O} \vDash \alpha$表示对于所有满足本体$\mathcal{O}$的模，都可以使得$\alpha$成立。
-\section{定义}
+    
+	术语断言的溯因诊断需要计算出由一条或多条术语断言的集合，这些集合需要满足最小集的条件。当这些集合被加入到本体中的时候，它需要保持本体的一致性，并且可以使得更新后的本体能够蕴含($\models$)含观察值。$\mathcal{O} \models \alpha$表示对于所有满足本体$\mathcal{O}$的模，都可以使得$\alpha$成立。
+	
+	
+	考虑以下例子：
+	\begin{example}
+		令$\mathcal{O} = \mathcal{T} \cup \mathcal{A}$是一个DL 本体，其中$TBox$ $\mathcal{T}$和$ABox$ $\mathcal{A}$包含以下公理：
+			
+	$$ \mathcal{T}=\left\{
+		\begin{aligned}
+		Enthusiastic \sqcup (\exists owns.Cat \sqcap WorkHard) \sqsubseteq NicePerson\\
+		Person \sqcap \exists help.Person \sqsubseteq Enthusiastic\\
+		WorkHard \sqsubseteq Person
+		\end{aligned}
+	\right\}.
+	$$
+	
+	$$ \mathcal{A}=\left\{
+		\begin{aligned}
+		Cat(\mathsf{Lily})\\
+		Person(\mathsf{Peter})\\
+		WorkHard(\mathsf{James})
+		\end{aligned}
+	\right\}.
+	$$
+	
+	
+	其中我们有观察值$\alpha$:
+	$$ \alpha=\left\{
+		\begin{aligned}
+		NicePerson(\mathsf{James})
+		\end{aligned}
+	\right\}.
+	$$
+	
+	根据给出的背景知识可以知道，一个热心的或者是一个工作努力又养猫的人是一个好人，并且乐于助人的人是热心的。又由$ABox$ $\mathcal
+	{A}$可以知道Lily是一只猫，Peter是一个人以及James工作努力。
+	由$TBox$ $\mathcal{T}$和$ABox$ $\mathcal{A}$，我们知道$\mathcal{O} \not \models \alpha$。从语义上说，溯因诊断的任务是提出一个合理的假设去解释“James是好人”。从技术上说，就是要找到合理的断言公理集合$\mathcal{E}$使得$\mathcal{O} \cup \mathcal{E} \models NicePerson(\mathsf{James})$。例如，在本例中，我们根据观察值和背景知识可以提出三个合理的解释：1)根据背景知识“热心人是好人”，我们可以假设“James是热心的”，即$\mathcal{E}=\{Enthusiastic(James)\}$，2)根据一个工作努力又养猫的人是一个好人，而James工作努力且Lily是一只猫，我们可以假设“James拥有Lily”，即$\mathcal{E}=\{owns(James, Lily)\}$，3)根据背景知识利于助人的人是热心人，热心人是好人，我们可以假设“James帮助了Peter”，即$\mathcal{E}=\{help(James, Peter)\}$。这三种假设都可以使观察值得出合理解释，从而使得$\mathcal{O} \cup \mathcal{E} \models \alpha$。
+	\end{example}
 
-\begin{definition}[可扩展公理)]
-    对于本体的一条公理，如果公理中的一个或多个的二元关系或者个体被二元关系变量或者个体变量替换，则这条公理会被称作可扩展公理。一条可扩展公理会被称为可全扩展公理如果这条公理的所有二元关系和个体都被二元关系和个体变量替换。
-\end{definition}
 
-\begin{definition}[替换)]
-    对于一条可扩展公理或者一个由可扩展公理构成的集合$E$，替换是一个从$E$中的二元关系变量或个体变量到其它二元关系变量或者二元关系以及个体变量或个体的映射。其中，如果该替换把所有二元关系变量映射到二元关系以及所有个体变量映射到个体，我们就把这个替换称作实例化替换。
-\end{definition}
-
-\begin{definition}[解释)]
-    给定一个一致的本体$\mathcal{O}$以及一个二元关系实例$\alpha$，$\mathcal{O} \nvDash \alpha$, 并且$\mathcal{O} \cup \{\alpha \} $ 是一致的，那么假如存在一个公理的集合$\mathcal{E}$使得$\mathcal{O} \cup \mathcal{E} \models \alpha$，$\mathcal{E} \nvDash \alpha$并且$\mathcal{O} \cup \mathcal{E}$ 是一致的，那么我们称这个集合$\mathcal{E}$为在本体$\mathcal{O}$中对$\alpha$的解释。
-\end{definition}
-
-\begin{definition}[$\subseteq_\mathsf{ds}$-\emph{minimal} 解释)]
-    一个解释$\mathcal{E}$会被称为$\subseteq_\mathsf{ds}$-\emph{minimal} 如果这个$\mathcal{E}$满足以下条件：不存在这样一个解释$\mathcal{E}'$使得$\mathcal{E}'\subseteq_\mathsf{ds}\mathcal{E}$ 且$\mathcal{E}\not\subseteq_\mathsf{ds}\mathcal{E}'$，其中$\mathcal{E}'\subseteq_\mathsf{ds}\mathcal{E}$ 表示存在一个$\mathcal{E}'$的差异化替换$\theta$，使得$\mathcal{E}'\theta\subseteq\mathcal{E}$。
-\end{definition}
-
-\begin{definition}[基于决定集模版的解释)]
-    对于一个给定的一致本体$\mathcal{O}$，一个基于$role(X,Y)$的模版$\mathcal{P}$以及一个观察值$\alpha$其中$\mathcal{T} \nvDash \alpha$且$\mathcal{O}\cup \{\alpha\}$是一致的，对于$\alpha$在$\mathcal{O}$ 的解释$\mathcal{E}$会被称为基于决定集模版的解释，如果这个解释满足以下四个条件：
-    \begin{itemize}
-        \item (非平凡) $\mathcal{E} \nvDash \alpha$
-        \item (一致) $\mathcal{O}\cup\mathcal{E}$ 是一致的
-        \item ($\subseteq_\mathsf{ds}-\emph{minimal}$) 不存在一个对于$alpha$在$\mathcal{O}$中的解释$\mathcal{E}'$使得$\mathcal{E}'\subseteq_\mathsf{ds}\mathcal{E}$ 且$\mathcal{E}\not\subseteq_\mathsf{ds}\mathcal{E}'$。
-        \item (可容许) 存在一个决定集模版$\mathcal{J}_p \in \mathcal{P}$以及$\mathcal{J}_p$的一个差异化替换$\theta$使得$\alpha = role(X\theta, Y\theta)$，$\mathcal{E} \subseteq \mathcal{J}_p\theta$且$\mathcal{J}_p\theta \in Jst(\alpha, \mathcal{O}\cup\mathcal{E})$
-    \end{itemize}
-\end{definition}
-
-\begin{definition}[诊断问题)]
-    我们把$\mathcal{P}=(\mathcal{T},\mathcal{A}, \alpha)$称作一个诊断的问题实例，其中本体$\mathcal{O}=\mathcal{T} \cup \mathcal{A}$是一个一致的描述逻辑本体。对于问题$\mathcal{P}$的一个解释$\mathcal{E}$满足：$\mathcal{T}\cup\mathcal{A} \cup \mathcal{E} \models \alpha$ 且 $\mathcal{T}\cup\mathcal{A} \cup \mathcal{E} \nvDash \bot$。
-\end{definition}
-
-\begin{definition}[决定集)]
-    对于一个一致的描述逻辑本体$\mathcal{O}$，且$\mathcal{O} \models \alpha$($\alpha$是一个推论)，$\mathcal{O}$的子集$\mathcal{O}'$会被称作在本体$\mathcal{O}$中对于$\alpha$的决定集如果$\mathcal{O}'\models\alpha$，且对于所有的$\mathcal{O}''\subset\mathcal{O}'$ 都有$\mathcal{O}''\nvDash \alpha$。
-\end{definition}
-
-\begin{definition}[决定集模版)]
-    一个由扩展公理组成的集合$\mathcal{J}_p$会被称为在本体$\mathcal{O}$中对于$role\left(x,y\right)$的决定集模版如果$\mathcal{J}_p$满足以下两个条件:(1) 存在一个替换$\theta$使得$\mathcal{J}_p\theta\in \emph{Jst}\left(role\left(X\theta, Y\theta\right), \mathcal{O}\right)$\ \ (2)对于所有的实例化替换$\sigma$存在$\mathcal{J}_p\sigma\models role\left(X\sigma, Y\sigma\right)$
-\end{definition}
-
-\begin{proposition}
-    给定一个一致的本体$\mathcal{O}$, 一个在$\mathcal{O}$中对于$role(X,Y)$的决定集模版$\mathcal{P}$，以及一个观察值$role(A,B)$，其中$\mathcal{O} \nvDash role(A,B)$ 且$\mathcal{O} \cup \{role(A,B)\}$是一致的，那么对于观察值$role(A,B)$在本体$\mathcal{O}$中由$\mathcal{P}$映射得到的解释集合$\mathcal{S}=\{\mathcal{J}_2\theta\mid \mathcal{J}_p\in\mathcal{P}$, $(\mathcal{J}_1,\mathcal{J}_2)\in \emph{bipart}(\mathcal{J}_p),$且$\theta$是一个在$\mathcal{J}_1 \cup \{role(X,Y)\}$上的替换使得$X\theta=A,Y\theta=B, \mathcal{J}_1 \theta \subseteq \mathcal{O}, \mathcal{J}_2\theta \nvDash role(A,B)\}$。
-\end{proposition}
-
-\begin{proposition}
-    一个对于观察值$\alpha$在本体$\mathcal{O}$中的$\subseteq_\mathsf{ds}$-\emph{minimal} 解释$\mathcal{E}$同时也是一个$\emph{subset-minimal}$的解释。
-\end{proposition}
-
-\begin{proposition}
-    给定一个一致的本体$\mathcal{O}$, 一个在$\mathcal{O}$中对于$role(X,Y)$的决定集模版$\mathcal{P}$，以及一个观察值$role(A,B)$，其中$\mathcal{O} \nvDash role(A,B)$ 且$\mathcal{O} \cup \{role(A,B)\}$是一致的，那么对于观察值$role(A,B)$在本体$\mathcal{O}$中由$\mathcal{P}$映射得到的解释集合$\mathcal{S}=\{\mathcal{J}_2\theta\mid \mathcal{J}_p\in\mathcal{P}$, $(\mathcal{J}_1,\mathcal{J}_2)\in \emph{bipart}(\mathcal{J}_p),$且$\theta$是一个在$\mathcal{J}_1 \cup \{role(X,Y)\}$上的替换使得$X\theta=A,Y\theta=B, \mathcal{J}_1 \theta \subseteq \mathcal{O}, \mathcal{J}_2\theta \nvDash role(A,B)\}$。
-\end{proposition}
-\begin{example}[诊断)]
-    考虑以下训练集：
-    \begin{center}
-        \item 1) $(Mike, /isFatherOf, Josan)$
-        \item 2) $(Mike, /isParentOf, Lily)$
-        \item 3) $(Hill, /isFriendOf, Peter)$
-    \end{center}
-    关系路径:
-    \begin{figure}[htb]
-    \center
-        \includegraphics[width=0.95\textwidth]{img/6.jpg}\\
-    \caption{关系路径}\label{fig:fulladder}
-    \end{figure}
-    观察值:
-    \begin{center}
-        \item $(Mike, /isGrandpaOf, Peter)$
-    \end{center}
-\end{example}
-    \ \ \ \ \ \ \ \ 对于例中的训练集，关系路径以及观察值，我们使用本体语言对其进行表达，分别得到TBox $\mathcal{T}$,ABox $\mathcal{A}$以及观察值$\alpha$。\\
-    其中$\mathcal{T}$为：
-        \begin{center}
-	       \item $isFatherOf\left(a, b\right) \wedge isParentOf\left(a, c\right) \wedge isMotherOf\left(c, d\right) \to isGrandpaOf\left(a, d\right)$
-\end{center}
-    $\mathcal{A}$为:
-        \begin{center}
-        \item 1) $\emph{isFatherOf}(Mike, Josan)$
-        \item 2) $\emph{isParentOf}(Mike, Lily)$
-        \item 3) $\emph{isFriendOf}(Hill, Peter)$
-    \end{center}
-    观察值$\alpha$为:
-    \begin{center}
-        \item $\emph{isGrandpaOf}(Mike, Peter)$
-    \end{center}
-
-    使用二分法对$\mathcal{T}$中的公理进行划分，分别得到以下公理集：
-        \begin{center}
-	    \item 1)\ $J_1$: $isFatherOf\left(a, b\right) \wedge isParentOf\left(a, c\right)$$J_2$: $isMotherOf\left(c, d\right)$
-        \item 2)\ $J_1$: $isParentOf\left(a, c\right) \wedge isMotherOf\left(c, d\right)$$J_2$: $isFatherOf\left(a, b\right)$
-        \item 3)\ $J_1$: $isFatherOf\left(a, b\right) \wedge isMotherOf\left(c, d\right)$$J_2$: $isParentOf\left(a, c\right)$
-        \item 4)\ $J_1$: $isMotherOf\left(c, d\right)$$J_2$: $isFatherOf\left(a, b\right) \wedge isParentOf\left(a, c\right)$
-        \item 5)\ $J_1$: $isFatherOf\left(a, b\right)$$J_2$: $isParentOf\left(a, c\right) \wedge isMotherOf\left(c, d\right)$
-        \item 6)\ $J_1$: $isParentOf\left(a, c\right)$$J_2$: $isFatherOf\left(a, b\right) \wedge isMotherOf\left(c, d\right)$
-        \end{center}
-   首先，我们使用第1个公理集中的$J_1$ 在$\mathcal{A}$中进行实例化，得出以下替换$\mathcal{M}$:
-   \begin{center}
-    \item $\{a \to Mike, b \to Josan, c \to Lily, d \to Peter\}$
-   \end{center}
-   根据得出的替换$\mathcal{M}$,对公理集中的$J_2$执行实例化，因此得到的第一个解释$\mathcal{E}_1$为：
-   \begin{center}
-    \item $\{\emph{isMotherOf}(Lily, Peter)\}$
-   \end{center}
-
+	

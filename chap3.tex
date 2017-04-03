@@ -1,6 +1,14 @@
 \def\qed{\hfill \vrule height6pt width 6pt depth 0pt}
 \chapter{基于决断集模板进行溯因诊断}
-    本体中的知识库以及规则是本体可以进行推理的前提。目前的本体构造主要由手工或者是半手工构建。由于本体的结构复杂，信息量大，因此本体的构建是一个长期的过程。在本体的构建过程中，构建的本体与观察值的不一致是一个常会发生的问题。因此，找到问题的原因，对观察值提出合理解释成为本体推理中的一个重要任务，这类任务也被称作是溯因推理问题。
+	本体中的知识库以及规则是本体可以进行推理的前提。目前的本体构造主要由手工或者是半手工构建。由于本体的结构复杂，信息量大，因此本体的构建是一个长期的过程。在本体的构建过程中，构建的本体与观察值的不一致是一个常会发生的问题。因此，找到问题的原因，对观察值提出合理解释成为本体推理中的一个重要任务，这类任务也被称作是溯因推理问题。
+\section{知识库诊断问题}
+	对于一个知识库$G = (E,R,S)$，我们定义在$S$经过深度学习构建出的知识库模型为$\Delta_G$，令$\Delta_G$无法表达的正向三元组记作$g$。我们的目标是使用本体语言对知识库进行表达，并在本体上对观察值做溯因诊断，因此，我们定义一个由知识库$S$构成的本体为$\mathcal{O}_G=\mathcal{T}_G \cup \mathcal{A}_G$。其中，$\mathcal{T}_G$是知识库$G$中的规则集合，$\mathcal{A}_G = \{r_l(h,t)\mid h \in E, t\in E, l \in R\}$。另外，我们使用$\alpha_g$表示$\mathcal{O}_G$无法表达的观察值。
+	
+	在本文中我们考虑$\mathcal{O}_G$的诊断问题，我们对该问题做出以下定义：
+	
+	\begin{definition}[诊断问题)]
+    我们把$\mathcal{P}=(\mathcal{T}_G,\mathcal{A}_G, \alpha_g)$称作一个诊断的问题实例，其中本体$\mathcal{O}_G=\mathcal{T}_G \cup \mathcal{A}_G$是一个一致的描述逻辑本体。对于问题$\mathcal{P}$的一个解释$\mathcal{E}$满足：$\mathcal{T}_G\cup\mathcal{A}_G \cup \mathcal{E} \models \alpha_g$ 且 $\mathcal{T}_G\cup\mathcal{A}_G \cup \mathcal{E} \not \models \bot$。
+\end{definition}
 \section{解释与决定集}
     溯因推理的一个重要目的就是需要找出合理的解释对观察值的进行解释。一般的，这个解释不应该导致诊断本体的不一致，同时，结合本体中的背景知识，新构建出的本体能够蕴含观察值，且新构建的本体能够保持一致的特性。因此，我们对解释有以下定义：
 \begin{definition}[解释)]
@@ -82,7 +90,7 @@
 			$r_K(e_1, e_2)$
 		\end{center}
 		
-		根绝决断集模板$\mathcal{J}_p$，我们可以得到$\mathcal{E} = {r_M(e_1, e_3), r_N(e_3, e_2)}$是一个对于观察值$r_K(e_1, e_2)$在$\mathcal{O}$中的可接受解释，因为存在一个差异化实例替换：
+		根据决断集模板$\mathcal{J}_p$，我们可以得到$\mathcal{E} = {r_M(e_1, e_3), r_N(e_3, e_2)}$是一个对于观察值$r_K(e_1, e_2)$在$\mathcal{O}$中的可接受解释，因为存在一个差异化实例替换：
 		\begin{center}
 			$\theta = \{A \mapsto e_1, e_w \mapsto e_3, B \mapsto e_2\}$
 		\end{center}
@@ -146,7 +154,7 @@
   \KwOut{Justification Pattern based Explanations $\mathcal{S}$ for observation $r_o(A,B)$ in $\mathcal{A}$ w.r.t $\mathcal{P}$}
 
   $\mathcal{S}\gets \emptyset $\
-   
+
   \For{each $\mathcal{J}_p$ in Justification Pattern Set $\mathcal{P}$}
   {
 	$\mathcal{T}_p \gets TBox \ \mathcal{T}$ in $\mathcal{J}_p$\;
@@ -195,7 +203,7 @@
 		}
 	}
   }
-  
+
 \end{algorithm}
 
 \begin{example}[诊断)]
@@ -219,8 +227,8 @@
 		\item 3) $(Zhejiang, \emph{ProvinceInCountry}, China)$
 		\item 4) $(Guangxi, \emph{ProvinceInCountry}, China)$
     \end{center}
-    
-    
+
+
 \end{example}
     根据例子，首先使用本体语言对训练集进行表达，得到ABox $\mathcal{A}$：
 	\begin{center}
@@ -243,7 +251,7 @@
 	易得，$\mathcal{O}$与$\mathcal{O}\cup r_{Nationality}(Mike, China)$都是是一致的。又，通过决断集可以得到蕴含$r_{Nationality}(A, B)$的基于决断集模板$\mathcal{J}_p$:
 		\begin{center}
 	       \item $r_{BornInCity} (A, C)$
-		   \item $r_{CityInProvince} (C, D)$ 
+		   \item $r_{CityInProvince} (C, D)$
 		   \item $r_{ProvinceInCountry} (D, B)$
 	\end{center}
     观察值$\alpha$为:
@@ -273,7 +281,7 @@
 		根据划分4)，可以得到一个$\theta$使得 $\mathcal{J}_1\theta \subseteq \mathcal{O}$，其中$\theta = \{A \mapsto Mike, B \mapsto China, D \mapsto Zhejiang\}$，所以我们设$\mathcal{E}_4 = \mathcal{J}_2\theta = \{r_{BornInCity}(Mike, e_1), r_{CityInProvince}(e_1, Zhejiang)\}$，又因为$\mathcal{O} \cup \mathcal{J}_2\theta$是一致的，$\mathcal{O} \cup \mathcal{J}_2\theta \models \alpha$，且对于所有的$\mathcal{E}' \in subs_1(\mathcal{E}_4) \cup lifts_1(\mathcal{E}_4)$都有$\mathcal{O} \cup \mathcal{E}' \not \models \alpha$，所以$\mathcal{E}_4$是一个合理的解释。
 		
 		\begin{center}
-	    \item 5)\ $J_1$=$\{r_{CityInProvince}(C, D), r_{ProvinceInCountry}(D, B)\}$, $J_2$ $\{r_{BornInCity}(A, C)\}$ 
+	    \item 5)\ $J_1$=$\{r_{CityInProvince}(C, D), r_{ProvinceInCountry}(D, B)\}$, $J_2$ $\{r_{BornInCity}(A, C)\}$
 		\end{center}
 		根据划分5)，可以得到一个$\theta$使得 $\mathcal{J}_1\theta \subseteq \mathcal{O}$，其中$\theta = \{A \mapsto Mike, C \mapsto Beihai, B \mapsto China, D \mapsto Guangxi\}$，所以我们设$\mathcal{E}_5 = \mathcal{J}_2\theta = \{r_{BornInCity}(Mike, Beihai)\}$，又因为$\mathcal{O} \cup \mathcal{J}_2\theta$是一致的，$\mathcal{O} \cup \mathcal{J}_2\theta \models \alpha$，且对于所有的$\mathcal{E}' \in subs_1(\mathcal{E}_5) \cup lifts_1(\mathcal{E}_5)$都有$\mathcal{O} \cup \mathcal{E}' \not \models \alpha$，所以$\mathcal{E}_5$是一个合理的解释。。
 		
