@@ -532,6 +532,8 @@
 
 \SetKw{Continue}{continue}
 \SetKw{Or}{or}
+\usepackage{cases}
+
 \usepackage{multirow}
 \begin{document}
 \begin{CJK*}{GBK}{song}

@@ -32,7 +32,7 @@
                 \item $\theta = \{e_{x_i} \mapsto e_1, e_{y_i} \mapsto e_\mu, e_m \mapsto e_\mu,e_n \mapsto e_2 \mid 1\leq i\leq n\}$
             \end{center}
 
-            由于这个$\theta$满足条件所有的个体变量被映射到个体实例，因此这个映射$\theta$是一个实例化替换使得$\mathcal{J}_p\theta = \mathcal{J}$。
+            由于$\theta$满足条件所有的个体变量被映射到个体实例，因此映射$\theta$是一个实例化替换使得$\mathcal{J}_p\theta = \mathcal{J}$。
     \end{example}
     为了避免出现决断集模板基数无限增大的情况，我们需要的决断集模板的替换做出进一步限制。在实例化替换的基础上，我们提出差异化实例替换。差异化实例替换不仅需要满足条件所有的个体变量都被映射到个体实例，还需要满足条件对于所有的不相同变量，被映射后的个体也不相同。直观地，一个差异化实例替换会是变量到个体间的一一映射。同时，一般地一个决断集模板需要能够生成至少一个决断集，然而为了保证最后生成的解释的合理性，我们需要决断集模板的所有差异化实例替换都只生成决断集，因此我们需要限制所有的对于$r(e_x, e_y)$决断集模板，在差异化实例替换的映射下能够维持蕴含$r(e_x\theta, e_y\theta)$这一特性。因此我们对决断集模板做出如下定义：
 	\begin{definition}[决定集模版)]
@@ -267,7 +267,7 @@
 		\begin{center}
         \item 2)\ $J_1$ $\{r_{BornInCity}(A, C)\}$, $J_2$=$\{r_{CityInProvince}(C, D), r_{ProvinceInCountry}(D, B)\}$
 		\end{center}
-		根据划分2)，可以得到一个$\theta$使得 $\mathcal{J}_1\theta \subseteq \mathcal{O}$，其中$\theta = \{A \mapsto Mike, C \mapsto Hangzhou, B \mapsto China\}$，所以我们设$\mathcal{E}_2 = \mathcal{J}_2\theta = \{r_{CityInProvince}(Hangzhou, e_1), r_{ProvinceInCountry}(e_1, China)\}$，又因为$\mathcal{O} \cup \mathcal{J}_2\theta$是一致的，$\mathcal{O} \cup \mathcal{J}_2\theta \models \alpha$，且对于所有的$\mathcal{E}' \in subs_1(\mathcal{E}_2) \cup lifts_1(\mathcal{E}_2)$都有$\mathcal{O} \cup \mathcal{E}' \not \models \alpha$，所以$\mathcal{E}_2$是一个合理的解释。
+		根据划分2)，可得$\theta$使得 $\mathcal{J}_1\theta \subseteq \mathcal{O}$，其中$\theta = \{A \mapsto Mike, C \mapsto Hangzhou, B \mapsto China\}$，设$\mathcal{E}_2 = \mathcal{J}_2\theta = \{r_{CityInProvince}(Hangzhou, e_1), r_{ProvinceInCountry}(e_1, China)\}$，又因为$\mathcal{O} \cup \mathcal{J}_2\theta$是一致的，$\mathcal{O} \cup \mathcal{J}_2\theta \models \alpha$，且对于所有的$\mathcal{E}' \in subs_1(\mathcal{E}_2) \cup lifts_1(\mathcal{E}_2)$都有$\mathcal{O} \cup \mathcal{E}' \not \models \alpha$，所以$\mathcal{E}_2$是一个合理的解释。
 		
 		\begin{center}
 	    \item 3)\ $J_1$= $\{r_{BornInCity}(A, C), r_{ProvinceInCountry}(D, B)\}$, $J_2$=$\{r_{CityInProvince}(C, D)\}$
